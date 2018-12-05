@@ -1,0 +1,2050 @@
+```{r echo=FALSE}
+library(NHANES)
+#options(formatR.arrow=TRUE,width=90)
+#source("normalcurves.R")
+```
+
+
+
+# Numerical summaries: quantitative data
+
+
+```{r echo=FALSE}
+SixSteps(4, "Numerical summary (quantitative data)")
+```
+
+
+## Introduction
+
+
+Again,
+consider this RQ:
+
+> Among Americans,
+> is the average 
+> direct HDL cholesterol level
+> different for current smokers and non-smokers?
+
+NOT QUITE THE SAME EVERYWHERE: CHECK
+
+
+OLD NO DOT PLOTS!
+
+In the previous chapter,
+we looked at ways of understanding the data
+using graphs,
+and we noted that 
+we should describe what the graph tells us about the data.
+In some cases,
+the feature of the data displayed in the graph can be described *numerically*.
+
+In this chapter,
+we discuss how to summarise *quantitative* data numerically.
+
+
+
+```{example}
+For the NHANES data,
+we need to understand the response variable
+(direct HDL cholesterol values),
+so we can produce a histogram 
+What does the histogram tell us?
+
+* Location: A typical, 'average' value is about 1.5 mmol/L. 
+* Variation: The values range from about 0.5 to 3.3 mmol/L.
+* Shape: The distribution is slightly skewed right.
+* Outliers: There doesn't appear to be any outliers.
+
+Describing some of these features more precisely (with numbers) can be helpful.
+```
+
+
+```{r echo=FALSE}
+hist(NHANES$DirectChol,
+	xlab="Direct HDL cholesterol (mmol/L)",
+	ylab="Frequency",
+	las=1,
+	ylim=c(0, 4500),
+	xlim=c(0, 4.5),
+	main="",
+	breaks=seq(0, 4.5, by=0.5),
+	col=plot.colour)
+box()
+```
+
+Just a reminder:
+The RQ indicates the population we wish to study, 
+but we only ever study a
+sample.
+If the sample is representative of the population, 
+the sample results may be generalised to the
+population. 
+The purpose of a sample is to provide an estimate of what is happening in the
+Population. 
+So the 'average' found from the sample data approximates 
+the 'average' in the
+population. 
+
+The value of some summary quantity that is based on the population 
+is called a *parameter*.
+The value of some summary quantity that is based on the sample 
+(in this case, the sample mean)
+is called a *statistic*.
+That is:
+
+* **S**amples are described by **s**tatistics;
+* **P**opulations are described by **p**arameters
+
+
+
+
+
+
+
+## Measuring the location/centre
+
+The location (or average, or centre, or typical value) for
+*quantitative sample data* can be measured
+in many ways;
+the two most common are:
+
+* the sample mean (or *sample arithmetic mean*); or
+* the sample median.
+
+In both cases,
+the population parameter is 
+*estimated* using the sample information.
+
+NOTE: The word 'average' could refer to either mean or median, so be specific when necessary!
+
+
+```{exercise}
+Consider the daily river flow volume at the Mary River
+in Table \@ref(tab:MaryRiver)
+(from [Queensland DNRM](http://watermonitoring.dnrm.qld.gov.au/cgi/webhyd.pl?rsdf_org=138110A&cat=rs&lvl=1&0)).
+For February,
+the average river flow could be calculated:
+
+* the *mean* daily flow is:1\,167\,ML.
+* the *median* daily flow is: 172\,ML.
+
+
+Table: (\#tab:MaryRiver) Summaries of the daily streamflow in the Mary River 
+
+Month           |   Daily Max |	Daily Min |	Daily Mean |	Daily Median |	Monthly Mean
+---------------:+------------:+----------:+-----------:+--------------:+--------------:
+Jan | 	89641 | 	0 | 	997 | 	80 | 	30884
+Feb | 	156586 | 	0 | 	1167 | 	172 | 	32986
+Mar | 	64760 | 	0 | 	829 | 	208 | 	25696
+Apr | 	118696 | 	0 | 	675 | 	144 | 	20260
+May | 	24365 | 	0 | 	367 | 	126 | 	11392
+Jun | 	91104 | 	2 | 	400 | 	91 | 	11992
+Jul | 	60590 | 	0 | 	281 | 	72 | 	8707
+Aug | 	12792 | 	0 | 	115 | 	62 | 	3575
+Sep | 	12537 | 	0 | 	108 | 	55 | 	3249
+Oct | 	40814 | 	0 | 	133 | 	38 | 	4113
+Nov | 	35480 | 	0 | 	198 | 	43 | 	5930
+Dec | 	41281 | 	0 | 	334 | 	64 | 	10348
+All months | 	 156586 | 	 0 | 	 463 | 	 80 | 	 14087
+
+The two common ways of measuring the 
+the same thing, the 'average' rainfall, give 
+very different answers.
+Why?
+```
+
+
+
+
+
+
+
+
+
+
+## Measuring the location: The mean
+
+The mean of the population is denoted by $\mu$ 
+('mu', pronounced 'myu'),
+
+RECORD SOUND
+
+but is almost always unknown.
+Instead, the mean of the population is *estimated* by the mean of the sample,
+which is denoted by $\bar{x}$ (pronounced 'x-bar').
+In this context,
+the unknown parameter is $\mu$,
+and the statistic is $\bar{x}$.
+The sample mean is used to estimate the population mean.
+
+   
+```{example JerseyCows}
+Consider this RQ:
+
+> For mature Jersey cows (@data:hand:handbook, @data:sokal:biometry)
+> what is the average percentage butterfat in their milk?
+    
+
+For this RQ,
+the *population* is 'milk in Jersey cows',
+and we would like an estimate of the mean of the population.
+The population mean is denoted by $\mu$.
+
+Clearly, we cannot study every Jersey cow,
+and so we study a *sample*.
+That is,
+the unknown population mean $\mu$ is estimated
+using the sample mean,
+which is denoted by $\bar{x}$.
+```
+  
+  
+Measurements were taken from 10 cows, in percentages:
+
+```
+4.8    6.5    5.2    4.5    5.2
+5.7    5.4    4.8    5.2    5.2
+```  
+
+
+The *sample mean* is what people usually think of as the 'average'.
+The sample mean is the 'balance point' of the observations:
+
+
+
+IMAGE OF BALANCE POINT
+
+
+
+To find the sample mean:
+
+* *Add* all the observations (which we denote by $x$); then
+* *Divide* by the number of observations (which we denote by $n$).
+
+In symbols:
+\[
+	\bar{x} = \frac{\sum x}{n},
+\]
+where $\sum$ means to add up what follows the symbol.
+
+```{exercise}
+For data for the Jersey cow data
+(Example \@ref(exm:JerseyCows))
+an estimate of the population mean
+percentage butterfat using the sample information,
+we sum all $n$ observations and divide by $n$:
+\begin{eqnarray*}
+    	\overline{x} = \frac{\sum x}{n} &=& \frac{4.8 + 6.5 + \cdots + 5.2}{10}\\
+                     &=& \frac{52.5}{10} =  5.25
+\end{eqnarray*}
+The sample mean is 5.25 *percent*.
+Usually, 
+you will use your calculator's *Statistics Mode* or software (such as SPSS or R) to do this.
+```
+      
+      
+
+```{exercise}
+What is the value of $\mu$,
+the mean of the *population*?
+```
+
+
+
+
+
+## Rounding numerical answers
+   
+How do we round our answers?
+A useful rule-of-thumb is to 
+round to one or two more significant figures than the original data.
+
+```{example}
+For example,
+      the butterfat data are given to one decimal place.
+      So quote the mean weight
+      to two decimal places:
+$\bar{x}=5.25\%$.
+```
+
+
+
+
+
+
+
+
+   
+```{exercise}
+A study of eyes
+[@ehlers1970corneal]
+ asked this RQ:
+
+> What is the mean corneal thickness of eyes affected by glaucoma?
+
+The collected data are (in microns):
+```
+
+```
+4.8    6.5    5.2    4.5    5.2
+5.7    5.4    4.8    5.2    5.2
+```
+
+Estimate the population mean corneal thickness.
+
+
+
+
+
+
+
+
+## Measuring location: The median
+
+The median is a value separating the larger half of the data from the smaller half of the data.
+In a dataset with $n$ values,
+the median is *ordered* observation number $\displaystyle \frac{n+1}{2}$.   
+The median is *not*:
+
+* equal to $\displaystyle \frac{n+1}{2}$; nor
+* halfway between the minimum and maximum values in the data.
+
+Futhermore,
+most calculators cannot find the median.
+
+Note: There is no commonly-used symbol for the median.
+
+
+```{example}
+For the Jersey cow data 
+(Example \@ref(exm:JerseyCows))
+given above,
+determine the sample median of the data.
+```
+
+
+First we need to
+arrange all $n=10$ observations *in order*:
+
+```  
+4.5    4.8    4.8    5.2    5.2
+5.2    5.2    5.4    5.7    6.5
+```
+
+The median separates the larger 5 numbers from the smaller 5 numbers.
+So, with $n=10$ observations, the median is 
+the ordered observation located between the fifth and sixth observations
+(i.e.\ at position
+$\displaystyle \frac{10+1}{2} = 5.5$;
+the *median is not 5.5*).
+So the sample median is between $5.2$ (ordered observation five) 
+and $5.2$ (ordered observation six),
+so the sample median is $5.20$ percent.
+
+ 
+ 
+```{exercise}
+What is the population median?
+```
+
+
+         
+```{exercise}
+A study of eyes
+asked this RQ:
+
+> What is the mean corneal thickness of eyes affected by glaucoma?
+
+The collected data are (in microns):
+```
+
+```         
+484   478  492     444   436   398   464  476
+```
+
+Estimate the population *median* corneal thickness.
+What is the population median?
+
+
+
+
+
+
+
+
+
+
+
+## When to use means or medians?
+
+
+Consider estimating the average daily river flow volume at the Mary River (Bellbird Creek),
+as shown in
+Table \@ref(tab:MaryRiver):
+
+* The *mean* daily flow is:\phantom{di} 1\,167\,ML.
+* The *median* daily flow is: \phantom{1\,}172\,ML.
+
+If we wanted an estimate of the 'average' daily river flow volume at the Mary River (Bellbird Creek),
+what would be the best 'average' to use?  Why?
+
+A histogram of the *monthly* stream flow
+(I couldn't find the daily data) 
+is shown below:
+
+```{r echo=FALSE}
+#MR <- read.table("~/Documents/Teaching/Datasets/applications/climatology/MaryRiverStreamflow-FEB.txt", header=TRUE)
+MR <- structure(list(Year = 1960:2017, Feb = c(14534.6, 15521.9, 7917, 
+9438, 2835, 1985, 3815, 12625, 46605, 74, 18532, 179432, 224304, 
+63290, 25696, 2607, 77259, 1564.7, 3575, 14229.1, 10397.1, 64755, 
+15760, 221, 4047, 1720, 766, 4156, 2093, 11663, 34820, 9086, 
+145407, 3738, 14107, 48302.5, 4491, 231, 4343, 292271, 7137, 
+44579, 493.1, 33094.7, 9966.7, 1635.7, 489.8, 673, 44029, 18002, 
+20786, 13340, 65669, 122537, 413, 73365, 1154, 199.7)), .Names = c("Year", 
+"Feb"), class = "data.frame", row.names = c(NA, -58L))
+
+
+#mean(MR$Feb/1000)
+#median(MR$Feb/1000)
+
+hist(MR$Feb/1000, 
+     las=1,
+     xlab="Monthly streamflow (GL)",
+     ylab="Number of months",
+     sub="(https://water-monitoring.information.qld.gov.au/)",
+     main="*Monthly* streamflow at Mary River\n(Bellbird Creek) from 1960--2017",
+     col="lightsteelblue",
+     breaks=seq(0, 300, by=25))
+
+abline( v = mean(MR$Feb/1000), lwd=3, col="red")
+abline( v = median(MR$Feb/1000), lwd=3, col="blue")
+# Boxplot
+#boxplot(MR$Feb/1000, 
+#        las=1,
+#        main="*Monthly* streamflow at Mary River\n(Bellbird Creek) from 1960--2017",
+#        ylab="Monthly streamflow (in GL)")
+box()
+```
+
+The histogram clearly shows that the data are very highly skewed (to the right).
+It turns out that this is important:
+
+* *Means* are best used for approximately symmetric data
+(it is influenced by outliers and skewness).
+* *Medians* are best used for skewed data
+(it is not influenced by outliers and skewness).
+
+The mean is most commonly used measure of location,
+and has many useful properties.
+The mean is generally used if possible
+(for practical and mathematical reasons),
+and is the most commonly-used measure of location.
+However,
+the mean *is* influenced by outliers and skewness;
+the median is *not* influenced by outliers and skewness.
+The mean and median are similar in approximately symmetric distributions.
+
+
+
+
+```{exercise}
+An engineering study [@data:hald:statistical] 
+was studying a new building material,
+and asked this RQ:
+
+> In a given building material,
+>	what is the average  permeability?
+
+Measurements from 81 pieces of sheets of material were taken
+on the time for water to permeate sheets (in seconds).
+
+Estimate the population mean and median.  
+Which would be best to use?  
+```
+
+
+```{r echo=FALSE}
+library(GLMsData)
+data(perm)
+
+   hist(perm$Perm, xlab="Permeability (in seconds)",
+   	  ylab="Number of obs.",
+      las=1, 
+      xlim=c(0,180), 
+      breaks=seq(0,180,by=10), 
+      axes=FALSE,
+      col=plot.colour, 
+      main="Permeability of building material")
+   axis(side=1, at=seq(0,180,by=20), las=2)
+   axis(side=2, las=1)
+
+```
+
+
+
+
+
+
+
+
+ 
+```{exercise}
+The histogram of the HDL cholesterol values from the NHANES study is shown 
+in Fig.~\ref{FG:GRAPHICS:SerumHist}.
+Should we use the mean or median to measure location?  
+	MOVE ALL NHANES STUFF TO THE END, as per graphs chapter?  
+```
+
+
+
+
+
+
+
+
+
+
+
+## Measuring the amount of variation
+
+For quantitative data,
+we also need to describe the amount of *variation* present 
+in the bulk of the data.
+How can we describe the variation numerically?
+
+```{exercise DescribeTwoDatasets}
+Describe the two datasets in
+Fig. \@ref(fig:TwoDatasets),
+using location, variation, shape 
+(approximately symmetric; skewed), unusual features:
+```
+
+```{r TwoDatasets, echo=FALSE, fig.width=4, fig.height=3, fig.cap="Dotplots of two sets of data", fig.align="center"}
+### DOT CHARTS of two samples iwth similar mean, range but diff sd
+
+set.seed(100010)
+
+rescale <- function(x, from, to){
+  minx <- min(x)
+  maxx <- max(x)
+  
+  slope <- (to - from) / ( maxx - minx )
+  intercept <- to - slope*maxx
+  
+  y <- slope * x + intercept
+  y
+  
+}
+len <- 50
+tmp1 <- runif(len)
+x1 <- rescale(tmp1, -4, 4)
+
+par(mfrow=c(2, 1))
+
+y1.jitter <- jitter(rep(1, length(x1)))
+
+par( mar=c(2,0,2,0) + 0.1)
+plot( y=y1.jitter, 
+      x=x1, 
+      pch=19,
+      ylim = c( 0.95*min(y1.jitter), 1.05*max(y1.jitter) ),
+      ylab="",
+      xlab="Observations",
+      main="Dataset A",
+      axes=FALSE)
+axis(side=1)
+
+
+
+
+
+
+tmp2 <- rt((len - 4), 5)
+x2 <- c( rescale(tmp2, -1.5, 1.5),  -2.5, 2.5, -4, 4)
+
+
+y2.jitter <- jitter(rep(1, length(x2)))
+
+par( mar=c(2,0,2,0) + 0.1)
+plot( y=y2.jitter, 
+      x=x2, 
+      pch=19,
+      ylim = c( 0.95*min(y2.jitter), 1.05*max(y2.jitter) ),
+      ylab="",
+      xlab="Observations",
+      main="Dataset B",
+      axes=FALSE)
+axis(side=1)
+
+```
+
+What is the main difference?
+
+
+Both distributions are approximately symmetric,
+but most of the observations in Dataset B are close to the mean.
+In Dataset A, observations are, on average, further from the mean.
+How do we quantify (measure) this?
+The boxplot 
+(Fig. \@ref(fig:TwoDatasetsBoxplot)).
+shows the differences quite well:
+most observations are near the middle.
+
+```{r TwoDatasetsBoxplot, echo=FALSE, fig.cap="A boxplot comparing the two datasets", fig.align="center"}
+boxplot( cbind("Dataset A" = x1, "Dataset B" = x2),
+         las=1,
+         ylab="Observations",
+         col="slategrey"
+         )
+```
+
+
+  
+One way to quantify the difference (and there are many others)
+is to measure the *average distance of the observations from the mean*.
+What do you estimate this to be for the data in
+Fig. \@ref(fig:TwoDatasets)?
+
+
+Many ways exist to measure the variation in a dataset.
+We will look at four ways to numerically measure variation:
+
+* The *range*: very simple, but rarely used.
+* The *standard deviation*: commonly used.
+* The *interquartile range* (IQR): commonly used.
+* *Percentiles*: sometimes used.
+
+As always,
+we are using the values computed from the sample
+(the statistics)
+to estimate the unknown values in the population
+(the parameters).
+
+      
+
+
+
+### Measuring the amount of variation: Range
+
+```{definition, name="Range"}
+The range is the maximum  value *minus* the minimum value.
+```
+
+The range is rarely used,
+because it only uses two extreme observations,
+and is highly influenced by outliers.
+
+Sometimes,
+the *range* is given by stating both the maximum and the minimum value in the data set.
+
+
+```{example}
+For Jersey cow data
+(Example \@ref(exm:JerseyCows)),
+the range in the data can be computed as:
+\[
+		\text{Range} = \overbrace{6.5}^{\text{largest}} - \overbrace{4.5}^{\text{smallest}} = 2.0,\text{percent}.
+\]   
+So the sample median percentage butterfat is 5.20 percent, with a range of 2.00 percent.
+
+```
+
+
+
+
+
+
+
+
+
+
+### Measuring the amount of variation: Standard deviation
+
+The *standard deviation* is
+(kind-of) the average distance that the observations are away from the mean.
+It is the most commonly used measure of variation,
+but is a complicated to compute by hand.
+The standard deviation is
+measured in the same measurements units as the data.
+
+The population standard deviation is denoted by $\sigma$ ('sigma', the parameter)
+and is estimated by the sample standard deviation $s$ (the statistic).
+
+
+```{example}
+For the Jersey cow data
+(Example \@ref(exm:JerseyCows)),
+we can work out the *distances* of each observation from the mean:
+
+IMAGE
+```
+
+
+The standard deviation is a bit like (but not exactly) the mean of all these distances.
+There are three ways to find the sample standard deviation $s$: 
+
+
+* A calculator (using your calculator's *Statistics Mode*);
+* A computer (e.g. SPSS); or
+* A brain (much harder, and unnecessary).
+
+**You do not have to use the formula**,
+but we will demonstrate for those who might find it useful.
+
+The formula is:
+\[
+	s = \sqrt{ \frac{\sum(x - \overline{x})^2}{n-1} }.
+\]
+To use the formula,
+follow these steps:
+
+* Calculate the sample mean: $\overline{x}$;
+* Calculate the *deviations* of each value from the mean: $x-\overline{x}$;
+* Square these deviations (to make them all *positive* values): $(x-\overline{x})^2$;
+* Add these values: $\sum(x-\overline{x})^2$;
+* Divide the answer by $n-1$;
+* Take the square root.
+
+
+**You do not need to use the formula!**
+You **must**  know how to use your calculator to find the standard deviation 
+(e.g. for the exam).
+Learn to use your calculator's *Statistics Mode*: much faster and easier
+      
+  
+
+
+```{example}  
+From the Jersey cow data
+(Example \@ref(exm:JerseyCows)),
+the sample mean is $5.25$.
+To work out the standard deviation,
+follow the steps outlined
+(which is  best done using a table).
+**You don't have to do this manually!**
+
+$x$      | $x-\overline{x}$ | $(x-\overline{x})^2$ 
+:---------:+-----------------:+----------------------:
+            4.5  |      $-0.75$  |  $0.5625$
+            4.8  |      $-0.45$  |  $0.2025$
+            4.8  |      $-0.45$  |  $0.2025$
+            5.2  |      $-0.05$  |  $0.0025$
+            5.2  |      $-0.05$  |  $0.0025$
+            5.2  |      $-0.05$  |  $0.0025$
+            5.2  |      $-0.05$  |  $0.0025$
+            5.4  |      $0.15$   |  $0.0225$
+            5.7  |      $0.45$   |  $0.2025$
+            6.5  |      $1.25$   |  $1.5625$
+          |   | $\sum (x -\overline{x})= 0$  |  $\sum (x-\overline{x})^2 =  2.765$
+
+
+Notice that is we add all the distances $x-\overline{x}$ together, 
+the answer is *always* zero,
+which is not helpful.
+To avoid this, 
+we first square these distances to get $(x-\bar{x})^2$
+(other ways are possible too).
+Then,
+we add these values together to get $\sum(x-\bar{x})^2$.
+Then complete the steps:
+the sample standard deviation is:
+\[ 
+   s = \sqrt{
+      \frac{2.765}{10-1}
+       }
+        = \sqrt{ 0.3072222} = 0.5542763
+\]
+So the sample mean percentage butterfat is 5.25 percent, with a sample standard deviation of 0.554 percent.
+
+
+
+
+```{exercise}
+For the distributions in 
+Fig. \@ref(fig:TwoDatasets),
+the standard deviation for Dataset A is 2.00.
+What do you estimate the standard deviation of Dataset B will be:
+smaller or greater than 2.00?
+Why?
+```
+
+
+
+
+
+
+
+
+
+
+
+The sample standard deviation is:
+
+* positive (unless all observations are the same; then it is zero);
+* best used for (approximately) symmetric data;
+* usually quoted with the mean;
+* the most commonly used measure of variation;
+* like the mean,
+   influenced by *skewness* and outliers.
+
+
+
+```{exercise}
+For the Jersey cow data
+(Example \@ref(exm:JerseyCows)),
+what is the average percentage butterfat in their milk?
+
+Using your calculator's Statistics Mode:
+
+* Find the population standard deviation.
+* Find the sample standard deviation.
+
+```   
+
+
+
+
+
+```{exercise}
+The monthly SOI 
+(http://www.bom.gov.au/climate/current/soihtm1.shtml)
+values in August from 1995 to 2000 were
+
+         0.8   4.6   -19.8   9.8   2.1   5.3
+         
+Using your calculator's Statisticsd Mode,
+calculate the
+
+* sample mean and median.
+* range.
+* sample standard deviation.
+
+``` 
+
+
+
+
+
+
+
+
+The standard deviation isn't straightforward to calculate.
+If the sample size is reasonably large (say, 200 or more),
+a useful guide for bell-shaped distributions is that the 
+standard deviation is approximately the range
+divided by six,
+provided there are no outliers.
+In symbols:
+\[
+   s \approx \frac{\text{range}}{6}.
+\]
+
+
+```{exercise}
+An UK study in the 1980s measured the heights of husbands and wives.
+For the husbands' heights
+(@data:hand:handbook, @data:Marsh1988:ExploringData)
+the minimum height is $155.9$\,cm
+and the maximum height is $194.9$\,cm.
+Find the approximate value of the standard deviation
+(see Fig. \@ref(fig:HusbandHts)).
+
+The actual sample standard deviation is 9 cm.
+```
+
+
+```{r HusbandHts, echo=FALSE, fig.cap="A histogram of the husbands' height", fig.align="center"}
+# hts <- read.table("~/Documents/Teaching/Datasets/Books/Hand/Hand-R/husbands-fix.dat",
+# header=TRUE)
+hts <- 
+structure(list(Hage = c(49L, 25L, 40L, 52L, 58L, 32L, 43L, 42L, 
+47L, 31L, 26L, 40L, 35L, 45L, 35L, 35L, 47L, 38L, 33L, 32L, 38L, 
+45L, 29L, 59L, 26L, 50L, 49L, 42L, 33L, 31L, 27L, 57L, 34L, 28L, 
+46L, 37L, 56L, 27L, 36L, 31L, 57L, 55L, 47L, 64L, 60L, 31L, 35L, 
+36L, 40L, 30L, 32L, 27L, 20L, 45L, 59L, 43L, 29L, 48L, 39L, 47L, 
+54L, 43L, 54L, 61L, 27L, 51L, 27L, 32L, 54L, 37L, 55L, 36L, 32L, 
+57L, 51L, 62L, 57L, 51L, 50L, 32L, 54L, 34L, 45L, 64L, 55L, 27L, 
+55L, 27L, 41L, 44L, 22L, 30L, 53L, 42L, 31L, 36L, 56L, 46L, 34L, 
+55L, 44L, 45L, 48L, 44L, 59L, 64L, 34L, 37L, 54L, 49L, 63L, 48L, 
+64L, 33L, 52L, 27L, 33L, 46L, 54L, 27L, 50L, 42L, 54L, 49L, 62L, 
+34L, 23L, 36L, 53L, 32L, 59L, 53L, 55L, 62L, 42L, 50L, 37L, 51L, 
+25L, 54L, 34L, 43L, 43L, 58L, 28L, 45L, 47L, 57L, 27L, 34L, 57L, 
+27L, 54L, 24L, 48L, 37L, 25L, 57L, 40L, 61L, 25L, 32L, 37L, 45L, 
+24L, 47L, 44L, 52L, 45L, 20L, 60L, 36L, 25L, 25L, 35L, 35L, 49L, 
+33L, 50L, 63L, 57L, 41L, 38L, 30L, 52L, 51L, 46L, 50L, 32L, 52L, 
+30L, 33L, 20L, 32L, 51L, 64L, 44L, 40L, 59L), Hht = c(1809L, 
+1841L, 1659L, 1779L, 1616L, 1695L, 1730L, 1753L, 1740L, 1685L, 
+1735L, 1713L, 1736L, 1715L, 1799L, 1785L, 1758L, 1729L, 1720L, 
+1810L, 1725L, 1764L, 1683L, 1585L, 1684L, 1674L, 1724L, 1630L, 
+1855L, 1796L, 1700L, 1765L, 1700L, 1721L, 1823L, 1829L, 1710L, 
+1745L, 1698L, 1853L, 1610L, 1680L, 1809L, 1580L, 1600L, 1585L, 
+1705L, 1675L, 1735L, 1686L, 1768L, 1721L, 1754L, 1739L, 1699L, 
+1825L, 1740L, 1704L, 1719L, 1731L, 1679L, 1755L, 1713L, 1723L, 
+1783L, 1585L, 1749L, 1710L, 1724L, 1620L, 1764L, 1791L, 1795L, 
+1738L, 1639L, 1734L, 1695L, 1666L, 1745L, 1775L, 1669L, 1700L, 
+1804L, 1700L, 1664L, 1753L, 1788L, 1765L, 1680L, 1715L, 1755L, 
+1764L, 1793L, 1731L, 1713L, 1725L, 1828L, 1735L, 1760L, 1685L, 
+1685L, 1559L, 1705L, 1723L, 1700L, 1660L, 1681L, 1803L, 1866L, 
+1884L, 1705L, 1780L, 1801L, 1795L, 1669L, 1708L, 1691L, 1825L, 
+1760L, 1949L, 1685L, 1806L, 1905L, 1739L, 1736L, 1845L, 1868L, 
+1765L, 1736L, 1741L, 1720L, 1871L, 1720L, 1629L, 1624L, 1653L, 
+1786L, 1620L, 1695L, 1674L, 1864L, 1643L, 1705L, 1736L, 1691L, 
+1753L, 1680L, 1724L, 1710L, 1638L, 1725L, 1725L, 1630L, 1810L, 
+1774L, 1771L, 1815L, 1575L, 1729L, 1749L, 1705L, 1875L, 1784L, 
+1584L, 1774L, 1658L, 1790L, 1798L, 1824L, 1796L, 1725L, 1685L, 
+1769L, 1749L, 1716L, 1664L, 1773L, 1760L, 1725L, 1645L, 1694L, 
+1851L, 1691L, 1880L, 1835L, 1730L, 1644L, 1723L, 1758L, 1718L, 
+1723L, 1708L, 1786L, 1764L, 1675L, 1641L, 1743L, 1823L, 1720L
+), Wage = c(43L, 28L, 30L, 57L, 52L, 27L, 52L, NA, 43L, 23L, 
+25L, 39L, 32L, NA, 35L, 33L, 43L, 35L, 32L, 30L, 40L, NA, 29L, 
+55L, 25L, 45L, 44L, 40L, 31L, NA, 25L, 51L, 31L, 25L, NA, 35L, 
+55L, 23L, 35L, 28L, 52L, 53L, 43L, 61L, NA, 23L, 35L, 35L, 39L, 
+24L, 29L, NA, 21L, 39L, 52L, 52L, 26L, NA, NA, 48L, 53L, 42L, 
+50L, 64L, 26L, NA, 32L, 31L, 53L, 39L, 45L, 33L, 32L, 55L, NA, 
+NA, NA, 52L, 50L, 32L, 54L, 32L, 41L, 61L, 43L, 28L, 51L, NA, 
+41L, 41L, 21L, 28L, 47L, 37L, 28L, 35L, 55L, 45L, 34L, 51L, 39L, 
+35L, 45L, 44L, 47L, 57L, 33L, 38L, 59L, 46L, 60L, 47L, 55L, 45L, 
+47L, 24L, 32L, 47L, 57L, NA, NA, NA, 46L, 42L, 63L, 32L, 24L, 
+32L, NA, NA, 56L, 50L, 55L, 58L, 38L, 44L, 35L, 44L, 25L, 43L, 
+31L, 35L, 41L, 50L, 23L, 43L, 49L, 59L, NA, 38L, 42L, 21L, NA, 
+NA, 42L, 35L, 26L, 57L, 34L, 63L, 23L, NA, NA, NA, 23L, 46L, 
+40L, 53L, 40L, 22L, 60L, 32L, 24L, 28L, 40L, NA, 48L, 33L, 49L, 
+64L, 55L, 41L, 38L, 31L, 52L, 43L, 51L, 47L, NA, 32L, 33L, NA, 
+18L, NA, 45L, 64L, 43L, 39L, 56L), Wht = c(1590L, 1560L, 1620L, 
+1540L, 1420L, 1660L, 1610L, 1635L, 1580L, 1610L, 1590L, 1610L, 
+1700L, 1522L, 1680L, 1680L, 1630L, 1570L, 1720L, 1740L, 1600L, 
+1689L, 1600L, 1550L, 1540L, 1640L, 1640L, 1630L, 1560L, 1652L, 
+1580L, 1570L, 1590L, 1650L, 1591L, 1670L, 1600L, 1610L, 1610L, 
+1670L, 1510L, 1520L, 1620L, 1530L, 1451L, 1570L, 1580L, 1590L, 
+1670L, 1630L, 1510L, 1560L, 1660L, 1610L, 1440L, 1570L, 1670L, 
+1635L, 1670L, 1730L, 1560L, 1590L, 1600L, 1490L, 1660L, 1504L, 
+1580L, 1500L, 1640L, 1650L, 1620L, 1550L, 1640L, 1560L, 1552L, 
+1600L, 1545L, 1570L, 1550L, 1600L, 1660L, 1640L, 1670L, 1560L, 
+1760L, 1640L, 1600L, 1571L, 1550L, 1570L, 1590L, 1650L, 1690L, 
+1580L, 1590L, 1510L, 1600L, 1660L, 1700L, 1530L, 1490L, 1580L, 
+1500L, 1600L, 1570L, 1620L, 1410L, 1560L, 1590L, 1710L, 1580L, 
+1690L, 1610L, 1660L, 1610L, 1590L, 1530L, 1690L, 1600L, 1693L, 
+1580L, 1636L, 1670L, 1600L, 1570L, 1700L, 1740L, 1540L, 1555L, 
+1614L, 1530L, 1690L, 1590L, 1610L, 1670L, 1690L, 1550L, 1650L, 
+1540L, 1660L, 1620L, 1630L, 1610L, 1540L, 1610L, 1630L, 1530L, 
+1520L, 1544L, 1570L, 1580L, 1550L, 1570L, 1521L, 1580L, 1630L, 
+1650L, 1640L, 1650L, 1520L, 1620L, 1744L, 1647L, 1615L, 1680L, 
+1670L, 1620L, 1570L, 1660L, 1550L, 1590L, 1620L, 1560L, 1670L, 
+1650L, 1539L, 1470L, 1580L, 1670L, 1520L, 1620L, 1710L, 1530L, 
+1630L, 1720L, 1570L, 1560L, 1650L, 1635L, 1590L, 1590L, 1566L, 
+1590L, 1662L, 1550L, 1570L, 1560L, 1630L, 1530L), Hmarried = c(25L, 
+19L, 38L, 26L, 30L, 23L, 33L, 30L, 26L, 26L, 23L, 23L, 31L, 41L, 
+19L, 24L, 24L, 27L, 28L, 22L, 31L, 24L, 25L, 23L, 18L, 25L, 27L, 
+28L, 22L, 25L, 21L, 32L, 28L, 23L, NA, 22L, 44L, 25L, 22L, 20L, 
+25L, 21L, 25L, 21L, 26L, 28L, 25L, 22L, 23L, 27L, 21L, 26L, 19L, 
+25L, 27L, 25L, 24L, 27L, 25L, 21L, NA, 20L, 23L, 26L, 20L, 50L, 
+24L, 31L, 20L, 21L, 29L, 30L, 25L, 24L, 25L, 33L, 22L, 24L, 22L, 
+20L, 20L, 22L, 27L, 24L, 31L, 23L, 26L, NA, 22L, 24L, 21L, 29L, 
+31L, 23L, 28L, 26L, 30L, 22L, 23L, 34L, 27L, 34L, 28L, 41L, 39L, 
+32L, 22L, 23L, 49L, 25L, 27L, 22L, 37L, 17L, 23L, 26L, 21L, 23L, 
+23L, 25L, 21L, 22L, 32L, 28L, 22L, 24L, 19L, 27L, 30L, 22L, 24L, 
+25L, 21L, 23L, 22L, 35L, 21L, 30L, 19L, 35L, 23L, 29L, 22L, 32L, 
+23L, 21L, 20L, 24L, 20L, 33L, 52L, 24L, 34L, 16L, 30L, 28L, 20L, 
+20L, 26L, 21L, 24L, 22L, 22L, 29L, 22L, 24L, 24L, 25L, 23L, 19L, 
+21L, 25L, 18L, 21L, 17L, 22L, 21L, 20L, 23L, 28L, 24L, 23L, 20L, 
+22L, 30L, 22L, 27L, 25L, 24L, 25L, 22L, 21L, 19L, NA, 25L, 30L, 
+25L, 23L, 24L)), .Names = c("Hage", "Hht", "Wage", "Wht", "Hmarried"
+), class = "data.frame", row.names = c(NA, -199L))
+
+
+x <- hts$Hht/10
+
+hist(x, 
+   prob=TRUE, 
+   axes=FALSE,
+   xlab="Husbands heights (in cm)",
+   las=1,
+   ylab="",
+   main="Histogram of husbands' heights\n (1980 OPCS; n=199)",
+   col="thistle")
+axis(side=1,at=seq(145, 195, by=5), las=2)
+```
+
+
+
+
+
+
+
+
+
+
+### Measuring the amount of variation: IQR
+
+*Quartiles* can be used to describe the variation and shape of data:
+
+* The first quartile $Q_1$: The value that
+  	separates the smallest 25\% of observations from the largest 75\%.
+* The second quartile $Q_2$: The value that
+  	separates the smallest 50\% of observations from the largest 50\%.
+  	(*median*)
+* The third quartile $Q_3$: The value that
+  	separates the smallest 75\% of observations from the largest 25\%.
+
+Quartiles divide the data into four parts
+of approximately equal size,
+and a boxplot\index{boxplot}
+is a picture of the quartiles.
+
+Importantly,
+the IQR is a measure of variation that is not influenced by outliers.
+
+
+
+
+
+
+
+```{example}
+Consider the boxplot of the age of respondents in the NHANES data:
+```
+
+```{r echo=FALSE}
+
+Age.quantiles <- quantile(NHANES$Age)
+#  0%  25%  50%  75% 100% 
+#   0   18   36   54   80 
+HDL.quantiles <- quantile(NHANES$DirectChol, na.rm=TRUE)
+#  0%  25%  50%  75% 100% 
+#0.52 1.06 1.29 1.58 3.44 
+```
+	 
+
+
+```{r BoxplotAgeMovie, echo=FALSE, fig.cap="The boxplot for the Age variable in the NHANES data", fig.align="center"}
+ htmltools::tags$iframe(title = "Boixplot of Age", src = "./Animations/BoxplotAgeMovie.html", height=640, width=520) 
+```
+
+
+
+* The oldest subject is about `r Age.quantiles[5]`.
+* About 75\% of subjects are younger than about `r Age.quantiles[4]` years of age ($Q_3$).
+   	That is,
+   	the third  quartile $Q_3 = `r Age.quantiles[4]`$,
+	the median of the *largest half* of the data.
+* About 50\% of subjects are younger than about `r Age.quantiles[3]`  ($Q_2$, the median).
+   	That is,
+   	the second quartile $Q_2 = `r Age.quantiles[3]`$,
+   	the median of the data set.
+* About 25\% of subjects are younger than about `r Age.quantiles[2]`  ($Q_1$).
+   	That is,
+	the first quartile $Q_1 = `r Age.quantiles[2]`$,
+  	median of the *smallest half* of the data.
+* The youngest subject is about `r Age.quantiles[1]`.
+   
+Then, $Q_3 = `r Age.quantiles[4]`$ and $Q_1 = `r Age.quantiles[2]`$,
+so the $IQR = Q_3 - Q_1 = `r Age.quantiles[4]` - `r Age.quantiles[2]` 
+= `r (Age.quantiles[4] - Age.quantiles[2])`$.
+
+
+
+
+
+
+
+
+```{r IQRAgeMovie, echo=FALSE, fig.cap="Computing the IQR for the Age variable in the NHANES data", fig.align="center"}
+htmltools::tags$iframe(title = "Computing the IQR for Age", src = "./Animations/IQRAgeMovie.html", height=640, width=520) 
+```
+
+
+
+
+
+### Measuring the amount of variation: Percentiles
+
+We can also compute *percentiles*,
+which are similar to quantiles:
+
+* The 12th percentile is the value
+      separating the smallest 12\% of the data
+      from the rest.
+* The 67th percentile is the value
+      separating the smallest 67\% of the data
+      from the rest.
+* The 94th percentile is the value
+      separating the smallest 94\% of the data
+      from the rest.
+
+By this definition,
+the first quartile $Q_1$ is also the 25th percentile,
+the second quartile $Q_2$ is also the 50th percentile (and the median),
+and the third quartile $Q_3$ is also the 75th percentile.
+
+
+EXAMPLE?
+
+
+
+
+
+
+
+
+
+
+### Which measure of variation to use?
+
+Which is the best measure of variation for quantitative data?
+As with measures of location,
+it depends on the data.
+Since the standard deviation calculation uses the mean,
+it is impacted in the same way as the mean by outliers and skewness
+(Table \@ref(tab:QuantStatistics)).
+
+Table: (\#tab:QuantStatistics)  When to use which numerical summaries for *quantitative* data
+
+Shape       | Location     | Variation
+-----------:+:-------------+:------------
+Approx. symmetric    | Mean   | Standard deviation
+Not symmetric        | Median | IQR
+
+   
+
+PERCENTILES AND QUARTILES ONLY used in special situations...?
+
+
+
+
+
+
+
+
+## Describing shape
+
+Describing the skewness numerically is possible; 
+however,
+we do so and
+just describe the shape as
+skewed, approximately symmetric, bimodal, etc.
+as we have done before (see Sect. \@ref(SummariseData)).
+
+
+
+
+
+
+```{example}
+The Australian Bureau of Statistics ([ABS](http://www.abs.gov.au/))
+records the 
+[age at death of Australians](http://www.abs.gov.au/AUSSTATS/subscriber.nsf/log?openagent&33020do008_2012.xls&3302.0&Data%20Cubes&19D242509768F63BCA257C1B000D6ECA&0&2012&07.11.2013&Latest).
+The histograms for females are males are shown in
+Fig. \@ref(fig:DeathAgeHist)
+and
+Fig. \@ref(fig:DeathAgeBoxplot).
+These distributions are *negatively* skewed:
+Few Australians die at a very young age.
+```
+
+```{r DeathAgeHist, echo=FALSE, fig.cap="Histograms of age at death for Australians in 2012", fig.align="center"}
+deathCounts <- c(565, 116, 69, 78, 319, 501, 633, 655, 848, 1226, 1633, 2459, 3375, 4669, 6152, 7436, 9526, 12619, 12455, 7113, 2104, 241)
+ageBreaks <- c(0, 1, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100, 110)
+
+# Sum the two smallest bins to make a single (0, 5) bin:
+dCountsM <-  c(565 + 116, 69, 78, 319, 501, 633, 655, 848, 1226, 1633, 2459, 3375, 4669, 6152, 7436, 9526, 12619, 12455, 7113, 2104, 241)
+ageBreaks <- c(0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100, 110)
+
+par(mfrow=c(1,2))
+
+# Now, try combining boxes in pairs"
+ dCountsM2 <-  c(565 + 116  + 69, 78+ 319, 501+ 633, 655+ 848, 1226+ 1633, 2459+ 3375, 4669+ 6152, 7436+ 9526, 12619+ 12455, 7113+ 2104, 241)
+ ageBreaks2 <- seq(0, 110, by=10)
+ 
+ 
+ par(mfrow=c(1,2))
+ 
+ 
+ 
+ dCountsF2 <- c(466+87+ 59, 63+ 181, 202+ 218, 328+ 454, 750+ 1024, 1569+ 2093, 2909+ 3745, 4810+ 6914, 11290+ 15430, 12946+ 5637, 1128)
+ outF <- barplot(dCountsF2/1000, 
+ 	space=0.0, 
+ 	las=1,
+ 	col="mistyrose", 
+ 	ylim=c(0, 27),
+ 	axes=FALSE,
+ 	axisnames=FALSE,
+ 	names.arg=ageBreaks2,
+ 	main="Age at death of Australian\nFemales in 2012")
+ 
+ axis(side=1, at=0:(length(ageBreaks2)-1), labels=ageBreaks2)
+ axis(side=2, las=1)
+ title(xlab="Age (in years)", ylab="Number (in thousands)", , sub=paste("(Total deaths: ",sum(dCountsF2),")", sep=""))
+ box()
+ 
+ 
+ outM <- barplot(dCountsM2/1000, 
+                 space=0.0, 
+                 las=1,
+                 col="azure2",
+                 ylim=c(0, 27),
+                 axes=FALSE,
+                 axisnames=FALSE,
+                 main="Age at death of Australian\nMales in 2012")
+ axis(side=1, at=0:(length(ageBreaks2)-1), labels=ageBreaks2 )
+ axis(side=2, las=1)
+ title(xlab="Age (in years)", ylab="Number (in thousands)", sub=paste("(Total deaths: ",sum(dCountsM2),")", sep="") )
+ box()
+```
+
+
+
+```{r DeathAgeBoxplot, echo=FALSE, fig.cap="Boxplot of age at death for Australians in 2012", fig.align="center"}
+
+# BOXPLOT
+
+# Make pretend data
+sDataM <- NULL
+sDataF <- NULL
+ClassLimits <- seq(0, 110, by=10)
+set.seed(98672)
+
+for (i in (1: (length(dCountsM2) - 1 )) ) {
+	sDataM <- c( sDataM, runif( dCountsM2[i], ClassLimits[i], ClassLimits[i+1] ) )
+}
+for (i in (1: (length(dCountsF2) - 1 )) ) {
+	sDataF <- c( sDataF, runif( dCountsF2[i], ClassLimits[i], ClassLimits[i+1] ) )
+}
+
+DeathAges <- data.frame( Age=c(sDataM, sDataF), Gender=c(rep("M", length(sDataM)), rep("F", length(sDataF)) ) )
+
+boxplot(Age ~ Gender, data=DeathAges,
+   las=1,
+   ylim=c(0, 110),
+   ylab="Age at death",
+   xlab="Gender",
+   main="Age at death of Australians in 2012",
+   col=c( "mistyrose", "azure2"))
+
+```
+
+
+
+## Identifying outliers
+
+Outliers are observations that are quite different that the bulk of the data. 
+But this is a subjective assessment.
+How can we identify the outliers *numerically*?
+
+We can make some arbitrary numerical guidelines about outliers,
+but any rule for identifying outliers is somewhat subjective.
+
+We will look at two rules for identifying outliers.
+We begin by looking at bell-shaped distributions. 
+
+
+
+
+
+
+
+### Normal distribution and the empirical rule
+
+Often,
+working with normal distributions is useful.
+For convenience,
+histograms may be smoothed,
+and drawn to contain 100\% of the observations.
+Then,
+*areas* under the normal curve are theoretical percentages
+of the total number.
+
+Importantly,
+the areas under the curve approximately follow this rule.
+
+
+```{definition, EmpiricalRule, name="Empirical rule (or the 68--95--99.7 rule)"}
+For *any* bell-shaped distribution, approximately:
+
+* 68\% of observations are within one standard deviation of the mean;
+* 95\% of observations are within two standard deviations of the mean;
+* 99.7\% of observations are within three standard deviations of the mean.
+
+```
+
+```{example}
+An UK study in the 1980s measured the heights of husbaneds and wives
+(@data:hand:handbook, @data:Marsh1988:ExploringData).
+For the husbands' heights,
+the histogram of the data looks approximately bell shaped,
+so we could approximate the distribution with a bell-shaped distribution
+(Fig. \@ref(fig:HusbandHistNormal)). 
+```
+ 
+ 
+```{r HusbandHistNormal, echo=FALSE, fig.cap="The heights of husbands have an approximate normal distribution", fig.align="center", fig.height=3.5}
+
+x <- hh <- hts$Hht/10
+
+#Produce some output to use before we plot:
+out <- hist(x, 
+   prob=TRUE, 
+   axes=FALSE,
+   xlab="Husbands heights (in cm)",
+   las=1,
+   ylab="",
+   main="Histogram of husbands' hts\n (1980 OPCS; n=199)",
+   col="thistle")
+   
+   
+   
+par( mfrow=c(1,3),
+     mar=c(4, 1, 2, 1) )
+
+hist(x, 
+   prob=TRUE, 
+   axes=FALSE,
+   xlab="Husbands heights (in cm)",
+   las=1,
+   ylab="",
+   main="Histogram of husbands' hts\n (1980 OPCS; n=199)",
+   col="thistle")
+axis(side=1, at=seq(145, 195, by=5), las=2)
+   
+hist(x, 
+   prob=TRUE, 
+   axes=FALSE,
+   xlab="Husbands heights (in cm)",
+   las=1,
+   ylab="",
+   main="Histogram of husbands' hts\n (1980 OPCS; n=199)",
+   col="thistle")
+axis(side=1,at=seq(145, 195, by=5), las=2)
+
+plot( function(y) dnorm(y, mean(x), sd(x)), 
+   from=min(x), 
+   to=max(x), 
+   col="red", 
+   add=TRUE,
+   lwd=2)
+
+plot( function(y) dnorm(y, mean(x), sd(x)), 
+   axes=FALSE,
+   xlab="Husbands heights (in cm)",
+   las=1,
+   ylab="",
+   ylim=c(0, max(out$density)),
+   main="Husbands' heights\n (1980 OPCS; n=199)",
+   from=min(x), 
+   to=max(x), 
+   col="red", 
+   lwd=2)
+axis(side=1, at=seq(145, 195, by=5), las=2)
+```
+
+
+Using this idea, we can shade certain areas
+(Fig. \@ref(fig:HusbandHistNormalShade)): 
+	   
+```{r HusbandHistNormalShade, echo=FALSE, fig.cap="The heights of husbands, with certain percentages shaded", fig.align="center", fig.height=3.5}
+par( mfrow=c(1,3),
+     mar=c(4, 1, 2, 1) )
+
+hh.m <- mean ( hh )
+hh.s <- sd ( hh )
+
+z.lo <- -3.5
+z.hi <-  3.5
+
+x.lo <- z.lo * hh.s + hh.m
+x.hi <- z.hi * hh.s + hh.m
+xx <- seq(x.lo, x.hi, length=200)
+
+hh.norm <- dnorm( xx, mean=hh.m, sd=hh.s )
+
+plot( hh.norm ~ xx,
+   type="n",
+   xlab="Heights (in cm)",
+   ylab="",
+   las=1,
+   axes=FALSE,
+   main="100% of men")
+ 
+lines( hh.norm ~ xx, lwd=2)
+
+axis(side=1)
+
+
+x.p <- c( xx[1], xx, xx[length(xx)] )
+y.p <- c( 0, hh.norm, 0 )
+polygon( x.p, y.p, col=plot.colour )
+
+
+# - Now shade middle 50%
+plot( hh.norm ~ xx,
+   type="n",
+   xlab="Heights (in cm)",
+   ylab="",
+   las=1,
+   axes=FALSE,
+   main="Middle 80%")
+ 
+lines( hh.norm ~ xx, lwd=2)
+ 
+axis(side=1)
+
+z.lo <- -1.28
+z.hi <-  1.28
+
+x.lo <- z.lo * hh.s + hh.m
+x.hi <- z.hi * hh.s + hh.m
+x.80 <- seq(x.lo, x.hi, length=200)
+y.80 <- dnorm( x.80, mean=hh.m, sd=hh.s )
+
+x.p <- c( x.80[1], x.80, x.80[length(xx)] )
+y.p <- c( 0, y.80, 0 )
+polygon( x.p, y.p, col=plot.colour )
+
+
+
+
+
+# -Tallest 20%
+plot( hh.norm ~ xx,
+   type="n",
+   xlab="Heights (in cm)",
+   ylab="",
+   las=1,
+   axes=FALSE,
+   main="Tallest 20%")
+ 
+lines( hh.norm ~ xx, lwd=2)
+ 
+axis(side=1)
+
+z.lo <- 0.84
+z.hi <-  3.5
+
+x.lo <- z.lo * hh.s + hh.m
+x.hi <- z.hi * hh.s + hh.m
+x.20 <- seq(x.lo, x.hi, length=200)
+y.20 <- dnorm( x.20, mean=hh.m, sd=hh.s )
+
+x.p <- c( x.20[1], x.20, x.20[length(xx)] )
+y.p <- c( 0, y.20, 0 )
+polygon( x.p, y.p, col=plot.colour )
+```
+
+We can also apply the empirical rule
+(Fig. \@ref(fig:HusbandHistNormalShadeEmpirical)): 
+
+
+```{r HusbandHistNormalShadeEmpirical, echo=FALSE, fig.cap="The heights of husbands, showing the 68--95--99.7 rule", fig.align="center", fig.height=3.5}
+par( mfrow=c(1,3),
+     mar=c(4, 1, 2, 1) )
+
+
+
+# Mid 68%
+plot.norm( mean(hh), sd=sd(hh), 
+   xlab.name="Ht (cm)", 
+   shade.hi.z=1,
+   shade.lo.z=-1,
+   round.dec=0,
+   show.lo="1 std dev",
+   show.hi="1 std dev",
+   main="Within 1 std. dev.")
+   
+
+
+
+# Mid 95%
+plot.norm( mean(hh), sd=sd(hh), 
+   xlab.name="Ht (cm)", 
+   shade.hi.z=2,
+   shade.lo.z=-2,
+   round.dec=0,
+   show.lo="2 std dev",
+   show.hi="2 std dev",
+   main="Within 2 std. devs.")
+   
+
+
+# Mid 99.7%
+plot.norm( mean(hh), sd=sd(hh), 
+   xlab.name="Ht (cm)", 
+   shade.hi.z=3,
+   shade.lo.z=-3,
+   round.dec=0,
+   show.lo="3 std dev",
+   show.hi="3 std dev",
+   main="Within 3 std. devs.")
+```
+
+Notice that the empirical rule states,
+among other things,
+that 99.7\% of observations within 3 standard deviations of the mean.
+That is practically all the observations.
+
+This suggests a rule for identifying outliers in bell-shaped distributions:
+any observation more than 3 std.\ devs.\ away from the mean is quite unusual\dots
+and may be considered as an outlier.
+More generally,
+this rule is often applied to distributions that are approximately symmetric.
+   
+We learn a lot more about the bell-shaped (normal) distributions later.
+
+
+
+```{example}
+In 1980,
+a random sample of 200 husbands and wives were taken from Great Britain
+(the 'OPCS study
+(@data:hand:handbook, @data:Marsh1988:ExploringData).
+The husbands' heights had a sample standard deviation of 6.88\,cm.
+   
+For the husbands' heights,
+$\bar{x} = 173.2$\,cm;
+$s = 6.88$\,cm.   
+The data are roughly bell-shaped,
+so (using the empirical rule) about 68\% of husbands are between:
+
+* $\underbrace{(173.2 - 6.88)}_{\text{One std. dev. below mean}}=166.3$\,cm and 
+* $\underbrace{(173.2 + 6.88)}_{\text{One std. dev. above mean}}=180.1$\,cm.
+
+In the sample,
+the sample, 71\% between 166.3\,cm \& 180.1\,cm.
+```
+
+
+
+```{r echo=FALSE}
+x <- hts$Hht/10
+
+hist(x, 
+   prob=TRUE, 
+   axes=FALSE,
+   xlab="Husbands heights (in cm)",
+   las=1,
+   ylab="",
+   main="Histogram of husbands' heights\n (1980 OPCS; n=199)",
+   col="thistle")
+axis(side=1,at=seq(145, 195, by=5), las=2)
+```
+
+
+
+
+
+
+
+
+   
+```{example}
+For the husbands' heights,
+the sample mean height is $173.2$\,cm;
+the sample standard deviation is $6.88$\,cm.
+
+
+Two standard deviations are $2\times6.88=13.76$,
+so about 95\% of husbands are between
+$(173.2 - 13.76) = 159.4$\,cm and 
+$(173.2 + 13.76) = 187.0$\,cm.
+In the sample, 93\% of observations are between 159.4\,cm \& 187.0\,cm.
+```
+
+
+
+
+```{exercise}
+For the husbands' heights,
+   the sample mean height is $173.2$\,cm;
+   the sample standard deviation is $6.88$\,cm.
+   
+Using the 68--95--99.7 rukle,
+about 99.7\% of the husbands are between what heights?
+```
+
+
+
+
+
+
+### The standard deviation rule for identifying outliers
+
+An *outlier* is an unusual observation:
+one inconsistent with the bulk of the data.
+Many rules exist for identifying outliers;
+all are arbitrary.
+Here is one rule for identifying outliers:
+
+```{definition, name = "Standard deviation rule for identifying outliers"}
+
+Any observation more than three standard deviations from the mean
+```
+
+Since this is based on the mean and the standard deviation,
+this rule is suitable for approximately symmetric distributions.
+   
+
+
+
+
+
+
+
+
+### The IQR rule for identifying outliers
+
+
+Since the standard deviation rule for identifying outliers
+relies of the mean and standard deviation,
+it suffers from the same problems that the mean and standard deviation has:
+It is not appropriate for distributions that are not symmetric.
+So another rule is needed for identifying outliers in these situations.
+
+
+
+This is called the IQR rule.
+(This is the rule that SPSS uses to identify outliers
+when creating boxplots.)
+      
+            
+```{definition, name="Outliers: IQR rule"}
+The IQR rule can identify outliers as:
+
+*Mild outliers*:
+observations  $1.5\times IQR$
+more unusual than $Q_1$ or $Q_3$;
+   
+*Extreme outliers*:
+observations  $3\times IQR$
+more unusual than $Q_1$ or $Q_3$.
+```
+
+
+
+
+This definition is easier to understand using an example.
+
+```{example}
+An engineering project
+[@data:hald:statistical]
+was studying a new building material,
+and posed this RQ:
+
+> In a given building material,
+> what is the average  permeability?
+
+Measurements from 81 pieces of sheets of material were taken
+on the time for water to permeate sheets (in seconds).
+
+For these data
+$Q_1 = 24.7$ and 
+$Q_3 = 50.6$, so
+$IQR = {50.6 - 24.7 = 25.9}$.
+   
+
+**Extreme** outliers are more unusual than
+$3\times 25.9 = 77.7$
+away from $Q_1$ or $Q_3$.
+That is,
+*extreme* outliers are more unusual than:
+   $24.7 - 77.7 = -53$
+   or
+   $50.6 + 77.7 = 128.3$.
+
+**Mild** outliers are more unusual than 
+   $1.5\times 25.9 = 38.9$
+   away from $Q_1$ or $Q_3$.
+	That is,
+  *mild* outliers are
+   more unusual than:
+   $24.7 - 38.9 = -14.2$ or
+   $50.6 + 38.9 = 89.5$.
+   
+To draw the boxplot,
+extend the 'whiskers' to observations left
+after excluding 'mild' and 'extreme' observations:
+
+*SPSS shows *mild outliers*
+using a $\circ$;
+* SPSS shows *extreme outliers*
+using a $\star$.
+
+You don't need to *do* this;
+you do need to *understand* what SPSS is doing.
+
+The boxplot can be drawn like this:
+```
+
+```{r echo=FALSE}
+tt.box <- function(x, do.mild=TRUE, do.extreme=TRUE,  mild=NULL, extreme=NULL, plot=TRUE, ...){
+
+   # FIND IQR, Q1, Q3
+   q1 <- quantile(x, 0.25, na.rm=TRUE)
+   q3 <- quantile(x, 0.75, na.rm=TRUE)
+   iqr <- q3 - q1
+   med <- median(x)
+   
+   # FIND 1.5 and 3 times IQR
+   if ( is.null(mild) )  mild <- 1.5 * iqr
+   if ( is.null(extreme) ) extreme <- 3 * iqr
+   
+   # FIND extreme obs
+   extreme.obs <-  ( x < q1 - extreme )  | (x > q3 + extreme) 
+   extreme.num <- length( x[extreme.obs] )
+   
+   # FIND mild obs
+   mild.obs <- ( ( x < q1 - mild)  | (x > q3 + mild) ) &  !extreme.obs
+   mild.num <- length( x[mild.obs] )
+   
+   # PLOT
+   out <- boxplot( x, plot=FALSE, range=0)
+	if (plot) {
+	   boxplot( x[ ! ( c(mild.obs | extreme.obs) )  ], 
+				ylim=c(min(0, na.rm=TRUE), 
+				max(x, na.rm=TRUE)), range=0, ... )
+	   if ( do.extreme ) points( rep( 1, extreme.num), x[extreme.obs], pch=8)
+	   if ( do.mild )    points( rep( 1, mild.num), x[mild.obs], pch=1)
+	}   
+   return( list(stats = out ) )
+}
+```
+
+```{r echo=FALSE}
+par (mfrow=c(1,2))
+x <- perm$Perm
+
+out <- tt.box(x, plot=FALSE)$stats$stats
+
+
+minx <- out[1,1]
+q1x <- out[2,1]
+medx <- out[3,1]
+q3x <- out[4,1]
+maxx <- out[5,1]
+iqr <- q3x - q1x
+mild <- q3x + 1.5*iqr
+extreme <- q3x + 3*iqr
+
+
+
+hide <- tt.box( x,
+   las=1,
+   ylab="Permeability (in secs)",
+   main="Permeability of\nbuilding material",
+   col="slateblue",
+   do.mild=TRUE,
+   do.extreme=TRUE,
+   axes=FALSE, ylim=c(0,180)
+   )
+axis(side=2, at=seq(0,180,by=20), las=1)
+box()
+
+abline( lwd=2, col="gray", h=extreme )
+text(1, mean( c(extreme, maxx)), "All observations here\nare extreme outliers", col="grey")
+abline( lwd=2, col="gray", h=mild )
+text(1, mean( c(mild, extreme)), "All observations here\nare mild outliers", col="grey")
+
+
+
+hide <- tt.box( x,
+   las=1,
+   ylab="Permeability (in secs)",
+   main="Permeability of\nbuilding material",
+   col="slateblue",
+   do.mild=TRUE,
+   do.extreme=TRUE,
+   axes=FALSE, 
+   ylim=c(0,180)
+   )
+axis(side=2, at=seq(0,180,by=20), las=1)
+box()
+```
+
+
+
+
+### When to use which rule?
+
+In summary,
+two common ways for identifying outliers are:
+
+* For *approximately symmetric distributions*: observations more than 3 standard deviation from the mean;
+* For *any distribution*, but primarily for those skewed or with outliers: use the IQR rule.
+
+But remember:
+All rules for identifying outliers are arbitrary!
+   
+```{example}
+For the permeability data
+[@data:hald:statistical]:
+```
+
+```{r echo=FALSE}
+par (mfrow=c(1,2))
+
+library(GLMsData)
+data(perm)
+
+hide <- tt.box( perm$Perm,
+   las=1,
+   ylab="Permeability (in secs)",
+   main="Permeability of\nbuilding material",
+   col="slateblue",
+   do.mild=TRUE,
+   do.extreme=TRUE,
+   axes=FALSE, 
+   ylim=c(0,180)
+   )
+axis(side=2, at=seq(0,180,by=20), las=1)
+box()
+
+hist( perm$Perm,
+	xlab="Permeability (in secs)",
+	ylab="Number of obs.",
+	main="Permeability of\nbuilding material",
+	col=plot.colour,
+	ylim=c(0, 30),
+	axes=FALSE,
+	breaks=seq(0, 190, by=10),
+	las=1)
+axis(side=1, at=seq(0, 180, by=20), las=1 )
+axis(side = 2, las=1)
+```
+
+
+
+
+
+
+```{exercise}
+In an American study
+[@data:Tager:FEV],
+the lung capacity (FEV) of 
+youth aged 3 to 19 was measured.
+The average FEV was about 2.6 litres,
+and slightly skewed right.
+The FEV varies from about 0.8 to 5.8 litres,
+with no outliers.
+
+Sketch the boxplot and the histogram. 
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+```{exercise}
+Match the histogram with the boxplot
+```
+
+
+```{r echo=FALSE}
+layout( matrix( c(1,3,5,2,4,6), ncol=3, byrow=TRUE) )
+
+set.seed(20032009)
+num <- 400
+
+dt1 <- rgamma(num, scale=0.2, shape=2)
+dt2 <- rnorm(num, mean=max(dt1)/2, sd=max(dt1)/6)
+dt3 <- c( rnorm(num/3, mean=4, sd=1), rnorm(2*num/3, mean=1, sd=1) )
+dt3 <- c( runif(num,0,max(dt1)) )
+
+xlims <- c( 0, max(c(dt1,dt2,dt3)) )
+hist(dt1, col="slateblue", main="A", xlim=xlims, las=1, axes=FALSE, xlab=""); axis(side=1)
+boxplot(dt2, col="bisque", main="I", ylim=xlims, las=1, range=0, horizontal=TRUE)
+
+hist(dt2, col="slateblue", main="B", xlim=xlims, las=1, axes=FALSE, xlab=""); axis(side=1)
+boxplot(dt1, col="bisque", main="II", ylim=xlims, las=1, range=0, horizontal=TRUE)
+
+hist(dt3, col="slateblue", main="C", xlim=xlims, las=1, axes=FALSE, xlab=""); axis(side=1)
+boxplot(dt3, col="bisque", main="III", ylim=xlims, las=1, range=0, horizontal=TRUE)
+```
+
+
+
+
+
+
+
+
+
+## Summary
+   
+Quantitative data can be summarised numerically,
+and the most common techniques are indicated in
+Table \@ref(tab:SummaryQuantStats).
+
+
+Table: (\#tab:SummaryQuantStats): Summaries of quantitative data
+
+Feature        | Approximately symmetric    | Not symmetric, or outliers
+---------------+----------------------------+------------------------------
+Location:      | Mean                       | Median
+Variation:     | Standard deviation         | IQR
+Shape:         | Verbal description         | Verbal description
+Outliers:      | Std.\ deviation rule       | IQR rule
+
+   
+Mean and standard deviation are usually used whenever possible.
+
+
+
+
+
+
+
+
+
+
+
+
+```{example}
+
+QUANT AND QUAL DATA. MOVE TO LATER, or just focus on QUANT? Maye do quant here then add the qual later in the qual chapter as an example
+
+In a study
+[@data:Ejtahed2012:Yoghurt] of yoghurt
+the objective was to assess the effects of probiotic and conventional yogurt 
+on blood glucose and antioxidant status in Type 2 diabetic patients.
+A randomised controlled trial (i.e. an experiment)
+collected data from 60 patients.
+         
+
+Some quantitative information is sumnarised 
+(Table \@ref(tab:YoghurtDataSummary)
+using means and standard deviations,
+and some with meadians and IQRs,
+Qualitative information is summarised 
+with frequencies.
+Consider the results
+(Table \@ref(tab:YoghurtResultsSummary)).
+
+Means and standard deviations are presented for the two groups 
+to be compared.    
+
+Do  you think there is there a difference between the two groups *in the population*?
+```
+
+   
+Table: (\#tab:YoghurtDataSummary)  Baseline characteristics of study participants (results given as means$\pm$ standard deviation)
+         
+Variable          | Conventional yoghurt ($n=30$)    |  Probiotic yoghurt ($n=30$)
+:-----------------+---------------------------------:+----------------------------:
+Age               | 51.00 $\pm$ 7.32                 | 50.87 $\pm$ 7.68
+Men/women         | 12/18                            | 11/19
+Weight (kg)       | 75.42 $\pm$ 11.28                | 76.18 $\pm$ 10.94
+BMI (kg/m^2)      | 29.14 $\pm$ 4.30                 | 28.95 $\pm$ 3.65
+
+
+
+
+
+
+Table: (\#tab:YoghurtResultsSummary)  Results from a 6-week study of yoghurt consumption on blood glucose (results given as means$\pm$ standard deviation)
+         
+Variable             | Conventional yoghurt ($n=30$)  |  Probiotic yoghurt ($n=30$)
+:--------------------+-------------------------------:+----------------------------:
+Gluocse (mmol/L)     |                                |
+- Baseline           | 7.35 $\pm$ 1.28                | 8.06 $\pm$ 2.49
+- After invervention | 7.53 $\pm$ 1.32                | 7.36 $\pm$ 2.41
+
+
+
+
+
+
+
+
+## Tips for compiling tables of numerical summary information
+
+When compiling tables of numerical summary information,
+here are some tips:
+
+* Numbers should be rounded appropriately (not using all decimals provided by SPSS).
+* Places captions *above* the tables.
+* In general, use **no** vertical lines and **very few** few horizontal lines.
+* Align number in the table by decimal point, for easier reading.
+
+
+
+
+
+## The NHANES data: Numerical summaries
+
+In Sect.~\ref{SEC:Graphics:NHANES},
+the NHANES data were introduced,
+and graphs were used to understand the data
+relevant to answering this RQ:
+
+> Among Americans,
+> is there a relationship between smoking status, 
+> and the average direct HDL cholesterol levels? (DIFFERENT!)
+
+For these data,
+we can summarise the direct HDL cholesterol
+numerically 
+(Table \@ref(tab:NHANESDatasSummary)).
+
+
+Table: (\#tab:NHANESDatasSummary) Direct HDL cholesterol concentrations (in mmol/L)
+
+Feature       | Value
+--------------+--------
+Location:     |  Sample mean: $\bar{x} = `r round( mean(  NHANES$DirectChol, na.rm=TRUE), 2)`$\,mmol/L
+~             |  Sample median: $`r round( median(NHANES$DirectChol, na.rm=TRUE), 2)`$\,mmol/L
+Variation:    |  Sample std.\ dev.\ : $s=`r round( sd(    NHANES$DirectChol, na.rm=TRUE), 3)`$\,mmol/L
+~             |  Sample IQR: $`r round( IQR(   NHANES$DirectChol, na.rm=TRUE), 3)`$\,mmol/L
+Shape:        |  Slightly skewed right
+Outliers:     |  Some identified by SPSS in boxplot, mostly large values
+
+
+But the RQ is about the *relationship*
+between direct HDL cholesterol
+and current smoking status.
+To help understand the data relevant to this RQ,
+we can compile a table 
+(Table \@ref(tab:NHANESResultsSummary))
+of the numerical summaries of direct HDL cholesterol for each group:
+
+
+Table: (\#tab:NHANESResultsSummary) Direct HDL cholesterol concentrations (in mmol/L) for smokers and non-smokers
+
+Group            |  $n$       				 |  Mean       |  Median     |  Std. dev     |  IQR
+----------------:+--------------------:+------------:+------------:+---------------:+------:
+*All participants* 	 |  $`r sum( !is.na(NHANES$DirectChol))`$ |  $`r  round(   mean( NHANES$DirectChol, na.rm=TRUE) , 2) `$				 |  $`r  round( median( NHANES$DirectChol, na.rm=TRUE) , 2) `$  |  $`r  round(     sd( NHANES$DirectChol, na.rm=TRUE) , 3) `$  	 |  $`r  round(    IQR( NHANES$DirectChol, na.rm=TRUE) , 3) `$
+Smokers        	 |  $`r sum( !is.na(NHANES$DirectChol[NHANES$SmokeNow=="Yes"]))`$    |  $`r  round(   mean(   NHANES$DirectChol[NHANES$SmokeNow=="Yes"], na.rm=TRUE) , 2) `$    | $`r  round(   median( NHANES$DirectChol[NHANES$SmokeNow=="Yes"], na.rm=TRUE) , 2) `$ |  $`r  round(   sd(     NHANES$DirectChol[NHANES$SmokeNow=="Yes"], na.rm=TRUE) , 3) `$ |  $`r  round(   IQR(    NHANES$DirectChol[NHANES$SmokeNow=="Yes"], na.rm=TRUE) , 3) `$
+Non-smokers    	 |  $`r sum( !is.na(NHANES$DirectChol[NHANES$SmokeNow=="No"]))`$	 |  $`r  round(   mean(   NHANES$DirectChol[NHANES$SmokeNow=="No"], na.rm=TRUE) , 2) `$    	 |  $`r  round(   median( NHANES$DirectChol[NHANES$SmokeNow=="No"], na.rm=TRUE) , 2) `$		 |  $`r  round(   sd(     NHANES$DirectChol[NHANES$SmokeNow=="No"], na.rm=TRUE) , 3) `$		 |  $`r  round(   IQR(    NHANES$DirectChol[NHANES$SmokeNow=="No"], na.rm=TRUE) , 3) `$
+
+  Note: Information about current smoking status is unavailable for all people in the study.
+
+```{exercise}
+Information about current smoking status is unavailable for all people in the study.
+Do you think this could impact the results?
+```
+  
+
+```{exercise}
+Based on this *sample* information,
+is there difference between average direct HDL cholesterol between current smokers and non-smokers
+*in the population*?
+```
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,1313 @@
+# (PART) Connection RQs: Regression and Correlation {-}
+
+
+
+
+
+
+
+
+
+# Relationships between two quantitative variables
+
+```{r echo=FALSE}
+SixSteps(5, "Connection RQs: Tests and CIs")
+```
+
+## Revision
+
+OR "CONTEXT".
+
+OR don't bother: Just point out that now we are looking at PO(Connection)-type RQs.
+
+
+To begin,
+let's see what types of situations we have studied for analysis so far:
+
+If the response variable in a RQ is a population **proportion** $p$
+or population **odds ratio**:
+
+Situation | Test to use
+---------:+:--------------
+Compare *two groups*:                 | Chi-square
+Compare *more than two groups*:       | Chi-square
+
+If the response variable in a RQ is a population **mean** $\mu$:
+
+Situation  | Test to use
+----------:+:------------
+In one group:                      | One-sample $t$ 
+Mean difference:                   | Paired sample $t$
+Compare *two groups*:              | Two-sample $t$
+Compare *more than two groups*:    | ANOVA (studied in other courses)
+
+   
+Note that in all cases,
+the *explanatory variable is qualitative* (i.e. groups) in all cases.
+
+But sometimes the explanatory (independent) variable 
+is *quantitative*.
+With a quantitative explanatory and quantitative response variable:
+
+* *graphically summarise* using a scatterplot (as seen in Sect. \@ref(Scatterplots));
+* *numerically summarise* using a *correlation coefficient*;
+* *analyse* using regression and correlation.    
+
+
+Situation                       | Graphical summary | Numerical summary | Analysis (test)
+-------------------------------:+:-----------------:+------------------:+------------------:
+Two proportions                 | side-by-side bar; stacked bar   | odds; odds ratios; percentages | chi-square
+One mean                        | histogram                       | $\bar{x}$, $s$, s.e.$(\bar{x})$, etc.  | one-sample $t$
+Mean difference                 | histogram of *differences*      | mean, standard deviation and standard error  of *differences* | paired $t$
+Difference between means        | boxplot; error bar chart        | $\bar{x}$, $s$, s.e.$(\bar{x})$, etc. for *both* groups ; summaries for difference between means | two-sample $t$ 
+
+
+
+
+
+## Two quantitative variables: Revision
+
+```{r echo=FALSE}
+RD <- structure(list(Age = c(4.4, 4.4, 4.4, 4.4, 4.4, 4.4, 4.4, 4.8, 
+4.8, 5.4, 5.4, 5.4, 5.4, 5.4, 5.4, 5.4, 5.4, 5.4, 5.4, 5.4, 5.4, 
+5.8, 6.4, 6.4, 6.4, 6.4, 6.4, 6.4, 6.4, 6.4, 6.4, 6.4, 6.4, 7.4, 
+7.4, 7.4, 7.4, 7.4, 7.4, 7.4, 7.4, 7.8, 7.8, 8.4, 8.4, 8.4, 8.4, 
+8.4, 8.4, 8.4, 8.4, 8.4, 8.4, 8.4, 8.4, 8.4, 9.4, 9.4, 9.4, 9.4, 
+9.4, 9.4, 9.4, 9.4, 9.4, 9.4, 9.4, 9.8, 10.4, 10.4, 10.4, 10.4, 
+11.4, 12.4, 12.8, 13.4, 13.4, 14.4), Weight = c(2.42, 4.45, 5.24, 
+3.19, 3.9, 3.26, 3.07, 4.48, 3.18, 3.36, 3.61, 3.71, 3.57, 3.33, 
+2.72, 3.64, 2.61, 3.89, 3.3, 2.62, 3.1, 4.03, 3.36, 3.19, 3.32, 
+2.78, 3.38, 3.07, 3.22, 3.05, 3.79, 3.15, 2.69, 3.92, 3.07, 2.54, 
+3.82, 3.1, 3.56, 2.6, 3.56, 3.8, 3.49, 3.25, 1.84, 2.41, 2.86, 
+2.88, 2.35, 2.94, 2.99, 2.76, 2.4, 2.67, 2.97, 2.61, 1.89, 1.8, 
+2.62, 1.92, 3.75, 4.6, 2.31, 2.26, 3.48, 2.86, 2.38, 2.82, 1.09, 
+2.69, 2.48, 2.72, 2.1, 2.72, 1.71, 2.14, 2.76, 1.57)), .Names = c("Age", 
+"Weight"), class = "data.frame", row.names = c(NA, -78L))
+```
+
+A study of red deer
+[@data:Holgate1965:StraightLine]
+examined the relationship between age and the weight of molars for male red deer.
+Both of these variables are *quantitative*.
+
+
+For two *quantitative* variables,
+the graphical summary is a *scatterplot*
+(Sect. \@ref(Scatterplots)).
+The *response* is determined from individuals
+(from which the outcome is derived): denoted $y$.
+An  *explanatory* variable (potentially) explains or *influences* changes in the response:
+denoted $x$.
+So in this example:
+
+* Explanatory variable $x$: the age of the deer (in years)
+* Response variable $y$:  weight of molars (in grams)
+
+(In some cases, 
+it doesn't matter which is $x$ and which is $y$.)
+
+Note that each point (unit of analysis) is a deer,
+where two measurements are made on the deer for two different variables: 
+the molar weight ($y$) which is on the *vertical* axis,
+and the age ($x$) which is plotted on the *horizontal* axis
+(Fig \@ref(fig:RedDeerScatter)).
+
+```{r RedDeerScatter, echo=FALSE, fig.cap="Molar weight verses age for the red deer data", fig.align="center"}
+plot(Weight ~ Age, data=RD,
+     las=1,
+     pch=19, 
+     ylim=c(0, 5.5),
+     xlim=c(4, 15),
+     xlab="Age (in years)",
+     ylab="Molar weight (in g)")
+```
+
+
+
+
+```{exercise}
+
+A study evaluated various foods for sheep
+[@data:Moir1961:RuminantDiet].
+One combination of variables that was assessed are shown in
+Fig. \@ref(fig:SheepScatter).
+
+* Which variable is denoted by $x$?
+* Which variable is denoted by $y$?
+
+```
+
+```{r SheepScatter, echo=FALSE, fig.cap="Scatterplots for the sheep-food data", fig.align="center"}
+library(GLMsData)
+data(ruminant)
+
+par(mfrow=c(1,2))
+
+plot(Energy ~ DryMatterDigest, data=ruminant,
+     las=1,
+     xlim=c(30,80),
+     ylim=c(1, 3.5),
+     xlab = "Dry matter digestibility (%)",
+     ylab="Digestible energy (in Cal/gram)",
+     pch=19)
+
+plot(Energy ~ DryMatterDigest, data=ruminant,
+     las=1,
+     xlim=c(30,80),
+     ylim=c(1, 3.5),
+     xlab = "Dry matter digestibility (%)",
+     ylab="Digestible energy (in Cal/gram)",
+     pch=19)
+abline( lm( Energy ~ DryMatterDigest, data=ruminant), lwd=2)
+```
+
+## Understanding scatterplots
+
+Recall that the purpose of a graph
+is to help us *understand* the data.
+To help understand the data displayed in a scatterplot,
+we describe the *form*, *direction*, and *variation*:
+
+1. *Form*: Identify the overall *form* of the pattern (e.g.\ linear; curved upwards; etc.).
+2. *Direction*: Identify the *direction* of the relationship (**only** if a linear relationship):
+    - Two variables are *positively*  associated if high values of one accompany *high* values of the other.
+    - Two variables are *negatively* associated if high values of one accompany *low* values of the other.
+
+3. *Variation*: The amount of *variation* in the relationship.
+
+These three features help to understand the type of relationship,
+and the strength of that relationship.
+
+
+```{example}
+To demonstrate these three features, consider the following example scatterplots:
+```
+
+```{r echo=FALSE}
+set.seed(2300)
+x <- runif(50, min=0, max=10)
+y <- 2*x + 5 + rnorm( length(x), 0, 1)
+
+par( mar=c(5, 4, 2, 2) + 0.1) # DEFAULT: c(5, 4, 4, 2) + 0.1.
+plot( y ~ x,
+      pch=19,
+      las=1,
+      xlab="Explanatory var",
+      ylab="Response",
+      main="Scatterplot A"
+)
+abline( coef(lm( y ~ x )), lwd=2, col=2)
+
+text(0, 25, "Form: linear", pos=4)
+text(0, 23, "Direction: positive", pos=4)
+text(0, 21, "Variation: small", pos=4)
+```
+
+
+
+```{r echo=FALSE}
+set.seed(2300)
+x <- runif(50, min=0, max=10)
+y <- -2*x + 5 + rnorm( length(x), 0, 5) + 25
+
+par( mar=c(5, 4, 2, 2) + 0.1) # DEFAULT: c(5, 4, 4, 2) + 0.1.
+plot( y ~ x,
+      pch=19,
+      las=1,
+      xlab="Explanatory var",
+      ylab="Response",
+      main="Scatterplot B"
+)
+abline( coef(lm( y ~ x )), lwd=2, col=2)
+
+text(0, 10, "Form: linear", pos=4)
+text(0, 8, "Direction: negative", pos=4)
+text(0, 6, "Variation: fairly large", pos=4)
+```
+
+
+
+
+```{r echo=FALSE}
+set.seed(2300)
+x <- runif(50, min=0, max=10)
+y <- -2*(x-4)^2 + 5 + rnorm( length(x), 0, 5) + 80
+
+par( mar=c(5, 4, 2, 2) + 0.1) # DEFAULT: c(5, 4, 4, 2) + 0.1.
+plot( y ~ x,
+      pch=19,
+      las=1,
+      xlab="Explanatory var",
+      ylab="Response",
+      main="Scatterplot C"
+)
+mod.curve <- lm( y ~ poly(x,2) )
+
+xnew <- seq(0, 10, length=25)
+newdata <- data.frame(x=xnew)
+ynew <- predict( mod.curve, newdata=newdata)
+
+lines( ynew ~ xnew, lwd=2, col=2)
+
+text(3, 40, "Form: non-linear (curved)", pos=4)
+text(3, 35, "Direction: (not relevant)", pos=4)
+text(3, 30, "Variation: small", pos=4)
+
+```
+
+
+   
+```{r echo=FALSE}
+set.seed(2300)
+x <- runif(50, min=0, max=10)
+y <- 2*(x-4)^2 + 5 + rnorm( length(x), 0, 15) + 25
+
+par( mar=c(5, 4, 2, 2) + 0.1) # DEFAULT: c(5, 4, 4, 2) + 0.1.
+plot( y ~ x,
+      pch=19,
+      las=1,
+      xlab="Explanatory var",
+      ylab="Response",
+      main="Scatterplot D"
+)
+mod.curve <- lm( y ~ poly(x,2) )
+
+xnew <- seq(0, 10, length=25)
+newdata <- data.frame(x=xnew)
+ynew <- predict( mod.curve, newdata=newdata)
+
+lines( ynew ~ xnew, lwd=2, col=2)
+
+text(0, 125, "Form: non-linear (curved)", pos=4)
+text(0, 115, "Direction: (not relevant)", pos=4)
+text(0, 105, "Variation: moderate", pos=4)
+```
+
+
+
+
+```{r echo=FALSE}
+set.seed(2300)
+set.seed(2300)
+x <- runif(50, min=0, max=10) 
+y <- 2*(x-5)^3 + 5 + rnorm( length(x), 0, 15) + 250
+
+par( mar=c(5, 4, 2, 2) + 0.1) # DEFAULT: c(5, 4, 4, 2) + 0.1.
+plot( y ~ x,
+      pch=19,
+      las=1,
+      xlab="Explanatory var",
+      ylab="Response",
+      main="Scatterplot E"
+)
+mod.curve <- lm( y ~ poly(x,3) )
+
+xnew <- seq(0, 10, length=25)
+newdata <- data.frame(x=xnew)
+ynew <- predict( mod.curve, newdata=newdata)
+
+lines( ynew ~ xnew, lwd=2, col=2)
+
+text(0, 450, "Form: non-linear (curved)", pos=4)
+text(0, 420, "Direction: (not relevant)", pos=4)
+text(0, 390, "Variation: small/moderate", pos=4)
+
+```
+
+
+
+
+
+```{example}
+A study
+(@data:Tager:FEV, @BIB:data:FEV, @data:smyth:ozdasl)
+examined the lung capacity of children
+(measured using the forced expiratory volume (FEV)).
+The scatterplot (Fig. \@ref(fig:FEVscatter)) could be described as
+
+* Form: curved.
+* Direction: (not relevant; non-linear).
+* Variation: medium.
+
+```
+	
+
+```{r FEVscatter, echo=FALSE, fig.cap="FEV plotted against height", fig.align="center"}
+library(GLMsData)
+data(lungcap)
+
+par(mfrow=c(1,2))
+
+
+plot(FEV ~ Ht, data=lungcap,
+     las=1,
+     ylim=c(0,6),
+     xlab = "Height (inches)",
+     ylab="FEV (litres)",
+     pch=19)
+
+scatter.smooth( lungcap$Ht, lungcap$FEV,
+     las=1,
+     ylim=c(0,6),
+     col="grey",
+     lwd=2,
+     xlab = "Height (inches)",
+     ylab="FEV (litres)",
+     pch=19)
+```
+
+
+
+```{exercise}
+Describe the scatterplot in
+Fig. \@ref(fig:NHANESscatterDBPAge),
+which comes from the NHANES data.
+Describe the scatterplot of *diastolic* BP against age:      
+
+* How would you describe the **form** of the relationship? 
+* How would you describe the **direction** of the relationship?
+* How would you describe the **variation** in the relationship?
+
+```
+
+
+```{r NHANESscatterDBPAge, echo=FALSE, fig.cap="Diastolic blood pressure plotted against age for the NHANES data", fig.align="center"}
+NHANES$BPDia1[ NHANES$BPDia1 == 0 ] <- NA
+
+plot(BPDia1 ~ Age,
+	las=1,
+	xlab="Age (in years)",
+	ylab="Diastolic BP (mm Hg)", 
+	data=NHANES)
+```
+
+
+
+```{exercise}
+For the red deer data
+(Fig. \@ref(fig:RedDeerScatter)),
+describe the scatterplot:
+
+* How would you describe the **form** of the relationship? 
+* How would you describe the **direction** of the relationship?
+* How would you describe the **variation** in the relationship?
+
+```
+  
+
+
+```{exercise}
+For the sheep-food digestibility data plotted in 
+Fig. \@ref(fig:SheepScatter),
+	describe the scatterplot:
+
+* How would you describe the **form** of the relationship? 
+* How would you describe the **direction** of the relationship?
+* How would you describe the **variation** in the relationship?
+
+```
+
+
+
+
+
+# Correlation
+
+## Correlation coefficients
+
+To understand the relationship between two quantitative variables,
+we have looked at the *form*, the *direction* and the *variation*.
+A *correlation coefficient* is a number that captures all three of these features.
+
+Correlation describes the *direction* and *strength*
+of a *linear* relationship between two quantitative variables
+Correlation is measured quantitatively using the
+*correlation coefficient*.
+In the *population*,
+the correlation coefficient is denoted by $\rho$ ('rho');
+in the *sample* the correlation coefficient is denoted by $r$.
+As usual,
+$r$ is an estimate of $\rho$.
+
+Correlation coefficients are only relevant if the form is *linear*
+(so first check with a scatterplot).
+Here,
+we discuss the *Pearson* correlation coefficient,
+which is suitable for quantitative data.
+
+```{block2, type="rmdwarning"}
+Correlation coefficients only make sense 
+if the relationship is approximately linear.
+```
+
+
+The values of $\rho$ and $r$ are *always* between $-1$ and $+1$.
+The *sign* of $r$ indicates positive or negative linear association in the *sample*.
+The *value* of the correlation coefficient tells us the strength of the relationship:
+
+* $r=0$ means *no linear relationship* between the variables in the sample
+* $r=+1$ means a *perfect, positive* relationship in the sample
+* $r=-1$ means a *perfect, negative* relationship in the sample
+
+The animation below shows some scatterplots with the correlation coefficients.
+
+
+```{r CorrPlots, echo=FALSE, fig.cap="The correlation coefficient", fig.align="center"}
+htmltools::tags$iframe(title = "My embedded document", src = "./Animations/CorrelationMovie.html", height=640, width=520) 
+```
+
+
+
+
+
+```{example}
+For the red deer data 
+(Fig. \@ref(fig:RedDeerScatter)),
+$r = -0.584$.
+Notice that the value of $r$ is *negative*,
+because,
+in general,
+larger values for $x$ (age)
+are associated with smaller molars ($y$).
+```
+
+
+   
+```{example}
+MOVE ALL NHANES TILL LATER??
+  
+Consider the plot in 
+Fig. \@ref(fig:NHANESDBPscatter)
+from the NHANES data.
+This scatterplot of *diastolic* BP against age is not linear,
+so a correlation coefficient is *not appropriate*.
+```
+
+```{r NHANESDBPscatter, echo=FALSE, fig.cap="Diastolic blood pressure plotted aghainst age for the NHANES data", fig.align="center"}
+NHANES$BPDia1[ NHANES$BPDia1 == 0 ] <- NA
+
+plot(BPDia1 ~ Age,
+	las=1,
+	xlab="Age (in years)",
+	ylab="Diastolic BP (mm Hg)", 
+	data=NHANES)
+```            
+
+
+
+
+
+
+
+
+
+```{exercise}
+For the sheep-food digestibility data in
+Fig. \@ref(fig:SheepScatter2),
+estimate $r$.
+```
+
+
+```{r SheepScatter2, echo=FALSE, fig.cap="Scatterplots for the sheep-food data", fig.align="center"}
+library(GLMsData)
+data(ruminant)
+
+par(mfrow=c(1,2))
+
+plot(Energy ~ DryMatterDigest, data=ruminant,
+     las=1,
+     xlim=c(30,80),
+     ylim=c(1, 3.5),
+     xlab = "Dry matter digestibility (%)",
+     ylab="Digestible energy (in Cal/gram)",
+     pch=19)
+
+plot(Energy ~ DryMatterDigest, data=ruminant,
+     las=1,
+     xlim=c(30,80),
+     ylim=c(1, 3.5),
+     xlab = "Dry matter digestibility (%)",
+     ylab="Digestible energy (in Cal/gram)",
+     pch=19)
+abline( lm( Energy ~ DryMatterDigest, data=ruminant), lwd=2)
+```
+
+
+
+
+```{example}
+The NHANES project uses an observational study,
+so confounding is a potential issue.
+For this reason,
+we can examine relationships between the 
+response and explanatory variables, and extraneous variables.
+So, for example, examining the relationship between
+Age and direct HDL cholesterol is reasonable 
+(Fig.~\ref{FG:REGRESSION:NHANES-SBP-Age-Scatter}).
+How would you describe the relationship?
+   
+The values of the *explanatory* variable appear on the *horizontal* axis:
+called $x$: Age.
+The values of the *response* variable appear on the *vertical* axis}:
+called $y$: SBP.
+
+* Form: Approximately linear;
+* Direction: Positive (Older people tend to have a slightly higher SBP);
+* Variation: Moderate (large?) variation
+
+What do you guess for the value of $r$?            
+```
+
+```{r echo=FALSE}
+plot(BPSys1 ~ Age,
+	las=1,
+    ylab="Systolic BP (in mm Hg)",
+    xlab="Age", 
+    data=NHANES)
+```
+
+
+SPSS, not surprisingly, computes the value of $r$ for us:
+
+
+SPSS OUTPUT
+
+SPSS says that $r=0.532$.
+What does this *mean*?
+
+* Form: Relationship is approximately linear, and $r$ is only relevant with linear relationships.
+* Direction: The *sign* of $r$ indicates the direction.
+Here we see a *positive* relationship:
+Higher age associate with higher systolic BP (in general)
+* Variation:
+The *value* of $r$ indicates the variation in the relationship,
+or the strength of the relationship.
+Here,
+we may describe the variation as reasonably large.
+
+
+
+
+
+## R-squared ($R^2$)
+
+
+While using $r$ tells us about the strength and direction of the linear relationship,
+it is hard to know what the value actually tells us.
+Interpretation is easier using $R^2$, or R-squared,
+which is just the value of $r$ squared.
+
+For the NHANES data above,
+$\text{R-squared} = r^2=(0.532)^2 = 0.283$,
+or about 28.3\%.      
+This tells us that about 33.1\% of the variation in systolic BP
+is due to age,
+and other things (such as weight, gender, race, amount of exercise, diet, genetics, etc.)
+explain the remaining 71.7\% of the variation in SBP values.
+
+
+```{block2, type="rmdnote"}
+The value of $R^2$ is *never* negative.
+```
+
+
+```{r R2Plots, echo=FALSE, fig.cap="The values of R-squared", fig.align="center"}
+htmltools::tags$iframe(title = "My embedded document", src = "./Animations/R2Movie.html", height=640, width=520) 
+```
+
+
+```{example}
+For the red deer data 
+(Fig. \@ref(fig:RedDeerScatter)),
+$R^2= 34.1\%$.
+Notice that the value of $R^2$ is positive even though the value of $r$ is negative.
+```
+
+
+
+
+## Hypothesis testing {#CorrelationTesting}
+
+Again, consider the red deer data,
+where we explored the relationship between the
+weight of molars and age.
+
+In the population,
+the correlation coefficient is unknown and denoted by  $\rho$.
+From the sample,
+the sample correlation coefficient is computed as $r = `r round(cor(RD$Age, RD$Weight), 3)`$.
+But since this value of $r$ is found from a *sample*,
+we know that a different sample would conatin different deer,
+and hence the value of $r$ will vary from sample to sample.
+That is,
+there is sampling variation.
+(The size of this sampling variation could be measured with a *standard error*,
+but we don't do that here with correlation coefficients.)
+
+So,
+as usual, 
+we can ask question about this:
+
+> Is the *sample* correlation non-zero due to sampling variation,
+> or because the *population* correlation really is non-zero?
+
+Writing the relevant hypotheses:
+
+* $H_0$: $\rho = 0$ (the usual 'nothing happens', no relationship exists in the population)
+* $H_1$:  $\rho \ne 0$ ('something happens'; there is a relationship in the population)
+
+Note this is a *two-tailed* test here.
+As always,
+the hypotheses concern the population.
+   
+SPSS can be used to test the hypotheses; 
+the output in
+Fig. XXXXX contains the relevant $P$-value 
+(twice in fact!).
+The $P$-value for the test: 0.000.
+That is,
+the $P$-value is zero *to three decimal places*
+(it is never *exactly* zero).
+This means that there is *strong evidence* to support $H_1$,
+that the correlation in the population is not zero.
+
+The $P$-value is small, so there is no evidence to support $H_0$,
+and very strong evidence to support $H_1$.
+That is,
+the *sample* evidence suggests there is a non-zero correlation between age and SBP
+*in the population*.
+
+> The sample presents very strong evidence 
+> (two-tailed $P=0.000$; $n=78$)
+> of a correlation between molar weight and the age of the deer
+> for male red deer
+> ($r=0.-0.584$)
+> in the population.
+
+
+```{block2, type="rmdnote"}
+A *non-zero* correlation
+doesn't necessarily mean it is a *strong* correlation.
+It just that the evidence suggests the correlation is non-zero (in the population).
+```
+
+
+
+
+## Validity conditions {#ValidityCorrelation}
+
+The conditions for which the test is statistically valid are:
+
+1. The sample is a random sample from some population.
+2. The relationship is approximately linear.
+3. The variation in the response variable is constant for all values of the explanatory variable.
+
+```{example}
+For the red deer data,
+the scatterplot
+(Fig. \@ref(fig:RedDeerScatter))
+shows that the relationship is approximately linear,
+and the variation in molar weights doesn't seem to be 
+obviously getting larger or smaller for older deer.
+
+Provided the sample is a somewhat representative sample,
+the test in Sect. \@ref(CorrelationTesting) will be valid.
+```
+
+
+```{example}
+A study
+
+(@data:ForestBiomass2017, @schepaschenko2017bpdb, @mypapers:dunnsmyth:glms)
+examined  the foliage biomass of small-leaved lime trees.
+A plot of the foliage biomass against diameter
+(Fig. \@ref(fig:LimeScatter))
+shows that the relationship is non-linear,
+so the *second validity condition* would not be satisfied.
+
+In addition,
+the variation in biomass *increases* for larger diameters,
+so the third validity condition would not be satisfied either.
+
+A hypothesis test similar to what we saw in 
+Sect. \@ref(CorrelationTesting) 
+is inappropriate.
+```
+
+```{r LimeScatter, echo=FALSE, fig.cap="Foliage biomass plotted against diameter for small-leaved lime trees", fig.align="center"}
+library(GLMsData)
+data(lime)
+
+plot(Foliage ~ DBH, data=lime,
+     las=1,
+     pch=19, 
+     ylim=c(0, 14),
+     xlim=c(0, 40),
+     xlab="Diameter (in cm)",
+     ylab="Foliage biomass (in kg)")
+
+
+LM.lm <- lm(Foliage ~ DBH, data=lime)
+abline( coef(LM.lm), lwd=2, col="grey")
+```
+
+
+
+
+
+
+
+
+
+## Example: Mist generation
+
+
+Mist is generated when metal-removing fluids are used in machining operations
+to cool and lubricate.
+This mist is a health concern,
+so a study
+[@data:Dasch2002:MistGeneration]
+wanted to understand this mist
+in a certain context.
+Specifically,
+they asked:
+
+> Does a *faster* fluid flow result in *smaller* mist particles (MMD)?
+
+Over six runs, the measured variables are:
+
+* Fluid flow (in cm/sec)
+* MMD (in $\mu$m)
+
+Both of these variables are *quantitative*.
+
+
+
+```{exercise}
+Answer these questions using the scatterplot in 
+Figs.~\ref{FG:REGRESSION:MistScatter} and~\ref{FG:REGRESSION:MistSPSS}:
+
+* The response variable is:
+* The explanatory variable is:
+* Null hypothesis:
+* Alternative hypothesis:
+* Describe the relationship: Form, direction, variation:
+* Write down the value of $r$:
+* Write down the value of $R^2$:
+* Explain what this value of $R^2$ means:
+* The $P$-value:
+
+```  
+   
+
+
+```{r echo=FALSE}
+mistgeneration <- structure(list(FluidFlow = c(89L, 177L, 189L, 354L, 362L, 442L, 
+965L), Mist = c(0.4, 0.6, 0.48, 0.66, 0.61, 0.69, 0.99), MMD = c(10, 
+9.7, 8.7, 7.9, 6.7, 7.1, 6.6)), .Names = c("FluidFlow", "Mist", 
+"MMD"), class = "data.frame", row.names = c(NA, -7L))
+
+mg <- subset(mistgeneration, FluidFlow<800)
+
+   plot(MMD ~ FluidFlow, data=mg,
+      pch=19, col="blue", las=1,
+      xlab="Fluid flow (cm/sec)", ylab="MMD (micrometres)")
+```
+
+SPSS
+
+
+
+
+# Regression
+
+
+```{r echo=FALSE}
+SixSteps(5, "Connection Tests and CIs")
+```
+
+## Introduction
+
+We have studied *correlation*,
+which measures the *strength* of the linear relationship between 
+two quantitative variables $x$ and $y$.
+We now turn to **regression**,
+which describes *what* the relationship is between $x$ and $y$.
+We describe the relationship using an *equation*,
+which allows us to:
+
+1. **Predict** values of $y$ from values of $x$; and
+2. **Understand** the relationship between $x$ and $y$.
+
+
+## Linear equations
+
+You may recall the equation of a straight line being
+written as $y = mx+c$,
+or perhaps as $y = ax + b$.
+
+However,
+in statistics, the equation of a straight line is 
+written^[For good reason! In this course, we only look at one explanatory ($x$) variable,
+but in general we can have many explanatory variables: $x_1$, $x_2$, $\dots$,
+and each of these are assocaited with a regression coefficient: $b_1$, $b_2$, $\dots$]
+as
+\[
+   \hat{y} = {b_0} + {b_1} x
+\]
+where:
+
+* $\hat{y}$  means that the formula gives *predicted* values of $y$;
+* The \quad $\hat{~}$\quad on the $y$ indicates that the equation gives a *predicted* value of $y$;
+* $b_0$ and $b_1$ are just numbers whose values we need to find.
+
+For example,
+here are three possible regression models:
+
+
+* $\hat{y} = -4 + 2x$: In this case, $b_0=-4$ and $b_1 = 2$.
+* $\hat{y} = 15 - 102x$: : In this case, $b_0=15$ and $b_1 = -102$.
+* $\hat{y} = 2.1 - 0.0047x$: : In this case, $b_0=2.1$ and $b_1 = -0.0047$.
+
+
+
+   
+The straight-line (or *linear*) regression equation is
+\[
+	\hat{y} = {b_0} + {b_1} x
+\]
+where:
+
+* $b_0$ is a number, and is the *intercept*: the predicted value of $y$ when $x=0$.
+* $b_1$ is a number, and is the *slope*: on average, how much $y$ changes when $x$ increases by 1
+         
+
+We need to find the numbers $b_0$ and $b_1$,
+for which we will use SPSS.
+But we can estimate the slope as:
+\[
+   \text{slope} = \frac{\text{rise}}{\text{run}} = \frac{\text{Change in $y$}}{\text{Corresponding change in $x$}}.
+\]
+
+```{exercise}
+As an example,
+consider the scatterplot
+in
+Fig. \@ref(fig:ExampleScatter).
+For this graph:
+
+* If $x=0$, what do you predict the value of $y$ to be approximately?
+* If $x$ increases by 1, what do you predict the value of $y$ will change by (approximately)?
+
+The answers to these two questions are approximate values of $b_0$ and $b_1$ respectively.
+```
+   
+```{r ExampleScatter, echo=FALSE, fig.cap="An example scatterplot", fig.align="center"}
+set.seed(5000)
+x <- seq(0.5, 5, length=10)
+mu <- 2 + 3*x
+y <- mu + rnorm(length(x),0,0.4)
+m1 <- lm(y~x);
+plot(y~x, xlim=c(0,5), 
+	ylim=c(0,20), 
+	las=1, 
+	xlab=expression(paste("Explanatory, ",italic(x)) ), 
+	ylab=expression(paste("Response, ",italic(y))), 
+	pch=19)
+grid()
+```
+
+
+My best estimates are that $b_0$ is about $2$, 
+and $b_1$ is about ${3}$.
+So the regression line is about: 
+$\hat{y} = 2 + (3\times x) = 2+3x$.
+
+
+
+```{r echo=FALSE}
+htmltools::tags$iframe(title = "Estimating the slope", src = "./Animations/RiseRunMovie.html", height=640, width=520) 
+```
+
+\animategraphics[loop,controls, width=\linewidth]{12}{./_book/Animations/images/RiseRun}{1}{9}
+
+
+
+```{example}
+EXAMPLE HERE to rread from a scatterplot.
+```
+
+
+
+
+
+## Regression in SPSS
+
+The formulas for computing $b_0$ and $b_1$ are ugly.
+Again, 
+we will use SPSS to do the mathematics. 
+The numbers $b_0$ and $b_1$ are called
+*regression coefficients*, 
+and are computed from the sample information.
+The values of $b_0$ and $b_1$ are estimating the unknown values in the population.
+
+
+Using the deer data again
+(Fig \@ref(fig:RedDeerScatter)),
+part of the relevant SPSS output is:
+
+
+SPSS
+
+
+```{r echo=FALSE}
+RD.lm <- lm(Weight ~ Age, data=RD)
+RD.b0 <- round( coef(RD.lm)[1], 3)
+RD.b1 <- round( coef(RD.lm)[2], 3)
+```
+
+From this output,
+the *slope* in the sample is $b_1=`r RD.b1`$,
+and the $y$-intercept in the sample is $b_0 = `r RD.b0`$.
+These are the values of the two *regression coefficients*,
+so that
+\[
+	\hat{y} = `r RD.b0` + (`r RD.b1`\times x).
+\]
+Usually we would write this more simply as
+\[
+	\hat{y} = `r RD.b0` - `r abs(RD.b1)` x.
+\]         
+
+
+
+
+
+## Regression for predictions
+
+
+We can use this regression equation
+\[
+	\hat{y} = `r RD.b0` - `r abs(RD.b1)` x
+\]
+to make *predictions*.
+So, for example,
+for deer aged $10$,
+what do we predict that the *average* molar weight will be?
+
+Since $x$ is the age, use $x=10$.
+Then use the regression equation to compute:
+\begin{eqnarray*}
+         \hat{y} 
+         &=&
+         `r RD.b0` + (`r RD.b1`\times 10)\\
+         &=& `r RD.b0` + `r RD.b1 * 10`\\
+         &=& `r RD.b0 + RD.b1*10`.
+\end{eqnarray*}
+Deer aged 10 years old have a mean molar weight of  `r  RD.b0 + RD.b1*10` grams.
+Obviously,
+some male red deer aged 10 will have molars that weight *more* than this,
+and some will have molars that weight *less* than this.
+The model predict that the *mean* molar weight  will be about 
+`r RD.b0 + RD.b1*10` grams.
+
+```{exercise}
+For male red deer $12$ years of age,
+what do we predict for the mean molar weight?
+```
+
+
+
+```{exercise}
+For male red deer $20$ years of age,
+what do we predict for the mean molar weight?
+```
+
+The oldest deer in our data is aged 14.4 years,
+so we do not know if the regression line even applies
+for people under 10 years of age.
+**Extrapolation** beyond the data can lead to nonsense predictions.
+
+```{block2, type="rmdwarning"}
+*Extrapolating* can lead no nonsense predictions.
+The prediction *may* be a *good* prediction,
+but it also *may* be a *poor* prediction.
+We cannot know for sure, as we have no data near that value of $x$.
+```
+
+
+## Regression for understanding
+
+The regression equation can be used to help us understand the relationship
+between the two variables.
+For the red deer regression equation 
+\[
+   \hat{y}
+   = 
+   `r RD.b0` 
+   + 
+   ( `r RD.b1`\times x),
+\]
+what does the equation *mean*? What does it tell us about the data?
+
+$b_0$ tells us the predicted value of $y$ when $x=0$.
+So we would predict a molar weight of $`r RD.b0`$ for
+a deer zero years of age.
+However,
+this is likely to be nonsense: it is *extrapolating* beyond the data.
+
+
+```{block2, type="rmdnote"}
+The value of the intercept $b_0$ is often meaningless.
+The value of the slope $b_1$ is usually of much greater interest,
+as it explains the relationship between the two variables.
+
+```
+
+$b_1$ tells us how much the molar weight changes
+(on average) 
+when age increases by one year.
+In this case then,
+each extra year of age is associated with a change of
+`r RD.b1` grams in molar weight;
+that is,
+a *decrease* in molar weight by a mean of $`r abs(RD.b1)`$.
+To demonstrate,
+before  we saw that when $x=12$, we predict $y$ to be $\hat{y}= `r RD.b0 + 12 * RD.b1`$.
+
+So,
+for deer one year older than this (i.e.\ $x=13$) we predict
+$y$ to be $b_1 = `r RD.b1`$ higher.
+That is,
+we would predict 
+$\hat{y}= `r RD.b0 + 12*RD.b1` + `r RD.b0` = `r RD.b0 + 13*RD.b1`$.
+           
+
+```{block2, type="rmdnote"}
+If the value of $b_1$ is *negative*,
+then the predicted values of $y$ *decrease* as the values of $x$ *increase*.
+```
+
+
+
+## Hypothesis testing
+   
+The regression line is computed from the sample,
+but we are assuming a linear relationship actually exists in the population.
+The (unknown) regression line in the *population* is
+\[
+	\hat{y} = {\beta_0} + {\beta_1} x.
+\]
+From the sample,
+our *estimate* of the regression line in the population is
+\[
+	\hat{y} = {b_0} + {b_1} x.
+\]
+That is,
+the intercept in the population is $\beta_0$,
+and the slope in the population is $\beta_1$.
+Then, 
+we can use our *sample* to ask questions about the
+*population* regression coefficients.
+As usual,
+sample statistics are used to estimate the value of the population parameter
+(Table \@ref(tab:ParametersStatistics)).
+  
+  
+Table: (\#tab:ParametersStatistics) Some sample statistics used to estimate population parameters
+
+Statistic |  In population   | In sample
+---------:+-----------------:+:-------------
+Mean           | $\mu$           | $\bar{x}$
+Standard deviation | $\sigma$        | $s$
+Proportion     | $p$             | $\hat{p}$
+Correlation    | $\rho$          | $r$
+Slope of regression line      | $\beta_1$       | $b_1$
+Intercept of regression line  | $\beta_0$       | $b_0$
+
+
+We almost always only ask questions about the slope,
+because the slope explains the 
+*relationship* between the two variables.
+
+To demonstrate,
+consider an artificial  situation where the slope estimated 
+from the sample $b_1$ is zero:
+\[
+   \hat{y} = 3 + (0\times x) = 3 + 0x.
+\]
+If we use this model to make prediction,
+look at what we find:
+
+* When $x=25$, we predict $\hat{y} = 3 + (0\times 25) = 3$.
+* When $x=35$, we predict $\hat{y} = 3 + (0\times 35) = 3$.    
+* When $x=45$, we predict $\hat{y} = 3 + (0\times 45) = 3$.
+
+That is,
+when the slope is zero,
+the prediction is always the same:
+the value of $x$ makes no difference to the predicted value of $y$.
+In other words,
+*there is no relationship* between $x$ and $y$.
+In this case,
+we would also find that $r=0$.
+         
+
+So,
+to perform a test to see if a relationship exists between $x$ and $y$,
+we can see what the null hypothesis ('no relationship') should be in this context.
+The hypotheses are:
+
+* $H_0$: $\beta_1 = 0$ (no relationship: $b_1$ is not zero because of sampling variation)
+* $H_1$: $\beta_1 \ne 0$ ($\beta_1$ really is non-zero)
+
+
+Consider again the red deer data (XREF).
+To determine if a relationship exists between the age of the deer,
+and the weight of their molars,
+we would test these hypotheses:
+
+* $H_0$: $\beta_1 = 0$ (no relationship: $b_1$ is not zero because of sampling variation)
+* $H_1$: $\beta_1 \ne 0$ ($\beta_1$ really is non-zero)
+
+```{r echo=FALSE}
+RD.fitinfo <- summary(RD.lm)$coefficients
+RD.t <- RD.fitinfo[, "t value"]
+RD.P <- RD.fitinfo[, "Pr(>|t|)"]
+```
+The SPSS output 
+(FIG)
+shows that
+the $t$-score is $`r round(RD.t[2], 3)`$,
+and the $P$-value is $`r round(RD.P[2], 3)`$.      
+This means that the sample presents very strong evidence
+that the slope in the population between systolic blood pressure and age
+is not zero.
+It is useful to also report the CI for the slope too.
+
+
+```{exercise}
+Using
+Fig.~\ref{FG:REGRESSION:NHANES:BPandAge:SPSS},
+what is the 95\% CI for $\beta_1$?	
+```
+
+The CI can be computed using the usual approximate method,
+but SPSS can also be asked to explicitly produce CIs too.
+Then we can write a conclusion.
+
+
+SPSS
+
+
+
+
+
+We would write:
+
+> The 
+> sample presents very strong evidence
+> ($P = `r round(RD.P[2], 3)`$)
+> of a relationship between systolic blood pressure and age
+> (slope: `r RD.b1`; 
+> $t = `r round(RD.t[2], 3)`$; 
+> $n= `r length(RD$Age)`$; 
+> 95\% CI from $X$ to $Y$)
+> in the population
+
+
+
+
+
+
+      
+      
+      
+      
+## Validity conditions
+
+The conditions for which the test is statistically valid are the same as for correlation
+(Sect. \@ref(ValidityCorrelation)):
+
+* The sample is a random sample from some population.
+* The relationship is approximately linear.
+* The variation in the response variable is constant for all values of the explanatory variable.
+
+
+
+
+## Example: Food digestibility
+
+A study evaluated various foods for sheep
+[@data:Moir1961:RuminantDiet].
+One combination of variables that was assessed are shown in
+Fig. \@ref(fig:SheepScatter).
+The RQ is:
+
+> Does the digestible energy requirement of feed 
+> *increase* with dry matter 
+> digestibility percentage
+> (and if so, *how*)?
+
+
+In this study,
+$x$ is the dry matter weight digestibility percentage,
+and
+$y$ is the digestible energy.
+The relevant SPSS output is:
+   
+SPSS
+
+From the output, determine:
+
+* The value of the slope ($b_1$): 
+* The value of $y$-intercept ($b_0$): 
+* So the equation is:
+* Interpret the slope ($b_1$):
+* To test for a relationship in the population:
+    - $H_0$: 
+   	- $H_1$:  
+* $t$-score:
+* $P$-value:
+* Determine an *approximate* 95\% CI for the population slope $\beta_1$:
+* Write a conclusion:
+
+
+    
+## Example: Mist generation
+
+
+
+
+Mist is generated when metal-removing fluids are used in machining operations
+to cool and lubricate.
+This mist is a health concern,
+so a study
+[@data:Dasch2002:MistGeneration]
+wanted to understand this mist
+in a certain context.
+Specifically,
+they asked:
+
+> Does a *faster* fluid flow result in *smaller* mist particles (MMD)?
+
+Over six runs, the measured variables are:
+
+* Fluid flow (in cm/sec)
+* MMD (in $\mu$m)
+
+Both of these variables are *quantitative*.
+
+From the SPSS output, determine:
+
+* The value of the slope ($b_1$): 
+* The value of $y$-intercept ($b_0$): 
+* So the equation is:
+* Interpret the slope ($b_1$):
+* To test for a relationship in the population:
+    - $H_0$: 
+    - $H_1$:  
+* $t$-score:
+* $P$-value:
+* Determine an *approximate* 95\% CI for the population slope $\beta_1$:
+* Write a conclusion:

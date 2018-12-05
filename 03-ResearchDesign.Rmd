@@ -1,0 +1,2456 @@
+# (PART) Research design  {-}
+
+
+# Research design
+
+Talking video introducing this chapter?
+
+```{r echo=FALSE}
+SixSteps(2)
+```
+
+
+<iframe src="https://h5p.org/h5p/embed/186287" width="1090" height="354" frameborder="0" allowfullscreen="allowfullscreen"></iframe><script src="https://h5p.org/sites/all/modules/h5p/library/js/h5p-resizer.js" charset="UTF-8"></script>
+
+
+
+
+
+## Types of research study designs
+
+
+From the RQ,
+we know what data we need to collect
+(the response and explanatory variables)...
+so *how* do we obtain the data that we need?
+After all,
+data are the means by which we will answer the RQ.
+Two broad methods for obtaining data are to use
+*observational studies* or *experimental studies*.
+
+
+
+```{example}
+Suppose we wish to compare the effects of echinacea on
+the symptoms of the common cold~\cite{data:barrett:echinacea}.
+How could we design such a study to collect the necessary data?
+```
+
+
+
+
+## Observational studies
+
+Observational studies are commonly used,
+and sometimes are the only possible study design that can be used.
+
+```{definition, name="Observational study"}
+An *observational study* is one where the researchers
+do not impose anything upon those in the study
+to (potentially) change the response of the participants.
+```
+
+In other words,
+observational studies observe an existing situation
+without trying to intervene. 
+Observational studies are used to answer Relational RQs.
+	
+	   
+   
+```{definition, name="Condition"}
+*Conditions*:
+The conditions of interest that those in the study can be exposed to.
+In experiments, treatments are imposed by researchers.
+```
+
+
+```{example}
+Consider again this RQ [@data:barrett:echinacea]:
+
+> Among Australian teens with a common cold,
+> is the *average* duration of cold symptoms
+> shorter for 
+> teens taking a daily dose of echinacea
+> compared to teens taking no medication?
+
+We could consider this as a relational RQ,
+if the researchers do not impose the echinacea
+(that is,
+the individuals make this decision themselves).
+For this RQ,
+the *conditions*
+would be choosing to take echinacea,
+or choosing not to take echinacea.
+We could think of the design like this:
+ 
+
+
+
+
+
+```{exercise}
+In South Australia in 1988--1989,
+25 cases of legionella infections 
+(an unusually high number)
+were investigated [@data:oconnor:pottingmix].
+All 25 cases were gardeners,
+with hanging baskets of ferns.
+	
+The 25 people who ended up with legionella infections
+were compared to 75 people without legionella.
+The use of potting mix in the previous four weeks was
+associated with an increase in the risk 
+of contracting illness of about 4.7 times.
+
+Why is this study *observational*?
+```
+		
+      
+
+
+Broadly speaking, there are three types of observational studies
+(Table~\@ref(tab:TypesOfObsStudies)):   
+
+* Retrospective;
+* Prospective;
+* Cross-sectional.
+
+
+In broad terms,
+they differ in when the Outcome and Comparison/Connection are observed.
+There are many types of observational studies
+(case--control studies; cohort studies),
+but we will not delve into these.
+
+
+Table: (\#tab:TypesOfObsStudies) The three types of observational studies
+
+**Type**          | **O**  | **C**
+-----------------:+-------:+:------
+Retrospective     | Now    | Earlier
+Prospective       | Later  | Now
+Cross-sectional   | Now    | Now 
+
+
+   
+### Retrospective studies
+
+In *retrospective studies*,
+the Outcome is observed now,
+and the researchers look back to see what 
+Comparison group they came from
+(e.g.\ Case-control studies).
+
+   
+   
+
+```{example}
+A 2012 Australian study [@data:Pamphlett:toxins] 
+examined patients with and without SMND,
+and asked about the extent of their *past* exposure to metals.
+In this study,
+the Outcome (whether or not the respondent had SMND)
+is assessed now,
+and the extent of their exposure to metals (Comparison) 
+is assessed from the *past* exposure.
+This is a retrospective observational study.
+```
+   
+
+
+
+
+### Prospective studies
+
+In *prospective studies*,
+the Comparison is determined now, 
+and researchers look ahead to assess or measure the Outcome
+(e.g.\ Prospective cohort studies).
+   
+   
+```{example} 
+A 2008 paper [@data:Choi2008:GoutSoftdrinks] 
+measured the softdrink consumption of men,
+and determined who experienced gout over the following 12 years.
+The Outcome (whether or not the individuals experience gout)
+is determined in the future.
+The connection 
+(the amount of softdrink consumed)
+is measured now.
+This is a prospective observational study.
+```
+
+
+
+
+
+
+### Cross-sectional studies
+
+In *cross-sectional studies*,
+both the Outcome and Comparison are gathered now.
+
+
+ 
+
+```{example}
+A study [@data:Russell2014:FoodInsecurity] asked older Australian their opinions
+of their own food security,
+and recorded their living arrangements.
+Individuals responses to both
+living arrangements
+and opinions on food security
+are obtained now.
+This is a cross-sectional observational study.
+```
+
+
+<iframe src="https://docs.google.com/forms/d/e/1FAIpQLScUGUtuPBTArcmQo36tb3iYH49xGiJSl0Z_9XJdnQdV6Ej4ZQ/viewform?embedded=true" width="640" height="601" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
+
+     
+```{exercise}
+In South Australia in 1988--1989,
+25 cases of legionella infections 
+(an unusually high number)
+were investigated [@data:oconnor:pottingmix].
+All 25 cases were gardeners,
+with hanging baskets of ferns.
+	
+Researchers compared 25 cases with legionella infections
+with 75 non-cases,
+matching on the basis of age (within 5 years),
+sex, post codes.
+
+The use of potting mix in the previous four weeks was
+associated with an increase in the risk 
+of contracting illness of about 4.7 times.
+ 
+Why *type* of observational study is this?
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Experimental studies
+
+
+```{definition, name="Experiment"}
+In an *experiment*,
+the researchers intervene to control the values of the explanatory variables (C)
+that are applied to the individuals.
+The researchers *allocate* treatments
+(i.e. apply the intervention).
+```
+
+In other words,
+the researcher *creates* changes in the explanatory variable,
+and *notes* the changes in the response variable.
+Experimental studies are used to answer interventional RQs.
+
+
+
+```{definition, name="Treatments"} 
+*Treatments*:
+The conditions of interest that those in the study can be exposed to.
+In experiments, treatments are imposed by researchers.
+```
+
+
+Two broad types of experimental studies can be defined:
+true experiments and quasi-experiments
+(Table \@ref(tab:ExperimentalStudyDesigns)).
+      
+
+Table: (\#tab:ExperimentalStudyDesigns)  Comparing experimental study designs
+
+
+Study type | Researchers allocate who or what to groups         | Researchers allocate treatments to groups
+----------:+---------------------------------------------------:+:------------------------------------------
+True experiment    | Yes | Yes
+Quasi-experiment   | No  | Yes
+Observational      | No  | No
+
+
+
+
+
+
+
+### True experimental studies
+
+```{definition, name="True experiment"}
+In a *true experiment*,
+the researchers:
+
+* allocate treatments to groups (i.e.\ decide the values of the Comparison/Connection used), *and*
+* determine who or what is in those groups.
+
+```      
+
+```{example}
+The echinacea study [@data:barrett:echinacea]
+from
+Sect. \@ref(Writing-RQs) 
+could be designed as a true experiment.
+The researchers would need to 
+allocate individuals to groups,
+and then decide which group took echinacea and which group did not.
+It might look like this:
+```   
+
+
+
+
+
+
+
+
+```{exercise}
+A researcher wants to examine the effect of an alcohol awareness program [@macdonald2008enough]
+on the amount of alcohol consumed in O-Week.
+She runs the program at UQ only,
+then compared amount of drinking at UQ and USC.
+   
+What type of study is this: observational or true experimental?
+Answer these questions to help:
+
+* Do researchers allocate treatments to the groups 
+(i.e.\ decide the value of the Comparison/Connection)? 
+* Do researchers allocate subjects to groups?
+
+```
+
+
+
+
+
+
+
+### Quasi-experimental studies
+
+```{definition, name="Quasi-experiment"}
+In a *quasi-experiment*,
+the researchers:
+  
+* allocate treatments to groups (i.e. do not decide the values of the Comparison/Connection used), but
+* do *not* determine who or what is in those groups.
+
+```   
+      
+```{example}  
+The echinacea study [@data:barrett:echinacea]
+from
+Sect. \@ref(Writing-RQs) 
+could be designed as a quasi-experiment.
+The researchers would need to *find* (not *create*) two
+existing groups of people
+(say from two different tutorial grous)
+then decide which group took echinacea and which group did not.
+It might look like this.
+
+```
+
+
+
+
+
+## Comparing study designs
+
+In *experimental* studies,
+we *create* differences in the explanatory variable through allocation,
+and note the effect of this on the response variable.
+In *observational* studies,
+we *observe* differences in the explanatory variable,
+and note the values in the response variable.
+Different RQs require different study designs 
+(Table~\ref{TB:Study:RQsDesigns}).
+
+Only well-designed true experiments can show cause-and-effect.
+Well-designed true experiments provide stronger evidence than quasi-experiments,
+which produce stronger evidence than observational studies.
+But experimental studies are often not possible
+for ethical, cost or logistical reasons.
+
+Table: Study types and research questions
+
+RQ type           | P | O | C | I |  Study type
+-----------------:+:-:+:-:+:-:+:-:+:-------------
+Descriptive       | Yes | Yes |     |        | Descriptive     
+Relational        | Yes | Yes | Yes |        | Observational  
+Interventional    | Yes | Yes | Yes | Yes    | Experimental
+
+   
+
+
+
+   
+   
+  
+```{exercise}
+In a  study on the shear strength of recycled concrete beams [@gonzalez2007shear],
+beams were divided into three groups.
+Different loads were then applied to each group,
+and the shear strength needed to fracture the beams was measured.\medskip
+ 
+Is this a *quasi-experiment* or a *true experiment*? 
+Answering these questions may help: 
+
+* Do researchers allocate treatments to the groups? 
+* Do researchers allocate the who or what to groups? 
+
+```
+
+
+
+
+
+
+```{exercise}
+A study [@data:Manzano2013:Matresses] has this aim:
+
+> To compare the effectiveness of alternating pressure air mattresses vs. overlays, 
+> to prevent pressure ulcers.
+
+Patients were provided with either 
+alternating pressure air overlays (in 2001) 
+or alternating pressure air mattresses (in 2006).
+The number of pressure ulcers were recorded.
+
+This study experimental,
+because the researchers provided the mattresses.
+But is this a true experiment or quasi-experiment?
+Explain.
+```
+
+
+
+
+
+```{exercise}
+Consider this initial research question
+[@friedmann1985health],
+that clearly requires a lot of refining:
+
+> Are people with pets healthier?
+
+To answer this RQ:
+
+* Describe an *experimental* study to answer the RQ.
+* Describe an *observational* study to answer the RQ.
+
+```
+  
+
+
+
+
+## Units of observation and units of analysis
+
+**Units of observation** and **units of analysis**
+are important, but similar,
+concepts to distinguish.
+
+```{example}
+Consider this RQ:
+
+> In Australian 20-something men,
+> is the average thickness of head hair strands the same
+> for blonds and brunets
+[@vaughn2009comparison]? 
+
+Which of these designs is best for answering the RQ?
+
+* Compare 100 hairs from one blond man,
+and 100 hairs from one brunet man;
+* Compare 1 hair from 100 blond men,
+and 1 hair from 100 brunet men;
+* Compare 10 hairs from 10 blond men,
+and 10 hairs from 10 brunet men.
+
+```
+
+Consider option A.
+*Only one man of each hair colour is represented*.
+While there are 200 observations,
+only two people are compared,
+so we don't learn much about men *in general*.
+We do learn a lot about two men specifically.
+
+In this study,
+each individual hair is a *unit of observation*:
+the hair strands are what are actually measured.
+
+However,
+each person is called a *unit of analysis*:
+hair thickness is a property of the *person*.
+Each person is likely to have hairs of similar thickness,
+and each hair is treated similarly
+(shampooed at the same time, with the same shampoo;
+combed or brushed in the same way with the same device;
+all conditioned or not; etc.)
+
+The size of the study is the number units of analysis;
+so here, 
+the sample size (usually written as $n$) is 2.
+
+
+```{definition, name="Unit of observation"}
+*Unit of observation*:
+The 'who' or 'what' which are observed, 
+from which measurements are taken and data collected.
+```
+
+
+
+```{definition, name="Unit of analysis"}
+*Unit of analysis*:
+The 'who' or 'what' about which generalizations and conclusions are made;
+the smallest *independent* 'who' or 'what' for which information is analysed.
+Units of analysis should not typically share a common underlying source.
+```
+
+
+
+```{example}
+A study compares two brands of car tyres.
+Four tyres of Brand A are allocated to each of Cars 1--10.
+Four tyres of Brand B are allocated to each of Cars 11--20.
+After 12 months,
+the amount of wear is recorded on each tyre.
+  
+The *unit of observation* is the tyre:
+the amount of wear is measured on each tyre.
+
+However,
+the *unit of analysis* is the car:
+the brand of tyre is allocated to each car and all wheels on the car get the same tyre.
+Tyres on any one car are not independent:
+They all are exposed to the same day-to-day use,
+the same drivers, 
+have driven very similar distances, 
+under the same conditions, etc.
+```
+
+
+
+
+The units of observation and units of analysis *may* be the same,
+and often are the same.
+Importantly,
+studies compare units of analysis, not units of observation.
+      
+```{example}
+A study compared two school physical activity (PA) programs.
+Each of 44 children 
+      (whose parents agreed to participate in the study)
+      were allocated to one of two PA program.
+      The improvement in children's fitness was measured for every student in the study.
+
+The units of observation are
+the individual students, as the
+the measurements are taken from the students.
+         
+The units of analysis are also 
+the individual students,
+as the PA program was allocated to each student.
+```
+
+
+
+```{example}
+A study compared two school physical activity (PA) programs.
+      Program 1 was allocated to be used at School A,
+      while Program~2 was allocated to School B.
+      In each school, 
+      22 children 
+      (whose parents agreed to participate in the study)
+      were observed
+and the improvement in children's fitness was measured for each student.
+
+The units of observation are
+      the individual students, as the
+measurements are taken from the students.
+       
+The units of analysis are the *schools*, 
+as the PA program was allocated to each school.
+      The students in any one school
+      are exposed to the same administrative policies,
+      similar weather and physical conditions,
+      teachers and school-based teaching philosophies, etc.  
+
+All students at School A are exposed Program 1,
+      but all students at School A are also likely
+      to be exposed to similar weather, physical conditions,
+      teachers and school-based philosophies.
+```
+
+
+
+
+```{exercise}
+Animals in an experiment are divided into pens,
+      and feed is allocated to each pen.
+      Animals in different pens receive different feed;
+      animals in the same pen receive the same feed.
+The weight gain of each animal is recorded.
+      
+* What is the *unit of observation*?  Why?
+* What is the *unit of analysis*?  Why?
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+```{exercise}
+Consider this journal extract:
+
+> We randomly assigned 811 overweight adults to one of four diets...
+> The diets consisted of similar foods and met guidelines for cardiovascular health...
+> The primary outcome was the change in body weight after 2 years in two-by-two factorial 
+> comparisons of low fat versus high fat and average protein versus high protein 
+> and in the comparison of highest and lowest carbohydrate content.
+>
+  > --- @data:sacks:weightloss, p. 859
+
+* Define POCI.
+* Is this study observational or experimental?  Why?
+* Is this study a quasi-experiment or a true experiment?  Why?
+* What are the units of analysis?
+* What are the units of observation?
+* What is the response variable?
+* What are the explanatory variables?
+
+```
+
+
+
+
+
+
+
+
+# Elements of research design
+
+
+
+
+## The importance of design
+
+
+Answering a RQ scientifically requires data (evidence).
+Data may be obtained by:
+
+* Using data already available: This is called *secondary data*.
+* Collecting your own data: This is called *primary data*.
+   
+Either way,
+knowing *how* the data are obtained is important.
+The design phase 
+is about planning *how* to obtain the necessary data well.
+It includes making decisions about:
+
+* Sampling: Since we can't study the whole population, who or what do we study in the population (Sect. \@ref(Sampling)), and how many (we need to learn more before we can answer this critical question)?
+* Effectiveness: How do we conduct the study *effectively*?
+   (Chaps. \@ref(DesignExperiment) and \@ref(DesignObservational))
+* Ethics: How do we ensure we are ethical?
+   (Chap. \@ref(Ethics))
+* Data collection: How do we actually go about collecting the data we need? (Chap. \@ref(CollectingDataProcedures))
+* Interpretation: How do we correctly interpret the impact of the design? (Chap. \@ref(Interpretation))
+
+
+
+
+```{example}
+Two surveys were conducted before the 1936 presidential election in the \textsc{usa}
+to predict the winner [@data:Bryson1976:Poll]:
+   
+Study             | Number surveyed     | Population         | Method
+-----------------:+--------------------:+-------------------:+--------------------:
+A                 | 10 000 000      	  | Specific groups    | Voluntary survey
+B                 | 50 000   	          | All Americans      | Random survey
+
+Which predicted correctly the winner of the election?
+```
+
+
+
+
+
+
+## Sampling {#Sampling}
+
+Our RQ implies that we want to study every member of the population
+(after all, the *P* in *P*OCI stand for 'population').
+But being able to do so is very rare
+because of cost, practicality, ethics,
+Because of this,
+a smaller subset (a *sample*) is almost always studied.
+A sample consists of some *individuals* (or *cases*) from the population.
+The purpose of a sample is to provide an estimate of what is
+happening in the population.
+
+
+
+```{definition, name="Sample"}
+A *sample* is a subset of the population of interest which is studied.
+```
+
+
+Once we see that a sample is necessary,
+a number of issues are raised:
+
+* *How* do we select the sample?
+* *How* large should the sample be?
+* *How* can we learn about the whole population if we only study some of that population?
+
+We need to leave the second issue for later
+after we learn more.
+
+```{example}
+A study [@data:aspirin:headaches]
+	of the effect of aspirin in treating headaches
+	cannot possible use every single human alive in the study.
+	Not only would this be prohibitively expensive,  time-consumng, and impractical,
+but such a study would not even use those humans who had not been born yet.
+	
+We clearly need to use a *sample* of people.
+```
+
+
+Of course,
+only using a sample instead of the entire population present challenges.
+**Every sample  is likely to be a bit different**,
+so what we learn from a sample depends on which cases are present in the sample we end up with.
+That is,
+every sample might give us different data,
+and hence different answers to the research question.
+This is the challenge of research:
+**How to make decision about populations, 
+when all we have is imperfect sample information?**
+
+
+
+
+
+## Types of samples
+
+One key to making good decisions about the population
+is to ensure that the sample
+we study is representative of the population of interest.
+For example,
+suppose we wanted to study the level of mental health literacy
+of Australians.
+It would be silly to just study a sample
+of teenage girls.
+While we might learn a lot about the 
+mental health literacy of teenage girls,
+we would not learn much about Australians *in general*,
+which was the intended population.
+
+This is what we look at now:
+How to get a good sample that is representative of the population.
+
+Whenever we take a samples,
+it includes only some of the population.
+But we can select those members of the sample using either **random samples**
+or **non-random samples**.
+
+In a **random sample**, 
+each individual in the population can be selected,
+on the basis of impersonal chance.
+The key advantage of using random samples
+is that *the results probably generalise to the population 
+from which the sample is drawn*.
+We look a some examples of random sampling methods in the next sections
+(Table \@ref(tab:TypesOfRandomSampling)).
+
+Table: (#tab:TypesOfRandomSampling) Comparing three types of random sampling
+
+Type           | Stage 1      | Stage2 | Section
+--------------:+:-------------+:-----------+------------:
+Systematic     | Start at random location  | Take every $n$th element thereafter | Sect. \@ref(SystematicSampling)
+Stratified     | Split into a few large groups ('strata') | Select at *random* from every stratum | Sect. \@ref(StratifiedSampling)
+Cluster        | Split into many small groups ('clusters'); *randomly* select some clusters | Select all in the chosen clusters | Sect. \@ref(ClusterSampling)
+Multi-stage    | Select at *random* from the larger stage | Select at *random* from those chosen in Stage 1; etc. | Sect. \@ref(MultistageSampling)
+
+
+
+A **non-random** sample requires some kind personal input.
+Examples of non-random samples include:
+
+* *Judgement sample*:
+Select those agreeable or helpful 
+based on the researchers' judgement.
+* *Convenience sample*:
+Select those convenient to the researcher.
+* *Voluntary* response (self-selecting) sample:
+Subjects participate if they wish to.
+
+The key observation here is that 
+using a non-random sample means that *our results may not generalise to the intended population*.
+
+Consider testing a pot of soup by 'sampling'.
+As long as we give the pot a mix,
+we don't need to taste the whole pot of soup to see if the soup tastes OK.
+The same principle applies in research:
+If we use a random sample (equivalent to the mixing),
+we don't need to study every member of the population.
+However, if we don't mix the soup and just take a spoonful
+from the top,
+we do not get an overall impression of the soup.
+
+
+
+
+
+
+
+
+
+## Simple random samples
+
+In a *simple random sample*,
+*every* possible sample of the same size has same chance of being selected.
+A simple random sample is chosen
+from a list of all members of the population
+(the *sampling frame*)
+using *random numbers*
+(see Appendix B.1 in Workbook).
+
+```{definition, name="Sampling frame"}
+*Sampling frame*
+A list of the members of the population (the 'individuals' or 'cases').
+```
+
+
+Often,
+establishing the sampling frame is difficult,
+so finding a random sample is also difficult.
+For example,
+if we are studying wombats to determine
+why they produce cubic poo [@yang2018wombats],
+taking a random sample would require having a list of all
+wombats in Australia,
+so we could select some using random number tables.
+This is clearly absurd,
+and 
+[special ecological sampling methods](http://www.countrysideinfo.co.uk/what_method.htm)
+would be used instead.
+
+In this course,
+we always assume simple random samples,
+for simplicity.
+
+
+```{example, Typing}
+Consider this RQ:
+
+> For students in this course,
+> is the average number of letters typed on a keyboard in 10 seconds the same 
+> for dominant and non-dominant hands?
+
+For this study:
+
+* P: Students in this course in this semester.
+* O: Average number of letters typed in 10 seconds (say, 'typing speed').
+* C: Between left and right hand.
+* I: None.
+
+Note that there is no intervention: 
+we are not altering the C in an attempt to *change* the average number of letter typed;
+indeed, we cannot alter whether the hand 
+I point to is your left or right at all.
+
+The sampling frame for all students in this course this semester is 
+the list of all students enrolled in this course for this semester.
+   
+```{exercise}
+Suppose our budget and time constraints mean we can only study 40  students.
+Describe how to use the course enrolment list to find a simple random sample of  students to examine.
+```
+
+
+```{r echo=FALSE}
+htmltools::tags$iframe(title = "SRS Sampling", src = "./Animations/SamplingSRSMovie.html", height=640, width=520) 
+```
+
+
+
+
+Other good (random) sampling  methods use a system to select randomly,
+rather than by human choice.
+
+
+
+
+
+## Systematic sampling {#SystematicSampling}
+
+In **systematic sampling**,
+we *randomly* select first case;
+select every (say) fifth element thereafter
+      
+```{example}
+For the RQ above that requires students,
+I could select a random number (say 9),
+then select every 11th person thereafter in the sampling frame
+to be in my sample
+until I had around 40 students.
+```   
+
+
+```{r echo=FALSE}
+htmltools::tags$iframe(title = "Systematic Sampling", src = "./Animations/SamplingSystematicMovie.html", height=640, width=520) 
+```
+
+   
+   
+   
+   
+## Stratified sampling  {#StratifiedSampling}
+
+In **stratified sampling**,
+we split population into a small number of strata
+(large, usually homogenous, groups),
+then *randomly* select from every stratum.
+
+```{example}
+For the RQ above that requires students,
+I could select 20 females and 20 males.
+```
+
+```{r echo=FALSE}
+htmltools::tags$iframe(title = "Stratified Sampling, equal numbers", src = "./Animations/SamplingStratifiedEqualMovie.html", height=640, width=520) 
+```
+
+Or,
+since about 67\% if USC students are females,
+I could select about two-thirds females (around 26.7) and about one-third males (about 13.3). 
+
+
+
+```{r echo=FALSE}
+htmltools::tags$iframe(title = "Stratified Sampling, proportional numbers", src = "./Animations/SamplingStratifiedPropMovie.html", height=640, width=520) 
+```
+
+
+## Cluster sampling {#ClusterSampling}
+
+In **cluster sampling**,
+we split population into a large number of small groups,
+then select a *random* sample of small groups and 
+use *every* member of those small groups.
+
+```{example}
+For the RQ above that requires students,
+I could take a random sample of (say) three 
+of the many tutorials,
+and *every* student enrolled in those tutorials 
+constitute the sample.
+```
+
+
+```{r echo=FALSE}
+htmltools::tags$iframe(title = "Cluster Sampling", src = "./Animations/SamplingClusterMovie.html", height=640, width=520) 
+```
+
+
+
+## Multistage sampling {#MultistageSampling}
+
+In **multistage sampling**,
+we *randomly* select large groups,
+then *randomly* select smaller groups within those groups.
+We can continue randomly sampling for as many levels as necessary.
+
+      
+```{example}
+For the RQ above that requires students,
+I could take a random sample of (say) ten of the many tutorials,
+and then select 4 people *randomly* from each tutorial.
+```   
+
+
+
+```{r echo=FALSE}
+htmltools::tags$iframe(title = "Multistage Sampling", src = "./Animations/SamplingMultistageMovie.html", height=640, width=520) 
+```
+
+
+
+
+```{example}
+Multistage sampling is often used by the 
+Australian Bureau of Statistics (ABS).
+For example,
+to obtain a random sample of Queenslanders,
+we could proceed:
+
+* Randomly select cities in Queensland;
+* Then randomly select suburbs in these cities;
+* Then randomly select streets in these suburbs;
+* Then randomly select the houses in these streets.
+
+This is cheaper than simple random sampling,
+as data collectors can be employed in a smaller number of locations.
+```
+
+
+
+
+## Representative samples {#Representative-samples}
+	
+
+Obtaining a truly random sample is usually hard or impossible.
+Hence, we often we select a sample that we hope is somewhat *representative* of the population.
+Nonetheless,
+if a sample is not a random sample,
+our results *may not generalise* to the intended population.
+The results will generalise to the population which the sample *does* represents.
+We can rarely be sure that a 'representative sample' is close to a truly random sample.
+   
+Ideally,
+even if we cannot get a random sample,
+we would prefer a sample where those who are in the sample
+are not likely to be different than those *not* in the sample,
+at least for the variables of interest.
+
+
+```{example}
+A group of Queensland and NSW residents 
+	is asked to evaluate two types of hand prosthetics.
+	It is probable (but not certain) that their views 
+	would be similar to those all of Australians.
+	There is no reason to think that residents 
+	of Queensland and New South Wales would be very different from 
+	residents in the rest of Australia
+	in their view of these two hand prosthetics.
+	
+So even though the sample is not a random sample,
+and so we cannot be sure the results will generalise to all Australians,
+the results will *probably* generalise to all Australians.
+```
+
+```{example "StateOfOrigin"}
+Suppose we wish to determine what 
+proportion of Australians plan to watch the 
+State of Origin^[The State of Origin is a three-game series of rugby league games. Rugby league is very popular in Queensland and New South Wales, but is less popular in the other states (where Australian Rules football dominates, particularly in Victoria).]
+	 on TV next series.
+	 If a group of Queensland and NSW residents is asked,
+	this would not be expected to represent all Australians 
+	(it would *over*-represent the true proportion).
+	
+In contrast,
+if a group of Victorians were asked,
+this would not be expected to represent all Australians 
+(it would *under*-represent).
+```	
+
+Sometimes we can only hope to get the sample in a way that is practical,
+which may not be random.
+Even so,
+we should acknowledge the impact this has on our conclusions (limitations).
+Nonetheless,
+there may be ways in which we can obtain a sample
+that is more likely to be representative.
+
+```{example}
+To find a sample of USC students,
+	we could approach students at Cafe C 
+	every Monday morning at 8am, for four weeks.
+	This is a *convenience* sample,
+	and not a random sample.
+
+However,
+	we can try to make the sample 
+	*more likely* to be representative
+	by approaching a broader cross-section of students:		
+
+* Use other days as well as Monday: why?
+* Use other times apart from 8am: why?
+* Use other locations apart from Cafe C: why?
+
+We would also need to be careful not to include people more than once in our sample.
+```
+
+
+
+
+
+
+
+
+
+
+```{exercise}
+To assess the quality of bearings from a manufacturer,
+a researcher takes a random sample of 25 bearings 
+from *each* of the 
+three cases delivered.
+      
+What type of sampling scheme is being used?
+```   
+
+
+
+
+## Bias in selecting samples
+   
+The sample may not be representative of the population for many reasons,
+all of which compromise the generalisability of the results from the sample.
+This is known as a *bias*.
+
+
+```{definition, name="Bias"}
+*Bias*:
+The tendency of a sample to over- or under-estimate a population quantity.
+```
+
+More formally:
+
+> ...bias is the introduction of systematic error, subconsciously or otherwise, 
+> in the design, data collection, data analysis, or publication of a study.
+>
+> --- @sedgwick2014non
+
+In *selection bias*,
+the wrong sampling frame used,
+or non-random sampling used.
+
+```{example}
+Consider the example in Sect. \@ref(Representative-samples),
+about estimating the proportion of people
+watching State of Origin.
+Using just people from Queensland and New South Wales in the sample
+is using the wrong sampling frame: 
+  the sampling frame does not represent the target populkatiomn ('Australians').
+```
+
+```{example}
+Asking students in a lecture if they can make it to the lecture
+   suffers from selection bias.
+   Only those who can come to the lecture
+   will be in the lecture to answer the question.
+```
+     
+*Non-response bias* occurs when 
+chosen participants do not respond for some reason.
+The problem here is that
+the responses from those who *do not* respond
+may be different than the responses who *do* respond.
+Non-response bias can occur because of a poorly-designed survey,
+chosen participants refuse to participate,
+participants forgetting to return completed surveys,
+etc.
+
+
+```{example}
+Consider a study to determine the average number of hours
+of overtime worked by varous professions.
+People who work a large amount of overtime are likely to be so busy
+that they do not have time to answer the survey.
+Those who answer the survey may be likely to work less overtime
+than those who do not answer the survey.
+
+This is an example of *non-response bias*.
+```
+      
+      
+*Response bias* occurs when 
+participants provide incorrect information:
+the answers provided by the particpants may not reflect the truth.
+This can occur intentionally
+(e.g. if the survey questions are very personal or controversial in nature)
+or non-intentionally.
+
+```{exercise}
+Suppose we randomly select a student 
+and send them a postal survey,
+but the student has moved address.
+
+What type of bias is this?
+```
+
+
+
+```{example}
+One (true) survey concluded *in 2001* 
+(@data:Heiger:Homebuyer cited in @bock2010stats, p. 283):
+
+> All but 2\% of the home buyers 
+> have at least one computer at home,
+> and 62\% have two or more.
+> Of those with a computer,
+> 99\% are connected to the internet.
+
+The article later reveals the survey was conducted *on-line*.
+
+What is the problem?
+```
+
+
+
+
+
+
+```{exercise}
+For these samples,
+to what populations will results generalise?
+  
+* Obtaining data using a telephone survey.
+* Obtaining data using a  TV stations call-in.
+* Asking your friends to participate because it is easier than finding a random sample.
+
+For each of the above samples, 
+give an example of an outcome which would be likely to over-estimate the true (population) value.
+```
+
+
+
+
+
+
+
+
+# Factors that influence the values of the response variable
+
+```{exercise}
+Consider the letter-typing RQ again (from Example \@ref(exm:Typing))
+
+> For students in this course,
+> is the average number of letters typed on a keyboard in 10 seconds
+> the same for left and right hands?
+
+```
+
+For this study:
+
+* P: students in this course this semester.
+* O: Average number of letters typed in 10 seconds (say, 'typing speed').
+* C: Between left and right hand.
+* I: None (we are not altering the C in an attempt to 
+   *change* the average number of letter typed;
+   indeed, we cannot alter whether the hand 
+   I point to is your left or right at all).
+
+After measuring the typing speed
+(the *response variable*),
+clearly there will be a lot of variation in the values we collect.
+Many factors can influence the typing speeds 
+that we measure:
+
+* *The explanatory variable* (which hand is used):
+   This is what we want to study.
+* *Other variables* that aren't the focus of the study but may still influence the response variable,
+   such as 'age' or 'whether or not the person wears glasses'. 
+   We can work with these if we are careful (Sects. \@ref(ExpManagingConfounding) and \@ref(ObsManagingConfounding)).
+* *Design issues*; that is, how the study is *designed*.
+   These can mean *disaster* if not handled properly (XREF).
+* *Chance* (or  *randomness*):
+   Even the same person doing the same thing repeatedly will not record exactly the same
+   reaction time every attempt.
+   This influence is unavoidable,
+   but we can live with it if we have some idea of the size of it.
+
+
+
+   
+
+
+		
+		
+		
+
+
+
+## The explanatory variable may influence the response variable
+
+The explanatory variable may influence the vales of the response variable.
+On the other hand, it may not\dots;
+after all,
+this is what we are exploring.
+
+If nothing else influenced the values of the response variable,
+life would be easy\dots
+
+
+
+
+
+
+## Extraneous variables may influence the response variable {#ExtraneousVariables}
+
+Other variables may exist which may be associated with changes in the value of the response variable;
+these are called *extraneous variables*.
+
+
+```{definition, name="Extranaeous variable"}
+An *extraneous variable* is any variable that is (potentially) associated with the response variable,
+    but is not one of the main variables of interest.
+```
+
+All extraneous variables are, by definition, related to the response variable.
+An extraneous variable may or may not be associated with the explanatory variable as well.
+Extraneous variables may have other names too
+(Table \@ref(tab:ClassifyExtraneous)).
+ 
+
+
+
+
+
+
+
+```{definition, name="Confounding variable"}
+A *confounding variable* is an extraneous variable associated with the response *and* explanatory variables.
+```
+
+```{definition, name="Confounding"}
+*Confounding* is when a third variable (potentially) influences the relationship between the response
+ and explanatory variable.
+```
+
+
+Sometimes confounding variables are not know to us
+(that is, they are not measured or observed);
+these are special confounding variables called *lurking variables*.
+Failure to acknowledge lurking variables can lead to wrong conclusions
+(for example,
+see Sec. \@ref(NumericalQual)).
+To avoid lurking variables,
+we collect information about those studied
+and circumstances of the study.
+
+To clarify:
+Some extraneous variables are 'confounding variables',
+and
+some confounding variables are 'lurking variables'.
+Some unknown extraneous variables will be associated with response variable only,
+and so become part of variation due to chance (i.e.\ unexplained).
+
+	
+Table: (\#tab:ClassifyExtraneous)  Different ways in which extraneous variables can be classified
+
+Type                        | Impacts only response		 | Impacts response and explanatory (*confounding*)
+---------------------------:+-------------------------:+:------------------------
+Measured or observed				|  No special name : extraneous		     | Confounding (but not lurking)
+Not measured or observed 		| Becomes part of 'chance'             | Special name: *Lurking*
+
+
+
+
+
+```{definition, name="Lurking variable"}
+A *lurking variable*  is an extraneous variable associated with the response *and* explanatory variables,
+and *is not* considered in the study.
+```
+
+IMAGE
+
+
+
+```{example}
+Consider the relationship between carrying matches,
+and lung cancer. 
+We may notice that the proportion of people with lung cancer
+is different for those who usually carry matches, and those who do not usually carry matches.
+So an association would appear to exist\dots
+but there is a lurking variable:
+'Whether the person is a smoker is the lurking variable'.
+
+Note: This would be an observational study.
+
+```
+
+IMAGE
+
+
+Some extraneous variables *we can know about*:
+we can plan to collect such data.
+
+* Some known extraneous variables will be associated with the response variable only, 
+		but *not* the explanatory variables.
+		The impact of these can be managed 
+* Some known extraneous variables will be associated with the both the response and explanatory variables:
+		(*Confounding variables*).
+
+To avoid lurking variables,
+we can
+collect information about those studied
+and circumstances of the study
+(and hence have a confounding variable).
+
+```{definition, name="Confounding variable"}
+A *confounding variable* is an extraneous variable associated with the response *and* explanatory variables,
+and *is* considered in the study.
+```
+
+```{example}
+Consider the relationship between response time,
+   and number of paramedics sent to an incident.  
+   'Severity of the incident' is the lurking variable,
+   since more severe accidents would have 
+   more paramedics sent (in general),
+   and have more fatalities.
+   
+IMAGE
+   
+Note: This would be an observational study.
+
+```
+
+
+```{exercise}
+What possible extraneous variables
+are there in the letter-typing study (Example \@ref(exm:Typing))?
+```
+     
+
+		
+
+
+
+ 
+## The study design can influence the response
+
+Many aspects of the study design can cause the value of the response variable
+to vary.
+We try to minimise the impact of these as much as possible,
+so we can focus on the
+explanatory variable's influence on the response.
+We'll talk about these at length very soon
+(Sects. \@ref(DesignExperiment) and \@ref(DesignObservational)).
+
+
+
+
+
+
+## Chance can influences on response
+
+*Natural* (chance) variation refers to what we cannot otherwise explain:
+even repeating a study exactly many times may not always produce the same values of the response variable.
+We call this variation *chance*.
+
+We try to minimize the amount of natural (chance) variation,
+because chance variation makes it hard to detect 
+the influence of the explanatory variable
+(which we are wanting to  study).
+To *minimise the amount of the chance variation*, 
+use good design,
+and measure as many other variables as is reasonable.
+
+Chance can impact the values of the response variable in many ways:
+each individual can produce different values of the response variable
+each time the study is conducted;
+each individual in the study can produce different values of the response variable to other individuals:
+
+* To estimate the amount of variation *within* individuals
+  	(from one individual's measurement to the next):
+  	We need to take many observations from each unit of analysis (individual).
+* To estimate amount of variation *between* individuals
+  	(from one individual to the next):
+  	We need to use many units of analysis (individuals)
+
+Since the second is usually more variable than the first,
+it is usually more important to measure many individuals
+than a smaller number of individuals many times.
+
+
+
+```{example}
+Consider the letter-typing study  (Example \@ref(exm:Typing)) again\dots
+What are the pros and cons of:
+
+* measuring one person 30 times?
+* measuring 30 different people once each?
+* measuring 10 different people three times each?
+
+```
+  
+
+
+
+
+
+
+# Designing experimental studies {#DesignExperiment}
+
+
+
+Collecting good data requires careful thought about how the study is designed.
+There are many aspects of the design that we should keep in mind,
+some of which are discussed below.
+
+NOTE:   Data collection is often tedious and expensive.
+  You usually get one chance to collect your data,
+  but you can analyse your data as many times as you like.
+  
+  Since you usually get one chance to collect your data: Do it well.
+
+
+We will work with this RQ:
+
+```{example}
+Consider this RQ (based on @data:Bird2008:wholegrain):
+
+> Among Australians,
+> does eating provided food made from wholegrain *Himalaya 292* increase faecal weight
+> compared to eating provided food made from refined cereal?  
+
+```
+
+
+
+```{exercise}
+For the *Himalaya 292*  study:
+
+
+* Determine P, O, C and I.
+* What are the variables?
+* What type of study is this?
+
+```
+
+
+
+
+
+## Managing confounding {#ExpManagingConfounding}
+
+Confounding has the potential to compromise the study and the interpretation of the results,
+so it is important to make attempts to manage the impact of confounding on the study.
+
+As always,
+the values of the response variable can be
+influence by
+chance;
+the explanatory variable;
+design issues;
+and extraneous variables.
+
+
+```{exercise}
+What are some potential extraneous variables in the
+*Himalaya* study [@data:Bird2008:wholegrain)]?
+```
+
+Suppose,
+for example,
+that the researchers created two groups:
+
+* **Group A**:  Women recruited at a female-only gym.
+* **Group B**:  Men recruited at a local retirement home.
+
+They then gave *Himalaya 292* to Group A, and
+the refined cereal to Group B.
+
+If we did find a difference in the outcome between the two groups,
+it may be:
+
+* Because the diet was different in each group;
+* Because of the sex of the participants, since Group A was all women and Group B was all men;
+* Because of the age of the participants, since Group A is likely to be younger on average,
+	and Group B is likely to be older on average. 
+
+So even if we see a different between the *Himalaya 292* and refined cereal groups,
+we can't be sure it is because of the cereal.
+This is an extreme case of *confounding*.
+Often confounding issues are more subtle.
+
+There are many potential extraneous variables;
+we will consider just one here: the fitness levels of the participants.
+How can be make sure than the fitness of the participants
+does not cause confounding?
+
+
+Confounding can be managed by:
+
+* **Restricting** our study to a certain group 
+   (for example, only fit people).
+* **Blocking**:
+   Analyse the data separately for different groups 
+   (for fit people and unfit people).
+* **Analyse** using special methods 
+   (after measuring 'fitness levels').   
+* **Random allocation** of people to groups:
+   Fit people would be spread approximately evenly between groups.
+
+We'll look at these in turn.
+
+The first two approaches (*restricting*; *blocking*)
+are useful if we know, or suspect, that a certain variable or two
+is likely to be confounding.
+The third approach (*analyse*) requires us to measure all the variables that we
+suspect may be of importance.
+The fourth approach (*random allocation*) is generally superior if it is possible,
+because it is likely to reduce the chance of confounding
+even for variables that we had not even considered would be confouding variables.
+
+
+
+
+### Managing confounding: Restrictions
+
+Sometime we reduce the influences on the response by 
+*controlling some variables*,
+or keeping some variables constant.
+These are called *control variables.
+
+```{example}
+In the *Himalaya* study [@data:Bird2008:wholegrain],
+we might restrict our study to subjects that attend the gym at least once a week.
+The control variable is ''frequency of gym attendance''.
+```
+
+Sometimes we reduce the influences on the response 
+by refining the population
+using *exclusion* and/or *inclusion criteria*.
+Exclusion and inclusion criteria do not really define the population;
+they clarify which elements may be included or excluded 
+from the population.
+
+REALLY?
+
+Ensure that you explain why the exclusion criteria apply 
+if not obvious.
+You do not need both exclusion and inclusion criteria,
+but you may have both.
+
+
+```{definition, name="Inclusion criteria"}
+*Inclusion criteria* are characteristics that potential
+	units of analysis must meet explicitly to be included in the study.
+```
+
+```{example}
+Two examples of inclusions criteria may be:
+
+* Ecological studies of site locations for a certain species
+		may need a confirmed sighting within the last two years.
+* People over a certain weight may be needed for weight-loss studies.
+
+```
+
+   
+
+```{definition, name="Exclusion criteria"}
+*Exclusion criteria* are characteristics that 
+   	 disqualify potential units of analysis 
+   	 from being included in the study. 
+```
+
+
+```{example}
+Two examples of exclusions criteria may be:
+
+* Concrete test cylinders with fissure cracks
+		may be excluded from tests of concrete strength. 
+* People with severe asthma may be excluded from exercise studies.
+
+```
+   
+
+
+```{example}
+In the *Himalaya* study [@data:Bird2008:wholegrain],
+	an exclusion criteria may be
+	people with digestive problems 
+	(such as gluten intolerance; coeliacs).
+	Inclusion criteria may define the subjects as
+	healthy people between 18 and 45.
+```
+
+```{example}
+Here is an extract from a journal detailing the
+inclusion and exclusion criteria used in a study [@data:Guirao2017:amputees]
+of walking abilities
+of amputees:
+	
+> The criteria for exclusion were the presence of cognitive impairment 
+> hindering the ability to follow instructions and/or perform the tests, 
+> body weight over 100kg, 
+> active oncologic pathologies, psychological disorders, previous residuum infection, 
+> active infection, residual femur length less than 15cm measured from the greater trochanter, 
+> pregnancy, 
+> and hip flexion deformity greater than 30$^\circ$.
+>
+> --- @data:Guirao2017:amputees, p. 27
+
+```
+   
+   
+
+
+
+
+
+
+
+
+   
+   
+### Managing confounding: Blocking
+
+Sometimes we use *blocking* to minimise the impacts of confounding.
+
+```{definition, name="Blocking"}
+*Blocking* is when units of analysis
+are arranged in groups (called *blocks*) that are similar to one another.
+```
+
+Random allocation looks like this if *blocking* used: 
+
+IMAGE
+
+
+
+### Managing confouding: Analysis {#ExpManagingConfoundingAnalysis}
+
+Confounding variables can 
+be accommodated in the analysis
+(using analysis method far beyond what is in this course),
+*provided those variables have been measured*.
+Because of this,
+it is important to measure, observe or record 
+all the information that is likely to be important for understanding the data.
+For this reason,
+most studies of people record the particpants
+age and sex,
+as these two variables are common confounders.
+
+
+### Managing confounding: Random allocation
+
+
+One way to reduce confounding is to random allocate individuals in the study.
+Random allocation has the advantage that is should approximately
+evenly distribute potential confounding variables that we have identfied (such as fitness levels)
+but also those we may not have even considered or are hard to measure or observe
+(such as genetic conditions).
+
+How would *random allocation* look in the *Himalaya* study?
+The units of analysis (in this case, the people in the sample) could be allocated to a group at random
+(that makes it an experiment).
+We could allocate diets to a group through a toss of a coin.
+
+Random allocation may occur 
+when we randomly allocate individuals to groups 
+(true experiment),
+and/or when we randomly allocate treatments to groups 
+(true or quasi-experiment).   
+
+IMAGE
+
+
+Random allocation can be shown like this, in general: 
+
+IMAGE
+	
+	
+	
+	
+
+
+
+
+
+
+
+### Random allocation vs Random sampling
+
+Random sampling and random allocation are two different concepts,
+that serve two different purposes,
+but students often confuse them:
+
+* **Random sampling**
+   allows results to be generalised  to a larger population.
+   It concerns how we get the sample to study.
+* **Random allocation**
+   tries to eliminate confounding issues,
+   by evening-out possible confounders across treatments.
+   *Random allocation* of treatments 
+   helps establish cause-and-effect.
+
+
+   
+IMAGE
+   
+   
+
+   
+   
+   
+   
+   
+
+
+## Carry-over effect
+
+
+What if patients spent two weeks on the *Himalaya 292* diet,
+then the next two weeks on the refined cereal diet?
+The influence of the first diet would clearly still be impacting the subjects 
+for a a little while after stopping the diet.
+This is called the *carryover effect*.
+   
+```{definition, name="Carryover effect"}
+ Carryover effect:
+When the effects of one treatment carry over into the effects of the next treatment.
+```
+
+
+To minimise the carryover effect, we can:
+
+* Use a *washout period* or similar; 
+   for example,
+   after finishing one diet, 
+   the participants
+   spend two weeks on their usual diet,
+   and then revert to the other diet being used.
+* Use *random allocation*:
+   if possible,
+   randomly allocate the  *order* in which the treatments (i.e. the diets) are used.
+   That is,
+   some participants start by spending two weeks on the *Himalaya 292* diet,
+   then (after a washout period) two weeks on the refined cereal diet;
+   meanwhile,
+   other participants start by spending two weeks on the refined cereal diet,
+   then (after a washout period) two weeks on the *Himalaya 292* diet.
+
+
+
+
+
+
+
+
+
+## Hawthorne effect
+
+What if the patients in the *Himalaya 292* study
+were being watched (or waited for) while defecating?
+People often behave differently if they are (or think they are) being watched.
+This is  the *Hawthorne effect*.
+
+```{definition, name="Hawthorne effect"}
+Hawthorne effect:
+   The tendency of people (or animals, or\dots) 
+   to behave differently if they know (or think)
+   they are being observed.
+```
+
+```{example}
+People are more health-conscious 
+if they know they will be weighed on a daily basis.
+```
+
+
+
+
+To minimising the Hawthorne effect:
+
+* Good planning:
+   We may be able to make efforts to reduce the chance that people know 
+   they are being observed.
+* Blinding participants: 
+   participants in an experiment do not know 
+   what treatment they are receiving.
+
+
+
+
+
+
+
+## Experimenter effect
+
+What if the researchers assessing the outcomes knew the diet allocated to each patient?
+Perhaps surprisingly,
+this can have an (unconscious) impact on the values of the response variable.
+This is the *experimenter effect*.
+
+   
+```{definition, name="Experimenter effect"}
+Experimenter effect:
+when the researchers *unintentionally* influence the behaviour of subjects.
+```
+
+To minimize the experimenter effect:
+
+* Good planning.
+* Blind the researchers:
+  when the person giving the treatment nor the person evaluating knows what treatment has been given.
+
+The experimenter effect does not just apply to situations where people
+are used as participants.
+   
+```{example, CleverHans}
+['Clever Hans'](https://en.wikipedia.org/wiki/Clever_Hans)
+was a horse that seemed to be able to perform
+simple mental arithmetic.
+
+After much study,
+Carl Stumpf realised that the horse was responding to 
+involuntary cues from the trainer.
+This was discovered, in part, by using blinding.
+```
+
+
+
+
+
+
+## Placebo effect
+
+What if people *thought* they were on the wholegrain diet, but they weren't?
+Perhaps surprisingly,
+individuals in a study may report effects of a treatment,
+even if they have not received an active treatment.
+This is the *placebo effect*.
+   
+
+
+
+   
+```{definition, name="Placebo effect"}
+Placebo effect:
+When individuals report perceived or actual effects
+without having received the treatment.
+```
+   
+   
+To minimize, or manage, the influence of the placebo effect:
+
+* Good planning:
+  Experts can suggest other ways exist to reduce this effect
+  (e.g. measuring *long-term* effects).
+* *Blinding* participants: 
+  They don't know what treatment they are receiving.
+* Use *controls*:
+  Units of analysis
+  without the treatment applied
+  but *as similar as possible* in every other way
+  to those units of analysis receiving the treatment.
+
+ 
+How can we distinguishing the placebo effect from a real effect?
+Sometimes the control group receives a *placebo*.
+A *placebo* is a non-effectual treatment.
+Those who receive the placebo should be selected through random allocation
+when possible.
+Sometimes,
+using a placebo is unethical.
+The [Wikipedia entry about placebos](http://en.wikipedia.org/wiki/Placebo) 
+is intriguing.
+
+```{definition, name="Placebo"}
+A *placebo* is a treatment with no intended effect.
+```
+
+
+
+
+
+
+```{exercise}
+To test the effectiveness of a new drug,
+patients are to report to a GP to receive injections of a new drug.
+We wish to compare to people who do not get the injection.
+
+What is the control?
+```
+
+
+
+
+```{example}
+Three active analgesics (pain relievers) were compared to a placebo [@data:Huskisson1974:placebo].
+  	Four different coloured placebos were used.
+  	Part of the data are plotted below:
+  	the most pain relief was experienced by those taking *red* placebos\dots
+  	who experienced even more pain relief than those given true pain relievers.
+```
+
+```{r echo=FALSE}
+pe <- structure(list(
+	Time = 0:4, 
+	Placebo = c(0, 0.85, 1.05, 0.98, 0.8), 
+	Distr = c(0, 1.01, 1.35, 1.4, 1.3), Asp = c(0, 1.1, 1.3, 1.27, 1.25), 
+	Codis = c(0, 1.25, 1.6, 1.45, 1.4), 
+	PlaceboRed = c(0, 1.2, 1.45, 1.55, 1.5)), 
+.Names = c("Time", "Placebo", "Distr", "Asp", "Codis", "PlaceboRed"), 
+class = "data.frame", 
+row.names = c(NA, -5L))
+
+### dput(pe) from the file  "placeboeffect.R:
+### pe <- read.csv("placeboeffect.csv", header=TRUE)
+
+par( xpd=TRUE,   # Allows plotting outside plot area
+	 mar=c(4, 3, 7, 2) + 0.1 )  # DEFAULT: c(5, 4, 4, 2) + 0.1
+	 
+plot( c(0, 2.25) ~ range(Time), data=pe,
+	las=1, 
+	type="n", 
+	xlab="Time (hours)", 
+	ylab="Pain relief score")
+
+abline(h=1, lty=2)
+abline(h=2, lty=2)
+text(3, 2, "Moderate pain relief", pos=3)
+text(3, 1, "Slight pain relief", pos=1)
+
+lines( Asp ~ Time, data=pe,
+	col="black", 
+	lwd=2)
+#lines( Distr ~ Time, data=pe,
+#	col="blue", 
+#	lwd=2)
+#lines( Codis ~ Time, data=pe,
+#	col="green", 
+#	lwd=2)
+lines( Placebo ~ Time, data=pe,
+	col="orange", 
+	lwd=2)
+lines( PlaceboRed ~ Time, data=pe,
+	col="red", 
+	lwd=2)
+
+legend(-0.2, 3, 
+	col=c("red", "black", "orange"), 
+	lwd=2, 
+	lty=1,
+	horiz=TRUE,
+	legend=c("Red placebos", "Aspirin", "All Placebos"))
+```
+
+
+
+
+
+
+
+
+
+
+
+
+```{example}
+A study of placebos [@data:Waber2008:Placebo]
+	gave half the subjects a placebo,
+	but told them that the pill was an expensive pain killer (\$2.50 per tablet).
+	The other half were also given a placebo,
+	but were told that the pill was a discount pain killer (\$0.10 per tablet).
+	About 85\% of participants in the first group reported a pain reduction,
+	yet only 61\% in the second group reported a pain reduction.
+Remember that *both* groups actually received a placebo!
+```
+
+```{example}
+Some people have claimed that ginko extract claims to improve memory.
+     One study [@data:Solomon2002:Ginko] gave placebos to
+     over 100 elderly people 
+     and ginko extracts to over 100 other elderly patients.
+     On 13 memory tests,
+     the placebo group did better in seven tests,
+and the control group did better in six.
+```
+
+
+
+
+
+
+
+## Describing blinding
+
+*Blinding* refers to experimental conditions where
+certain groups involved in the study
+(not just people!)
+do not know which treatments was used on which subjects.
+
+A study can blind the *researcher*
+to knowing what treatment was applied.
+A study can blind the *participants* 
+to knowing what treatment was applied.
+A study can even blind the *analysts*
+to knowing what treatment was applied in the study.
+
+
+If *only* the participants are blinded,
+the study is called *single blind*.
+If *both* the researchers and participants are blinded,
+the study is called *double blind*.
+If the researchers, participants *and* the analyst are blinded,
+the study is called *triple blind*.
+
+For clarity,
+it is best just to state explicitly who or what is binded.
+Blinding of researchers should be considered in all studies,
+when possible.      
+
+*Blinding of participants does not just apply to people*;
+it is also relevant with animals, for example 
+(\@ref(exm:CleverHans))
+
+
+
+
+
+## Design issues and possible solutions: Summary
+
+A summary of design issues to consider:
+
+* *Confounding* and *lurking variables*;
+* The *carryover* effect;
+* The *Hawthorne* effect;
+* The *experimenter* effect;
+* The *placebo* effect.
+
+We have discussed ways to minimize these effects.
+
+
+IMAGE
+
+Note: Lurking variables become confounding variables when considered in the study,
+and then we can then manage them.
+
+
+
+```{exercise}
+A scientist is comparing the effects of 
+     two types of fertiliser on the 
+     size of tomatoes.
+     
+He plants tomato seedlings,
+     and fertilises with Fertiliser I,
+     and later measures the size of mature tomatoes.
+     
+He then plants more tomato seedlings in the same field,
+     and fertilises with Fertilizer II,
+     and measures the size of mature tomatoes.
+     
+What is the potential issue?
+```
+
+
+```{exercise}
+A scientist is expecting that recycled water will taste the same as bottled water
+      in a taste test.
+      The scientist provides people selected at random with a plastic cup of recycled water,
+      and she asks them to give her a rating of the taste on a scale of 1 to 10.
+      
+What is the potential issue?
+```
+
+
+
+
+
+
+# Designing observational studies {#DesignObservational}
+
+In experimental studies,
+by definition many aspects of the study are controlled by the researcher.
+This can sometimes (but not always!) make it easier for the researchers to design features that minimise
+potential problems.
+It may be more difficult for observational studies,
+since fewer parts of the study are under the control of the researchers
+(this is one reason why experimental studies are usually stronger 
+than observational studies).
+For example,
+treatments are not imposed,
+so random allocation of treatments is impossible,
+and hence *confounding* is probable issues.
+Nonetheless,
+there are aspects of observational that the researchers may be able to design.
+
+Issues about how to select the sample are still relevant
+for observational studies however.
+
+ 
+
+```{exercise}
+Doll \& Hill [@data:DollHill1950:Smoking]
+wrote to a large number of British doctors,
+and asked how much they smoked.
+Then they followed smokers and non-smokers for many years,
+and recorded who died of lung cancer.
+
+This is an observational study. Why?
+```
+
+
+
+## Managing confounding {#ObsManagingConfounding}
+
+In Sect. \@ref(ExpManagingConfounding)
+different methods were listed for managing confounding.
+Some, but not all, of these are still possible in observational studies.
+
+
+
+
+### Managing confounding: Restrictions
+
+As with experimental studies,
+we can decide to restrict our study to certain parts of the population.
+
+
+
+
+
+
+### Managing confounding: Random allocation
+
+In observational studies,
+treatments are not allocated by the researchers
+(at random or otherwise).
+This can be a major issue with observational studies,
+as individuals who are in one group may be different (in terms of the response variable)
+to those who are in another group.
+
+
+### Managing confounding: Blocking
+
+Blocking can be used with observational studies,
+though we cannot *allocate* individuals to these blocks.
+For example,
+we can analyse smokers and non-smokers separately.
+
+
+### Managing confounding: Analysis
+
+In short,
+the best advice (as given earleir)
+is to 
+measure, observe or record 
+all the information that is likely to be important for understanding the data.
+This is particularly important for observational studies,
+as managing confounding through analysis \@ref(ExpManagingConfoundingAnalysis)
+is often one of the few means available.
+
+
+
+
+## Carry-over effect
+
+Since treatments are not allocated in observational studies,
+carry-over effects may be present in some observational studies.
+
+
+## Hawthorne effect
+
+In observational studies,
+we can still do our best to ensure that individuals 
+do not know that their behaviours are being observed.
+
+
+## Experimenter effect
+
+The experimenter effect can be an issue in observational as well as experimental studies.
+For example,
+consider a study where the blood pressure of smokers and non-smokers is recorded.
+This is an observational study 
+(individuals cannot be allocated to be a smoker or non-smokers),
+but if the researchers know whether or not the individual is a smoker
+then the experiment effect could still come into play.
+
+In this example,
+the experimenter effect could be managed
+if the researchers first measured the blood pressure,
+and *then* asked if the individual was a smoker or not.
+
+
+
+
+
+## Placebo effect
+
+Observational studies can still have a control group,
+but the individuals are not randomly allocated to the control group.
+For example,
+in the Doll \& Hill smoking study [@data:DollHill1950:Smoking],
+two groups were being compared:
+non-smokers (the control group) and smokers.
+Subjects were not allocated to the groups, however,
+so confounding remains a possibility.
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+# Interpretation of results {#Interpretation}
+
+When the results if a study are interpreted,
+we need to ensure that we understand the implications of the design of the study.
+
+
+## Applicability
+
+We should comment on  how applicable the results are likely to be in the real world ;
+this is called *ecological validity*.
+
+```{definition, name="Ecological validity"}
+A study is *ecologically valid*
+if the study results are likely to translate well into the real world.
+```
+
+Studies don't have to be ecologically valid;
+much can be learnt under special conditions,
+as long as we understand the limitations when applying the results to the real world.
+
+
+
+```{example}
+A study was completed to observe the effect of using
+high-mounted rear brake lights [@data:Kahgane1998:RearBrakeLights],
+which are now commonplace.
+The American study showed that such lights reduced rear-end collisions by about 50%.
+After making these lights mandatory, rear-end collisions reduced by only 5%. Why?
+```
+
+How can we ensure our studies are ecologically valid?
+
+* Good planning:
+      Make the study as realistic as possible
+* Think: Report whether or not
+      the results likely to be realised in the real world,
+      and discuss limitations
+
+
+
+## Generalisability
+
+We should comment on how likely it is that the results will generalise to the intended population;
+for example,
+see Example \@ref(exm:StateOfOrigin)
+
+
+```{example}
+A study of using biochar [@farrar2018short] to grow ginger
+only used one farm at Mt Mellum, Australia.
+While the results may only apply to growing ginger at Mt Mellum,
+the encouraging results suggest that a wide,
+more general, study of the impact of using biochar to grow ginger would be worthwhile.
+```
+
+
+## Design issues
+
+We should comment on the potential impacts of issues such as confounding,
+experimenter effect, placebo effect, etc.
+
+
+
+
+
+
+
+
+
+
+```{exercise}
+Consider this RQ:
+
+>   Among USC students,
+>   is the taste of appropriately recycled water
+>   different than the taste of bottled water?
+
+You want to answer this question using an *experiment*.
+How would you manage:
+
+* Random allocation?  
+* Blinding?  
+* Double blinding? 
+* Control? 
+* Finding a random sample?
+
+```
+
+
+
+
+
+# Ethics {#Ethics}
+
+Studies *must* be designed to be ethical, and meet ethical guidelines.
+Most studies go through a massive ethics approval process,
+and so USC has an ethics committee, as do all universities.
+There is no time to cover all issues,
+but some are obvious
+and many ethical issues are common-sense.
+Common ethical issues to consider are:
+    
+* Physical risks
+* Psychological risks
+* Social risks
+* Economic risks
+* Legal risks
+* Acknowledgement 
+* Incentives to participate
+* Confidentiality
+* Storage of data
+* Consent
+* Plagiarism
+
+
+
+
+```{example}
+In the 
+[Tuskegee syphilis experiment](http://en.wikipedia.org/wiki/Tuskegee_syphilis_experiment) 
+(conducted between 1932 and 1972),
+known effective treatments were witheld from men with syphilis.
+The men's wives and children often were affected.
+The men were lied to about the treatment they were given,
+and  were prevented from seeking  treatment elsewhere.
+```
+      
+
+
+
+
+# Review
+
+<iframe src="https://h5p.org/h5p/embed/186296" width="1090" height="530" frameborder="0" allowfullscreen="allowfullscreen"></iframe><script src="https://h5p.org/sites/all/modules/h5p/library/js/h5p-resizer.js" charset="UTF-8"></script>
+
+
+

@@ -1,0 +1,1416 @@
+```{r echo=FALSE}
+library(NHANES)
+#options(formatR.arrow=TRUE,width=90)
+#source("normalcurves.R")
+```
+
+
+
+# Numerical summaries: qualitative data {#NumericalQual}
+
+
+
+In the previous chapter,
+we studied ways of summarising *quantitative* data.
+In this chapter,
+we look at ways of summarising *qualitative* data.
+The most common ways are to use percentages, odds and odds ratios.
+
+
+```{r echo=FALSE}
+SixSteps(4, "Numerical summary (qualitative data)")
+```
+
+
+
+## Percentages
+
+### Example: Kidney stones
+
+In a study by @data:Charig:stones,
+the aim was to:
+
+> ...compare (two) different methods of treating *renal calculi*... 
+> to establish which was the most... successful.
+>
+> --- @data:Charig:stones, p. 879
+
+(*Renal calculi* are better known as kidney stones.)
+The study was experimental,
+with data collected from 700 UK patients,
+on two qualitative variables:
+
+* Treatment method used ('A' or 'B'): Explanatory variable
+* Outcome ('success' or 'failure'):   Response variable
+
+Both of these variables are *qualitative*.
+The researchers also recorded the size of the
+kidney stone,
+as a possible confounding variable,
+as 'small' or 'large' (also a qualitative variable).
+
+
+The data from this study can be summarised using two-way tables,
+and graphed using side-by-side or stacked barcharts, for example.
+To begin,
+we can examine the two way tables
+for the small 
+(Table \@ref(tab:KS-Small)) and 
+large 
+(Table \@ref(tab:KS-Large))
+stones separately:
+
+
+```{r echo=FALSE}
+Counts <- c(81, 234, 6, 36,
+            192, 55, 71, 25)
+Method <- c("Method A", "Method B", "Method A", "Method B",
+           "Method A", "Method B", "Method A", "Method B")
+Result <- rep(
+              c( rep("Success", 2), rep("Failure", 2) ),
+              2)
+Size <- c( rep("Small", 4),
+           rep("Large", 4))
+
+KS <- data.frame(Counts, Method, Result, Size)
+```
+
+```{r KS-Small, echo=FALSE}
+KS.small <- xtabs( Counts ~ Method+Result, data=subset(KS, Size=="Small"))
+KS.small2 <- cbind(KS.small, "Total"=rowSums(KS.small))
+
+kable(
+  KS.small2,
+  digits=0,
+  align=c("r", "r", "r", "r"),
+  col.names = c("Failure", "Success", "Total"),
+  caption="*Numbers* for **small** kidney stones"
+)
+```
+
+
+
+```{r KS-Large, echo=FALSE}
+KS.large <- xtabs( Counts ~ Method+Result, data=subset(KS, Size=="Large"))
+KS.large2 <- cbind(KS.large, "Total"=rowSums(KS.large))
+
+kable(
+  KS.large2,
+  digits=0,
+  align=c("r", "r", "r", "r"),
+  col.names = c("Failure", "Success", "Total"),
+  caption="*Numbers* for **large** kidney stones"
+)
+```
+
+
+
+For each of these tables,
+we can compute *row percentages*
+(Table \@ref(tab:KS-Small-rowPC))
+or 
+*column percentages*
+(Table \@ref(tab:KS-Small-colPC)).
+
+
+The *row percentages* 
+(Table \@ref(tab:KS-Small-rowPC))
+tell us,
+for example,
+the percentages of failures and successes there were for each Method.
+Row percentages allow us to compare the percentages as part of the row total.
+For example, for Method~A we see that $81 \div 87 \times 100 = 93.1\%$ of operations are successful.
+
+
+
+
+
+```{r KS-Small-rowPC, echo=FALSE}
+KS.small.rowPC <- prop.table(KS.small, margin=1)*100
+KS.small.rowPC2 <- cbind(KS.small.rowPC, "Total"=c(100, 100) )
+  
+kable(
+  KS.small.rowPC2,
+  digits=1,
+  align=c("r", "r", "r", "r"),
+  col.names = c("Failure", "Success", "Total"),
+  caption="*Row percentages * for **small** kidney stones"
+)
+```
+
+
+The *column percentages* 
+(Table \@ref(tab:KS-Small-colPC))
+tell us,
+for example,
+what percentage of the successes were from Method A
+(and what percentage of the successes were from Method B).
+Column percentages allow us to compare the percentages as part of the column total.
+For example, we can see that $81 \div (81 + 234) \times 100 = 25.7\%$ 
+of successful operations are from using Method~A.
+
+
+```{r KS-Small-colPC, echo=FALSE}
+KS.small.colPC <- prop.table(KS.small, margin=2)*100
+KS.small.colPC2 <- rbind(KS.small.colPC, "**Total**"=c(100, 100) )
+  
+
+
+kable(
+  KS.small.colPC2,
+  digits=1,
+  align=c("r", "r", "r"),
+  col.names = c("Failure", "Success"),
+  caption="*Column percentages * for **small** kidney stones"
+)
+```
+
+
+While both row and column percentages can be computed,
+in this case the row percentages seems to be more intuitive:
+they allow us to compare the success percentage for each treatment method.
+
+
+For *each* size of kidney stones,
+we compute the *percentage success* for both methods (i.e. row percentages),
+and hence determine which seems to be the better method:
+   
+```{example}
+First, the succes rates for the small stones:
+	
+* Small stones, with Method A: $81\div 87\times 100 = 93\%$;
+* Small stones, with Method B: $234\div270\times100 = 87\%$.
+
+So the success rate for Method A is higher than the success rate for Method B.
+
+Then, the success rates for the large stones:
+
+* Large stones, with Method A: 
+* Large stones, with Method B: 
+
+Which has the higher success rate?
+```
+
+
+So for both small and large stones,
+Method A is better.
+So let's combine the two tables 
+and effectively ignore the size of the kidney stones:
+   
+   
+```{r KS-all, echo=FALSE}
+KS.all <- KS.small + KS.large
+KS.all2 <- cbind(KS.all, "Total"=rowSums(KS.all))
+
+kable(
+  KS.all2,
+  digits=0,
+  align=c("r", "r", "r", "r"),
+  col.names = c("Failure", "Success", "Total"),
+  caption="*Numbers* for **all** kidney stones combined"
+)
+
+
+```
+
+
+
+In summary, the sample shows us that:
+
+* For *small* stones: **Method A is better**:
+Method A success rate: 93\%;  Method B success rate: 87\%
+* For *large* stones: **Method A is better**:
+Method A success rate: 73\%; Method B success rate: 69\%
+* Combining *all* stones together: **Method B is better**:
+Method A success rate: 78\%; Method B success rate: 83\%
+
+Note: The overall success rate, combining all stones together and combining Method~A and Method~B together,
+is $562\div700 \times 100 = 80.3\%$.
+
+How can this be explained? 
+Method A seems better when small and large stones are considered together,
+but Method B seems better when they are combined.
+
+The size of the stone is a *confounding variable*.
+In this example,
+it is important not to ignore the size of the kidney stone.
+Ignoring the size of the kidney stone,
+leads to the wrong (opposite) conclusion:
+one would think that Method B is better is the size of the stones was ignored,
+when the best method really is Method A.
+This is called *Simpson's paradox*.
+
+IMAGE
+
+
+
+
+
+
+
+
+
+## Odds
+
+Consider again the small kidney stone data
+(Table \@ref(tab:KS-Small)).
+For Method A,
+there are 81 successes and 6 failures.
+Apart from percentages,
+another way to summarise this information is to see that
+there are $81\div 6 = 13.5$ *times* as many smokers than non-smokers.
+We say that:
+For Method A,
+the **odds** of a success is 13.5.
+
+```{definition, name="Odds"}
+The ratio of the percentage (or number) of times that an event happens,
+to the percentage (or number) of times that the event does not happen.
+
+This can be written as
+\[
+         \text{Odds} = \frac{\text{Percentage of times that something happens}}{\text{Percentage of times that something doesn't happen}},
+\]
+or (equivalently)
+\[
+         \text{Odds} = \frac{\text{Number of times that something happens}}{\text{Number of times that something doesn't happen}}.
+\]
+The *odds* show how many *times* more 
+likely an event is to happen than to not happen.
+Another interpretation is that is shows how many times the event occurs
+in the sample for every 100 times that it does not happen.
+```
+
+```{example}
+Above,
+we found that the odds of a success for Method A was 13.5.
+We could interpret this as:
+
+* There are 13.5 times as many successes as failures in the sample; 
+* There are 1350  successes for every 100 failures in the sample.
+
+Either way, the number of successes is much greater than the number of failures.
+```
+
+```{exercise}
+The odds of a success for Method A 13.5.
+
+* What would it mean *if* we had found that the odds were $4$?
+* What would it mean *if* we had found that the odds were $0.5$?
+* What would it mean *if* we had found that the odds were $1$?
+  
+~
+```
+
+```{exercise}
+What are the odds of finding a *failure* for Method A?
+```   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Odds ratios
+
+Consider again the small kidney stone data
+(Table \@ref(tab:KS-Small)).
+We have computed the odds of a success with Method A.
+We could also compute the odds of a success using MethodB:
+
+```{example}
+Odds(Success with Method B) $=$ 
+\[
+  \frac{\text{Number of successes for Method B}}{\text{Number of failures for Method B}}
+  =\frac{234}{36} = 6.5.
+\]
+```
+
+So for MethodB,
+there are 6.5 times as many successes as failures.
+Or, 
+there are 650 successes for every 100 failures. 
+
+Recall that,
+for Method A, 
+the odds of success is 13.5,
+so that,
+in the sample, 
+the odds of success for Method A is many *times* greater than for Method B.
+
+In fact,
+in the sample,
+the odds of success for Method A is 
+\[
+	\frac{13.5}{6.5} = 2.08
+\]
+*times* the odds
+of a success for Method B.
+This is called the **odds ratio** (OR).
+
+```{definition, names="Odds Ratio (OR)"}
+How many *times* greater are the odds of some event in one group,
+compared to the odds of the same event in another group.
+```
+
+The OR compares the odds of an event in two groups.
+      
+
+IMAGE
+
+
+```{exercise}
+The odds of a success with Method A are
+\[
+  \text{OR}
+  =
+  \frac{\text{Odds of success with Method A}}{\text{Odds of success with Method B}}
+  =
+  2.08
+\]
+*times* the odds
+of a success with Method B.
+
+* What would it mean *if* we had found that the OR was $4$?
+* What would it mean *if* we had found that the OR was $0.5$?
+* What would it mean *if* we had found that the OR was $1$?
+
+```
+
+
+
+
+
+
+
+```{example}
+The data in 
+Table \@ref(tab:SkipBreakfast)
+came from a study of Iranian children 
+aged 6--18 years old
+[@data:kelishadi2017:snack].
+```
+
+```{r SkipBreakfast, echo=FALSE}
+Counts <- c(2383, 1944, 4257, 4902)
+Gender <- c("Females", "Males", "Females", "Males")
+Breakfast <- c("Skip", "Skip", "Doesn't skip", "Doesn't skip")
+
+Brek <- xtabs(Counts ~ Gender + Breakfast)
+Brek2 <- cbind(Brek, "Total"=rowSums(Brek))
+
+kable(
+  Brek2,
+  align=c("r", "r", "r"),
+  digits=0,
+  col.names = c("Doesn't skip breakfast", "Skips breakfast", "Total"),
+  caption = "The number of Iranian children aged 6 to 29 who skip and do not skip breakfast"
+)
+```
+
+	
+From this table:	
+
+* The *percentage* of females who skipped breakfast is $2\,383/6\,640 = 35.9\%$;
+* The *percentage* of females who skipped breakfast is $1\,944/6\,846 = 28.4\%$.
+		
+Also,
+
+* $\text{Odds}(\text{Skips brekkie, among F}) = 2\,383/4\,257 = 0.5598$;
+* $\text{Odds}(\text{Skips brekkie, among M}) = 1\,944/4\,902 = 0.3966$.
+
+So the Odds ratio (OR) for comparing the odds of skipping breakfast 
+in females to males is
+\[
+  \frac{0.5598}{0.3966} = 1.41;
+\]
+the odds of females skipping breakfast are $1.41$
+times the odds of males skipping breakfast.
+	
+The data can then be summarised numerically
+as in Table \@ref(tab:BreakSum).
+
+
+```{r BreakSum, echo=FALSE}
+
+Brek.Sum <- array( NA, dim=c(3, 2))
+rownames(Brek.Sum) <- c("Females", "Males", "Odds ratio")
+
+Brek.Sum[1, 1] <- Brek[1, 2] / sum(Brek[1,])
+Brek.Sum[2, 1] <- Brek[2, 2] / sum(Brek[2,])
+
+Brek.Sum[1, 2] <- Brek[1, 2] /Brek[1, 1]
+Brek.Sum[2, 2] <- Brek[2, 2] /Brek[2, 1]
+
+Brek.Sum[3, 1] <- Brek.Sum[1, 2] / Brek.Sum[2, 2]
+
+options(knitr.kable.NA = '') 
+kable(
+  Brek.Sum,
+  align=c("r", "r"),
+  digits=3,
+  col.names = c("Percentage that skip breakfast", "Odds of skipping breakfast"),
+  caption = "Numerical summary of the Iranian-breakfast data"
+)
+```
+
+
+
+
+## Observing relationships
+
+
+Notice that the percentage of successes for Method A
+is different than the percentage of successes for Method B.
+Similarly,
+the odds of a success for Method A and B are quite different.
+Why?
+
+
+Broadly,
+there are two possible reasons for this difference in percentages (or odds) *in the sample*:
+
+* *Sampling variation*:
+       The percentages (and odds) are actually the same in the *population*,
+       but we see a difference in the *sample*
+       because of the people we ended up with in our sample.
+       Sampling variation explains the *difference in the sample percentages*.
+       
+* A *difference really exists in population*:
+    The percentages (and odds) of success are actually different for Methods A and B in the *population*,
+       and the difference in the sample percentages (or odds)
+       simply reflects *a difference* between Methods A and B in the population.
+
+These two explanations have special names;
+they are called:
+
+* The null hypothesis, or $H_0$; and
+* The alternative hypothesis, or $H_1$.
+
+The RQ is about the population,
+so we need to know which of these two possible explanations
+is likely to be the actual situation.
+
+
+
+
+
+
+
+
+
+
+## The NHANES data: Numerical summaries
+
+
+In Sect.~\ref{SEC:Graphics:NHANES},
+the NHANES data were introduced,
+and graphs were used to understand the data
+relevant to answering this RQ:
+
+> Among Americans,
+> is there a relationship between smoking status, 
+> and the average direct HDL cholesterol levels?
+
+The data come from the NHANES study.
+For these data,
+we can summarise the data set,
+including HDL cholesterol,
+using a table.
+Different summaries are needed for quantitative 
+(means, medians; standard deviations, IQR) and qualitative (percentages; odds) variables,
+of course.
+One way of summarising the data in a table is shown in 
+Table \@ref(tab:NHANESBigSummary).
+
+
+
+
+
+Table: (\#tab:NHANESBigSummary) A summary of some variables in the NHANES data set,
+	according to current smoking status
+	(there are 6789 respondents whose current smoking status was not reported,
+	and some other variables were not reported for all respondents).
+	Quantitative variables are summarised using the mean (standard deviation),
+	and qualitative variables using percentages (odds)
+
+Overall ($n = 10000$) | Current non-smokers ($n = 1745$) | Current smokers ($n = 1466$) 
+---------------------:+----------------------------------:+--------------------------------:
+**Direct HDL** (mmol/L) | |
+$n$:						  	| 8474 					| 1668				| 1388
+Mean: 							| 1.36			    | 1.39				| 1.31
+Standard deviation	| 0.40      		| 0.43 		  	| 0.42 
+**Gender** | | 
+$n$								| 10000			| 1745				| 1466
+Percentage 'female'				| 50.2\rlap{\%}| 43.8\rlap{\%}	| 43.5\rlap{\%}
+Odds 'female'					| 1.008			| 0.779				| 0.771
+**Age** (years)			| |
+$n$:							| 10000			| 1745				| 1466    
+Mean:							| 36.7			| 54.3				| 42.7 
+Standard deviation:				| 22.4 		| 16.6				| 14.8 
+**Height** (in cm)			| |
+$n$:							| 9647					| 1726				| 1459
+Mean:							| 161.9			| 170.1				| 170.4
+Standard deviation:				| 20.2			| 9.8				| 9.3
+**Weight** (in kg)			|  |
+$n$:							| 9922					| 1727				| 1458
+Mean:							| 710		| 84.5				| 80.5
+Standard deviation:				| 29.1			| 20.7				| 19.7
+**BMI** (kg/m${}^2$) | |
+$n$:							| 9634					| 1726				| 1458
+Mean:							| 26.7			| 29.1				| 27.7
+Standard deviation:				| 7.4			| 6.2				| 6.4
+**Diabetes**				| | 
+$n$								| 9858			| 1743				| 1466
+Percentage 'yes'				| 7.7\rlap{\%}| 15.3\rlap{\%}	| 7.2\rlap{\%}
+Odds 'yes'						| 0.084			| 0.181				| 0.078
+
+
+
+
+
+If we look at just the relationship between being a current smoker
+and having a diabetes diagnosis,
+Table \@ref(tab:NHANESDiabSmoke)
+is useful:
+
+
+```{r NHANESDiabSmoke, echo=FALSE}
+data(NHANES)
+
+NHANES.Diab.Smoke <- xtabs( ~ Diabetes + SmokeNow, data=NHANES)
+rownames(NHANES.Diab.Smoke) <- c("Not diabetic", "Diabetic")
+
+kable(NHANES.Diab.Smoke,
+      caption="The two-way table of diabetes diagnosis against current smoking status",
+      col.names=c("Doesn't smoke now", "Smokes now"))
+```
+
+
+
+A number of interesting questions emerge from 
+Table \@ref(NHANESDiabSmoke):
+
+* How can the mean age of all respondents be 36.7 years,
+	but the mean age for non-smokers and smokers both be much larger than this (54.3 and 42.7 years respectively)?
+* Similarly,
+	the percentage of females in the whole sample is 50.1\%,
+	but the percentage of females is less than this for both non-smokers and smokers 
+	(43.8\% and 43.5\% respectively)?
+
+
+
+Once again,
+we can ask some questions about these results:
+
+* For current non-smokers,
+    the percentage of diabetics is:
+    $15.32$\%.
+* For current smokers,
+    the percentage of diabetics is:
+    $7.23$\%.
+
+Notice that the percentage diabetics of *in the sample* is different
+for non-smokers and smokers.
+Why?
+Similarly,
+
+* For current non-smokers,
+    the odds of finding a diabetic is:
+    $0.181$.
+* For current smokers,
+    the odds of finding a diabetic is:
+    $0.078$.
+
+Notice that the odds of finding a diabetic of *in the sample* is different
+for non-smokers and smokers.
+Why?
+
+Broadly,
+there are two possible reasons for this difference in percentages and odds *in the sample*:
+
+* *Sampling variation*:
+The percentages (and odds) are actually the same in the population,
+       but we see a difference in the *sample*
+       because of the people that we happened we ended up with in our sample.
+       Sampling variation explains the *difference in the sample percentages (and odds)*.
+       
+* A *difference really exists in population*:
+    The percentages (and odds) are actually different for non-smokers and smokers in the population,
+       and the difference in the sample percentages (and odds)
+       simply reflects *a difference* between non-smokers and smokers in the population.
+
+
+These two explanations have special names;
+they are called:
+
+* The null hypothesis, or $H_0$; and
+* The alternative hypothesis, or $H_1$.
+
+Essentially then,
+we need to decide which of these explanations
+is supported by the data.
+
+In the next chapters,
+we will discuss how to look at these issues.
+
+
+
+
+
+
+
+
+
+
+# Making decision about two-way tables: CHANGE EXAMPLE?
+
+
+KIDNEY STONES EXAMPLE rather than NHANES???
+
+
+Consider the earlier two-way tables
+from the NHANES data (Table~\ref{TB:NUMERICAL:NHANESTwoWay}).
+From this table,
+we saw that      
+the odds of a non-diabetic being a smoker are
+$2.321$
+*times* the odds
+of a non-diabetic being a smoker.
+
+Recall that if the value of the OR
+is one,
+it means the odds of finding a smoker is the same for diabetics and non-diabetics;
+that is,
+there is no relationship between having diabetes and being a smoker:
+the odds of finding a smoker is the same for diabetics and noin-diabetics.
+            
+So,
+since the sample OR is not one,
+we could suppose two possible explanations:
+
+* The OR really is one (in the population),
+	but the *sample OR* is not one due to sampling variation}.
+	That is,
+	when we select a sample,
+	each sample is likely to be different and likely to contain different individuals.
+	This means that the data in the sample can be different every time we take a sample,
+	so the sample OR is likely to be different with every sample,
+	even if the OR is one in the population.
+	or 
+
+* The OR really isn't one (in the population),
+	and the sample OR is simply reflecting this.
+
+These two possible explanations (or *hypotheses*) are called:
+
+* The null hypothesis, or $H_0$;
+* The alternative hypothesis, or $H_1$.
+
+
+Now,
+we shouldn't expect that the odds ratio to be *exactly* one in the *sample*,
+even if it is one in the *population*,
+because each sample is likely to be different.
+But how close to one is close enough that it can be explained by sampling variation?
+      
+
+
+
+
+## Expected values in two-way tables
+
+From the data in Table~\ref{TB:NUMERICAL:NHANESTwoWay},
+we found that,
+in the overall sample,
+the percentage of respondents that smoke now is 
+$45.68\%$.
+
+*If* it was true that there is no relationship between
+diabetes diagnosis and smoking status,
+then it shouldn't matter whether we looked at the diabetics or the non-diabetics:
+the percentage of smokers should be the same
+(or, equivalently, the odds of finding a smoker would be the same).
+That is,
+if there is no relationship between
+diabetes diagnosis and smoking status,
+we would expect that approximate percentage of smokers
+would be about 
+$45.68\%$
+for both diabetics and non-diabetics.
+
+That is,
+we would expect that about 
+$45.68\%$
+of the 
+$373$ diabetics
+to be smokers
+(which is about 
+$170.4$)
+to be smokers.
+
+Similarly,
+we would expect that about 
+$45.68\%$
+of the 
+$2836$ non-diabetics
+to be smokers
+(which is about 
+$1295.6$)
+to be smokers.
+
+These are called the *expected values*.
+We can do similar for all four cells of 
+Table~\ref{TB:NUMERICAL:NHANESTwoWay},
+and compile these values into a table of *expected values*
+(Table \@ref(tab:NHANESexpected)).
+
+
+```{r NHANESexpected, echo=FALSE}
+kable( round(chisq.test(NHANES.Diab.Smoke)$expected, 2),
+       align="r",
+       caption="The *expected* counts for each cell in the NHANES data table")
+
+```
+
+
+
+\begin{table}[hb]
+	\centering
+	\begin{tabular}{lrrr}
+					 		& Doesn't smoke now     													& Smokers now     & Totals\\
+					 		\midrule
+		 Not diabetic      	& 1540.4             	& 1295.6                   & 2836\\ 
+		 Diabetic        	& 202.6        		& 170.4                   & 373\\
+		 \midrule
+		 Total       & 1743           & 170.4                   & 3209
+	  \end{tabular}
+
+	\caption{The two-way table of the *expected values* that we would find if there really was no relationship between diabetes diagnosis and current smoking status}
+	\label{TB:NUMERICAL:NHANESTwoWayExpected}
+\end{table}
+
+This table shows us what we would *expect* to see in the two-way table
+if the percentage (or odds) os smoking is the same for diabetics and non-diabetics.
+Of course,
+we don't 
+
+
+So we can compare what we actually found
+(Table~\ref{TB:NUMERICAL:NHANESTwoWay})
+with what we would *expect* to see if there really was no relationship between the variables
+(Table~\ref{TB:NUMERICAL:NHANESTwoWayExpected}).  
+Is what we observe close to what we would expect if there really was no relationship?
+And how close is close enough?
+
+To answer this question, 
+we need to understand how decision are made
+in this context.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## How decisions are made {#DecisionMaking}
+
+We need to think about how decisions are made.
+Here is one way to think about the logic of how decisions are made.
+
+INTRO: Describe a scenario. CARDS?
+
+
+The logic of decision making:
+
+* **Assumption**:
+Suppose I make an assumption.
+	      
+* **Expectation**:
+Under this assumption,
+I have some idea about what might be expected to happen.
+	      	
+* **Observation**:
+If I observe information that is:
+    - unlikely or **contrary to** that assumption,
+			then my assumption is probably **wrong**.
+			There is evidence suggest that my assumption is wrong (but it is not certain).
+    - likely or **consistent with** that assumption,
+			then my assumption may be **correct**.
+			There is no evidence to suggest my assumption is wrong (though it may be wrong).
+
+This is one way to describe the formal process of decision making in science.
+
+This approach is similar to what we apply every day
+without really thinking about it.
+For example,
+suppose I ask my son to brush his teeth~\cite{data:Budgett:RandomizationTest},
+and later I want to decide if he has indeed brushed his teeth.
+
+* **Assumption**:
+  	I assume
+   	my son has brushed his teeth (as I told him to).
+* **Expectation**:
+   	So when I check his toothbrush later,
+   	I expect to see a damp toothbrush.
+* **Observation**:
+But when I check later,
+   	I observe a *dry* toothbrush.
+   	The evidence seems to contradict my assumption,
+   	so my assumption is probably false:
+   	He probably didn't brush his teeth.
+
+Of course,
+I may be wrong: 
+He may have brushed his teeth,
+but his brush is now dry.
+However,
+it is highly likely that he has not brushed his teeth.
+
+The situation may have ended differently:
+
+* **Assumption**:
+  	I assume
+   	my son has brushed his teeth (as I told him to).
+* **Expectation**:
+   	So when I check his toothbrush later,
+   	I expect to see a damp toothbrush.
+* **Observation**:
+But when I check later,
+I do observe a *damp* toothbrush.
+    The evidence seems consistent with my assumption,
+    so my assumption possibly true:
+    He probably did brush his teeth.
+
+Again,
+I may be wrong: 
+He may have just ran his toothbrush under a tap.
+I don't really have any evidence that he didn't brush his teeth, though;
+I can hardly get him into trouble.
+
+This logic
+underlines a lot of decision making in science.
+We make an assumption about the population thgat is the status quo (''null hypothesis''):
+there is nothing of interest happening, there are no changes, there are no differences, or there is no relationships in the population.
+Then we observe the data and ask:
+Do the data contradict the assumption?
+
+   
+```{example}
+Suppose I deal 15 cards from what I assume is a fair pack. 
+
+* **Assumption**:
+Initially I assume a fair deck of cards
+      	(I have no evidence to doubt it).
+      
+* **Expectation**:
+Under this assumption,
+		I expect to get roughly (not exactly) equal numbers
+		of red and black cards.		
+
+* **Observation**:  
+Suppose I deal 15 cards, and all 15 are red cards.    	
+    	This is very unlikely to occur under the assumption of a fair deck;
+      	the data are inconsistent with my assumption.
+		So the evidence suggests that the assumption is probably false.
+
+Of course, it is not impossible to get 15 red cards out of 15, 
+so I may be wrong... but getting 15 red from 15 cards is very unlikely.
+```
+
+
+
+
+
+
+
+
+
+
+
+## Decision making with odds ratios
+
+
+NEW DATA????
+
+
+
+The above decision-making process can apply in 
+many ways.
+For example,
+consider the relationship between diabetes diagnosis and current smoking status:
+
+* **Assumption**:
+Assume no relationship between diabetes diagnosis and being a current smoker
+*in the population*.
+   	That is, 
+   	the odds of being a smoker is the same for diabetics and non-diabetics;
+   	or (equivalently),
+   	the odds ratio is one;
+   	or (equivalently)
+   	the percentage of diabetics who are smokers is the same as the percentage of non-diabetics who are smokers.
+* **Expectation**:
+Under this assumption,
+we would expect the *population OR* to be 
+about 1 (but not necessarily exactly one *in the sample*).
+* **Observation**:  
+   	But from the evidence (the sample data),
+   	the *sample OR* is $2.321$.
+
+So the question becomes:
+Is this sample OR consistent with the assumption (that the OR is one), or not?
+After all,
+we wouldn't expect that sample OR to be exactly one 
+even if there really was no relationship: That's just the way it goes when you take  sample.
+
+If the sample OR was one,
+clearly the evidence would suggest no relationship in the population.
+At the other extreme,
+if the sample OR was, say, $300$ then
+the evidence would suggest that there *is* a relationship in the population:
+the odds of being a smoker looks very different for diabetics and non-diabetics.
+
+However,
+between these extremes it is not always easy to decide of the evidence
+contradicts or supports the null hypothesis. 
+How can we decide?
+ 
+ 
+ 
+SIMULATION FROM CARDS???
+Two-way could be cards (Red, black; picture, non-picture)
+
+
+IMAGE
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+SIMULATION FROM  DICE?
+Pick up a pair of dice (one red; one blue) and roll them (say) 20 times.
+We count dice (Red; Blue) and we count even and odds
+
+IMAGE
+
+ 
+ 
+ 
+This question can be answered using mathematics and probability,
+but we can get software such as SPSS to do the computations for us.
+SPSS tells us the chance that the *sample OR*
+being so much larger than one simply because of sampling variation
+is almost no chance (i.e. zero to three decimal places):
+      
+
+IMAGE
+
+The highlighted part of the output is called the $P$-value.
+Because it is very small (i.e. zero to three decimal places),
+it suggests that the evidence
+contradicts the null hypothesis:
+it would seem that the diabetes diagnosis is
+related to being a current smoker.
+
+
+* **Assumption**:
+Assume no relationship between diabetes diagnosis and being a current smoker
+*in the population*.
+This is the *null hypothesis*, or $H_0$.
+   
+* **Expectation**:
+Under this assumption,
+we would expect the *population OR* to be 
+about 1 (but not necessarily exactly one *in the sample*).
+* **Observation**:  
+But from the evidence (the sample data),
+the *sample OR* is $2.321$.
+
+We then use the SPSS output to tell us how close the observed and expected counts are.
+The value of the *test statistic* is {$\chi^2 \text{ (or 'chi-square')} = 41.183$}.
+This measures how far apart the number are in 
+Tables~\ref{TB:NUMERICAL:NHANESTwoWayExpected} and~\ref{TB:NUMERICAL:NHANESTwoWayExpected}.
+The *$P$-value* is $0.000$ to three decimal places,
+which tells us that the differences in the values in the two tables
+cannot be explained by sampling variation.
+
+On this basis,
+we can write a conclusion:
+
+> The *sample* provides strong evidence 
+> ($\chi^2=49.921$; $P=0.000$ to three decimal places)
+> of a relationship
+> between diabetes diagnosis
+> and being a current smoker in the *population*
+> (sample OR: $2.321$). 
+
+When communicating the results of a hypothesis test,
+include:
+
+* Conclusion: 
+   Report the answer to the RQ
+* Evidence: 
+   Summarise the evidence used to reach this conclusion
+* Summaries:
+   Summarise the data that were collected
+
+
+
+
+
+
+
+
+
+## About $P$-values
+
+A $P$-value tells us the likelihood of observing the sample results (or something even more extreme),
+assuming the assumption about the population is actually true.
+Then:
+
+*	'Small' $P$-values 
+   	mean that the data
+   	are unlikely
+   	to have occurred if our assumption about the population ($H_0$) was true:
+   	The data seem to contradict the null hypothesis.
+
+* 'Big' $P$-values mean that
+   	the data could reasonably 
+	have occurred through sampling variation if our assumption about the population ($H_0$) was true:
+	The data don't contradict
+	our assumption ($H_0$).
+
+But what do we mean by 'small' and 'big'?
+It is *arbitrary*, and there are no definitive rules.
+But commonly,
+a $P$-value smaller than 1\%
+is usually considered 'small',
+and
+a $P$-value larger than 10\%
+is usually considered 'big'.
+Traditionally,
+a $P$-value is 'small' if less than 5\%,
+but this is an *arbitrary* guideline.
+However,
+this binary decision making (only big or small)
+seems a bit unreasonable. 
+More reasonably,
+$P$-values can be interpreted as shown in
+Table~\ref{TB:PvaluesInterpretation}
+(but again, these are not definitive,
+and are only guidelines).
+Of course, write conclusions in the context of the problem.
+
+Table: A guideline for interpreting $P$-values
+
+$P$-value                | Write conclusion as...
+------------------------:+-------------------------------------------
+Larger than 0.10         | Insufficient evidence to support $H_1$
+Between 0.05 and 0.10    | Slight evidence to support $H_1$
+Between 0.01 and 0.05    | Moderate evidence to support $H_1$
+Between 0.001 and 0.01   | Strong evidence to support $H_1$
+{Smaller than 0.001}     | Very strong evidence to support $H_1$
+
+   
+
+
+
+
+## Conditions for the test to be statistically valid
+
+The mathematics behind computing the
+$\chi^2$ value and the $P$-value are not simple;
+that's why we get software to do that for us.
+However,
+the mathematics behind the calculations
+require some conditions to be true
+for those calculations to make sense.
+
+```{example}
+Suppose you visit the doctor,
+and the doctor asks you to get a blood test.
+The doctor also requires that you fast (refrain from eating) for 12 hours before your blood test
+to ensure the results are accurate.
+	
+Suppose you leave the doctor, 
+and then proceed to eat for the next 12 hours,
+and then go to your blood test.
+You can still have your blood extracted,
+and the blood can still be analysed in the pathology lab,
+and your doctor can still be emailed the results of the blood test.
+However,
+since you did not fast as requested (a condition of the test),
+the results may or may not be accurate.
+	
+Similarly,
+if the conditions of the hypothesis test are not met,
+the results may be suspect. 
+```
+
+
+For the $\chi^2$ test we have just seen.
+there are two statistical validity conditions.
+
+
+For the results from the $\chi^2$
+to be statistically valid,
+we require that: 
+
+
+* The sample is random (or somewhat representative); and
+* All the *expected* values are at least 5.
+
+The second condition (about expected values; see Sect.~\ref{SEC:ExpectedValues})
+is assessed automatically for us in SPSS.
+If the second condition is not met,
+it may be possible in tables with many rows or columns to (sensibly) combine
+some rows or columns so that the condition is met.
+
+The first condition is often not met exactly:
+samples are rarely true random samples.
+However the test should be approximately valid if the sample 
+is somewhat representative (Sect.~\ref{SEC:SAMPLING:Representative}).
+Even if the sample is not random or representative 
+(that is, the first validity condition is not met),
+it may just mean that the $P$-value is not quite accurate,
+but may still be close to the true $P$-value.
+
+
+```{r echo=FALSE}
+Counts <- c(9, 12, 5, 5, 6, 3)
+Treatment <- c( rep( c("Sterile water", "Saline"), 3))
+Outcome <- c(
+  rep("No change", 2),
+  rep("Improved", 2),
+  rep("Much improved", 2)
+)
+
+Whiplash <- data.frame( Counts = Counts,
+                        Treatment = Treatment,
+                        Outcome = Outcome)
+
+Whiplash$Outcome <- ordered(Whiplash$Outcome,
+                   levels=c("No change", "Improved", "Much improved"))
+```
+
+
+```{example}
+Consider this RQ
+[@data:Byrn:1993]:
+
+> Among those with whiplash,
+> does an injection of sterile water reduce associated pain after 8 months,
+>	compared to saline?
+
+A randomised controlled trial (not blinded)
+collected data from 40 patients
+(Table \@ref(tab:WhiplashData)).
+The hypotheses are:
+
+* Null hypothesis ($H_0$): 
+      *No relationship* exists between treatment 
+      and level of pain relief in the population: $\text{OR}=1$.
+* Alternative hypothesis ($H_1$): 
+      A relationship} exists between treatment 
+      and level of pain relief in the population: $\text{OR}\ne1$.
+
+
+```{r WhiplashData, echo=FALSE}
+kable(xtabs( Counts ~ Treatment + Outcome, data=Whiplash),
+      caption="Whiplash treatment data")
+```
+
+The SPSS output suggests the second statistical validity condition is not met;
+see the message under the SPSS chi-square output
+(Fig. \@ref(fig:WhiplashChisquare)):
+`2 cells (33.3%) have expected count less than 5`.
+
+```{r WhiplashChisquare, echo=FALSE, fig.cap="SPSS output for the whiplash data", fig.align="center"}
+knitr::include_graphics("SPSS/Whiplash/Whiplash-Chisquare.png")
+```
+
+
+We may be able to combine some categories;
+here we could combine 'improved' and 'much improved' together
+(Table \@ref(tab:WhiplashDataFixed)).
+
+```{r WhiplashDataFixed, echo=FALSE}
+Counts2 <- c(9, 12, 11, 8)
+Treatment2 <- c( rep( c("Sterile water", "Saline"), 2))
+Outcome2 <- c(
+  rep("No change", 2),
+  rep("Some improvement", 2)
+)
+
+Whiplash2 <- data.frame( Counts2 = Counts2,
+                        Treatment2 = Treatment2,
+                        Outcome2 = Outcome2)
+
+Whiplash2$Outcome2 <- ordered(Whiplash2$Outcome2,
+                   levels=c("No change", "Some improvement"))
+
+
+kable(xtabs( Counts2 ~ Treatment2 + Outcome2, data=Whiplash2),
+      caption="Whiplash treatment data (using only two outcomes)")
+
+```
+
+
+This seems to have fixed the problem;
+compare the message under this SPSS output
+(Fig. \@ref(fig:WhiplashChisquareCombine)):
+`0 cells (0.0%) have expected count less than 5`.
+
+
+```{r WhiplashChisquareCombine, echo=FALSE, fig.cap="SPSS output for the whiplash data", fig.align="center"}
+knitr::include_graphics("SPSS/Whiplash/Whiplash-Chisquare-Combine.png")
+```
+
+
+The $P$-value is not small ($P=0.902$),
+so we conclude that there is no evidence of a relationship (OR: percents differ? Odds differ??????????????)
+between the treatment and improvement:
+
+> The sample provides *no evidence*
+> ($\chi^2=0.902$; $P=0.342$)
+> that a relationship exists
+> between treatment and level of pain relief in the *population*
+> (OR: $1.833$).
+
+
+
+
+
+
+   
+```{exercise}
+Using the data from the previous example:
+
+* Using *sterile water*,
+what are the odds of an 'Improvement'  (in the sample)?
+
+* Using *saline*,
+what are the odds of an 'Improvement'  (in the sample)?
+
+* What is the *odds ratio* for comparing an improvement in sterile to an improvement in saline?
+
+```   
+
+
+
+
+
+
+
+
+
+
+## Summary of testing hypotheses
+
+We have just performed a *hypothesis test*.
+We will see more hypothesis tests later
+for making decisions in different contexts.
+Hypothesis tests
+help us determine if relationships in the sample
+are evidence of relationships in the population,
+because samples are imperfect representations of the population
+about which we are interested.
+
+The steps of a hypothesis test are:
+
+* **Understand** the data, by summarising with graphs, tables and/or numbers.
+* **Hypotheses**: State the null and alternative hypotheses.
+* **Conditions**: 
+   	Check the conditions for statistical validity.
+* **$P$-value**:
+Obtain the values of the test statistic
+(this is $\chi^2$ above, but there are other types of test statistics)
+and the $P$-value from the SPSS output.
+* **Report**:
+Report the results,
+including 
+    - a conclusion;
+   	- some evidence for this conclusion (including the $P$-value);
+   	- summarising the data used to make the decision (numerical summary information).
+
+
+
+
+
+
+
+
+## Practical significance and statistical significance
+
+Hypothesis tests assess 
+*statistical significance*,
+which answers the question:
+'Is there evidence in the sample that the populations are different?'.
+But population are very unlikely to be *exactly* the same.
+Even very small differences can be *statistically* different if the sample size is large enough. 
+Any samples can be found to be statistically different with a large enough sample size.
+
+In contrast,
+*practical significance* asks the question:
+'Are the differences observed between the samples big enough to have real *practical* importance?'
+'Practical significance' and `statistical significance' are two separate (and important) issues.
+Whether a results is of practical significance depends
+on what the data are being used for, and for what purpose.
+
+
+
+
+## Standardised residuals
+
+FIX! SEEMS UNNECESARY HERE...
+
+The sample provides evidence of a relationship in the population\dots
+but what is that relationship?
+That is,
+are males or females more likely to be smokers?
+For $2\times 2$ tables,
+this is usually clear,
+but in larger tables it may not be obvious.
+So,
+we can explore this using *standardized residuals*.
+
+Standardized residuals like $z$-scores:
+the number of standard deviations that the observed values
+are from what we expected them to be.
+Again,
+SPSS can generate these for us:
+
+
+*Large positive standardised residual* indicate FIX!!!!! more females are smokers than expected by chance
+      
+*Large negative standardised residual* indicate FIX!!!!!! fewer females are smokers than expected by chance
+
+In this way,
+we can explain what the relationship is between sex and smoking .
+
+
+
+
+
+
+
+

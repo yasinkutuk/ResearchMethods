@@ -1,0 +1,1083 @@
+# (PART) Asking research questions {-}
+
+
+
+# Research questions
+
+
+In this chapter, you will learn to:
+identify the steps in the research process
+
+* identify quantitative and qualitative research;
+* ask scientific research questions;
+* write testable hypotheses;
+* list, explain and give examples of the various types of research questions;
+* identify the variables in a research question (to know what data to collect);
+* identify observational or experimental studies;
+* communicate in the language of research and statistics.
+
+
+```{r echo=FALSE, fig.cap="", fig.align="center"}
+SixSteps(1)
+```
+
+   
+   
+## Introduction to research questions
+
+   
+We learn things by asking a *research question* (RQ), 
+then obtaining data (evidence) to help answer the RQ.
+
+Defining the RQ well is vital and impacts all other aspects of the research;
+however,
+defining the RQ precisely is often challenging.
+
+
+
+Research questions may be 
+*quantitative* (based around the collection of numbers and measurements)
+or 
+*qualitative* (based around the collection words, transcripts, interviews, etc.),
+or both.
+
+```{example, name="Types of RQs"}
+Examples of *qualitative* RQs:
+
+* Why do engineers use permeable pavement technology in urban areas?
+* What proportion of engineers would use permeable pavement technology in urban areas?
+  
+Examples of *qualitative* RQs:
+  
+* What council regulations are appropriate when using permeable pavement technology in commercial areas?
+* Does the water infiltration rate depend on the type of permeable pavement used in urban areas?
+
+```
+
+
+
+Studies often have an overall, broad research question
+(the main goal)
+with many sub-questions,
+both quantitative and qualitative.
+
+
+
+
+
+
+
+
+
+
+```{example, name="Research questions"}
+Consider a broad RQ such as
+
+> Are permeable pavements (PP) practical in urban areas?
+
+There are many components to answering this broad RQ.
+```
+
+
+
+
+
+## Operational definitions
+
+Usually the RQ contains terms that need to be carefully defined
+(*operational definitions*).
+For example,
+in a RQ studying stress in students before an exam,
+how is 'level of stress' being measured?
+
+
+Sometimes  the actual definition itself isn't important
+as long as it is very clear.
+In some cases, 
+commonly-accepted definitions are used
+(for example,
+for the purpose of criminal law,
+an adult in Australia is someone 
+aged 18 or over^[For example: https://www.alrc.gov.au/publications/18-childrens-involvement-criminal-justice-processes/age-thresholds-criminal-justice-pro].
+In many cases,
+there may not be one commonly accepted definition,
+but the definition being used should be clearly articulated.
+
+```{definition, name="Operational definition"}
+An *operational definition* is 
+a clear, concise, detailed definition of how some quantity will be collected, measured, assessed or described.
+```
+
+To clarify: 
+An *operational definition* is not a scientific definition.
+A *scientific definition* explains what something is,
+but an operational definition explains exactly
+`how some quantity will be collected, measured, assessed or described'.
+
+```{example, name="Operational definitions"}
+Consider a study where the temperature of water is being measured
+after 10 minutes,	using one of two methods to retain heat
+(such as paper and ceramic coffee cups).
+
+An *operational definition* would tell us exactly how the temperature 
+was being measured:
+the thermometer type,
+how it was positioned (touching the edge of the vessel? suspended in the water?),
+how long was it left in the liquid, 
+and so on.
+
+A *scientific* definition
+might describe the 
+scientific definition of temperature.
+```
+
+
+
+```{example, name="Definitions"} 
+@data:Meline2006:InclusionExclusion
+discusses five studies about stuttering.
+Each has a different definition:
+  
+* Study 1: As diagnosed by speech-language pathologist
+* Study 2: Within-word disfluences greater than 5 per 150 words
+* Study 3: Unnatural hesitation, interjections, restarted or incomplete phrases, \dots 
+* Study 4: More than 3 stuttered words per minute
+* Study 5: State guidelines for fluency disorders
+
+Some people could be classified as stutters by some
+definitions, but not by others.
+```
+
+
+
+
+
+
+```{exercise}
+Define a 'smoker'.
+```
+
+
+
+
+
+
+
+## Elements of RQs
+
+### The Population
+
+All RQs study some *population*.
+
+```{definition, name="Population"}
+The *population* is the group of *individuals* (or *cases*) from which the  
+total set of observations of interest could be made.
+```
+
+
+In this context,
+*individuals* or *cases* do not just mean people,
+though it is commonly used in that way.
+Similarly,
+*population* does not just mean people,
+though it is commonly used in that way.
+Here,
+a population is *any* group that is of interest;
+for example,
+the population may be:
+
+*	all Australian males between 18 and 35 years of age.
+* all bamboo flooring materials manufactured in Queensland.
+* all elderly males with glaucoma.
+* all *Pinguicula grandiflora* growing in Europe.
+
+We may not actually be able to access *all* of these elements of the population in practice,
+but the population represents all the 'individuals' to which we wish
+to generalise.
+
+
+```{block2, type="rmdimportant"}
+The **population** in a RQ is not just those we end up studying.
+It is the whole group to which our results would generalise.
+```
+
+GIVE A RQ about study a group that is a *sample*
+
+
+
+   
+### The Outcome
+
+
+All RQs study something about the population,
+which we call the *outcome*.
+The outcome is always referring to a population as a whole,
+so is some some *average* or *general*  quantity 
+assessed across the entire population.
+
+
+```{definition, name="Outcome"}
+The *outcome* in a RQ is the (potential) result, output, consequence or effect of interest in a study
+across the population.  
+```
+
+The outcome may be (for example):
+
+* *average* heart rates.
+* *average* amount of wear after 1000 hours of use.
+* *proportion* of people whose pupils dilate.
+* *average* weight after three weeks.
+
+```{block2, type="rmdimportant"}
+The **outcome** in a RQ is always about some quantity in general across the population.
+```
+
+
+
+### The Connection or Comparison
+
+Some RQs look at the outcome,
+and make a *comparison* or *connection*
+between the outcome and something else of interest.
+      
+```{definition, name="Comparison"}
+A *comparison* is when the outcome
+is compared across two or more separate groups.  
+```
+
+We may *compare* the outcome between two or more separate groups:
+
+* Average heart rates (O) could be compared across three groups: 
+  people who received three different doses of the drug
+* Average amount of wear in flooring (O) could be compared across two groups:
+  standard wooden flooring materials and bamboo flooring.
+
+
+
+```{definition, name="Connections"}
+The *connection* is  when the change in the outcome
+is recorded for various changes in another variable of interest.
+```
+
+We may explore a *connection* between the outcome and something else:
+
+* The connection between heart rate and exposure to various doses of caffeine.
+* The connection between crop yield and hours of sunlight.
+
+
+
+
+
+
+### The Interventions
+
+Some RQs use an *intervention*.
+
+      
+```{definition, name="Intervention"}
+An *intervention* is 
+the comparison or connection that the 
+researchers *impose* upon those in the study,
+*intending to change the outcome*.
+```
+
+
+The intervention may be: 
+
+* explicitly giving a new drug.
+* explicitly applying wear testing to two different flooring materials.
+* explicitly exposing people to different stimuli.
+* explicitly applying a different dose of fertiliser.
+
+
+
+```{example}
+Consider a study to compare the average blood pressure in females and males.
+Blood pressure is measured
+using a blood pressure machine (a sphygmomanometer).
+
+Even though the research team needs to interact with the participants and
+use a fancy machine to measure blood pressure,
+there is *no* intervention.
+Using the sphygmomanometer is just a way to measure the blood pressure,
+but it is not used *with the intent of changing the outcome* (the blood pressure).
+
+There is no intervention. 
+The comparison is between two sexes (females and males),
+and the sex of the respondent cannot be allocated by the researchers.
+```	
+
+
+
+
+
+
+## Types of RQs
+
+All RQs have a population and an outcome.
+But different types of RQ emerge depending on whether they also have an 
+comparison/connection or intervention.
+
+
+### Descriptive RQs (PO)
+
+
+*Descriptive RQs* are the most basic RQs.
+Descriptive RQs identify:
+
+
+* The *P*opulation to be studied.
+* The *O*utcome of interest about this population.
+
+Typically,
+descriptive RQs look like this:
+
+> Among {the population},
+> what is {the outcome}?
+
+Note: This is not a 'recipe',
+but a guideline.
+
+```{example, name="Descriptive RQ"}
+Consider this RQ:
+
+> Among Australian males between 18 and 35 years of age,
+> what is the average heart rate?
+
+For this RQ:
+  
+* P: Australians between 18 and 35 years of age.
+* O: *Average* heart rate in that population.
+
+This is a descriptive RQ,
+as the RQ does not imply studying
+and connection or comparisons of the heart rate (Outcome) with anything else.
+```
+
+
+
+
+
+
+
+
+```{exercise}
+Consider this RQ:
+
+> Among Australian adults, what proportion are coeliacs?
+
+For this RQ, identify:
+      
+* The *P*opulation: 
+* The *O*utcome of interest across the population:
+
+```   
+
+
+ 
+
+### Relational RQs (POC)
+
+Usually, 
+*relationships* between things are usually more interesting;
+relational RQs explore existing relationships.
+Relational RQs identify:
+
+* The *P*opulation.
+* The *O*utcome.
+* The *C*omparison or *C*onnection.
+		
+Relational RQs do not have an intervention.
+
+Typically,
+relational RQs based on a *comparison* look like this:
+
+> Among {the population},
+> is {the outcome}
+> the same for {the groups being compared}?
+
+
+```{example, name="Relational RQ"}
+
+Consider this RQ:
+
+> Among Australians between 18 and 35 years of age,
+> is the average heart rate the same
+> for females and males?
+
+For this RQ:
+
+* P: Australians between 18 and 35 years of age.
+* O: Average heart rate in that population.
+* C: Between females and males.
+
+This is a relational RQ based on a comparison.
+Notice that the heart rate (Outcome) is an average across the two
+population groups (females; males).
+NEED THAT LAST BIT???!
+```
+
+
+Typically,
+relational RQs based on a *connection* look like this:
+
+> Among {the population},
+> is {the outcome}
+> related to  {something else}?
+
+```{example, name="Relational RQ"}
+
+Consider this RQ:
+
+> Among Australians between 18 and 35 years of age,
+> is the heart rate related to age?
+
+For this RQ:
+
+* P: Australians between 18 and 35 years of age.
+* O: Heart rate in that population.
+* C: Age.
+
+This is a relational RQ based on a connection.
+```
+
+
+
+
+
+
+```{exercise}
+Consider this RQ [@data:Brown2000:WarningLights]:
+
+> In the Queensland Ambulance Service last year,
+> was the mean response time to emergency calls
+> the same for weekdays and weekends?
+
+For this RQ, identify:
+
+* The *P*opulation:
+* The *O*utcome of interest across the population:
+* The *C*omparison (if any):
+
+```
+  
+
+
+```{exercise}
+
+Consider this RQ [@data:Maron:eucthreshold]:
+
+> In Queensland state forests,
+> is there a *relationship between* the number of noisy miners (a type of bird)
+> and the number of eucalypts?
+
+For this RQ, identify:
+
+* The *P*opulation:
+* The *O*utcome of interest across the population:
+* The *C*onnection, if any:
+
+```
+
+
+
+ALL THESE HAVE BEEN HT-type RQs!!!!!!!!!!!!!!!!!!!!!
+
+```{exercise}
+Consider this RQ:
+
+> Among USC students,
+> is the average resting diastolic blood pressure
+> the same for students who drive to USC
+> and those who ride their bicycles?
+
+For this RQ, identify:
+* The *P*opulation:
+* The *O*utcome of interest across the population:
+* The *C*onnection, if any:
+
+```
+
+
+
+
+### Interventional RQs (POCI)
+
+*Interventional RQs* explore relationships 
+where the comparison/connection is controlled by the researchers,
+and identify:
+
+* The *P*opulation.
+* The *O*utcome.
+* The *C*omparison or *C*onnection.
+* The *I*ntervention.
+
+Typically,
+interventional RQs look like this:
+
+> Among {the population},
+> how does {the outcome}
+> compare between {the things being compared}
+> when {intervention} is imposed?
+
+
+	
+Together,
+these four components form the POCI acronym 
+useful for writing research questions.
+	
+
+```{example}
+Consider this RQ:
+  
+> Among Australians between 18 and 35 years of age,
+> is the average heart rate
+> for people allocated to receive a new pill
+> the same as for people 
+> allocated to receive a pretend pill?
+
+For this RQ:
+
+* P: Australians between 18 and 35 years of age;
+* O: Average heart rate;
+* C: Between those taking the new pill, and those taking the pretend pill;
+* I: Allocation of pill or pretend pill.
+
+This is an interventional RQ.
+```
+
+
+```{exercise}
+Consider this RQ:
+
+> In children with acute otitis media~\cite{data:McLinn:otitis}, 
+> is cefuroxime effective in reducing the average duration of symptoms
+> compared to amoxicillin?
+
+For this RQ:
+
+* What is the *P*opulation? 
+* What is the *O*utcome of interest across population?
+* What is the *C*onnection, if any?
+* What is the *I*ntervention, if any?
+
+```
+
+
+
+
+
+### The three levels of RQs
+
+Descriptive questions are the most basic
+and are usually used when a research topic is in its infancy;
+they set the platform for asking relational questions.	
+Relational questions explore relationships,
+and provide an understanding of how the outcome of interest is related
+to certain parts of the population;
+they may set the platform for asking interventional questions.
+Interventional questions test hypotheses, theories or models,
+and are the most interesting:
+they try to establish cause-and-effect relationships
+(Table \@ref(tab:ThreeTypesOfRQs)).
+
+
+
+Table: (\#tab:ThreeTypesOfRQs) The three types of RQs.
+
+RQ type |  P | O | C | I
+-------+-----+--+---+----
+Descriptive (D)      | Yes | Yes |     |
+Relational  (R)      | Yes | Yes | Yes |
+Interventional (I)   | Yes | Yes | Yes | Yes 
+
+
+
+Research often develops through these types of RQs
+as knowledge grows and develops.
+For example:
+
+* D: What proportion of Australian adults are coeliacs [@data:Cook2000:Coeliac]?
+* R: Among Australian adults, are females 
+more or less likely to be coeliacs than males [@data:Cook2000:Coeliac]?
+* I:  Among Australian adult coeliacs, 
+does providing a diet that includes oats reduce symptoms compared to a diet with no oats
+[@data:Janatuinen2002:Coeliac], [@data:Lundin2003:Coeliac]?
+
+
+
+
+
+
+```{exercise}
+What type of RQs are these?
+
+* Among Australian upper-limb amputees, 
+is the percentage wearing their prosthesis 'all the time' the same for transradial and transhumeral amputations [@data:Davidson2000:Amputees]?
+* In large urban settings,
+what is the average response time of paramedics to emergency calls [@data:Pons:ResponseTime]?
+* Is there a relationship between the  weekly hours of physical activity in children
+and the weekly average maximum temperature [@data:Edwards2015:PA]?
+
+```
+
+  
+  
+```{exercise}  
+Consider this article extract [@data:checkley:diarrhea]:
+
+> We conducted a 4-year (1995--1998) field study in a Peruvian
+> peri-urban community... to examine the relation between 
+> diarrhea and nutritional status in 230 children $<3$ years of age
+>
+> ---- @data:checkley:diarrhea, p. 210
+  
+For this study:
+
+* Identify PICO.
+* Can we infer the primary research question?
+* What type of question is used?
+* What operational definitions are needed?
+
+```   
+
+
+
+
+
+
+
+## Writing RQs: An example {#Writing-RQs}
+
+
+RQs emerge from observation,
+which leads to asking questions,
+and the need for evidence to answer that question.
+For example,
+you may notice that many people take echinacea when they get a cold,
+and it is reasonable to ask if there is evidence that it helps.
+This may lead to an initial RQ [@data:barrett:echinacea]:
+
+> Is it better to take echinacea when you have a cold?
+
+*This is a starting point only.*
+RQs often start as a basic idea,
+which can be refined by clarifying the POCI elements.
+For example,
+what *population* could we study?
+Many options exist;
+it could be,
+for example:
+
+* "You", as implied by the question... but this is not useful;
+* All Australians;
+* Australians adults with a specific "cold".
+
+What is the *outcome* we could measure
+to determine echinacea's effectiveness?
+Again,
+many options exist;
+it could be,
+for example:
+
+* Cold duration;
+* Severity cold symptoms;
+*  Number of days off work.
+
+We could decide to look at this outcome
+and *compare* this outcome across different groups.
+As the initial RQ stands,
+it cannot be answered because asking if taking echinacea is 'better' is ambiguous:
+better than what?
+For example,
+the comparison could be between:
+
+* Taking echinacea and taking no medication at all;
+* Taking echinacea and taking another medication;
+* Taking many different dose of echinacea.
+
+Furthermore,
+we could decide to intervene or not.
+If we did decide to intervene,
+what intervention could we apply?
+We could intervene by specifying,
+for example:
+
+* How frequently the dose was taken; and/or
+* What dose(s) of echinacea to take.
+
+After making some decisions,
+consider this revised RQ:
+
+> Among Australian teens with a common cold,
+> is the duration of cold symptoms
+> shorter for 
+> teens taking a daily dose of echinacea
+> compared to teens taking no medication?
+
+Of course,
+we may not include an intervention at all.
+
+
+
+
+Note that the P, O, C and I do not have to be comprehensive in their descriptions;
+some information could be provided as operational definitions
+(e.g.\ dose; etc.).
+
+This RQ is much better,
+but it is still not quite correct.
+It may imply that *every* teen who takes this dose
+will have a shorter duration of symptoms than
+*every* teen who does not.
+Recall that the outcome is a 
+*population-based* property,
+not a property of individuals.
+So consider this revised RQ [@data:barrett:echinacea]:
+
+> Among Australian teens with a common cold,
+> is the **average** duration of cold symptoms
+> shorter for 
+> teens taking a daily dose of echinacea
+> compared to teens taking no medication?
+
+
+```{exercise}
+For this RQ, what is:
+
+* Population?
+* Outcome?	   
+* Comparison/Connection?
+* Intervention?
+
+```
+
+
+
+
+
+
+
+
+## Two approaches to  RQs
+
+### Introduction
+
+RQs can commonly be approached in one of two ways:
+
+* For **making decisions** (*hypothesis testing*):
+These RQs are concerned with answering a question:
+is there a difference or a relationship, or not?
+* For **estimation** (*confidence intervals*):
+These RQs are concerned with assessing the size of a difference, 
+or strength of a relationship.
+
+
+
+
+### Making decisions: hypothesis testing questions
+
+Often,
+studies give an *aim*, *objective*,  or *hypothesis*,
+from which the RQ can be inferred.
+Hypotheses are *statements*, not questions,
+that suggest a possible answer to the RQ.
+Hypothesis test-type RQs are defined so that two answers (hypotheses) can be given to answer the RQ,
+and we need to choose which hypothesis is best supported by the data.
+
+
+```{example}
+Consider this RQ [@data:barrett:echinacea]:
+
+> Among Australian teens with a common cold,
+> is the average duration of cold symptoms
+> shorter for 
+> teens taking a daily dose of echinacea
+> compared to teens taking no medication?
+
+There are two possible answers: Either it does or it does not.
+In practice the answer is almost never that clear cut
+(remember the [smoking example](#smoking-study)?),
+and we look for how much  *evidence* there is for a particular theory.
+Evidence tends to *support* a theory
+or to *contradict* a theory.
+
+
+
+Ultimately,
+after we collect data,
+we need to decide which explanation is more consistent with the data we collect.
+```
+
+
+<!-- ```{r echo=FALSE} -->
+<!-- grViz(" -->
+
+<!-- digraph boxes_and_circles { -->
+
+<!-- # Node statements -->
+<!-- node [shape = oval, -->
+<!--       fillcolor = LightSeaGreen, -->
+<!--       style = filled, -->
+<!--       color = LightSeaGreen, -->
+<!--       fontname = Helvetica] -->
+<!-- RQ [label = '@@1'] -->
+
+<!-- node [shape = oval, -->
+<!--       fillcolor = PowderBlue, -->
+<!--       style = filled, -->
+<!--       color = PowderBlue, -->
+<!--       fontname = Helvetica] -->
+<!-- Yes [label = '@@2'] -->
+<!-- No [label = '@@3'] -->
+
+
+<!-- # Edge statements -->
+<!-- RQ -> Yes -->
+<!-- RQ -> No -->
+<!-- } -->
+
+<!-- [1]: paste0( 'RQ: Among Australian teens with\\n', 'a common cold, is the average\\n', 'duration of cold symptoms shorter\\n', 'for teens taking a daily dose of\\n', 'echinacea compared to teens\\n', 'taking no medication?') -->
+<!-- [2]: 'No it is not' -->
+<!-- [3]: 'Yes it is' -->
+<!--       ") -->
+
+<!-- ``` -->
+
+
+```{example}   
+Duration of cold symptoms (in days):
+
+Group               |   |   |   |   |   |   |  
+-------------------:+---+---+---+---+---+---+--
+With echinacea:     | 5 | 6 | 6 | 6 | 6 | 7 | 
+Without echinacea:  | 4 | 5 | 5 | 6 | 6 | 7 | 8
+
+Is there, *on average*, 
+a difference between the duration of symptoms in the population?  
+Why or why not?  Explain.
+```
+   
+
+
+
+
+
+
+### Estimation: confidence intervals
+
+Sometimes,
+we are not so much interested in whether or not a difference or a relationship exists,
+but more interested in the *size* of any difference,
+or the *strength* of any relationship.
+
+
+```{example}
+Consider this RQ [@data:barrett:echinacea]:
+
+> Among Australian teens with a common cold,
+> *how much shorter* are cold symptoms, 
+> on *average*,
+> for teens taking a daily dose of echinacea
+compared to teens taking no medication?
+
+Here,
+we just want an estimate of the likely difference in the
+duration of cold symptons.
+Of course, 
+there may be no difference (on average) at all.
+```
+
+
+
+
+
+
+
+## Variables: From populations to individuals
+  
+RQs explore relationships in the *population*.
+This means that the Outcome is about what happens in the population in general.
+
+For example,
+consider this RQ:
+
+> Is there a relationship between the  weekly hours of physical activity in children
+> and the weekly average maximum temperature [@data:Edwards2015:PA]?
+
+This is a relational RQ (based on a *connection*).
+We are not asking about what happens with any individual child;
+we couldn't find any relationship with information from just one child.
+
+Consider this: 
+suppose a child does 10 hours of physical acitivity in a week where the 
+average maximum temperature was 30$^\circ$.
+Is there a relationship between the 
+weekly hours of physical activity in children
+and the weekly average maximum temperature?
+We have no way of knowing.
+We want to explore the relationship between children in the whole population,
+so we need data from *many* children.
+
+Consider this RQ: 
+
+> In large urban settings,
+> what is the average response time of paramedics to emergency calls [@data:Pons:ResponseTime]?
+
+This is a relational RQ (based on a *comparison*).
+We are not asking about what happens with any individual emergency call;
+we want to explore the relationship in the whole population.
+This is why the RQ talks about the *average* response time,
+and why we need data from many emergency response calls.
+
+
+RQs concern averages or general statements about *populations*,
+but the data to answer the RQ come 
+from *individuals* in the population.
+As with the word `population',
+the word 'individual' here can refer to anything, 
+not just people.
+Each piece of information that we gather from 
+individuals is called a *variable*,
+because it's value *varies* from individual to individual.
+ 
+
+```{definition, name="Variable"}
+A *variable* is
+a single aspect or characteristic 
+associated with each of a group of individuals
+under consideration.
+```
+
+The value of the variable can *vary* from one individual to the next.
+Examples include
+the duration of cold symptoms; gender; age; place of birth; 
+amount of tyre wear; etc.
+
+The RQ 
+identifies the variables we *need* to answer the RQ,
+though other variables may be
+(and typically are) measured also (CROSS-REF).
+	 
+
+```{example}
+'Duration of cold symptoms' is a variable,
+as it can be obtained from each individual.
+It varies from individual to individual,
+   
+The '*average* duration of cold symptoms' is the outcome 
+across the individuals in the population.
+```
+
+
+While many variables can be measured on individuals,
+two variables are of greatest importance.
+The response variable is used to determine the outcome,
+and the explanatory variable is used to determine 
+the comparison or connection
+(Table \@ref(tab:RQsPopulationIndividuals)).
+Of all the variables that we can obtain from the individuals,
+these two are the most important,
+as they are crucial to answering the RQ.
+	
+
+Table: (\#tab:RQsPopulationIndividuals) The relationship between the population and the individuals
+
+**Population**  |               | **Individual**
+---------------:+:-------------:+:----------------
+Outcome         | $\rightarrow$ | Response variable
+Comparison      | $\rightarrow$ | Explanatory variable
+
+
+
+```{definition, name="Response variable"}
+A *response variable* is the variable used to measure, assess or describe the outcome
+	on each individual in the population.
+```
+
+Note that the outcome refers to what we see 'in general' or `on average' across the values of the response variable.
+
+
+```{definition, name="Explanatory variable"}
+An *explanatory variable* is a
+variable of interest from the individuals in the study 
+which (potentially) causes changes in, or is related to, the response variable.
+```
+
+The explanatory variable is a formal description of what *C* measures, assesses or describes
+in each member of the population.
+
+
+
+
+As examples,
+see Table \@ref(tab:RQsPopulationIndividualsExamples).
+
+Table: (\#tab:RQsPopulationIndividualsExamples) Examples of the Outcome and the corresponding Response variable
+
+Outcome in the Population   |  $\rightarrow$  |  Response variable in Individuals
+----------------------------:+:--------------:+:-----------------------------------
+*Average* blood pressure  | $\rightarrow$  | Blood pressure of *individuals*
+*Proportion* owning iPad  | $\rightarrow$  | Whether or not *individuals* own an iPad
+*Average* cold duration   | $\rightarrow$  |Cold duration for *individuals*		
+*Percentage* of concrete cylinders having fissures | $\rightarrow$ | Whether or not an *individual* cylinder has fissures
+
+   
+
+
+
+
+
+
+```{example}
+Consider this RQ [@data:barrett:echinacea]:
+
+> Among Australian teens with a common cold,
+> is the {average} duration of cold symptoms
+> shorter for 
+> teens taking a daily dose of echinacea
+> compared to teens taking no medication?
+
+For this RQ:   
+
+* *Outcome*: 
+The average duration of symptoms in the *population*.
+* *Response variable*: 
+Duration of symptoms for *each individual.
+* *Comparison*: 
+Between those in the *population* taking echinacea and no medication.
+* *Explanatory variable*:
+The medication taken by *each individual*.
+
+```   
+
+
+
+
+
+
+
+```{exercise}
+Consider this RQ:
+
+> For carrots grown in Buderim,
+> does applying Thrive as per directions at weekly intervals
+> produce heavier carrots on average 8 weeks after planting
+> compared to carrots grown with no application of Thrive?
+
+What data do we *need* from each element of the population
+to answer this question?
+```	
+
+
+
+
+
+## Review questions
+
+
+<iframe src="https://h5p.org/h5p/embed/186271" width="1090" height="403" frameborder="0" allowfullscreen="allowfullscreen"></iframe><script src="https://h5p.org/sites/all/modules/h5p/library/js/h5p-resizer.js" charset="UTF-8"></script>
+
+
+
+

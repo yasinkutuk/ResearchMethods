@@ -1,0 +1,76 @@
+body {
+	margin: 20px;
+}
+
+.rmdcaution, .rmdimportant, .rmdnote, .rmdtip, .rmdwarning, .rmdspss, .rmdthink {
+  padding: 1em 1em 1em 4em;
+  margin-bottom: 10px;
+  background: #f5f5f5 5px center/3em no-repeat;
+}
+.rmdcaution {
+  background-image: url("../icons/iconmonstr-warning-8-240.png");
+}
+.rmdimportant {
+  background-image: url("../icons/iconmonstr-warning-8-240.png");
+}
+.rmdnote {
+  background-image: url("../icons/iconmonstr-light-bulb-2-240.png");
+}
+.rmdtip {
+  background-image: url("../icons/iconmonstr-info-6-240.png");
+}
+.rmdwarning {
+  background-image: url("../icons/iconmonstr-danger-13-240.png");
+}
+.rmdspss {
+  background-image: url("../icons/iconmonstr-laptop-4-240.png");
+}
+.rmdthink {
+  background-image: url("../icons/iconmonstr-school-17-240.png");
+}
+p.caption {
+  color: #777;
+  margin-top: 10px;
+}
+p code {
+  white-space: inherit;
+}
+pre {
+  word-break: normal;
+  word-wrap: normal;
+}
+pre code {
+  white-space: inherit;
+}
+p.flushright {
+  text-align: right;
+}
+blockquote > p:last-child {
+  text-align: right;
+}
+blockquote > p:first-child {
+  text-align: inherit;
+}
+.header-section-number {
+  padding-right: .2em;
+  font-weight: 500;
+}
+.level1 .header-section-number {
+  display: inline-block;
+  border-bottom: 3px solid;
+}
+.level1 h1 {
+  border-bottom: 1px solid;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-weight: normal;
+}
+h1.title {
+  font-weight: 700;
+}
+.smallcaps {
+  font-variant: small-caps;
+}
+.book .book-body .page-wrapper .page-inner section.normal strong {
+  font-weight: 600;
+}

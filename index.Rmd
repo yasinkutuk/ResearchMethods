@@ -1,0 +1,147 @@
+---
+title: "Science Research Methods"
+author: "Peter K. Dunn"
+description: "An introduction to quantitative research"
+date: "`r  format(Sys.time(), '%B %d, %Y')`"
+bibliography: ["ReferenceList.bib"]
+link-citations: yes  
+#documentclass: memoir
+documentclass: kranz
+always_allow_html: yes
+links-as-notes: true
+colorlinks: yes
+lot: no
+lof: no
+fontsize: 12pt
+---
+
+# Preface {-}
+
+<!-- output: -->
+<!--   bookdown::gitbook: -->
+<!--     split_by: chapter -->
+<!--     css: [css/style.css, css/toc.css] -->
+<!--     config: -->
+<!--       toc: -->
+<!--         collapse: subsection -->
+<!--       before: | -->
+<!--         <li><a href="./">SCI110 Course Book</a></li> -->
+<!--         <li><a href="./">Dr Peter K. Dunn</a></li> -->
+<!--       after: | -->
+<!--         <li><a href="https://bookdown.org" target="_blank">Published with bookdown</a></li> -->
+<!--       toolbar: -->
+<!--         position: static -->
+<!--       download: "pdf" -->
+<!--   bookdown::pdf_book: -->
+<!--     includes: -->
+<!--       in_header: latex/preamble.tex -->
+<!--       before_body: latex/before_body.tex -->
+<!--       after_body: latex/after_body,tex -->
+<!--     keep_tex: yes -->
+<!-- #    papersize: a4 -->
+<!--     fontfamily: times -->
+<!--     #pandoc_args: --top-level-division=chapter -->
+<!--     toc_depth: 3 -->
+<!--     toc_unnumbered: no -->
+<!--     toc_appendix: yes -->
+<!--   bookdown::html_book: -->
+<!--     css: [css/style.css, css/toc.css] -->
+<!--     toc_float: true -->
+<!--   link-citations: yes -->
+<!-- bookdown::html_chapters: -->
+<!--   css: [css/style.css, css/toc.css] -->
+
+
+
+
+
+
+<!--  cover-image: "images/file.png" -->
+<!--  SEE: https://github.com/rstudio/bookdown/blob/master/inst/examples/_output.yml -->
+
+
+
+
+
+```{r include=FALSE, echo=FALSE}
+library("kableExtra")  # For tables
+library("animation")   # For animations
+library("gganimate") # NEEDED?
+library("oz")          # For Australia maps in graphcs chapter
+library("ggplot2")     # Used for plots of Australia
+library("NHANES")      # or NHANES data
+library("knitr")
+library("diagram")     # TRYING this for diagrams
+# set global chunk options
+options(formatR.arrow=TRUE,width=90)
+
+plot.colour <- "wheat"
+
+source("setup.R")
+
+# knitr:::is_latex_output()
+# knitr:::is_html_output()
+# 
+# This example from: https://stackoverflow.com/questions/41745170/how-to-do-different-things-in-r-in-bookdown-if-output-is-html-or-latex
+# 
+# if( knitr:::is_latex_output() ) {
+#     xlatex ...
+# } else {
+#     DT...
+# }
+# 
+
+# render_book("index.html")
+# render_book("index.html", "bookdown::pdf_book")
+
+```
+
+
+
+
+
+## About this book {-}
+
+## How to use this book {-}
+
+* **Navigation**: Navigate between pages using the arrows. 
+
+* The **table of contents** can be toggled on or off using the Contents menu item:
+    
+```{r echo=FALSE}
+knitr::include_graphics("./OtherImages/Menu-TOC.png")
+```
+
+* You can **search** for words using the Search button on the menu:
+
+```{r echo=FALSE}
+knitr::include_graphics("./OtherImages/Menu-Font.png")
+```
+
+* The **font** can be changed (e.g. enlarged) using the Font button on the menu:
+
+```{r echo=FALSE}
+knitr::include_graphics("./OtherImages/Menu-Font.png")
+```
+
+
+
+
+## Software {-}
+
+Most of this book can be read without relying on any specific statistical software.
+However,
+some parts mention and refer to [SPSS](https://www.ibm.com/products/spss-statistics).
+
+
+
+## How this book was made {-}
+
+This book was made using
+[**R**](https://www.r-project.org/),
+and the [**bookdown**](https://bookdown.org/yihui/bookdown/) package,
+which is based in Markdown syntax.
+These are all free.
+Icons are from [**iconmonstr**](https://iconmonstr.com/) and are also freely available.
+The quizzes are embedded using Google Forms and [H5P](https://h5p.org).
+

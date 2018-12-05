@@ -1,0 +1,1328 @@
+```{r echo=FALSE}
+library(NHANES)
+#options(formatR.arrow=TRUE,width=90)
+#source("normalcurves.R")
+```
+
+
+
+
+
+
+
+
+
+# Tools for describing sampling variation
+
+## Introduction
+
+NEEDS TO FIXED!
+And knitr stuff included.
+
+
+
+In the last chapter,
+we saw that what we observe in a sample can differ from sample to sample.
+This is called
+*sampling variation*.
+Sampling variation occurs because each sample is likely to contain different individuals.
+In the previous chapter,
+we looked at how a sample summary statistics (such as an odds ratio, or a difference is percentages)
+also varies from sample to sample.
+In this chapter,
+we learn about some tools that are used to describe this variation from sample to sample,
+which we will use in later chapters.
+
+
+
+
+
+
+
+
+
+## Probability
+
+A *probability* 
+measures the chance that something (called an 'event') will happen.
+A probability is a number between 0 and 1,
+where a probability of zero means the event is 'impossible',
+and, at the other extreme,
+a probability of one means that the event is 'certain'.
+   
+```{example}
+Consider these cases:
+
+* The probability that you will receive a negative mark for Quiz 2 is zero.
+  It is impossible to get a negative score.
+* The probability that you will receive a grade on completion of this course is one.
+  Everyone will obtain a grade.
+* The probability that you receive at least a pass\dots 
+  depends (partially) on how much work you do,
+  and is between 0 and 1.
+
+```
+
+Most events have a probability somewhere between these extremes of course.
+Many different ways exist to determine probabilities.
+We will briefly look at the
+*classical approach*,
+the *relative frequency approach*,
+and the *subjective approach*.
+
+
+```{example}
+Consider these situations;
+what is your estimate?
+
+* What is the probability of `rolling a **6** on a die'?
+* What is the probability that `a new baby is a boy'?
+* What is the probability that `Australia wins the next Ashes series'?
+
+```
+
+
+
+
+   
+   
+   
+   
+
+
+### The classical approach
+
+What is the probability of rolling a **6** on a die?
+Since the six possible outcomes are
+*equally likely*,
+then:
+\[
+        \text{Probability of rolling a **6**}
+        = \frac{\text{one of the outcomes is a **6**}}{\text{six equally likely outcomes}}
+\]
+\[
+        \text{Probability of rolling a **6**}
+        = \frac{1}{6} 
+        = 0.1667 \text{ or about 16.7\%}.
+\]
+This is the *classical* approach to probability
+     
+
+```{definition, name="Classical approach to probability"}
+*Classical approach to probability*:
+The probability of an event is the ratio of the number of cases in an event, 
+to the number of cases not in the event,
+*when all outcomes are equally likely*.
+```
+
+By this definition:      
+\[   
+	\text{Probability of an event}
+    = 
+    \frac{\text{Number of equally-likely outcomes of interest}}{\text{Total number of equally-likely outcomes}}
+\]
+
+
+SOME OF THIS MATERIAL LOOKS OLD TOO . CHECK IT.
+
+```{example}
+What is the *probability* of rolling a **6** on a die?
+What are the *odds* of rolling a **6** on a die?
+
+Since the six possible outcomes are
+*equally likely*:
+\[   
+\text{Prob.\ of rolling a **6**}
+     	= \frac{\text{one outcome is a **6**}}{\text{six equally-likely outcomes}}.
+\]
+So
+$\displaystyle\text{probability of rolling a **6**} = \frac{1}{6} = 0.1667$,
+or about 16.7\%.
+  
+Likewise,
+since the six possible outcomes are
+*equally likely*:
+\[   
+        \text{Odds of rolling a **6**}
+        = \frac{\text{one of the outcomes is a **6**}}{\text{five outcomes are not a **6**}}.
+\]
+So
+$\displaystyle\text{odds of rolling a **6**} = \frac{1}{5} = 0.2$.
+
+```   
+   
+   
+   
+   
+```{example}
+Consider rolling a standard six-sided die.
+
+There are six equally likely outcomes 
+(that is: **1**, **2**, **3**, **4**, **5** and **6**),
+and each has probability $1/6$ (or 16.7\%) of occurring.
+So the probability of rolling a **1** or a **2** is $2/6$ (or 33.3\%).
+```   
+   
+
+   
+
+```{example}
+Consider rolling a standard six-sided die again die.
+
+* The *proportion* of even numbers is $3 \div 6 = 0.5$.
+* The *percentage* of rolls that are even numbers is $3 \div 6 \times 100 = 50\%$.
+* The *odds* of rolling an even number is $3\div 3 = 1$.
+
+```
+   
+   
+   
+
+   
+### The relative frequency approach
+
+What is the probability that a new baby is a boy?
+We could use the classical approach: 
+$\text{Probability of a boy} =1\div2 =  0.5$\dots
+which is fine if girls and boys *equally likely* to be born?
+But are they?
+      
+In Australia in 2015:
+305\,377 live births
+resulted in 157\,088 male births,
+and 148\,289 non-male births
+(according to the 
+[ABS](http:www.abs.gov.au/ausstats/abs@.nsf/0/B8865D71D84F5210CA2579330016754C?opendocument)).
+
+Using these data,
+the probability of a boy is
+\[
+	\frac{157\,088}{305\,377} = 0.514,
+\]
+or about 51.4\%.
+This is the *relative frequency* approach to probability.
+
+```{exercise}
+Based on this information,
+what are the *odds* of having a baby boy?
+$0.514\div (1-0.514) = 1.06$.
+     
+According to the 
+[ABS](http:www.abs.gov.au/ausstats/abs@.nsf/0/B8865D71D84F5210CA2579330016754C?opendocument):
+
+> The sex ratio for all births registered in Australia
+> generally fluctuates around *105.5* male births per 100 female births.
+
+```
+         
+      
+```{exercise}
+The following data concern students enrolling in a library introductory session in O-Week.
+(REAL DATA?!?!)
+```
+
+```{r echo=FALSE}
+Counts <- c(68, 91, 56, 40)
+Gender <- c( rep("Female", 2),
+             rep("Male",   2))
+Age <- rep( c("30 and under","Under 30"), 2)
+
+Library <- xtabs( Counts ~ Gender + Age)
+
+Library2 <- cbind( Library, "Total" = rowSums(Library))
+Library2 <- rbind( Library2, "Total" = colSums(Library2))
+
+kable(Library2,
+      align = rep( "r", 4),
+      caption = "Attendance at a library O-Week session")
+```
+
+Find the probability that a randomly chosen student is:
+
+* A female student: $159/255 = 62.4\%$
+* A male student aged Under 30: $40/255=15.7\%$
+* Under 30,
+  *if we know the student is male*: $40/96 = 41.7\%$
+
+
+
+
+
+### The subjective approach
+
+Many probabilities cannot be computed using the classical or 
+relative frequency approach,
+for example:
+
+>      What is the probability Australia will win the next Ashes series?
+
+We can only give a *subjective probability*.
+This does not mean that the probability is just 'made up'.
+Sometimes a probability may be based on mathematical models that
+incorporate numerous inputs,
+such as weather forecasts.
+ 
+
+
+```{exercise}
+Which approach to probability can be used in these situations?
+
+* The probability that the Reserve Bank will drop interest rates next month.
+* The probability that a person writes left-handed.
+* The probability that a King will be randomly chosen from a pack of cards?
+* The probability that Buderim receives more than 100mm of rain in May.
+
+```
+
+
+
+
+
+
+
+## Distributions and models
+
+
+
+WORKING IN THEORY HERE... AS THE FIRST STEP IN DECISION MAKING IS TO **ASSUME** so use that here
+
+The heights of *all* Australian adult males
+is unknown:
+no-one has ever, or could ever realistically, 
+measure the height of all Australian adult males.
+The Australian Bureau of Statistics (ABS),
+however,
+does take samples of Australians to compute estimates of the 
+heights
+(taken from the [ABS](http://www.abs.gov.au/ausstats/abs@.nsf/Lookup/4338.0main+features212011-13))
+and other measurements.
+
+However,
+we can postulate a *model* for the heights of Australian adult males:
+a *theoretical* idea that might be a useful description of the heights of Australian adult males.
+For example,
+we may decide to *model* the heights of Australian adult males as:
+
+* having a symmetric distribution ( with most men having heights near the mean),
+* with a *mean height* of 175 cm, and 
+* a *standard deviation* of 7 cm. 
+
+Then,
+the height of Australian adult males may look something like
+Fig. \@ref(fig:HeightsModel).
+That is,
+most Australian adult males are between about 168 and 182cm,
+and very few are taller than 19cm or shoter than 154cm.
+
+```{r HeightsModel, echo=FALSE, fig.cap="A model for the heights of Australian adult maales", fig.align="center"}
+HT.mn <- 175
+HT.sd <- 7
+
+plot.norm(HT.mn, HT.sd, xlab.name="Height (in cm)", zlim.lo = -4, zlim.hi = 4, shade.lo.x=-5, shade.hi.x=5 )
+#  new=TRUE,
+#	shade.lo.x=NA, shade.hi.x=NA,
+#	shade.lo.z=NA, shade.hi.z=NA,
+#	show.lo=NA, show.hi=NA,
+#	round.dec=1,
+#	shade.col=plot.colour,
+#	main="A model for the height of\nAustralian adult males",
+#	width=6, # WAS 3.5
+#	height=width,
+#	type="z",
+#	las=1,
+#	xlim.hi = NA, xlim.lo = NA,
+#	zlim.hi = 3.5, zlim.lo=-zlim.hi)
+```
+
+This model represents an idealised picture of the histogram of the heights
+of all Australian adult males.
+Any *sample*, though, will be shaped a bit like this,
+but of course there will be sampling variation.
+Any one sample will look a bit different than this model,
+but this model captures the general feel of the histogram from many of these samples.
+
+
+```{r HeightsModelMovie, echo=FALSE, fig.cap="The model for heights", fig.align="center"}
+ htmltools::tags$iframe(title = "Boxplot of Age", src = "./Animations/HeightsModelMovie.html", height=640, width=520) 
+```
+
+
+The model of heights
+has approximately a bell-shape:
+that is,
+most values are near the average height,
+but there are a small number of men that are very tall or very short.
+
+A bell-shaped distribution is more formally called a
+*normal distribution*
+or a 
+*normal model*.
+A normal distribution is a way of *modelling* the data.
+			
+A *model* is a theoretical or ideal concept:
+In the same way that a model skeleton isn't 100\% accurate (plastic bones? wire joins?)
+and isn't really a skeleton,
+and certainly not exactly like *your* skeleton,
+it gives a great approximation to reality.
+None of us probably have a skeleton *exactly* like the model,
+but the model is still useful and helpful.
+Likewise,
+no variable has *exactly* a normal distribution,
+but the model is still useful and helpful.
+
+
+
+
+## Normal distributions
+
+
+### Introduction
+
+
+On the basis of the data above,
+a suitable model for the heights of Australian adult males may be described as
+(Fig. \@ref(fig:HeightsModel)):
+
+* Having an approximately normal shape,
+* With a mean height of 175 cm; and 
+* A standard deviation of 7 cm. 
+
+The model proposed above for the heights of Australian adult males
+is a *theoretical idea*:
+it is not meant to represent any particular sample of data.
+The model can be thought of as an 'average' of the histogram of the data
+from many samples.
+Indeed,
+if the model turns out not to be very good at describing what we see in these many samples,
+we can adjust the *parameters* of the model
+(that is,
+the values of $\mu$ and $\sigma$)
+so that we get a model that *does* describe the sample data well.
+In fact, 
+sample evidence suggests that the average heights of Australians have been increasing
+[@loesch2000secular]
+and so the mean may need to be changed at various times to 
+remain a good models for heights of Australian adult males.
+
+
+
+
+## Standardising ($z$-scores)
+
+Recall that the *68--95--99.7 rule*
+(Sect. \@ref(def:EmpiricalRule))
+states that,
+for *any* normal distribution 
+(Fig. \@ref(fig:HusbandHistNormalShadeEmpirical)):
+
+* 68\% of values lie within 1 standard deviation of the mean;
+* 95\% of values lie within 2 standard deviations  of the mean; and
+* 99.7\% of values lie within 3 standard deviations  of the mean.
+
+Note that these percentages only depend on how many 
+standard deviations ($\sigma$)
+the value ($x$) is from the mean ($\mu$).
+We can use this information to learn about the heights of Australian adult males.
+
+
+
+   
+```{example HeightsExer1}
+Suppose heights of Australian adult males
+have a mean of $\mu=175$cm,
+and a standard deviation of $\sigma=7$cm,
+and (approximately) follow a normal distribution.
+   
+Using this model, what proportion are *taller* 
+than 182cm?
+Drawing the situation is helpful
+(Fig. \@ref(fig:HtsExer1)).
+
+Notice that $175 + 7 = 182$cm is one standard deviation above the mean.
+We know that $68$\% of values are within one standard deviation of the mean,
+so that $32$\% are outside that range (smaller or larger);
+see the figure below.
+This means that 16\% are taller than one  standard deviation above the mean,
+so the answer is about 16\%.
+```
+
+
+```{r HtsExer1, echo=FALSE, fig.cap="What proportion of Australian adult males are taller than 182cm?", fig.align="center"}
+plot.norm(HT.mn, HT.sd, xlab.name="Height (in cm)", zlim.lo = -4, zlim.hi = 4, shade.lo.x=182, shade.hi.x=Inf )
+#  new=TRUE,
+#	shade.lo.x=NA, shade.hi.x=NA,
+#	shade.lo.z=NA, shade.hi.z=NA,
+#	show.lo=NA, show.hi=NA,
+#	round.dec=1,
+#	shade.col=plot.colour,
+#	main="A model for the height of\nAustralian adult males",
+#	width=6, # WAS 3.5
+#	height=width,
+#	type="z",
+#	las=1,
+#	xlim.hi = NA, xlim.lo = NA,
+#	zlim.hi = 3.5, zlim.lo=-zlim.hi)
+```
+
+
+
+Note again that the percentages only depend on 
+how many standard deviations ($\sigma$)
+the value ($x$) is from the mean ($\mu$),
+and not the actual values of $\mu$ and $\sigma$.
+   
+```{example HeightsExer2}
+Suppose heights of Australian adult males
+have a mean of $\mu=175$cm,
+and a standard deviation of $\sigma=7$cm,
+and (approximately) follow a normal distribution.
+   
+Using this model, what proportion are *shorter*
+than 161cm?
+Drawing the situation is helpful
+(Fig. \@ref(fig:HtsExer2)).
+
+Notice that $175 - (2\times 7) = 161$;
+that is: $161$cm is two standard deviation below the mean.
+Since  $95$\% of values are within two standard deviation of the mean,
+then $5$\% are outside that range (smaller and larger; see below),
+so that 2.5\% are shorter than $161$cm.
+```
+
+```{r HtsExer2, echo=FALSE, fig.cap="What proportion of Australian adult males are shorter than 161cm?", fig.align="center"}
+plot.norm(HT.mn, HT.sd, xlab.name="Height (in cm)", zlim.lo = -4, zlim.hi = 4, shade.lo.x=-Inf, shade.hi.x=161 )
+#  new=TRUE,
+#	shade.lo.x=NA, shade.hi.x=NA,
+#	shade.lo.z=NA, shade.hi.z=NA,
+#	show.lo=NA, show.hi=NA,
+#	round.dec=1,
+#	shade.col=plot.colour,
+#	main="A model for the height of\nAustralian adult males",
+#	width=6, # WAS 3.5
+#	height=width,
+#	type="z",
+#	las=1,
+#	xlim.hi = NA, xlim.lo = NA,
+#	zlim.hi = 3.5, zlim.lo=-zlim.hi)
+```
+
+Again,
+the percentages only depend on 
+how many standard deviations ($\sigma$)
+the value ($x$) is from the mean ($\mu$).
+
+   
+```{example}
+Suppose heights of Australian adult males
+have a mean of $\mu=175$cm,
+and a standard deviation of $\sigma=7$cm,
+and (approximately) follow a normal distribution.
+   
+
+Using this model, what proportion are 
+*shorter* than 160cm?
+Again, 
+drawing the situation is helpful
+(Fig. \@ref(fig:HtsExer3)).
+```
+
+
+```{r HtsExer3, echo=FALSE, fig.cap="What proportion of Australian adult males are shorter than 160cm?", fig.align="center"}
+plot.norm(HT.mn, HT.sd, xlab.name="Height (in cm)", zlim.lo = -4, zlim.hi = 4, shade.lo.x=-Inf, shade.hi.x=160 )
+#  new=TRUE,
+#	shade.lo.x=NA, shade.hi.x=NA,
+#	shade.lo.z=NA, shade.hi.z=NA,
+#	show.lo=NA, show.hi=NA,
+#	round.dec=1,
+#	shade.col=plot.colour,
+#	main="A model for the height of\nAustralian adult males",
+#	width=6, # WAS 3.5
+#	height=width,
+#	type="z",
+#	las=1,
+#	xlim.hi = NA, xlim.lo = NA,
+#	zlim.hi = 3.5, zlim.lo=-zlim.hi)
+```
+
+
+
+In this example,
+we can proceed as before,
+and ask 'How many standard deviation below the mean is 160cm?'
+Since $160$cm is $15$cm below the mean,
+then $15$cm is $\displaystyle\frac{15}{7}=2.14$ standard deviation below the mean.
+But what is the percentage corresponding to that?
+This case is not covered by the 68--95--99.7 rule (Sect. \@ref(def:EmpiricalRule)).
+
+```{exercise}
+*Estimate* the proportion of adult Australian males that are 
+*shorter* than 160cm.
+```
+
+
+The percentages only depend on how many 
+standard deviations ($\sigma$)
+the value ($x$) is from the mean ($\mu$).
+The number of standard deviations that an observation is from the mean
+is called a *$z$-score*.
+A $z$-score is computed using
+\[
+   z = \frac{ x - \mu}{\sigma}.
+\]
+Converting values to $z$-scores is called *standardising*.
+
+```{example}
+In Example \@ref(exm:HeightsExer1),
+the $z$-score for a height of 182cm is 
+\[
+   z = \frac{x-\mu}{\sigma} = \frac{182 - 175}{7} = 1.
+\]
+
+In Example \@ref(exm:HeightsExer2),
+the $z$-score for a height of 161cm is
+\[
+   z = \frac{x-\mu}{\sigma} = \frac{161 - 175}{7} = -2.
+\]
+```
+
+The $z$-score is the *number of standard deviations 
+the observation is away from the mean*.
+This is called the $z$-score,
+*standardised} value*
+or 
+*standard score*.
+In symbols:
+\[
+	z = \frac{x-\mu}{\sigma}.
+\]
+Note that:
+
+* $z$-scores are negative for observations *below* the mean,
+	and are positive for observations *above* the mean.
+* Converting observations to $z$-scores is called *standardising*.
+* $z$-scores are numbers without units (e.g.\ is not in kg, or cm).
+* $z$-scores can be used to compare observations 	
+	with different distributions 
+	and/or with different units.
+* Since the normal distribution curve represents all possible outcomes
+	(for example,
+	every Australian adult make has a height,
+	so all these heights are represented by the normal model),
+	the total area represented by the curve is 100\%, or 1.
+
+
+```{example}
+Consider the model for the heights of Australian adult males: 
+a normal distribution,
+mean $\mu=175$, standard deviation $\sigma=7$.
+
+* The mean is zero standard deviations from the mean: $z=0$.
+* 168cm and 182cm are one standard deviation from the mean:
+      	$z=-1$ and $z=1$ respectively.
+* 161cm and 189cm are two standard deviations from the mean:
+      	$z=-2$ and $z=2$ respectively.
+* 154cm and 196cm are three standard deviations from mean:
+      	$z=-3$ and $z=3$ respectively.
+
+```
+
+```{r HtsEmpirical, echo=FALSE, fig.cap="The empirical rule and heights of Australian adult males", fig.align="center"}
+plot.normZ(HT.mn, HT.sd, xlab.name="Heights (in cm)", zlim.lo = -4, zlim.hi = 4, shade.lo.z=-5, shade.hi.z=-5 )
+```
+
+
+
+
+
+But what if we asked:
+What percentage are within 0.71 standard deviations away from of the mean?
+Or 1.76 standard deviations?
+This cannot be answered using the 68--95--99.7 rule (Sect. \@ref(def:EmpiricalRule)),
+though we can use the 68--95--99.7 rule to make some estimates.
+
+```{example}
+Suppose heights of Australian adult males
+have a mean of $\mu=175$cm,
+and a standard deviation of $\sigma=7$cm,
+and (approximately) follow a normal distribution.
+   
+Using this model, what proportion are *shorter* 
+than 160cm?
+(Refer to Fig. \@ref(fig:HtsExer3).)
+
+As we noted earlier (Example \@ref(exm:HeightsExer1)),
+about 2.5\% of observation are shorter than 161cm.
+If we are now looking at even shorter males,
+and we go even more extreme than 161cm,
+then the probability will be smaller than 2.5\%.
+So while we don't know exactly what the probability will be,
+it will be smaller than 2.5\%.
+```
+
+
+Estimates in this way are quite crude, 
+but often serviceable.
+However,
+we can get better estimates by using tables
+related to the normal distribution
+that have been compiled for us for just this purpose.
+These tables (Tables B.2 and B.3) are available in your Workshop book.
+AND IN THIS BOOK?!
+The percentages of a normal curve are also called 
+`areas' under the normal curve.
+ 
+
+
+```{example}
+Using Tables B.2 and B.3, 
+what percentage of observations are less than 2 standard deviations *below* the mean
+in a normal distribution?
+      
+The Tables work with two decimal places,
+so we consider the $z$-score as $z=-2.00$.
+On the tables,
+we look for $-2.0$ in the left margin of the table,
+and for the second decimal place (in this case, 0)
+in the top margin of he table:
+where these intersect is the area (or probability) that is *less than* this $z$-score.
+So the probability of finding a $z$-score less than $-2$ is 0.0228, or about $2.28$\%.
+		
+Using the 68--95--99.7 rule earlier  (Sect. \@ref(def:EmpiricalRule)),
+the answer we obtained was $2.5$\%.
+the 68--95--99.7 rule is an approximation only.
+
+IMAGE OF TABLE
+
+```
+
+
+
+
+
+
+
+
+
+
+```{example}
+Suppose heights of Australian adult males
+have a mean of $\mu=175$cm,
+and a standard deviation of $\sigma=7$cm,
+and (approximately) follow a normal distribution.
+   
+Using this model, what proportion are *shorter* 
+than 160cm?
+```
+
+Our approach is as follows:      
+
+* **Draw a diagram**: Mark on 160cm; see the left panel below.
+* **Shade** the required region: ''less than 160cm tall'' (the region of interest); see the right panel below.
+* **Compute** the $z$-score.
+* **Use** Tables B.2 and B.3.
+* **Work out** the answer.
+
+
+
+
+
+To work out how many standard deviations
+160cm is from the mean, use:
+\[
+         z  = \frac{x-\mu}{\sigma} 
+            = \frac{160-175}{7}
+            = \frac{-15}{7} = -2.14.
+\]
+So we use $z=-2.14$.
+That is,
+160\,cm is 2.14 standard deviations *below* the mean. 
+     
+To use Table B.2,
+find the row for $z=-2.1$
+and the column $4$ (the second decimal place of $z$):
+the table entry there is $0.0162$.
+The diagram at the top of the tables reminds us that this is 
+the probability (area) that the value of $z$ is *less* $z=-2.14$
+(Fig. \@ref(fig:HtsExer3z)).
+
+
+
+```{r HtsExer3z, echo=FALSE, fig.cap="What proportion of Australian adult males are shorter than 160cm?", fig.align="center"}
+plot.normZ(HT.mn, HT.sd, xlab.name="Height (in cm)", zlim.lo = -4, zlim.hi = 4, shade.lo.z=-5, shade.hi.z=-5 )
+#  new=TRUE,
+#	shade.lo.x=NA, shade.hi.x=NA,
+#	shade.lo.z=NA, shade.hi.z=NA,
+#	show.lo=NA, show.hi=NA,
+#	round.dec=1,
+#	shade.col=plot.colour,
+#	main="A model for the height of\nAustralian adult males",
+#	width=6, # WAS 3.5
+#	height=width,
+#	type="z",
+#	las=1,
+#	xlim.hi = NA, xlim.lo = NA,
+#	zlim.hi = 3.5, zlim.lo=-zlim.hi)
+```
+
+
+The probability of finding an Australian man less than 160cm tall 
+is about 1.6\%.
+
+
+We can also ask more complicated questions too,
+as we show in the next section.
+
+
+
+
+
+
+
+
+
+## Example: Using $z$-scores
+
+@data:Sivak1993:BrakeLamps
+studied peoples' reaction times to brake lights on cars.
+Peoples' reaction times to brake lights in cars can be modelled with 
+a normal distribution,
+with:
+
+* mean $\mu = 1.25$ seconds, and
+* standard deviation $\sigma=0.46$ seconds.
+
+
+Using this model,
+what is the probability that a driver's reaction time is *longer* than one second?
+   
+We follow the steps identified earlier:
+
+* **Draw** a normal curve, and mark on 1 second (Fig. \@ref(fig:ZReactionTime1), top panel).
+* **Shade** the region corresponding to ``longer than 1 second'' (Fig. \@ref(fig:ZReactionTime1), bottom panel).
+      
+
+```{r ZReactionTime1, echo=FALSE, fig.cap="What proportion of reaction times are longer than 1 second?", fig.align="center"}
+RT.mn <- 1.25
+RT.sd <- 0.46
+
+par(mfrow=c(2, 1))
+
+z <- seq(-3.5, 3.5, length=250)
+zy <- dnorm( z, mean=0, sd=1)
+
+mu <- 1.25
+sigma <- 0.46
+x <- z * sigma + mu
+
+plot.norm(mu, sd=sigma,width=4, height=4,
+   xlab.name="Reaction times (seconds)",
+   shade.lo.x = 10,
+   shade.hi.x= 10,
+   round.dec=2,
+   main="Draw")
+   
+   
+	
+plot.norm(mu, sd=sigma,width=4, height=4,
+   xlab.name="Reaction times (seconds)",
+   shade.hi.x = Inf,
+   shade.lo.x= 1,
+   round.dec=2,
+   main="Shade")
+
+```
+
+
+
+
+* **Compute** the $z$-score:
+$\displaystyle z = \frac{x-\mu}{\sigma}$.
+Here, $x=1$, $\mu=1.25$, $\sigma=0.46$, so
+\[
+   z = \frac{1 - 1.25}{0.46} = \frac{-0.25}{0.46} = -0.54.
+\]
+* **Use** Table B.2: the probability of a reaction time *shorter* than 1 second is $0.2946$. 
+(Recall: Table B.2 and B.3 always give area *less* than the value of
+$z$ that is looked up.)
+* **Work out** the answer:
+The probability of a reaction time *longer* than 1 second is $1-0.2946 = 0.7054$,
+or about 71\%.
+
+
+```{block2, type="rmdimportant"}
+Tables B.2 ans B.3
+**always** provide area to the **left**
+of the $z$-scores that is looked up in the tables.
+```
+
+This is why the picture is so important:
+it's help us to see exactly how to get the answer from what the table give us.
+
+```{exercise}
+Match the diagram in 
+FGig. \@ref(fig:MatchDiagrams)
+with the meaning 
+for the reaction time data (recall: $\mu=1.25$):
+
+1. Reaction times more than 2 secs.
+2. Reaction times between 0.25 and 1 sec.
+3. Reaction times less than 2 secs.
+4. Reaction times between 0.5 and 2 secs.
+
+```
+
+```{r MatchDiagrams, echo=FALSE, fig.cap="Match the diagram with the description", fig.align="center"}
+par( mfrow=c(2, 2))
+
+plot.norm(mu, sd=sigma, width=4.5, height=3.5,
+   xlab.name="Reaction times (seconds)",
+   shade.lo.x = -Inf,
+   shade.hi.x= 2,
+   round.dec=2,
+   main="A")
+
+plot.norm(mu, sd=sigma,width=4.5, height=3.5,
+   xlab.name="Reaction times (seconds)",
+   shade.hi.x = Inf,
+   shade.lo.x= 2,
+   round.dec=2,
+   main="B")
+
+plot.norm(mu, sd=sigma,width=4.5, height=3.5,
+   xlab.name="Reaction times (seconds)",
+   shade.hi.x = 1,
+   shade.lo.x= 0.25,
+   round.dec=2,
+   main="C")
+
+plot.norm(mu, sd=sigma,width=4.5, height=3.5,
+   xlab.name="Reaction times (seconds)",
+   shade.hi.x = 2,
+   shade.lo.x= 0.5,
+   round.dec=2,
+   main="D")
+```
+
+
+
+```{example}
+@data:Sivak1993:BrakeLamps
+studied peoples' reaction times to brake lights on cars.
+Peoples' reaction times to brake lights in cars can be modelled with 
+a normal distribution,
+with:
+
+* mean $\mu = 1.25$\,seconds, and
+* standard deviation $\sigma=0.46$ seconds.
+
+Using this model,
+what is the probability that a driver's reaction time is
+*between* 1 and 2 seconds?
+
+First, draw the situation, and shade 'between 1 and 2 seconds'
+(Fig. \@ref(fig:ZReactionTime2)).
+
+
+```{r ZReactionTime2, echo=FALSE, fig.cap="What proportion of reaction times are between 1 and 2 seconds?", fig.align="center"}
+
+par( mfrow=c(2,1))
+
+z <- seq(-3.5, 3.5, length=250)
+zy <- dnorm( z, mean=0, sd=1)
+
+mu <- 1.25
+sigma <- 0.46
+x <- z * sigma + mu
+
+plot.norm(mu, sd=sigma,width=5, height=4,
+   xlab.name="Reaction times (seconds)",
+   shade.lo.x = 10,
+   shade.hi.x= 10,
+   round.dec=2,
+   main="Draw")	
+	
+	
+plot.norm(mu, sd=sigma,width=5, height=4,
+   xlab.name="Reaction times (seconds)",
+   shade.hi.x = 2,
+   shade.lo.x= 1,
+   round.dec=2,
+   main="Shade")	
+```
+
+We can then convert *both* reaction times to a $z$-score:
+\begin{eqnarray*}
+       \text{1~second}:  z &= \displaystyle \frac{1 - 1.25}{0.46} = -0.54;\\[6pt]
+       \text{2~seconds}: z &= \displaystyle\frac{2 - 1.25}{0.46} = 1.63.
+\end{eqnarray*}
+Now, using Table B, 
+the area to the left of $z=-0.54$ and
+the area to the left of $z=1.63$.
+However,
+neither of these are what we want;
+we want the area *between*
+$z=-0.54$ and $z=1.63$
+(see Fig. \@ref(fig:ZReactionTime3)).
+               
+```{r ZReactionTime3, echo=FALSE, fig.cap="What proportion of reaction times are longer than 1 second? Using the Tables", fig.align="center"}
+
+par( mfrow=c(2,1))
+
+plot.norm(mu, sd=sigma,width=5, height=4,
+   xlab.name="Reaction times (seconds)",
+   shade.hi.x = 1,
+   shade.lo.x= -Inf,
+   round.dec=2,
+   main="What the tables give\nfor z = -0.54")
+
+plot.norm(mu, sd=sigma,width=5, height=4,
+   xlab.name="Reaction times (seconds)",
+   shade.hi.x = 2,
+   shade.lo.x= -Inf,
+   round.dec=2,
+   main="What the tables give\nfor z = 1.63")
+```
+
+By looking carefully at the areas we get from the tables and the area that we want,
+we see that area between the two $z$-scores is
+\[
+		0.9484 - 0.2946 = 0.6538.
+\]
+
+```{r NormalMiddleMovie, echo=FALSE, fig.align="center", fig.cap="The reaction time is between 1 and 2 seconds"}
+htmltools::tags$iframe(title = "My embedded document", src = "./Animations/NormalMiddleMovie.html", height=580, width=520) 
+```
+
+The probability that a reaction time is between 1 and 2 seconds
+is about 65\%.
+
+
+
+## Unstandardising: Working backwards
+
+Consider again the study by	Sivak \& Flannagan [@data:Sivak1993:BrakeLamps],
+who	studied peoples' reaction times to brake lights on cars.
+Peoples' reaction times to brake lights in cars can be modelled with 
+a normal distribution,
+with:
+
+* mean $\mu = 1.25$ seconds, and
+* standard deviation $\sigma=0.46$ seconds.
+
+
+Suppose now we wish to identify the reaction times of the *fastest* 10\% of people.
+What are their reaction times?
+
+This is a different problem than before;
+previously, 
+we knew the reaction time,
+so we could compute a $z$ score,
+and hence sought a probability.
+Here,
+we know the probability,
+and seek a reaction time.
+That is,
+we need to work 'backwards'
+(Fig. \@ref(fig:WorkingWithZ)).
+
+
+```{r WorkingWithZ, echo=FALSE, fig.cap="Working with $z$-scores", fig.align="center"}
+par( mar=c(0.5, 0.5, 0.5, 0.5))
+openplotmat()
+
+pos <- coordinates(3)
+pos[1, 1] <- pos[1, 1] - 0.0
+pos[3, 1] <- pos[3, 1] + 0.0
+
+pos[, 2] <- 0.75
+
+text(0.5, 0.85, "The usual way to work with z-scores", font=2)
+curvedarrow(from=pos[1,], to=pos[2,], curve=0.2)
+curvedarrow(from=pos[2,], to=pos[3,], curve=0.2)
+textplain( pos[1,], lab="x", adj=c(0, -1)  )
+textplain( pos[2,], lab="z", adj=c(0, -1)  )
+textplain( pos[3,], lab="Area", adj=c(.5, -1) )
+
+text( mean(pos[2:3,1]), 0.65, "Using tables")
+text( mean(pos[1:2,1]), 0.65, "Using formula")
+
+###
+
+pos <- coordinates(3)
+pos[1, 1] <- pos[1, 1] - 0.0
+pos[3, 1] <- pos[3, 1] + 0.0
+
+pos[, 2] <- 0.25
+
+text(0.5, 0.45, "Working backwards with z-scores", font=2)
+curvedarrow(from=pos[2,], to=pos[1,], curve=0.2)
+curvedarrow(from=pos[3,], to=pos[2,], curve=0.2)
+textplain( pos[1,], lab="x", adj=c(0, 1)  )
+textplain( pos[2,], lab="z", adj=c(0, 1)  )
+textplain( pos[3,], lab="Area", adj=c(.5, 1) )
+
+text( mean(pos[2:3,1]), 0.35, "Using tables")
+text( mean(pos[1:2,1]), 0.35, "Using formula")
+```
+
+
+This means that we need to use Tables B.2 and B.3 'backwards' too.
+When we knew the $z$ scores 
+(in the margins of the tables),
+we found the areas in the body of the table.
+However
+if we already know the area (or probability) which is in the body of the table,
+then we can find the corresponding $z$-score (in the margins of the table) and 
+hence the observation $x$.
+We can convert our $z$-score to an observation value 
+using the *unstandardising* formula:
+\[
+	x = z\sigma + \mu
+\]
+to work out the value we need.
+
+
+
+
+
+IMAGE: Using tables
+
+
+Again,
+it is important to start with a diagram to help guide our thinking
+(Fig. \@ref(fig:ReactionTimesBackwards)).
+	
+So the $z$-score we need 'chops off' an area of 10\% of the area to the left
+(and recall the tables work with the area to the left).
+So we find an area of $10\% = 0.1000$ in the *body* of Table B 
+(Fig. XXXX);
+we can't find exactly $0.1000$ but we can get close by selecting $z=-1.28$.
+
+
+```{r ReactionTimesBackwards, echo=FALSE, fig.cap="Reaction times: The slowest 10\\%", fig.align="center"}
+plot.norm(mu, sd=sigma,width=5, height=4,
+   xlab.name="Reaction times (seconds)",
+   shade.hi.z = -1.28,
+   shade.lo.z= -Inf,
+   round.dec=2,
+   main="Shade")
+arrows(-3, 0.15, -2, 0.05, angle=15, length=0.15, lwd=2) # Note: Locations in terms of z-scores
+
+text(-3, 0.15, "Approx. 10%", pos=3)
+```
+
+That is,
+the value we need is $1.28$ standard deviations *below* the mean.
+Using the unstandardising formula:
+\[
+	x = \mu + (z\times\sigma) =   1.25 + (-1.28 \times 0.46) = 0.6612.
+\]
+10\% of reaction times less than about 0.66 seconds.
+
+
+
+
+
+```{exercise}
+Ball bearings are made with mean diameter 50mm
+and the diameters of the individual bearings actually follow a normal distribution
+with standard deviation 0.1mm.
+   
+The *smallest* 15\% of bearings are too small for sale.
+What size bearings cannot be sold?
+```
+
+
+
+
+
+
+
+
+## Sampling variation
+
+
+### Introduction
+
+Think about all students at this university.
+They vary in age (that is, there is natural variation).
+
+```{block2, type="rmdthink"}
+Draw a rough guess of the histogram of the ages of all students at this university.
+Then, on your histogram, mark your guess of the *mean* age.
+``` 
+
+Suppose you wanted to give someone a rough idea of the
+ages of most individual students at your university.
+
+
+```{block2, type="rmdthink"}
+Thinking about your histogram,
+write down a narrow *interval* that would encompass the age of almost all students.
+   	
+How much variation exists?
+```
+
+Whenever variation exists, 
+it can be measured using a standard deviation.
+The amount of variation in the individual ages 
+could be measured using a standard deviation: $s$.
+
+Now let's think about a related but different quantity.
+
+```{block2, type="rmdthink"}
+Think about your university again:
+write down a guess for the *mean age* of all students.
+
+Imagine that everyone in your class also makes a guess of the mean age of all students.
+
+Then,
+write down a narrow interval in which all reasonable guesses of the mean would probably lie.
+```
+   
+We have found two intervals:
+
+1. An interval for the *individual* ages of students;
+2. An interval for the guesses of the *mean* age.
+
+So variation exists within the ages of individuals,
+and variation also exists with the guesses of he mean age.
+
+Now,
+*whenever* variation exists, 
+it can be measured using a standard deviation.
+The amount of variation in the ages of *individuals* 
+could be measured using a standard deviation $s$, 
+and the interval containing the ages of individual students
+may be quite wide, perhaps 20 to 70-ish.
+
+But the interval that probably contains the 
+mean age of all students at your university
+would be narrower, 
+maybe from 22 to 30-ish.
+      
+Whenever variation exists, 
+it can be measured using a standard deviation.
+These two intervals have different meanings,
+have different amounts of variation,
+measure different things,
+and so different *types* of standard deviations,
+with different values,
+are used to describe this variation.
+
+More formally,
+the first interval reflects the amount of variation 
+(estimated by $s$) *in the individuals' ages* $x$ themselves.
+The second interval reflects the amount of variation 
+in estimating $\mu$ with $\bar{x}$,
+but clearly must be a different thing.
+
+Variation in the estimate of the mean 
+could be measured using a standard deviation too,
+but that won't be {$s$}.
+A standard deviation that measures the variation in $\bar{x}$ from *sample to sample*
+is called a
+*standard error*.
+
+
+
+
+### Standard errors
+
+As we have seen,
+each sample is likely to be different,
+so *any* quantity that is estimated from the sample
+(sample mean, sample odds ratios, etc.)
+is likely to be different for each sample.
+
+For example,
+the sample mean is used to estimate the population mean. 
+However, 
+every sample we select produces a different sample mean
+(and hence a different estimate of the population mean).
+So there are a lot of possible sample means,
+depending on which sample happens to be obtained.
+That is,
+the values of the sample mean that are possible have a
+*distribution*,
+and so the values of the sample mean that are possible to obtain 
+have a mean and a standard deviation.
+
+The standard error of the mean is the 
+standard deviation of those possible values of the sample mean
+(for a given size sample) selected from the population.
+The standard error of the *mean*
+measures how much the sample *mean* is likely to vary from sample to sample.
+In a way,
+the standard error is like 
+a measure of how precisely the *sample* mean estimates the *population* mean.
+
+```{example}
+Suppose the population mean age is estimated as $\bar{x}=26$.
+If the standard error was 0.01, 
+this estimate is relatively accurate,
+as it indicates that the value of $\bar{x}$ is not likely to vary much between samples;
+$\bar{x}$ is likely to be close to $\mu$.
+        
+If the standard error was 2, 
+this estimate is not very accurate,
+as it indicates that the value of $\bar{x}$ is likely to vary quite a bit from sample to sample.
+$\bar{x}$ is not likely to be close to $\mu$.
+```
+
+
+
+
+
+```{definition, name="Standard error"}
+A *standard error* is
+the standard deviation of all possible
+values of the sample estimate.
+*Any* quantity estimated from a sample has a standard error. 
+```
+   
+Notice that the standard error is a special type of standard deviation;
+it is the standard deviation of something quite specific:
+the variation in some sample quantity from sample to sample.
+
+```{block2, type="rmdnote"}
+The standard error is an unfortunate term: 
+It is not an *error* or *mistake*, or even *standard*.
+For example,
+there is no such thing as a 'non-standard error'.
+```
+
+
+
+
+
+
+### Standard deviation vs. standard error
+   
+The *standard deviation*,
+in general,
+measures the amount of variation present in any quantity.
+In usual usage,
+*standard deviation* os used to describe the amount of variation 
+in individual observations $x$.
+The *standard error of $\bar{x}$*
+is a *special* standard deviation that 
+measures the amount of variation 
+in the values of some sample statistic (such as $\bar{x}$) that could be obtained.
+Crucially,
+the standard error is a standard deviation,
+but has a special name to remind us that it is the standard deviation of something quite specific.
+
+*Anything* estimated from a sample has sampling variation,
+so has a standard error:
+
+* sample proportions;
+* sample odds ratios;
+* sample medians;
+* sample standard deviation;
+* etc.
+
+
+
+
+

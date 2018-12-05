@@ -1,0 +1,5270 @@
+# (PART) Analysis: Confidence intervals {-}
+
+
+
+# Confidence intervals for one proportion
+
+```{r echo=FALSE}
+SixSteps(5, "Comparison RQs: Confidence intervals")
+```
+
+
+```{r echo=FALSE}
+library(knitr)
+# set global chunk options
+options(formatR.arrow=TRUE,width=90)
+```
+
+
+```{r echo=FALSE}
+#source("normalcurves.R")
+```
+
+
+
+## Sampling distribution with a known proportions
+
+Suppose I take a fair, six-sided 
+die^[Note the language: We have two *dice*, but one *die*. *Dice* is the plural.],
+and I roll that die 25 times.
+What proportion of the rolls will produce an even number?
+That is,
+what is the *sample proportion*?
+
+Of course,
+we don't know exactly how the die will land for any of those 25 rolls.
+However,
+we do know that the proportion of rolls that land as an even number will not be the same every time:
+It will *vary* from roll to roll.
+
+
+```{r RollDice, echo=FALSE, fig.align="center", fig.cap="The proportion of rolls that are even change from one sample of 25 rolls to the next sample of 25 rolls"}
+htmltools::tags$iframe(title = "My embedded document", src = "./Animations/RollDiceMovie.html", height=600, width=520) 
+# knitr::include_graphics(path="./Animations/RollDiceMovie.gif")
+```
+
+We would also expect that the proportion of even rolls would
+usually be around 0.5,
+since 3 of the six faces of the die are even numbers (the *population proportion*) using the classical approach to probablility.
+It is possible, of course, that we could end up 
+with a very small or high proportion of even rolls,
+but we wouldn't expect to see that very often.
+
+In this example,
+the *population proportion* of even rolls is known to be $p=0.5$.
+The 25 rolls that we make is the *sample* of all possible rolls,
+and the proportion of even rolls in the *sample* is denoted by $\hat{p}$.
+For any sample of 25 rolls,
+we don't know what the value of $\hat{p}$ will be until after we finish rolling the die.
+The proportion of even rolls is likely to differ from sample to sample;
+that is,
+the sample proportion will have a *standard error*.
+
+Suppose we did roll a fair die 25 times and recorded the
+proportion of rolls that were even.
+Then suppose we had *many* different people do the same thing:
+roll the die 25 times.
+And suppose we recorded the sample proportion every time.
+We would have a large number of sample proportions $\hat{p}$,
+and we could plot a histogram of these sample proportions.
+
+
+
+
+
+
+
+```{r RollDiceHistHTML, echo=FALSE, fig.cap="Try This", fig.align="center"}
+#includeHTML("./Animations/RollDiceHistMovie.html")
+htmltools::tags$iframe(title = "My embedded document", src = "./Animations/RollDiceHistMovie.html", height=580, width=520) 
+```
+
+
+Look at the shape of the histogram:
+It looks roughly like a normal distribution.
+This is no accident:
+this is what statistical theory predicts will happen
+(under special circumstances: see Sect. \@ref(ValidityProportions)).
+We can even *describe* the normal distribution.
+
+```{r echo=FALSE}
+se.die <- sqrt(0.5 * (1 - 0.5) / 25)
+```
+
+The *sample* proportions will have a distribution that has:
+
+* roughly a normal distribution,
+* centred around a mean of $p=0.5$,
+* with a standard deviation of `r round(se.die, 3)` (we'll see where this number comes from soon).
+
+So we can describe *how* the sample proportions are likely to vary.
+We still don't know exactly what we'll find next roll...
+but we do not certain things.
+For example,
+using the 68--95--99.7 rule
+(Def. \@ref(def:EmpiricalRule)):
+
+* About 68% of the time,
+the sample proportion of rolls that will be even will be between
+$0.5$ give-or-take one standard deviation (that is, give-or-take `r round(se.die, 3)`).
+So, about 68% of the time, the proportion of even rolls in 25 rolls will be between
+`r round(0.5 - se.die, 3)` and `r round(0.5 + se.die, 3)`
+* About 95% of the time,
+the proportion of rolls that are even 
+$0.5$ give-or-take two standard deviations (that is, give-or-take `r round(2*se.die, 3)`).
+So, about 95% of the time, the proportion of even rolls in 25 rolls will be between
+`r round(0.5 - 2*se.die, 3)` and `r round(0.5 + 2*se.die, 3)`.
+
+These intervals are called **confidence intervals**.
+
+
+
+
+<!-- TRY include_url to include the HTML? -->
+
+<!-- TRY htmltools::includeHTML? -->
+
+<!-- TRY this (from https://stackoverflow.com/questions/48798913/include-html-file-into-rmarkdown-document-to-generate-html-document): -->
+<!-- External `HTML` file can be included in an `<iframe>` element: -->
+
+Note that the value of $p$ (the proportion of even numbers on the die) remains the same,
+but the value of $\hat{p}$ (the proportion of even numbers on the die in 25 rolls) 
+is not the same in every sample.
+That is, 
+$\hat{p}$ varies,
+and hence 
+*sampling variation* exists.
+The variation in $\hat{p}$ from sample to sample 
+is measured by the *standard error*,
+and we said above that the standard error in this situation was
+`r se.die`.
+In general,
+the **standard error for a sample proportion** when $p$ is known is
+\[
+   \sqrt{\frac{p \times (1-{p})}{n}},
+\]
+where $n$ is the number of rolls, and $p$ is the population proportion.
+For this example, then,
+we have $n = 25$ rolls of a die,
+and the population proportion of even rolls is $p=0.5$.
+
+For our case, with $p=0.5$ and a set of $n=25$ rolls,
+the standard error turns out to be
+\[
+	\text{s.e.}(\hat{p}) = \sqrt{\frac{0.5 \times (1-0.5)}{25}}
+    = 0.1.
+\]
+
+Recall that the 
+*the standard error is just a special standard deviation*.
+The standard error is a standard deviation that measures how much the sample estimates are likely to vary 
+from sample to sample.
+In that sense, then,
+the standard error of the proportion measures how precisely $\hat{p}$
+estimates the population proportion $p$.
+      
+So we can draw a picture of this normal distribution
+(Fig. \@ref(fig:NormalDieTheory)).
+Note that usually, $p$ is unknown, so when we calculate
+$\text{s.e.}(\hat{p})$ we need to use the best estimate that we have,
+which is $\hat{p}$.
+
+```{r NormalDieTheory, echo=FALSE, fig.cap="The normal distribution, showing how the proportion of even rolls varies when a die is rolled 25 times", fig.align="center"}
+pop.p <- 0.5
+n <- 25
+se.p <- sqrt( pop.p * (1-pop.p) / n )
+
+plot.norm(mu=pop.p, sd=se.die, 
+          xlab.name="Sample proportion of even rolls out of 25", 
+          shade.lo.x=-10, 
+          shade.hi.x=-10)
+```
+
+
+
+
+
+```{example}
+From our die example,
+the values of $\hat{p}$ will vary
+
+* with an approximate normal distribution;
+* centred around $p=0.5$; and
+* with a standard error of approximately 
+$\text{s.e.}({\hat{p}}) = 0.1$.
+
+How often would we expect to find a value of $\hat{p}$ bigger than 0.75?
+(Use Fig. \@ref(fig:NormalDieTheoryExample) if it helps.)
+```
+
+
+```{r NormalDieTheoryExample, fig.cap="IGI", fig.align="center", echo=FALSE}
+par(mar=c(2, 2, 2, 2) + 0.1, xpd=TRUE)
+
+z <- seq(-4, 4, length=100)
+y <- dnorm(z)
+plot(y~z, lwd=3, type="l", xlab="", ylab="", axes=FALSE)
+
+for (i in seq(-3, 3, by=1)){
+  lines( c(i,i), c(0, dnorm(i)), col="grey" )
+}
+abline(h=0, col="grey")
+
+text(-3:3,
+	  0,
+	  pos=1,
+	  labels=rep("?", 7)
+)
+``` 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Confidence intervals for a known proportion
+
+
+In the previous section,
+we saw how the sample proportion varies from sample to sample.
+The value of $\hat{p}$ changes with every sample,
+so has a *distribution*.
+We saw that we could compute an interval in which we could be reasonably sure that the 
+value of$\hat{p}$ would lie.
+This interval is a **confidence interval**.
+
+More formally,
+the **confidence interval** for a sample proportion is
+\[
+   p \pm (\text{multiplier} \times \text{s.e.}(\hat{p})),
+\]
+where $\text{s.e.}(\hat{p})$ is the 
+*standard error of the sample proportion*.
+The *standard error of the sample proportion*
+is a standard deviation that tells us how much the value of $\hat{p}$ 
+is likely to vary from sample to sample.
+For a 95\% confidence interval---which 
+are the most common---the multiplier is approximately 2,
+based on the 68--95--99.7 rule (Def. \@ref(def:EmpiricalRule)):
+Approximately 95% of observations are within two standard deviations of the mean.
+In this course,
+when we compute confidence intervals without a computer,
+we will always create *approximate* 95% intervals using the *approximate* multiplier of 2.
+That is,
+the *approximate* 95% confidence interval is:
+\[
+   p \pm 2 \times \text{s.e.}(\hat{p}).
+\]
+
+The quantity $2 \times \text{s.e.}(\hat{p})$
+is called the **margin of error**,
+so the *approximate* 95% confidence interval could also be written as:
+\[
+   p \pm \text{margin of error}.
+\]
+Note that the
+*margin of error*
+depends on:
+
+* *The sample size* (through the standard error);
+* *How confident we wish to be* (through the multiplier).
+
+For our dice example,
+we have (from Section )
+
+* the proportion of rolls that are expected to be even is $p=0.5$;
+* the standard error of the sample proportion is $\text{s.e.}( \hat{p}) = 0.1$.
+
+So we would expect that,
+about 95\% of the time,
+the sample proportion will be in the interval 
+$p$ give-or-take about two standard errors
+(from the 68--95--99.7 rule (Def. \@ref(def:EmpiricalRule))),
+which is between
+
+* $0.5 + (2\times 0.1) = 0.7$ and 
+* $0.5 -  (2\times 0.1) = 0.3$.
+
+That is,
+about 95\% of the time the sample proportion $\hat{p}$ will be between
+0.3 and 0.7.
+
+
+For 95\% CIs,
+the multiplier is approximately $2$
+(since 95\% of values are within 
+approximately two standard deviations of the mean,
+from the 68-95--99.7 rule  (Def. \@ref(def:EmpiricalRule))).
+We often find 95\% CIs,
+but we can actually find a CI  with *any* level of confidence:
+we just need a different multiplier.
+So,
+for example,
+
+* An *approximate* 68\% CI would be formed using a multiplier of 1
+since 68\% of values are within one standard deviation of the mean.
+standard deviation of the mean, using the 68--95--99.7 rule  (Def. \@ref(def:EmpiricalRule)).
+* An *approximate* 99.7\% CI would be formed using a multiplier of 3,
+since 99.7\% of values are within three standard deviations of the mean.
+* An *approximate* 90\% CI would be formed using a multiplier of... well, what?
+
+We would need to use tables or use a computer to determine the
+correct multiplier for a 90% confidence interval,
+as the 68--95--99.7 rule isn't helpful.
+
+
+
+In practice,
+95\% CIs are the most commonly used,
+and we'll just use a multiplier of $2$ to find CIs
+(and hence find *approximate* 95\% CIs),
+and otherwise use SPSS.
+
+In general,
+higher confidence levels means wider intervals:
+To be more confident that our interval contains $\hat{p}$,
+we need wider intervals
+(Fig. \@ref(fig:CIWidths))
+
+
+```{r CIWidths, echo=FALSE, fig.height=3.25, fig.cap="To have greater confidence that the CI contains the sample statistic, the CI needs to be wider", fig.align="center"}
+phat <- 0.5
+n <- 25
+
+sep <- sqrt( phat*(1-phat)/n )
+levels <- c(0.90, 0.95, 0.99, 0.997)
+zs <- qnorm( 1 - (1-levels)/2)
+mes <- sep * zs
+
+plot( c(0.2, 0.8),
+	c(0,1), 
+	axes=FALSE, 
+	xlab="Sample proportions",
+	ylab="", 
+	main="", 
+	type="n")
+axis(side=1)
+abline(v=phat)
+
+arrows(phat-mes[1],1,     phat+mes[1],1,    code=3, angle=15, col="blue", lwd=2, ylim=c(0, 0.35)); text(0.22,1.00,"90%")
+arrows(phat-mes[2], 0.66, phat+mes[2],0.66, code=3, angle=15, col="blue", lwd=2, ylim=c(0, 0.35)); text(0.22,0.66,"95%")
+arrows(phat-mes[3],0.33,  phat+mes[3],0.33, code=3, angle=15, col="blue", lwd=2, ylim=c(0, 0.35)); text(0.22,0.33,"99%")
+```
+
+
+
+
+
+
+
+
+## Sampling distribution for an unknown proportion
+
+Before,
+in the die example,
+we saw an equation for computing the standard error for the sample proportion
+when we knew what the value of $p$ was.
+This time we do not know the value of $p$,
+so the best we can do is to use an *estimate* of the value of $p$,
+which is $\hat{p}$.
+This means that the standard error of the sample proportion
+(which we write as $\text{s.e.}(\hat{p})$)  is
+ \[
+   \text{s.e.}(\hat{p}) = \sqrt{\frac{ \hat{p} \times (1-\hat{p})}{n}}
+\]
+when we do not know the value of $p$
+(which is the usual situation).
+      
+
+```{definition, name="Standard error of a sample proportion"}
+The *standard error of the sample proportion* is
+the standard deviation of all possible
+values of the sample estimate.
+Any quantity estimated from a sample has a standard error. 
+   
+The standard error for the sample proportion $\hat{p}$,
+   when we do not know the value of $p$,
+   is
+   $\displaystyle \text{s.e.}(\hat{p}) = \sqrt{ \frac{\hat{p}\times (1-\hat{p})}{n} }$,
+   where $n$ is the size of the sample,
+   and $\hat{p}$ is the sample proportion. 
+```
+
+
+
+
+
+
+## Confidence intervals for and unknown proportion
+
+
+In the previous sections,
+we saw how the sample proportion varies from sample to sample.
+The value of $\hat{p}$ changes with every sample,
+so has a *distribution*.
+We saw that we could compute an interval in which we could be reasonably sure that the 
+value of $\hat{p}$ would lie.
+This interval is a **confidence interval**.
+
+In the previous section though,
+we *knew* the value of $p$, 
+the *population* proportion.
+This is not usually true:
+Usually we don't not know the value of the *population* proportion.
+
+All the ideas are the same:
+The values of $\hat{p}$ varies from sample to sample,
+and we can describe how the sample proportion is likely to vary from sample to sample.
+
+When the value of $p$ is unknown,
+the best we can do is to use the best estimate of $p$ that we have;
+that is,
+$\hat{p}$.
+After doing so,
+the best guess we have of how the *sample* proportions will behave
+is that they will have a distribution that has:
+
+* roughly  a normal distribution,
+* centred around a mean of $\hat{p}$,
+* with a standard deviation of
+\[
+   \text{s.e.}(\hat{p}) = \sqrt{ \frac{ \hat{p} \times (1 - \hat{p})}{n}}
+\]
+
+If we *assume* that we did not know the proportion of die rolls that are expected to give an even number,
+we could roll the die many times (say, 25 times)
+and estimate the proportion with $\hat{p}$.
+Let's suppose we found that 11 of the 25 rolls gave an even number;
+then $\displaystyle \hat{p} = \frac{11}{25} =  0.44$,
+and
+\[
+  \text{s.e.}(\hat{p}) = \sqrt{ \frac{ 0.44 \times (1 - 0.44)}{25}} = 0.09927739.
+\]
+Then,
+the sample proportions would have:
+
+* roughly  a normal distribution,
+* centred around a mean of $\hat{p} = 0.44$,
+* with a standard deviation of $\text{s.e.}(\hat{p}) = 0.09927739$.
+
+Again, 
+for each sample we could compute the 95% CI as
+\[
+   \hat{p} \pm 2 \times \text{s.e.}(\hat{p}).
+\]
+
+The quantity $2 \times \text{s.e.}(\hat{p})$
+is called the **margin of error**.
+So here, the approximate 95% CI is from 
+
+* $0.44 + (2\times 0.09927739.) = 0.639$ and 
+* $0.44 -  (2\times 0.09927739.) = 0.241$.
+
+Suppose we asked lots of people to roll the die 25 times,
+and for each person we found $\hat{p}$,
+and hence computed the CI for their sample of 25 rolls.
+Of course,
+every sample of 25 rolls could produce a different estimate $\hat{p}$,
+and so a different CI.
+But **about 95% of the confidence intervals that we found would contain the true proportion $p$**.
+However,
+since we usually don't know the value of $p$,
+and we usually only have one sample,
+in general **we never know whether the CI we computed from our sample contains $p$ or not**.
+
+
+```{r RollDiceCIMovie, echo=FALSE, fig.cap="The 95% CI computed for the dice example", fig.align="center"}
+ htmltools::tags$iframe(title = "Boixplot of Age", src = "./Animations/RollDiceCIMovie.html", height=640, width=520) 
+```
+
+
+
+
+
+
+
+```{example FemaleCollegeCoffee}
+A study of 360 female college students in the United States
+[@data:Kelpin2018:AlcoholCoffee]
+found that 61 drank coffee daily. 
+We could find a 95% CI for the *population* proportion of female American college students who drink coffee daily.
+
+The sample size is $n = 360$,
+and the *sample* proportion of daily coffee drinkers is 
+$\hat{p} = 61/360 = 0.16944$.
+Of course, 
+another sample of 360 students from the same population is likely 
+to produce a different number of daily coffee drinkers, 
+and hence a different value of the sample proportion $\hat{p}$;
+that is, 
+the sample proportion has a *standard error*. 
+
+The standard error is
+\[
+  \text{s.e.}(\hat{p})
+               = \sqrt{ \frac{ 0.16944 \times (1 - 0.16944)}{260}}
+               = 0.01977.
+\]
+So,
+an *approximate* 95% CI is
+$0.1694 \pm (2 × 0.01977)$,
+where the '$\pm$' means 'give-or-take', or 'plus or minus'. 
+So the *approximate* CI is:
+$0.1694 \pm 0.03954$.
+The margin of error is $0.03954$. 
+
+If we actually compute the 'plus' and the 'minus' bits,
+the approximate 95% CI is from
+$0.12986$ to $0.20894$.
+If we round appropriately, 
+the approximate 95% CI is from about $0.130$ to $0.209$, 
+or (probably easier to understand) from 13.0% to 20.9%.
+
+How do we interpret this? The correct interpretation is:
+
+> If we repeated the study many times with 360 people from the same population, 
+> and for each one found the value of $\hat{p}$
+> and computed the approximate 95% CI, 
+> then about 95% of those intervals would contain the population proportion $p$.
+
+Usually, the CI is interpreted as
+
+> We are approximately 95% confidence 
+> that the population proportion if female college students in the United States
+> that drink coffee daily is between (approximately) 13.0% to 20.9%.
+
+```
+
+
+
+
+
+
+
+
+## Interpretation of a CI
+
+The CI  shows us an interval that the values of $\hat{p}$ are likely to fall within.
+Since $\hat{p}$ is an estimate of the unknown population proportion,
+it means that the CI  is like an interval where our best guess of the population proportion $p$ will fall too.
+While it is not exactly true,
+the CI  is often interpreted,
+then,
+as an interval where the population proportion $p$ is likely to fall within.
+
+The *correct* interpretation is: 
+
+> *If* repeated samples were taken and the 95\% confidence interval computed for each sample, 
+> 95\% of the confidence intervals formed would contain the population proportion.
+
+But this is rather unhelpful:
+we generally only have one single sample.
+
+It is almost correct to state:
+
+> There is a 95\% chance that our computed CI  straddles the actual (population) value of $p$.
+
+However,
+this is also not very helpful.
+While technically incorrect,
+most people interpret a CI  like this:
+
+> There is a 95\% chance that the population proportion lies within the interval.
+
+The distinction is subtle\dots
+
+I like to use this analogy:
+If I ask you in which direction the sun rises,
+how do you answer?
+You will probably tell me that the sun rises in the east.
+This is technically incorrect: the sun doesn't actually *rise* at all.
+It *appears* to rise in the east because the earth rotates about the sun.
+But almost everyone says that the sun rises in the east,
+and for most circumstances this is fine,
+even though it is technically incorrect.
+
+Similarly, 
+most people use the third interpretation above in practice,
+even though it is technically incorrect.
+
+
+
+
+
+
+
+
+
+## Statistical validity conditions {#ValidityProportions}
+
+
+The way we compute the CI  for the population proportion requires
+certain conditions to hold for the results to be statistically valid.
+
+
+The confidence interval for a sample proportion will be statistically valid if:
+
+* the sample is a random sample from some population;
+* the number of individuals in the group of interest must exceed 5; *and*
+* the number of individuals *not* in the group of interest must exceed 5.
+
+
+
+```{example}
+For the earlier example about female college students drinking coffee
+(Example \@ref(exm:FemaleCollegeCoffee)),
+the confidence interval for the sample proportion will be statistically valid if:
+
+* the sample is random;
+* the number of female college students in the sample who drink coffee exceeds 5; *and*
+* the number of female college students in the sample who *do not* drink coffee exceeds 5.
+
+
+The number of coffee drinkers was 61, which is more than five.
+The number of non-coffee drinkers is $360 - 61 = 299$,
+which is also more than five.
+	
+The CI  will be valid if the sample is a random sample.
+If not,
+the CI  will probably give a reasonable indication of the true proportion,
+but it may not be exactly correct.
+```
+
+
+
+
+
+
+## Summary: Finding a CI for $p$
+
+So the procedure for computing a confidence interval
+for a proportion is:
+
+
+
+
+* Compute the sample proportion, $\hat{p}$.
+* Compute the standard error:
+\[
+  \text{s.e.}(\hat{p})
+  =
+  \sqrt{\frac{ \hat{p} \times (1-\hat{p})}{n}}.
+\]
+This tells you how $\hat{p}$ is likely to vary from 
+one sample to the next.
+* Find the multiplier: this is $2$ for an approximate 95\% CI.
+* Compute:
+\[
+   \hat{p} \pm \left( \text{Multiplier}\times\text{standard error} \right).
+\]
+(Note: Multiplier$\times$standard error is called the  *margin of error*.)
+* Check the conditions are (at least approximately) satisfied.
+
+
+
+
+```{r echo=FALSE}
+Tab.Smoke <- table(NHANES$SmokeNow)
+p.Smoker <- Tab.Smoke["Yes"] / sum(Tab.Smoke)
+
+se.Smoker <- sqrt( p.Smoker * (1-p.Smoker) / sum(Tab.Smoke) )
+
+ci.lo.Smoker <- p.Smoker - 2*se.Smoker
+ci.hi.Smoker <- p.Smoker + 2*se.Smoker
+```
+
+
+
+
+
+```{example}
+
+Consider the NHANES data.
+The explanatory variable is
+'Whether a current smoker, or not'. 
+```
+In the sample,
+`r table(NHANES$SmokeNow)["Yes"]`
+out of the
+`r sum(table(NHANES$SmokeNow))` who reported their smoking status
+reported that they currently smoke, or 
+$\hat{p}= `r table(NHANES$SmokeNow)["Yes"]` \div `r sum(table(NHANES$SmokeNow))` = 
+`r round(table(NHANES$SmokeNow)["Yes"] / sum(table(NHANES$SmokeNow)) * 100, 2)`\%$,
+so that 
+$\hat{p} =  `r round(table(NHANES$SmokeNow)["Yes"] / sum(table(NHANES$SmokeNow)) , 4)`$.
+
+What is the population proportion $p$ that currently smoke?
+We don't know,
+and the estimate from every sample is likely to be different.
+The standard  error is about $`r round(se.Smoker, 5)`$,
+so the approximate 95% CI  for $p$ is 
+$`r round(p.Smoker, 4)` \pm `r round(2 * se.Smoker, 5)`$:
+from $`r round(ci.lo.Smoker ,3)`$ to $`r round(ci.hi.Smoker ,3)`$.
+*(Check the calculations for homework!)*
+
+We should check the conditions.
+For our conclusions to be statistically valid:
+
+* the sample must be random; 
+* the number of smokers must exceed 5;
+* the number of non-smokers must exceed 5. 
+
+The CI  appears to be statistically valid.  
+We can write:   
+
+> Based on the *sample*,
+> a 95% confidence interval for the *population* proportion of smokers in the USA 
+> from $`r round(ci.lo.Smoker, 3)`$ to $`r round(ci.hi.Smoker, 3)`$.
+
+
+
+
+## Example: Koalas crossing roads
+
+```{example}
+A study of koalas
+[@data:Dexter2018:Koalas]
+found that 18 of the 51 koalas studied (over 30 months)
+had crossed at least one road during that time.
+
+Find an approximate 95\% CI  for the proportion of all koalas
+that cross at least one road.
+```
+
+From the sample of $n=51$ koalas,
+the proportion having crossed a road is
+$\hat{p} = 18/51 = 0.3529$.
+The standard error is
+\[
+	\text{s.e.}(\hat{p} 
+	= \sqrt{ \frac{p \times (1 - p)}{n} }
+	= \sqrt{ \frac{0.3529 \times (1 - 0.3529)}{51} }
+	= 0.06692.
+\]
+An approximate 95\% CI, then, is
+\[
+	0.3529 \pm (2 \times 0.06692),
+\]
+where the '$\pm$' means 'give-or-take',
+or 'plus or minus'.
+So the CI  is:
+\[
+	0.1694 \pm 0.1338.
+\]
+The *margin of error* is $0.1338$.
+If we actually compute the 'plus' and the 'minus', 
+the approximate 95\% CI  is from
+0.219 to 0.487.	
+So the approximate 95\% CI for the proportion of koalas that cross at least one road
+is from about
+21.9\% to 48.7\%. 
+
+The research article reports:
+
+> Of the 51 koalas, 
+> 18 (35.3\%) crossed at least one road. 
+> The [...] probability of a koala crossing at least one road during 
+> the study was 35.3\% (95\% CI  = 22--48\%).
+>
+> --- @data:Dexter2018:Koalas, p. 70.
+
+
+This agrees with our calculations.
+
+
+##  Validity comnditions
+
+For the $\chi^2$ test
+to be statistically valid,
+we require that: 
+
+* The sample is random (or somewhat representative); and
+* All the *expected* values are at least 5.
+
+
+For the example for eating habis of university students,
+the data are given in 
+Table \@ref(tab:MealsDataTable);
+the smallest count in the table is 2.
+However,
+this is an **observed** count.
+The validity conditions require that all of the **expected** counts exceed 5.
+
+From the output in 
+Fig. \@ref(fig:),
+we see that all of teh **expected** counts exceed 5.
+Hence,
+if the sample is somewhat representative,
+the CI will be statistically valid.
+
+BUT WE DON'T DO THE TEST HERE!!
+
+
+
+## Estimating sample sizes for one proportion
+
+What if we wanted to estimate $p$ with *more* precision 
+(i.e.\ the 95\% CI  is narrower):
+What could we do?
+If we want a more precise estimate of the population proportion,
+we need a larger sample.
+
+
+Suppose we want our 95\% CI  for the proportion of smokers to be
+accurate to give-or-take $0.01$:
+what size sample would we need?      
+Conservatively,
+the sample size for a 95\% CI  needed is *at least*
+\[
+   \frac{1}{(\text{Margin of error})^2},
+\]
+so we'd need $\displaystyle \frac{1}{0.01^2} = 10\,00$ Americans.
+
+```{example}
+Suppose we wish to estimate the population proportion of pink Smarties to within $0.07$. 
+   Then,
+   conservatively, we would use at least
+   \[
+      \frac{1}{(\text{Margin of error})^2} { = \frac{1}{0.07^2}}.
+   \]
+   We would need at least $n=204.1$ Smarties.
+   We need to examine at least 205 Smarties
+   to achieve this desired level of precision
+   (that is, **always round up** in sample size calulations).
+```
+
+
+
+```{block2, type="rmdwarning"}
+We always round the sample size **up**.
+```
+
+
+
+
+
+## Exercises
+
+### Salt intake
+
+A study of salt intake in the United Kingdom
+[@data:Sutherland:SaltIntake]
+found that 2\,182 out of 6\,882 people sampled in 2007
+'generally added salt at the table'.
+
+Find an approximate 95\% CI  for the true proportion
+of Britons that generally add salt at the table.
+
+
+### Smarties
+
+We wish to estimate the population proportion of pink Smarties to within $0.05$.
+How many Smarties would need to examined?
+
+
+
+
+
+
+
+# Confidence intervals for one mean {#OneMeanConfInterval}
+
+## CIs for one sample mean
+
+
+```{r echo=FALSE}
+library(foreign)
+
+S.fun <- 
+structure(list(Year = structure(c(1L, 1L, 1L, 1L, 1L, 1L, 1L, 
+1L, 2L, 2L, 2L, 2L, 2L, 2L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 
+3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 
+3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 
+3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 
+4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 
+4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 
+4L, 4L, 5L, 5L, 5L, 5L, 5L, 5L, 5L, 5L, 5L, 5L, 5L, 5L, 5L, 5L, 
+5L, 5L, 5L, 5L, 5L, 5L, 5L, 5L, 5L, 5L, 5L, 5L, 5L, 5L, 5L, 5L, 
+5L, 5L, 5L, 5L, 5L, 5L, 5L, 5L, 5L, 5L, 5L, 5L, 5L, 5L, 5L, 5L, 
+5L, 5L, 5L, 5L, 5L, 5L, 5L, 5L, 5L, 5L, 5L, 5L, 5L, 6L, 6L, 6L, 
+6L, 6L, 6L, 6L, 6L, 6L, 6L, 6L, 6L, 6L, 6L, 6L, 6L, 6L, 6L, 6L, 
+6L, 6L, 6L, 6L, 6L, 6L, 6L, 6L, 6L, 6L, 6L, 6L, 6L, 6L, 6L, 6L, 
+6L, 6L, 6L, 6L, 6L, 6L, 6L, 6L, 6L, 6L, 6L, 6L, 6L, 6L, 6L, 6L, 
+7L, 7L, 7L, 7L, 7L, 7L, 7L, 7L, 7L, 7L, 7L, 7L, 7L, 7L, 7L, 7L, 
+7L, 7L, 7L, 7L, 7L, 7L, 7L, 7L, 7L, 8L, 8L, 8L, 8L, 8L, 8L, 8L, 
+8L, 8L, 8L, 8L, 8L, 8L, 8L, 8L, 8L, 8L, 8L, 8L, 8L, 8L, 8L, 8L, 
+8L, 8L, 8L, 8L, 8L, 8L, 8L, 8L, 9L, 9L, 9L, 9L, 9L, 9L, 9L, 9L, 
+9L, 9L, 9L, 9L, 9L, 9L, 9L, 9L, 9L, 9L, 9L, 9L, 9L, 9L, 9L, 9L, 
+9L, 9L, 9L, 9L, 9L, 9L, 9L, 9L, 9L, 9L, 9L, 9L, 9L, 9L, 9L, 9L, 
+9L, 9L, 9L, 9L, 9L, 9L, 9L, 9L, 9L, 9L, 9L, 9L, 9L, 9L, 9L, 9L, 
+9L, 9L, 9L, 9L, 9L, 9L, 9L, 9L), .Label = c("Before 2011", "2011", 
+"2012", "2013", "2014", "2015", "2016", "2017", "2018"), class = "factor"), 
+    Pink = c(3, 1, 1, 4, 2, 1, 3, 4, 3, 3, 4, NA, NA, NA, 1, 
+    2, 1, 1, 1, 3, 2, 3, 2, 0, 1, 2, 1, 3, 1, 3, 1, 2, 1, 2, 
+    2, 2, 3, 2, 2, 0, 1, 1, 1, 4, NA, NA, NA, NA, NA, NA, NA, 
+    NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, 3, 3, 
+    3, 0, 4, 5, 0, 2, 3, 1, 1, 4, 2, 1, 3, 4, 3, 3, 4, 3, 2, 
+    2, 3, 2, 3, 2, 2, 2, 2, 1, 2, 1, 2, 1, 4, 1, 2, 3, 3, 3, 
+    0, 2, 0, 5, 2, 3, 2, 4, 1, 0, 1, 1, 2, 1, 2, 3, 2, 0, 1, 
+    0, 2, 2, 3, 1, 1, 2, 3, 4, 3, 3, 2, 3, 1, 1, 2, 2, 1, 1, 
+    1, 2, 2, 3, 1, 1, 0, 3, 3, 1, 2, 2, NA, NA, NA, NA, NA, NA, 
+    NA, NA, NA, NA, 1, 1, 1, 1, 2, 2, 1, 1, 2, 1, 2, 2, 0, 1, 
+    1, 3, 2, 2, 4, 6, 1, 3, 0, 1, 2, 2, 2, 2, 1, 1, 1, NA, NA, 
+    NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, 
+    NA, NA, NA, 1, 1, 0, 3, 2, 1, 0, 1, 0, 2, 2, 2, 0, 2, 2, 
+    1, 2, 2, 2, 4, 3, 3, 1, 0, 1, 1, 4, 5, 1, 1, 5, 4, 4, 2, 
+    2, 3, 0, 3, 3, 2, 1, 1, 2, 1, 3, 2, 3, 1, 1, 3, 2, 1, 0, 
+    2, 1, 1, 0, 5, 0, 1, 2, 2, 0, 1, 4, 4, 0, 2, 2, 0, 2, 3, 
+    1, 1, 4, 2, 0, 4, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, 
+    NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, 0, 0, 1, 
+    1, 1, 2, 3, 1, 4, 1, 3, 0, 1, 2, 3, 1, 3, 3, 0, 3), Number = c(13, 
+    11, 14, 13, 13, 11, 13, 11, 15, 13, 13, 14, 12, 13, 12, 12, 
+    12, 9, 13, 11, 12, 12, 12, 10, 13, 13, 13, 11, 11, 12, 11, 
+    10, 13, 12, 11, 12, 12, 10, 12, 13, 9, 13, 13, 12, 12, 13, 
+    13, 12, 13, 12, 13, 12, 14, 13, 14, 11, 11, 12, 14, 12, 12, 
+    13, 14, 14, 14, 12, 12, 13, 13, 13, 14, 12, 13, 11, 14, 13, 
+    13, 11, 13, 11, 15, 13, 13, 12, 13, 14, 13, 14, 13, 13, 15, 
+    13, 15, 13, 12, 13, 13, 13, 16, 14, 14, 14, 13, 14, 13, 12, 
+    11, 12, 13, 16, 13, 13, 13, 12, 13, 12, 12, 12, 10, 13, 11, 
+    12, 11, 9, 12, 12, 9, 12, 12, 11, 13, 14, 12, 13, 12, 15, 
+    13, 12, 13, 12, 15, 12, 13, 12, 14, 14, 14, 14, 13, 15, 11, 
+    12, 12, 13, 14, 12, 12, 11, 13, 14, 12, 13, 15, 13, 14, 13, 
+    13, 13, 12, 14, 14, 13, 13, 13, 11, 14, 13, 12, 12, 15, 13, 
+    12, 13, 13, 14, 14, 12, 13, 14, 11, 14, 13, 10, 13, 12, 12, 
+    12, 13, 13, 13, 13, 12, 12, 14, 13, 12, 12, 13, 13, 12, 13, 
+    12, 13, 14, 11, 12, 12, 12, 13, 11, 13, 11, 12, 12, 11, 11, 
+    11, 11, 12, 12, 12, 12, 13, 12, 11, 12, 11, 12, 12, 12, 12, 
+    11, 13, 13, 12, 12, 12, 11, 12, 13, 13, 13, 12, 13, 12, 12, 
+    11, 12, 12, 13, 12, 11, 12, 11, 13, 13, 12, 12, 11, 12, 12, 
+    12, 13, 14, 12, 13, 12, 13, 12, 13, 13, 13, 14, 15, 13, 14, 
+    13, 14, 14, 13, 13, 12, 15, 13, 13, 13, 11, 13, 13, 12, 12, 
+    14, 13, 13, 13, 12, 14, 13, 13, 13, 13, 13, 11, 13, 13, 13, 
+    13, 14, 13, 15, 13, 14, 11, 14, 14, 14, 13, 13, 12, 13, 13, 
+    13, 13, 14, 14), filter_. = structure(c(1L, 1L, 1L, 1L, 1L, 
+    1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 
+    1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 
+    1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 
+    1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 
+    1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 
+    1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 
+    1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 
+    1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 
+    1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 
+    1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 
+    1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 
+    1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 
+    1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 
+    1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 
+    1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 
+    1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 
+    1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 
+    1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 2L, 2L, 2L, 2L, 
+    2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 
+    2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 
+    2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 
+    2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L
+    ), .Label = c("Not Selected", "Selected"), class = "factor"), 
+    Prop = c(0.230769230769231, 0.0909090909090909, 0.0714285714285714, 
+    0.307692307692308, 0.153846153846154, 0.0909090909090909, 
+    0.230769230769231, 0.363636363636364, 0.2, 0.230769230769231, 
+    0.307692307692308, NA, NA, NA, 0.0833333333333333, 0.166666666666667, 
+    0.0833333333333333, 0.111111111111111, 0.0769230769230769, 
+    0.272727272727273, 0.166666666666667, 0.25, 0.166666666666667, 
+    0, 0.0769230769230769, 0.153846153846154, 0.0769230769230769, 
+    0.272727272727273, 0.0909090909090909, 0.25, 0.0909090909090909, 
+    0.2, 0.0769230769230769, 0.166666666666667, 0.181818181818182, 
+    0.166666666666667, 0.25, 0.2, 0.166666666666667, 0, 0.111111111111111, 
+    0.0769230769230769, 0.0769230769230769, 0.333333333333333, 
+    NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, 
+    NA, NA, NA, NA, NA, 0.214285714285714, 0.25, 0.25, 0, 0.307692307692308, 
+    0.384615384615385, 0, 0.166666666666667, 0.230769230769231, 
+    0.0909090909090909, 0.0714285714285714, 0.307692307692308, 
+    0.153846153846154, 0.0909090909090909, 0.230769230769231, 
+    0.363636363636364, 0.2, 0.230769230769231, 0.307692307692308, 
+    0.25, 0.153846153846154, 0.142857142857143, 0.230769230769231, 
+    0.142857142857143, 0.230769230769231, 0.153846153846154, 
+    0.133333333333333, 0.153846153846154, 0.133333333333333, 
+    0.0769230769230769, 0.166666666666667, 0.0769230769230769, 
+    0.153846153846154, 0.0769230769230769, 0.25, 0.0714285714285714, 
+    0.142857142857143, 0.214285714285714, 0.230769230769231, 
+    0.214285714285714, 0, 0.166666666666667, 0, 0.416666666666667, 
+    0.153846153846154, 0.1875, 0.153846153846154, 0.307692307692308, 
+    0.0769230769230769, 0, 0.0769230769230769, 0.0833333333333333, 
+    0.166666666666667, 0.0833333333333333, 0.2, 0.230769230769231, 
+    0.181818181818182, 0, 0.0909090909090909, 0, 0.166666666666667, 
+    0.166666666666667, 0.333333333333333, 0.0833333333333333, 
+    0.0833333333333333, 0.181818181818182, 0.230769230769231, 
+    0.285714285714286, 0.25, 0.230769230769231, 0.166666666666667, 
+    0.2, 0.0769230769230769, 0.0833333333333333, 0.153846153846154, 
+    0.166666666666667, 0.0666666666666667, 0.0833333333333333, 
+    0.0769230769230769, 0.166666666666667, 0.142857142857143, 
+    0.214285714285714, 0.0714285714285714, 0.0714285714285714, 
+    0, 0.2, 0.272727272727273, 0.0833333333333333, 0.166666666666667, 
+    0.153846153846154, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, 
+    0.0714285714285714, 0.0769230769230769, 0.0769230769230769, 
+    0.0769230769230769, 0.166666666666667, 0.142857142857143, 
+    0.0714285714285714, 0.0769230769230769, 0.153846153846154, 
+    0.0769230769230769, 0.181818181818182, 0.142857142857143, 
+    0, 0.0833333333333333, 0.0833333333333333, 0.2, 0.153846153846154, 
+    0.166666666666667, 0.307692307692308, 0.461538461538462, 
+    0.0714285714285714, 0.214285714285714, 0, 0.0769230769230769, 
+    0.142857142857143, 0.181818181818182, 0.142857142857143, 
+    0.153846153846154, 0.1, 0.0769230769230769, 0.0833333333333333, 
+    NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, 
+    NA, NA, NA, NA, NA, 0.0833333333333333, 0.0833333333333333, 
+    0, 0.230769230769231, 0.181818181818182, 0.0769230769230769, 
+    0, 0.0833333333333333, 0, 0.181818181818182, 0.181818181818182, 
+    0.181818181818182, 0, 0.166666666666667, 0.166666666666667, 
+    0.0833333333333333, 0.166666666666667, 0.153846153846154, 
+    0.166666666666667, 0.363636363636364, 0.25, 0.272727272727273, 
+    0.0833333333333333, 0, 0.0833333333333333, 0.0833333333333333, 
+    0.363636363636364, 0.384615384615385, 0.0769230769230769, 
+    0.0833333333333333, 0.416666666666667, 0.333333333333333, 
+    0.363636363636364, 0.166666666666667, 0.153846153846154, 
+    0.230769230769231, 0, 0.25, 0.230769230769231, 0.166666666666667, 
+    0.0833333333333333, 0.0909090909090909, 0.166666666666667, 
+    0.0833333333333333, 0.230769230769231, 0.166666666666667, 
+    0.272727272727273, 0.0833333333333333, 0.0909090909090909, 
+    0.230769230769231, 0.153846153846154, 0.0833333333333333, 
+    0, 0.181818181818182, 0.0833333333333333, 0.0833333333333333, 
+    0, 0.384615384615385, 0, 0.0833333333333333, 0.153846153846154, 
+    0.166666666666667, 0, 0.0833333333333333, 0.307692307692308, 
+    0.307692307692308, 0, 0.142857142857143, 0.133333333333333, 
+    0, 0.142857142857143, 0.230769230769231, 0.0714285714285714, 
+    0.0714285714285714, 0.307692307692308, 0.153846153846154, 
+    0, 0.266666666666667, NA, NA, NA, NA, NA, NA, NA, NA, NA, 
+    NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, 0, 0, 
+    0.0714285714285714, 0.0769230769230769, 0.0666666666666667, 
+    0.153846153846154, 0.214285714285714, 0.0909090909090909, 
+    0.285714285714286, 0.0714285714285714, 0.214285714285714, 
+    0, 0.0769230769230769, 0.166666666666667, 0.230769230769231, 
+    0.0769230769230769, 0.230769230769231, 0.230769230769231, 
+    0, 0.214285714285714)), .Names = c("Year", "Pink", "Number", 
+"filter_.", "Prop"), row.names = c(NA, -335L), class = "data.frame", variable.labels = structure(c("", 
+"Number of pink Smarties", "Number of Smarties", "(Year = 2018) (FILTER)", 
+""), .Names = c("Year", "Pink", "Number", "filter_$", "Prop")), codepage = 65001L)
+```
+
+
+
+```{r echo=FALSE, results='hide'}
+# Find the first ten in each class
+S.fun <- subset(S.fun,  Year !="Before 2011")
+S.fun$Year <- as.numeric( as.character(S.fun$Year) )
+
+Yr.min <- 2013 #  min(S.fun$Year)
+Yr.max <- max( S.fun$Year )
+
+nn <- 10
+
+new.df <- rep(-1, nn)
+
+yrs <- NULL
+
+col.number <- 1 # Recall col 1 is the dummy data!
+
+for (i in (Yr.min:Yr.max) ) {
+  S.sub <-  S.fun[S.fun$Year==i, ]
+  
+  n.sub <- length(S.sub$Number)
+  
+  n.groups.of.ten <- n.sub%/%nn
+  
+  if (n.groups.of.ten > 0 ) {
+  
+    for (j in (1:n.groups.of.ten)){
+      
+      col.number <- col.number + 1
+
+      new.col <- S.sub$Number[((j-1)*nn+1) : (j*nn)]
+
+      new.col.name <- paste(i, "-", j, sep="")
+      new.df <- cbind(new.df, new.col.name=new.col)
+      colnames( new.df ) [col.number] <- new.col.name
+
+      yrs <- c(yrs, i)
+    }
+  }
+}
+# Now remove the dummy first col
+new.df <- new.df[, -1]
+
+# Add years
+new.df2 <- data.frame( "Mn"=colMeans(new.df), "Year"=yrs) 
+Num.Bags <-  dim(new.df)[2]
+
+# Each year's data:
+for (i in (Yr.min:Yr.max)){
+  cat(i, ": ", new.df2$Mn[new.df2$Year==i ], "\n", sep="; ")
+  tmp.mns <- new.df2$Mn[new.df2$Year==i ]
+  
+  VALS <- paste(tmp.mns, collapse=", ")
+   eval(
+   	parse( 
+   		text = paste("YR", i, " <- c(", VALS, ")", sep="" )  
+   		) 
+   	)
+}
+
+
+
+# Means
+mns <- colMeans(new.df)
+```
+
+
+
+Confidence intervals (CIs) are used to 
+provide an estimate of a population quantity based on sample information.
+In this section,
+we examine CIs for a single mean.
+
+```{example}
+In a study of paramedic practice
+[@data:MacDonald:Resuscitation],
+a sample of $n=16$ paramedics 
+were asked to perform certain relevant tasks while 
+wearing a 'hazardous materials suit'
+(or, 'protective suit').
+They produced a table about
+the times (in seconds) to complete the given tasks with and without the protective suit,
+part of which is shown in 
+Table \@ref(tab:DefibTimes).
+
+The sample means will vary from sample to sample.
+For this reason,
+they produce a 95\% CI for the times
+for the population means.
+```
+
+
+Table: (\#tab:DefibTimes) Defibrillation times (in seconds) with and without a protective suit
+
+~         | Without protective suit | With protective suit
+---------:+:-----------------------:+:----------------------:
+Mean:     | 46 | 57
+95\% CI:  | 41--51  |  50--64
+
+
+In this section,
+we will consider the problem of estimating  a population mean from a sample.
+
+Let's begin with a simple situation:
+Rolling dice again.
+Suppose we roll a die 25 times, and
+find the mean of the numbers that are rolled.
+What will be the mean of those numbers?
+
+```{r echo=FALSE}
+die.mn <- sum( (1:6)*(1/6))  # 3.5 as expected
+
+
+die.vr <-  sum( ((1:6)-3.5)^2 *(1/6))
+die.se <- sqrt( die.vr/25)
+```
+
+Of course, 
+we don't know what the mean will be from any sample of 25 rolls.
+The sample mean will vary from sample to sample,
+and so has sampling variation.
+Since every face of the die is equally likely to appear on any one roll,
+the mean roll will be 3.5: right in the middle of the numbers on each face.
+(Some fancy statistical theory, that's beyond this course,
+shows us that the standard deviation will be $\text{s.e.}(\bar{x}) = `r round(die.se, 3)`$).
+
+
+```{r RollDiceMeanHTML, echo=FALSE, fig.cap="Try This", fig.align="center"}
+#includeHTML("./Animations/RollDiceHistMovie.html")
+htmltools::tags$iframe(title = "My embedded document", src = "./Animations/RollDiceMeanMovie.html", height=580, width=520) 
+```
+
+
+Of course,
+the mean for any set of 25 rolls will sometimes be higher than 3.5,
+and sometimes lower than 3.5,
+but most of the time the mean should be near 3.5.
+If we asked lots of people to make sets of 25 rolls, 
+and compute the mean of each set,
+we could see how much that sample mean woud vary.
+
+
+```{r RollDiceHistMeanHTML, echo=FALSE, fig.cap="Try This", fig.align="center"}
+#includeHTML("./Animations/RollDiceHistMovie.html")
+htmltools::tags$iframe(title = "My embedded document", src = "./Animations/RollDiceMeanHistMovie.html", height=580, width=520) 
+```
+
+
+As we saw with the sample proportions,
+the sample means have an approximate normal distribution.
+When we know the value of the population mean (denoted $\mu$)
+and the population standard deviation (denoted $\sigma$)---which is almost never the case---then,
+under certain conditions
+(Sect. \@ref(ValiditySampleMean)),
+the sample means will be distributed as:
+
+* a normal distribution
+* with a mean of $\mu$; and
+* with a standard deviation of $\displaystyle \text{s.e.}(\bar{x}) = \frac{\sigma}{\sqrt{n}}$.
+
+So for our dice example,
+the sample means will be distributed as:
+
+* a normal distribution
+* with a mean of $\mu = 3.5$; and
+* with a standard deviation of $\displaystyle \text{s.e.}(\bar{x}) = \frac{\sigma}{\sqrt{n}}$.
+
+
+With this knowledge,
+we can make some statements about what values of the sample mean
+we are likely to expect,
+using the 68--95--99.7 rule (Def. \@ref(def:EmpiricalRule)).
+For example,
+
+* *Approximately* 68% of sample means will be between 
+3.5 give-or-take `r round(die.se, 3)`.
+* *Approximately* 95% of sample means will be between 
+3.5 give-or-take $2\times `r round(die.se, 3)`$.
+* *Approximately* 99.7% of sample means will be between 
+3.5 give-or-take $3\times`r round(die.se, 3)`$.
+
+
+Of course,
+we almost never know the population mean (after all, we are taking a sample to estimate the mean...),
+and almost never know the population standard deviation either.
+
+
+
+
+## One sample mean: The sampling distribution
+
+When a sample mean estimates a population mean,
+there will be sampling variation,
+as we saw above.
+Sometimes the sample mean $\bar{x}$ will be larger than $\mu$,
+and sometimes the sample mean $\bar{x}$ will be smaller than $\mu$;
+most of the time,
+the sample mean will be close to the true value of $\mu$.
+(Of course
+for any one sample,
+we don't know if our sample mean is close to the population mean,
+or is one of the unusually small or large sample means.)
+
+It turns out that
+the values of $\bar{x}$ vary in a way 
+such that they have a normal distribution centred around $\mu$.
+
+How much sampling variation can we expect?
+The *standard error* estimates the amount of sampling variation:
+how much the value of $\bar{x}$ is likely to vary from sample to sample.
+For sample means, 
+the standard error is
+\[
+	\text{s.e.}(\bar{x}) = \frac{s}{\sqrt{n}},
+\]
+where $s$ is the standard deviation of the individuals.
+The *standard error* of the mean
+is a special standard deviation,
+that measures the amount of variation in the estimates $\bar{x}$.
+
+
+```{definition, name="Standard error of the mean"}
+The *standard error of the sample mean*
+is the standard deviation of all possible
+   values of the sample estimate.
+   Any quantity estimated from a sample has a standard error. 
+   
+   The standard error for the sample mean is
+   $\displaystyle \text{s.e.}(\bar{x}) = \frac{s}{\sqrt{n}}$,
+   where $n$ is the size of the sample,
+   and $s$ is the standard deviation of the individual observations in the sample. 
+``` 
+
+So in summary,
+the value of $\bar{x}$ varies from sample to sample.
+These possible values of $\bar{x}$ have:
+
+* a normal distribution;
+* centred around $\mu$;
+* with a standard deviation of $\displaystyle\text{s.e.}(\bar{x}) = \frac{s}{\sqrt{n}}$.
+
+Of course,
+we don't know what the value of $\mu$ is
+(that's why we are estimating it),
+but we have an estimate of $\mu$: the value of $\bar{x}$.
+This all means that we have some idea of how the values of $\bar{x}$
+are likely to vary.
+
+
+
+
+Consider again our sample of rolling dice.
+
+Suppose again we roll the dice 25 times.
+We get these rolls:
+  
+```{r echo=FALSE}
+set.seed(31415)
+
+oneroll <- sample(1:6, 25, replace=TRUE)
+oneroll.mn <- mean(oneroll)
+oneroll.sd <- sd(oneroll)
+oneroll.se <- oneroll.sd / sqrt(25)
+oneroll
+```
+
+
+For our example of $n=25$ boxes, 
+we find:
+
+* $\bar{x}=`r round(oneroll.mn, 3)`$ and
+* $s = `r round(oneroll.sd, 4)`$.
+
+That is,
+the sample means have a sampling variation of 
+\[
+   \text{s.e.}(\bar{x}) = \frac{s}{\sqrt{n}} = \frac{`r round(oneroll.sd, 4)`}{\sqrt{25}}= `r round(oneroll.se, 3)`.   
+\]
+
+
+```{exercise}
+Based on this information,
+we can draw a picture of the likely possible values of $\bar{x}$
+(Fig. \@ref(fig:DieRollPossibleMeans)).
+That is,
+it would be unlikely to get a mean greater than 4.8,
+or less than 2.4,
+from 25 rolls of a die.
+```
+
+
+```{r DieRollPossibleMeans, echo=FALSE, fig.cap="An estimate of the distribution of the mean of 25 rolls", fig.align="center"}
+plot.norm(3.6, 0.387, 
+          xlab.name="Mean of 25 rolls",
+          shade.lo.x =-10, 
+          shade.hi.x=-10)
+```
+   
+
+## One sample mean: Confidence intervals
+
+
+We don't know the value of $\mu$,
+but we have an estimate:
+the value of $\bar{x}$.
+The actual value of $\mu$ might be a bit larger than $\bar{x}$, 
+or a bit smaller than $\bar{x}$;
+that is,
+$\mu$ is probably about $\bar{x}$, give-or-take a bit.
+
+Furthermore,
+we have seen that the values of $\bar{x}$ vary from sample to sample, 
+and we have just noted that they vary with an normal distribution.
+This means we can draw a picture of how the values of $\bar{x}$ are likely to vary.
+Then,
+using the 68--95--99.7 rule (Def. \@ref(def:EmpiricalRule)),
+we could create an approximate 95\% interval in which the values of $\bar{x}$ 
+are likely to fall.
+This is a *confidence interval*.
+
+A confidence interval for the population mean is an interval surrounding a sample mean.
+In general,
+an approximate 95\% confidence interval (CI) for $\mu$ is
+$\bar{x}$ give-or-take about two standard errors.
+      
+
+In general,
+the confidence interval (CI) for $\mu$ is
+\[
+   \bar{x} \pm \overbrace{(\text{Multiplier}\times\text{std error})}^{\text{Margin of error}}.
+\]
+For an approximate 95\% CI,
+the multiplier is about $2$
+(since about 95\% of values are within two standard deviations of the mean)
+
+We often find 95\% CI,
+but we can find a CI  with *any* level of confidence:
+we just need a different multiplier.
+We would need to use tables, or use software (like SPSS).
+We'll just use a multiplier of $2$ (and hence find *approximate* 95\% CIs),
+and otherwise use SPSS.
+
+
+
+In general,
+the confidence interval (CI) for $\mu$ is
+\[
+   \bar{x} \pm \underbrace{(\text{Multiplier}\times\text{std error})}_{\text{Margin of error}}.
+\]
+For a 95\% CI,
+the multiplier is about 2;
+for a 68\% CI,
+the multiplier is about 1.
+Commonly,
+CIs\ are computed at 90\%, 95\% and 99\% confidence levels.
+
+
+```{block2, type="rmdnote"}
+Note that the multipliers here are not exactly $z$-scores in this case though.
+They would be $z$-scores *if* we knew the value of $\sigma$;
+but since we don't,
+we use something called a $t$-score as the multiplier.
+The $t$- and $z$-multipliers are very similar,
+and (except for very small sample sizes) 
+it is reasonable to use a multiplier of 2 to compute
+*approximate* 95\% CIs in either case.
+We'll let SPSS handle the specifics.
+```
+
+
+
+
+If we collected many samples of this size,
+$\bar{x}$ and $s$ would be different for each sample,
+so the calculated
+CI  would be different for each.
+Some CIs would contain the population mean $\mu$,
+and some would not;
+and we never know if our CI  contains $\mu$.
+
+```{definition, name="Confidence interval"}
+If we found many samples in the same way,
+and computed the 95\% CI  from each,
+about 95\% of the CIs would contain $\mu$.
+This interval is called a *confidence interval*
+```
+
+Loosely:
+There is a 95\% chance that our 95\% CI  straddles $\mu$.
+For our single-sample CI,
+we don't know if our CI  includes the value of $\mu$ or not.
+
+
+In general,
+the confidence interval (CI) for $\mu$ is
+\[
+   \bar{x} \pm \overbrace{\text{Multiplier}\times\text{std error}}^{\text{Margin of error}}
+\]
+
+   
+```{exercise}         
+Would a 99\% CI for $\mu$ be wider or narrower than the 95\% CI?  Why?         
+```
+    
+
+
+
+A 99\% CI  for $\mu$ is wider than a 95\% CI:
+to be more confident of netting the target (e.g. $\mu$), the CI  would need to be wider.
+A 90\% CI  would need to be narrower than the 95\% CI dots
+         
+         
+         
+         
+         
+         
+         
+         
+
+## SMARTIES: keep the smartes for the lecture.
+
+
+Most of my children love Smarties.
+How many Smarties are in a fun size box, on average?
+I don't know for sure,
+but I could make an estimate of the *mean* number in a Fun Size box
+by counting the number of Smarties in a sample of Fun Size boxes,
+and working out the sample mean number $\bar{x}$.
+
+
+
+
+
+
+
+## SMARTIES: One sample mean: Sampling variation
+
+Roll die 10 times, find the mean number.
+Because we know how a die is made,
+we can determine (using mathematics) what the mean will be
+in the population 
+if we roll a die 10 times.
+(Recall, 
+we could also know how often we would expect to roll an even number.)
+
+
+
+Suppose *many* people do this.
+
+
+
+I have kids, 
+and kids love Smarties.
+If I buy them a treat,
+it may be a bag of fun size boxes of Smarties.
+Every fun-size box,
+though,
+doesn't contain exactly the same number of Smarties
+(Fig. \@ref(fig:SmartiesHisto)).
+The number of Smarties in each box varies:
+there is sampling variation.
+
+
+
+```{r SmartiesHisto, echo=FALSE, fig.cap="A histogram of the number of Smarties in a fun size box", fig.align="center"}
+hist(new.df,
+	col=plot.colour,
+	las=1,
+	ylim=c(0, 100),
+	main="Number of Smarties in a\nindividual Fun Size boxes",
+	xlab="Number of Smarties in a box",
+	ylab="Number of boxes",
+	breaks=seq(8, 18, by=1)
+)
+box()
+```
+
+
+And every time I get a bag  of Fun Size Smarties boxes,
+I am likely to get a different value for the *sample mean* number of Smarties
+in the boxes within each bag.
+Again,
+every bag of Fun Size boxes of Smarties is different.
+That is,
+the value of $\bar{x}$ is likely to be different for every sample,
+so that the sample mean *varies*.
+There is *sampling variation*.
+As usual,
+we can measure how much the sample mean is likely to vary from sample to sample
+by using the *standard error* of the sample mean.
+
+The *population* mean number of Smarties in a box is $\mu$,
+but we don't know what it's value is
+(that's why we're taking our sample).
+However,
+the value of $\bar{x}$ varies from sample to sample.
+We *estimate* $\mu$ from a sample using $\bar{x}$.
+The value of $\bar{x}$ is likely to be different in every sample.
+
+Since I have been studying Smarties for a long time
+(all in the name of research of course), 
+we can see this variation.
+Boxes of Fun Size Smarties come in bags of 11,
+so I generally take $n=10$ at a time
+(and I eat the eleventh),
+and compute the mean number of Smarties in a Fun Size box
+from the $n=10$ boxes that remain.
+Here are the mean numbers of Smarties per fun size box,
+for each of the bags of $n=10$ that I looked at:
+
+* In 2013 (from `r sum(new.df2$Year==2013 )` bags of $n=10$ Fun Size Smarties): 
+	`r YR2013`
+* In 2014 (from `r sum(new.df2$Year==2014 )` bags of $n=10$ Fun Size Smarties): 
+	`r YR2014`
+* In 2015 (from `r sum(new.df2$Year==2015 )` bags of $n=10$ Fun Size Smarties): 
+	`r YR2015`
+* In 2016 (from `r sum(new.df2$Year==2016 )` bags of $n=10$ Fun Size Smarties): 
+	`r YR2016`
+*	In 2017 (from `r sum(new.df2$Year==2017 )` bags of $n=10$ Fun Size Smarties): 
+	`r YR2017`
+* In 2018 (from `r sum(new.df2$Year==2018 )` bags of $n=10$ Fun Size Smarties): 
+	`r YR2018`	
+
+
+
+
+So far,
+I have examined 
+`r prod(dim(new.df))`
+Fun Size boxes of Smarties,
+so we can produced a histogram of the *total number* of Smarties in a box
+(Fig.~\ref{FG:CIs:SmartiesInABox}, left panel);
+the number of Smarties in a box looks approximately like a normal distribution.
+
+I can also plot the sample mean number in a box
+from the `r Num.Bags` bags of 10 Fun Size boxes that I examined
+(Fig. \@ref(fig:SmartiesHistoMeans)).
+What is the *mean* number of Smarties in a box, in the population?
+
+
+```{r SmartiesHistoMeans, echo=FALSE, fig.cap="A histogram of the *mean* number of Smarties in a bag of 10 fun size boxes", fig.align="center"}
+hist(mns, 
+	las=1, 
+	col=plot.colour, 
+	xlim=c(8, 18),
+	ylim=c(0, 12),
+	main="Mean number of Smarties in a box\n in bags of 10 Fun Size boxes",   
+	ylab="Number of bags of 10",
+	xlab="Mean number of Smarties in a bag of 10",
+	breaks=seq(8, 18, by=1)) 
+box()
+```
+
+
+
+
+
+
+
+## SMARTIES: One sample mean: The sampling distribution
+
+When a sample mean estimates a population mean,
+there will be sampling variation:
+Sometimes the sample mean $\bar{x}$ will be larger than $\mu$,
+and sometimes the sample mean $\bar{x}$ will be smaller than $\mu$;
+most of the time,
+the sample mean will be close to the true value of $\mu$.
+(Of course
+for any one sample,
+we don't know if our sample mean is close to the population mean,
+or is one of the unusually small or large sample means.)
+
+It turns out that
+the values of $\bar{x}$ vary in a way 
+such that they have a normal distribution centred around $\mu$.
+
+How much sampling variation can we expect?
+The *standard error* estimates the amount of sampling variation:
+how much the value of $\bar{x}$ is likely tio vary from sample to sample.
+For sample means, 
+the standard error is
+\[
+	\text{s.e.}(\bar{x}) = \frac{s}{\sqrt{n}},
+\]
+where $s$ is the standard deviation of the individuals.
+The *standard error* of the mean
+is a special standard deviation,
+that measures the amount of variation in the estimates $\bar{x}$.
+
+
+```{definition, name="Standard error of the mean"}
+The *standard error of the sample mean*
+is the standard deviation of all possible
+   values of the sample estimate.
+   Any quantity estimated from a sample has a standard error. 
+   
+   The standard error for the sample mean is
+   $\displaystyle \text{s.e.}(\bar{x}) = \frac{s}{\sqrt{n}}$,
+   where $n$ is the size of the sample,
+   and $s$ is the standard deviation of the individual observations in the sample. 
+``` 
+
+So in summary,
+the value of $\bar{x}$ varies from sample to sample.
+These possible values of $\bar{x}$ have:
+
+* a normal distribution;
+* centred around $\mu$;
+* with a standard deviation of $\displaystyle\text{s.e.}(\bar{x}) = \frac{s}{\sqrt{n}}$.
+
+Of course,
+we don't know what the value of $\mu$ is
+(that's why we are estimating it),
+but we have an estimate of $\mu$: the value of $\bar{x}$.
+This all means that we have some idea of how the values of $\bar{x}$
+are likely to vary.
+
+
+
+```{exercise}
+Consider again our sample of Smarties:
+
+* For our example of $n=\qquad$ boxes:
+$\bar{x}=\qquad\qquad$ and $s=\qquad\qquad$
+
+* Then the sample means have a sampling variation of 
+         \[
+            \text{s.e.}(\bar{x}) = \frac{s}{\sqrt{n}} = \frac{\phantom{11111}}{\sqrt{\phantom{1111}}}=\phantom{0000000}   
+         \]
+
+```
+
+```{exercise}
+Based on this information,
+draw a picture of the possible values of $\bar{x}$:
+
+
+IMAGE
+```
+
+
+   
+
+## SMARIES: One sample mean: Confidence intervals
+
+
+We don't know the value of $\mu$,
+but we have an estimate:
+the value of $\bar{x}$.
+The actual value of $\mu$ might be a bit larger than $\bar{x}$, 
+or a bit smaller than $\bar{x}$;
+that is,
+$\mu$ is probably about $\bar{x}$, give-or-take a bit.
+
+Furthermore,
+we have seen that the values of $\bar{x}$ vary from sample to sample, 
+and we have just noted that they vary with an normal distribution.
+This means we can draw a picture of how the values of $\bar{x}$ are likely to vary.
+Then,
+using the 69--95--99.7  rule (Def. \@ref(def:EmpiricalRule)),
+we could create an approximate 95\% interval in which the values of $\bar{x}$ 
+are likely to fall.
+This is a *confidence interval*.
+
+A confidence interval for the population mean is an interval surrounding a sample mean.
+In general,
+an approximate 95\% confidence interval (CI) for $\mu$ is
+$\bar{x}$ give-or-take about two standard errors.
+      
+
+In general,
+the confidence interval (CI) for $\mu$ is
+\[
+   \bar{x} \pm \overbrace{(\text{Multiplier}\times\text{std error})}^{\text{Margin of error}}.
+\]
+For an approximate 95\% CI,
+the multiplier is about $2$
+(since about 95\% of values are within two standard deviations of the mean)
+
+We often find 95\% CI,
+but we can find a CI  with *any* level of confidence:
+we just need a different multiplier.
+We would need to use tables\dots or use SPSS.
+We'll just use a multiplier of $2$ (and hence find *approximate* 95\% CIs),
+and otherwise use SPSS.
+
+
+
+In general,
+the confidence interval (CI) for $\mu$ is
+\[
+   \bar{x} \pm \underbrace{(\text{Multiplier}\times\text{std error})}_{\text{Margin of error}}.
+\]
+For a {95\% CI},
+the multiplier is about 2;
+for a {68\% CI},
+the multiplier is about 1.
+Commonly,
+CIs\ are computed at 90\%, 95\% and 99\% confidence levels.
+
+NOTE:
+	Note that the multipliers here are not exactly $z$-scores in this case though.
+	They would be $z$-scores if we knew the value of $\sigma$;
+	but since we don't,
+	we use something called a $t$-score as the multiplier.
+	The $t$- and $z$-multipliers are very similar,
+	and (except for very small sample sizes) 
+	it is reasonable to use a multiplier of 2 to compute
+	approximate 95\% CIs.
+	We'll let SPSS handle the specifics\dots
+
+
+
+
+
+If we collected many samples of this size,
+$\bar{x}$ and $s$ would be different for each sample,
+so the calculated
+CI  would be different for each.
+Some CIs\ would contain the population mean $\mu$,
+and some would not;
+we never know if our CI  contains $\mu$.
+
+```{definition, name="Confidence interval"}
+If we found many samples in the same way,
+and computed the 95\% CI  from each,
+about 95\% of the CIs\ would contain $\mu$.
+This interval is called a *confidence interval*
+```
+
+Loosely:
+There is a 95\% chance that our 95\% CI  straddles $\mu$.
+For our single-sample CI,
+we don't know if our CI  includes the value of $\mu$ or not.
+
+
+In general,
+the confidence interval (CI) for $\mu$ is
+\[
+   \bar{x} \pm \overbrace{\text{Multiplier}\times\text{std error}}^{\text{Margin of error}}
+\]
+
+   
+```{exercise}         
+Would a 99\% CI for $\mu$ be wider or narrower than the 95\% CI?  Why?         
+```
+    
+
+
+
+A 99\% CI  for $\mu$ is wider than a 95\% CI:
+to be more confident of netting the target (e.g. $\mu$), the CI  would need to be wider.
+A 90\% CI  would need to be narrower than the 95\% CI dots
+         
+         
+         
+         
+         
+## One sample mean: Statistical validity conditions {#ValiditySampleMean}
+
+As with any inference procedure,
+the underlying mathematics requires certain conditions to be met so that the
+results are statistically valid.
+For a CI  for one mean,
+these conditions are:
+
+* The data are from a random sample;
+	   and
+* At least one of these is true:
+    - The sample size is sufficiently large (i.e.\ larger than about 25);
+		  *or*
+    -	The sample size is small (i.e.\ less than about 25),
+		  **and**
+		  the *population* data has an approximate normal distribution
+
+
+We can explore the histogram of the *sample*
+to determine if normality of the *population* seems reasonable,
+but we can't really be sure about the population just from the sample.
+All we can reasonably hope to do 
+is to identify (from the sample)
+populations that are very non-normal by looking at the sample.
+
+```{example}
+In a study
+(@data:silverman:CT, @data:zou:fluoroscopy, @mypapers:dunnsmyth:glms)
+to examine the exposure to radiation
+for CT scans in the abdomen,
+seventeen patients had the exposure recorded.
+A histogram of the
+total radiation dose received is shown below. 
+
+We could form a CI  for the mean.
+However,
+since the sample is 'small',
+we would need that the *population* has a normal distribution
+for the CI to be valid.
+Even though the histogram is from *sample* data,
+it seems improbable that the data in the sample
+would have come from a population with a normal distribution.
+Computing a CI  for the mean of these data will probably be statistically invalid.
+	
+In this case, 
+other means (beyond the scope of this course) are possible for computing
+a confidence interval for the mean.
+```
+
+```{r echo=FALSE}
+library(GLMsData)
+data(fluoro)
+
+hist(fluoro$Dose,
+	col=plot.colour,
+	las=1,
+	xlab="Dose (in rads)",
+	ylab="Number of people",
+	main="Radiation dose for 17 people\nundergoing a CT scan")
+box()
+```
+
+It is important to understand the implication of these conditions.
+The CI  requires that the distribution of the *sample means* has a normal distribution
+so that we can use the 68--95--99.7 rule (Def. \@ref(def:EmpiricalRule)).
+Provided the sample size is larger than about 25,
+this will be approximately true 
+*even if* the 
+the population (or the sample) does not have a normal distribution.
+That is,
+when $n>25$
+the sample means generally have an approximate normal distribution.
+This is one reason why using means to describe samples is useful:
+the distribution of sample medians is *far* more complicated to describe.
+
+
+```{example}
+In the Smarties example, since we have a 'small sample',
+the CI  may not be valid, just 'indicative' and approximately correct.
+
+EXPAND ON THIS; AND CHECK!!
+
+FIX
+```
+
+
+
+## Example: NHANES
+Previously,
+we have asked this question:
+
+> Among Americans,
+> is the average 
+> direct HDL cholesterol level
+> different for current smokers and non-smokers?
+
+The response variable is direct HDL cholesterol concentration.
+So what is the population mean direct HDL cholesterol concentration?
+The data comes from the NHANES study
+(@data:NHANES3:Data, @data:NHANES3, @data:NHANES:Rpackage).
+
+
+```{r echo=FALSE}
+n.S <- length(NHANES$DirectChol) - sum( is.na(NHANES$DirectChol))
+
+mean.S <- mean(NHANES$DirectChol, na.rm=TRUE)
+sd.S <- sd(NHANES$DirectChol, na.rm=TRUE)
+
+se.S <- sd(NHANES$DirectChol, na.rm=TRUE) / sqrt( n.S )
+
+ci.lo.S <- mean.S - 2*se.S
+ci.hi.S <- mean.S + 2*se.S
+
+
+t99 <- abs( qt(0.005, df=n.S - 1) )
+ci.lo.S99 <- mean.S - t99*se.S
+ci.hi.S99 <- mean.S + t99*se.S
+```
+
+From the data (i.e. using SPSS):
+
+* $\bar{x} = 
+		`r round( mean.S, 4)`$ mmol/L;
+* $s=`r round( sd.S, 5)`$ mmol/L;
+* $n= `r n.S`$.
+
+Now we know that the value of $\bar{x}$
+    is likely to vary from sample to sample;
+    how much sampling variation is likely?
+    The standard error is:
+    \[
+        \text{s.e.}(\bar{x}) = 
+        \frac{s}{\sqrt{n}}
+         =
+         \frac{ `r round(sd.S, 5)`}
+               {\sqrt{`r n.S`}} = 
+               `r round(se.S, 5)`.
+    \]
+To find an approximate 95\% CI, 
+    use a multiplier of $2$,
+    when the margin-of-error is      
+    \[
+       2\times `r round(se.S, 4)`
+       = 
+       `r round(2 * se.S, 5)`.
+    \]
+    The approximate 95\% CI  is $`r round( mean.S, 3)`$, 
+    give-or-take $`r round(2 * se.S, 5)`$;
+    or
+from $`r round( ci.lo.S, 3)`$ to $`r round( ci.hi.S, 3)`$ mmol/L.
+
+> Based on the sample of size $n= `r n.S`$,
+> a 95\% CI  
+> for the population mean direct HDL cholesterol levels of Americans 
+> is between 
+> $`r round( ci.lo.S, 3)`$ and $`r round( ci.hi.S, 3)`$ mmol/L.
+
+If we found many samples in the same way,
+and computed the CI  from each,
+about 95\% of the CIs\ would contain $\mu$.
+Loosely, 95\% confident that this CI  straddles the true value of $\mu$.
+
+We now should check the conditions to ensure this is statistical valid.
+Since the data are from a random sample,
+and the sample size is sufficiently large (larger than 25),
+this CI  for mean direct HDL cholesterol is statistically valid,
+*even though* the histogram of direct HDL cholesterol for individuals is skewed
+(Fig. \@ref(fig:NHANEShistogram))
+since it is the distribution of the *sample means* that should be normally distributed.
+
+```{r NHANEShistogram, echo=FALSE, fig.cap="Histogram of direct HDL cholesterol concentration", fig.align="center"}
+hist( NHANES$DirectChol, 
+      xlab="Direct HDL cholesterol concentration (mmol/L)",
+      ylab="Number of people",
+      col=plot.colour,
+      las=1,
+      main="Histogram of direct\nHDL cholesterol concentrations")
+```
+
+To find a 99\% CI, 
+we can use SPSS 
+to find that the 99\% CI  is from 
+$`r round(ci.lo.S99, 3)`$ to 
+$`r round(ci.hi.S99, 3)`$mmol/L.
+      
+   
+> Based on the sample of size $n= `r n.S`$, a 99\% CI  
+> for the population mean direct HDL cholesterol levels of Americans 
+> is between `r round(ci.lo.S99, 3)` and `r round(ci.hi.S99, 3)` mmol/L.
+
+If we found many samples in the same way,
+and computed the CI  from each,
+about 99\% of the CIs would contain $\mu$.
+Notice that the 99\% CI  is wider than the 95\% CI.
+
+
+
+
+
+## Examples: Cadmium in peanuts
+
+A study of peanuts from the United States
+[@data:Blair2017:Peanuts]
+found the sample mean cadmium concentration was 0.0768 ppm
+with a standard deviation of 0.0460 ppm,
+from a sample of size 290 peanuts gathered from
+a variety of regions and times.
+
+To find an approximate 95\% CI  for the cadmium concentration
+for all US peanuts,
+we note that the sample mean is $\bar{x} = 0.0768$,
+but every sample of $n=290$ peanuts is likely to produce
+a different sample mean;
+that is,
+the sample mean has a standard error.
+The standard error is
+\[
+	\text{s.e.}(\bar{x}) = \frac{s}{\sqrt{n}} = \frac{0.0460}{\sqrt{290}} = 0.002701.
+\]
+So,
+the approximate 95\% CI\ is
+\[
+	0.0768 \pm (2 \times 0.002701),
+\]
+or
+\[
+	0.0768 \pm 0.00540,
+\]
+which is 0.0714 to 0.0822 ppm.
+(Note that the *margin of error* is 0.00540.)
+
+This means  that,
+if we repeatedly took sample of 290 from this population,
+about 95% of the 95% CIs would contain the population mean.
+In practice:
+We are about 95% confident that the population mean
+cadmium concentration is between  0.0714 to 0.0822 ppm.
+
+
+
+
+```{r echo=FALSE}
+library(GLMsData)
+data(lungcap)
+
+LC.F11 <- subset(lungcap, Age==11 & Gender=="F")
+```
+
+
+
+
+
+
+
+
+
+## One sample mean: Sample sizes estimation
+
+```{r echo=FALSE}
+me <- 0.02
+n.est <- ( 2 * sd.S / me )^2 
+```
+
+We can determine the sample size needed to
+estimate a *sample mean* with a given precision.
+Conservatively,
+the sample size for a 95\% CI  needed is *at least*
+\[
+   \left( \frac{2 \times s}{\text{Margin of error}}\right)^2.
+\] 
+Note: **We always round the sample size up**.
+
+
+For the NHANES data,
+a conservative estimate of the sample size needed to estimate the direct HDL cholesterol levels
+to within $`r me`$ mmol/L with 95\% confidence is at least
+\[
+   \left( \frac{2 \times `r round(sd.S, 5)`}{1}\right)^2 = `r round(n.est, 2)`,    
+\] 
+so we need at least `r ceiling(n.est)` Americans.
+
+
+```{block2, type="rmdnote"}
+We **always** round the sample size up.
+```
+
+
+
+
+
+
+
+
+
+
+
+## Exercises
+
+### Lung capacity in children 
+
+A study
+(@data:Tager:FEV, @BIB:data:FEV, @mypapers:dunnsmyth:glms)
+of the lung capacity of children in East Boston
+measured the forced expiratory volume (FEV) of children in the area.
+In the sample,
+there were 
+$n = `r length(LC.F11$FEV)`$ 11-year-old girls.
+
+For these children.
+the mean lung capacity was 
+$\bar{x} = `r round( mean(LC.F11$FEV), 2)`$
+and the standard deviation was 
+$s = `r round( sd(LC.F11$FEV), 2)`$.
+
+Find an approximate 95\% CI  for the
+population mean lung capacity 
+of 11-year-old females from  East Boston.
+
+
+### OTHERS
+
+
+# Confidence intervals for paired data {#PairedCI}
+
+
+
+## Paired samples
+
+
+
+House insulation is important for saving energy,
+particularly in cold climates.
+In one study
+[@data:OpenUni:insulationBA],
+researchers ran a pilot study}
+to test a new type of house insulation.
+There are various ways to design this study, 
+but here are two options:
+
+* We could take a sample of homes,
+	and measure the energy consumption
+	*before* adding the insulation,
+	and the *after* adding the insulation.
+	Each home gets *two* observations:
+	the energy consumption *before*
+	and
+	*after* adding the insulation.
+	
+*	We could take a sample of homes *without* the insulation,
+	and measure their energy consumption;
+	then take a different sample of homes *with* the insulation
+	and measure their energy consumption.
+
+There are advantages and disadvantages of each design
+[@data:Zimmerman1997:Pairedt],
+but in this case the first design would seem superior (why?).
+
+In the first design,
+each home gets a *pair* of measurements.
+This is called *paired data*,
+which is the subject of this chapter.
+The second design
+requires us to compare the means of two different groups of homes,
+which is the topic of the next chapter.
+
+
+```{definition, name="Paired data"}
+Paired data is when two observations are recorded
+for each unit of analysis.
+```
+
+Note that paired data allows us to ask questions about the *population mean difference*,
+which is not the same as *difference between two population means*
+(this is the subject of the next chapter).
+   
+```{exercise}
+Which of these are paired situations?
+
+* The mean difference between blood pressure before and after taking a drug for 36 people.         
+* The difference between the mean HDL cholesterol levels for 22 males and 19 females.
+* The mean difference in energy costs before and after adding insulation for 10 houses.
+
+```
+
+
+
+
+## Means for paired samples: Summaries
+
+
+
+```{example}
+The Electricity Council in Bristol 
+wanted to determine if a certain type of wall-cavity insulation
+was effective in reducing energy consumption in winter
+[@data:OpenUni:insulationBA].
+Their RQ was:
+
+> Is there a *mean difference* in energy consumption
+ > due to adding insulation?
+ 	     
+ 	     
+The data collected is shown in 
+Table \@ref(tab:DataInsulation).
+
+```
+
+
+```{r DataInsulation, echo=FALSE}
+insulate <- structure(list(Before = c(12.1, 11, 14.1, 13.8, 15.5, 12.2, 12.8, 
+9.9, 10.8, 12.7), After = c(12, 10.6, 13.4, 11.2, 15.3, 13.6, 
+12.6, 8.8, 9.6, 12.4)), .Names = c("Before", "After"), class = "data.frame", row.names = c(NA, 
+-10L))
+
+insulate$Diff <- insulate$Before - insulate$After
+
+kable( insulate,
+       col.names=c("Before", "After", "Energy *savings*"),
+       caption="The house insulation data: Energy consumption before and after adding insulation, and the energy saving (all in MWh)")
+```
+
+For these data,
+finding the difference in energy consumption for each house seems sensible.
+These data are *paired* as
+the same unit of analysis is measured twice on the same variable:
+energy consumption *before* adding insulation and *after* adding insulation.
+Pairing the before and after values for the first House,
+for example,
+makes sense;
+hence find the *difference* in energy consumption for the first house
+seems sensible
+Essentially,
+once we compute the difference for each house,
+we proceed as in Chap.~\ref{CHAP:CI:OneMean}
+where we use the differences as the data.
+    
+As a result,
+the appropriate graph for paired data
+is *a histogram (or a dot plot) of the differences*
+(Fig. \@ref(fig:InsulationHistogram)).
+Graphing the `Before` and `After` data is also useful,
+but a graph of the difference is *crucial*,
+as the RQ is about the differences.
+
+
+```{r InsulationHistogram, echo=FALSE, fig.cap="A plot of the energy *savings* from the insulation data. The vertical grey line represents no energy saving", fig.align="center"}
+par( mfrow=c(1,2))
+
+hist( insulate$Diff,
+	xlab="Energy cost difference (MWh)",
+	ylab="Frequency",
+	las=1,
+	main="",
+	col=plot.colour)
+box()
+abline(v=0, 
+	col="grey",
+	lwd=2)
+	
+
+
+stripchart( insulate$Diff,
+	method="jitter",
+	xlab="Energy cost difference (MWh)",
+	las=1,
+	pch=19,
+	main="",
+	col="blue")
+box()
+abline(v=0, 
+	col="grey",
+	lwd=2)
+```
+
+
+```{block2, type="rmdtip"}
+Note that it is important to make it clear 
+how the differences are computed.
+We could compute the differences as the 
+`Before` minus `After`
+(which computes the energy consumption *saving*),
+or the `After` minus `Before`
+(which would compute the energy consumption *increase*).
+Either is fine as long as you are consistent throughout,
+and the meaning of any conclusions will be the same.
+In this case, 
+discussing energy *savings* seems most natural,
+so we compute 
+`After` minus `Before`.
+```
+
+
+
+
+
+## Means for paired data: Notation
+
+The notation we use for paired samples
+reflects how we are working with the *differences*
+between the two observations for each unit of analysis
+(Table \@ref(tab:PairedNotation)).
+
+Table: (\#tab:PairedNotation) The notation used for paired samples
+
+Statistics           					   |  One sample          |  Paired samples
+--------------------------------:+:--------------------:+:------------------:
+The observations:             	 |  $x$                 |  $d$
+Sample means:                 	 |  $\bar{x}$           |  $\bar{d}$
+Standard deviations:             |  $s$                 |  $s_d$
+Standard error of sample mean:   |  $\displaystyle\text{s.e.}(\bar{x}) = \frac{s}{\sqrt{n}}$  |  $\displaystyle\text{s.e.}(\bar{d}) = \frac{s_d}{\sqrt{n}}$
+
+
+
+
+
+## Means for paired data: Summaries
+
+
+For paired data,
+we work with the differences,
+which we treat as a single set of data.
+For this reason,
+the correct graphical summary is a histogram of differences
+and
+the correct numerical summary is of the differences.
+
+For the house insulation data, 
+then,
+the appropriate *numerical summary* for paired data
+*summarises the differences*
+A numerical summary of the energy savings from our calculator (Statistics Mode)
+or from SPSS gives:
+
+* sample mean of the differences: $\bar{d} = 0.54$;
+* standard deviation of the differences: $s_d = 1.015655$.
+
+We round these before placing into the summary table.
+Producing the numerical summaries for the Before and After data is also useful,
+but the summary of the differences is crucial,
+as the RQ is about the differences
+(Table \@ref(tab:InsulationData)).
+
+
+Similarly,
+an appropriate graphical summary is
+a histogram or,
+because this is a small dataset,
+a dotplot
+(Fig. \@ref(fig:InsulationHistogram)).
+
+
+```{r InsulationData, echo=FALSE}
+Insulation.DataSummary <- array( dim=c(3, 4))
+
+Insulation.DataSummary[1, 1] <- mean(insulate$Before)
+Insulation.DataSummary[2, 1] <- mean(insulate$After)
+Insulation.DataSummary[3, 1] <- mean(insulate$Diff)
+
+Insulation.DataSummary[1, 2] <- median(insulate$Before)
+Insulation.DataSummary[2, 2] <- median(insulate$After)
+Insulation.DataSummary[3, 2] <- median(insulate$Diff)
+
+Insulation.DataSummary[1, 3] <- sd(insulate$Before)
+Insulation.DataSummary[2, 3] <- sd(insulate$After)
+Insulation.DataSummary[3, 3] <- sd(insulate$Diff)
+
+Insulation.DataSummary[1, 4] <- IQR(insulate$Before)
+Insulation.DataSummary[2, 4] <- IQR(insulate$After)
+Insulation.DataSummary[3, 4] <- IQR(insulate$Diff)
+
+rownames(Insulation.DataSummary) <- c("*Before*", "*After*", "*Energy savings*")
+
+kable(Insulation.DataSummary,
+      align=c("r", "r", "r", "r"),
+      col.names=c("Mean", "Median", "Std dev", "IQR"),
+      digits=2,
+      caption="The mean, median, standard deviation and IQR for the energy consumption data (MWh)")
+```
+
+
+
+
+
+
+
+
+
+
+
+## Means for paired data: sampling distribution
+
+
+Of course,
+each time we take a different sample of houses and repeat the study,
+we will obtain different energy consumptions,
+and the energy saving will differ from sample to sample also.
+That is,
+the differences have a sampling distribution and a standard error.
+Since we can treat the differences just like the data
+from Chap. \@ref(OneMeanConfInterval),
+we can see that the sampling distribution for the differences
+will have
+(provided the conditions are met; Sect. \@ref(ValidityPaired)):
+
+* an approximate normal distribution;
+* centred around $\mu_d$ (the mean of the *differences* in the population);
+*	with a standard deviation of $\displaystyle\text{s.e.}(\bar{d}) = \frac{s_d}{\sqrt{n_d}}$.
+
+Of course,
+we don't know what the value of $\mu_d$ is
+(that's why we are estimating it),
+but we have an estimate of $\mu_d$: the value of $\bar{d}$.
+
+For the home insulation data, 
+then,
+the sample mean differences will have a sampling distribution with a
+
+*	a normal distribution;
+* centred around $0.54$;
+*	with a standard deviation of $\displaystyle\text{s.e.}(\bar{d}) = \frac{1.015655}{\sqrt{10}} = 0.3211784$.
+
+(Notice we have used a lot of decimal places in the working;
+we will round sensibly when results are reported.)
+
+
+
+```{r EnergyPossibleMeans, echo=FALSE, fig.cap="An estimate of the distribution of the mean energy savings from sample of size 10", fig.align="center"}
+plot.norm(0.54, 0.3211, 
+          xlab.name="Mean energy savings",
+          shade.lo.x =-10, 
+          shade.hi.x=-10)
+```
+ 
+
+
+
+
+
+
+
+## Means for paired samples: Confidence intervals
+
+This all means that we have some idea of how the values of $\bar{d}$
+are likely to vary.
+Because of this similarity,
+finding an approximate 95\% CI  for the mean energy saving
+is similar to that in
+Chap.~\ref{CHAP:CI:OneMean}.
+CIs\ have the same form:
+an approximate 95\% confidence interval (CI) for $\mu_d$ is
+\begin{eqnarray*}
+	\hat{d} \pm 2 \times\text{s.e.}(\bar{d}),
+\end{eqnarray*}
+which is the same as the CI  for $\bar{x}$
+if we consider that we are working with the differences as the data.
+
+So we would have:
+\[
+	0.54 \pm (2 \times 0.3211784),
+\]
+or $0.54\pm 0.642348$.
+So we can write:
+
+
+> Based on the sample,
+> an *approximate* 95\% CI  is for the population mean energy 
+> *saving* because of the wall cavity insulation 
+> is from $-0.10$ to $1.18$MWh.
+
+What is the negative values?
+Energy consumptions cannot really be negative.
+But remember:
+that negative is *not* and energy consumption;
+it is a *difference* between the before and after energy consumption,
+or the energy *saving*.
+Saving a negative amount is like using *more* energy. 
+So the 95\% CI  is saying that 
+we are reasonably confident
+that, after adding the insulation,
+that households will save a mean amount 
+of energy between $0.10$\,MWh *more* energy to $1.18$\,MWh *less* energy.
+
+
+
+
+
+## Means for paired samples: using SPSS
+
+In SPSS,
+data are typically entered so that each unit of analysis is represented by one row.
+For paired data then,
+this means that each house represents a row,
+and the `Before` and `After` energy consumptions 
+are recorded in the columns
+(Fig. \@ref(fig:InsulationDataSPSS)).
+It may also be useful to record the *differences* in another column.
+
+
+```{r InsulationDataSPSS, echo=FALSE, fig.cap="SPSS output for the insulation data", fig.align="center"}
+knitr::include_graphics("SPSS/InsulationBeforeAfter/InsulationData.png")
+```
+
+
+
+
+We can ask SPSS to produce the CI  also;
+SPSS will produce an *exact* 95\% CI  which
+will probably be a bit different.
+Recall that the approximate and exact 95\% CIs
+are similar when the sample sizes are not small...
+and in this case, the sample sizes are small.
+From the SPSS output
+(Fig. \@ref(fig:InsulationTest)),
+we obtain:
+
+> Based on the sample,
+> a 95\% CI  is for the population mean energy *saving* because of the wall cavity insulation 
+> is from $-0.19$ to $1.27$MWh.
+
+
+```{r InsulationTest, echo=FALSE, fig.cap="SPSS output for the insulation data", fig.align="center"}
+knitr::include_graphics("SPSS/InsulationBeforeAfter/InsulationBeforeAfterPairedTOutput.png")
+```
+
+As expected,
+this 95% CI is slightly different than the CI computed by hand.
+since the sample size is small.
+
+
+
+
+
+
+
+## Means for paired samples: Statistical validity conditions {#ValidityPaired}
+
+The conditions under which the CI  is statistically valid
+are similar to those for one sample mean.
+
+The CI  computed as above is statistically valid if
+
+* The *differences* are from a random sample;
+* And *at least one* of these conditions is true:
+    - If the sample size of *differences* is sufficiently large; *or*
+    - If the sample size is small,
+         and
+         the *population* of *differences* has an approximate normal distribution.
+
+
+We can explore the histograms of the *sample* differences
+to determine if normality of the *population* differences is reasonable.
+
+
+The CI  for the insulation data is not a random sample,
+though possibly is representative;
+since the sample size is small,
+we require that the differences *in the population*
+follow a normal distribution.
+We don't know if they do 
+(though the data,
+graphed in Fig. \@ref(fig:InsulationHistogram),
+don't seems to identify any obvious doubts).
+So the CI  is probably statistically valid.
+
+So the results may not be valid; the CI  limits will be approximately correct only.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Example: Blood pressure
+
+```{r echo=FALSE}
+
+diab <- structure(list(id = c(1000L, 1001L, 1002L, 1003L, 1005L, 1008L, 
+1011L, 1015L, 1016L, 1022L, 1024L, 1029L, 1030L, 1031L, 1035L, 
+1036L, 1037L, 1041L, 1045L, 1250L, 1252L, 1253L, 1254L, 1256L, 
+1271L, 1277L, 1280L, 1281L, 1282L, 1285L, 1301L, 1303L, 1304L, 
+1305L, 1309L, 1312L, 1313L, 1314L, 1315L, 1316L, 1317L, 1321L, 
+1323L, 1326L, 1500L, 1501L, 1502L, 2004L, 2750L, 2753L, 2754L, 
+2756L, 2757L, 2758L, 2762L, 2763L, 2765L, 2770L, 2773L, 2774L, 
+2775L, 2777L, 2778L, 2780L, 2784L, 2785L, 2787L, 2791L, 2793L, 
+2794L, 2795L, 3250L, 3750L, 3751L, 3752L, 4000L, 4500L, 4501L, 
+4506L, 4515L, 4517L, 4750L, 4751L, 4753L, 4758L, 4759L, 4760L, 
+4761L, 4763L, 4767L, 4770L, 4771L, 4772L, 4776L, 4780L, 4783L, 
+4786L, 4787L, 4789L, 4790L, 4792L, 4793L, 4794L, 4795L, 4796L, 
+4801L, 4802L, 4803L, 4805L, 4808L, 4813L, 4818L, 4821L, 4822L, 
+4823L, 4825L, 4826L, 4827L, 4833L, 4835L, 4840L, 4841L, 4842L, 
+4843L, 10000L, 10001L, 10012L, 10014L, 10016L, 10020L, 12002L, 
+12004L, 12005L, 12006L, 12501L, 12502L, 12506L, 12507L, 12509L, 
+12751L, 12754L, 12760L, 12761L, 12763L, 12765L, 12766L, 12768L, 
+12769L, 12772L, 12778L, 13250L, 13254L, 13500L, 13501L, 13503L, 
+13505L, 14756L, 14758L, 15007L, 15008L, 15010L, 15012L, 15013L, 
+15016L, 15017L, 15250L, 15252L, 15260L, 15264L, 15271L, 15274L, 
+15276L, 15277L, 15278L, 15279L, 15500L, 15501L, 15502L, 15512L, 
+15513L, 15514L, 15515L, 15516L, 15517L, 15518L, 15519L, 15520L, 
+15521L, 15522L, 15527L, 15529L, 15540L, 15542L, 15545L, 15546L, 
+15757L, 15758L, 15760L, 15761L, 15762L, 15763L, 15766L, 15773L, 
+15777L, 15779L, 15782L, 15787L, 15792L, 15795L, 15797L, 15798L, 
+15799L, 15800L, 15801L, 15802L, 15805L, 15812L, 15813L, 15814L, 
+15815L, 15816L, 15818L, 15820L, 15821L, 15827L, 15828L, 16000L, 
+16001L, 16003L, 16004L, 16005L, 16016L, 17002L, 17751L, 17752L, 
+17754L, 17755L, 17756L, 17757L, 17760L, 17762L, 17765L, 17766L, 
+17767L, 17771L, 17772L, 17773L, 17776L, 17781L, 17784L, 17790L, 
+17791L, 17794L, 17795L, 17800L, 17802L, 17805L, 17808L, 17813L, 
+17814L, 17816L, 17817L, 17818L, 17819L, 17828L, 17829L, 17830L, 
+17834L, 17835L, 17841L, 17846L, 17849L, 20254L, 20258L, 20260L, 
+20261L, 20267L, 20271L, 20272L, 20274L, 20275L, 20278L, 20279L, 
+20288L, 20289L, 20290L, 20292L, 20293L, 20294L, 20298L, 20306L, 
+20308L, 20309L, 20312L, 20313L, 20314L, 20315L, 20318L, 20325L, 
+20329L, 20332L, 20335L, 20337L, 20340L, 20343L, 20346L, 20350L, 
+20352L, 20355L, 20361L, 20365L, 20367L, 20368L, 20369L, 20750L, 
+20754L, 20761L, 20762L, 20765L, 20768L, 20773L, 20774L, 20775L, 
+20782L, 20783L, 20784L, 20787L, 20790L, 21254L, 21255L, 21257L, 
+21281L, 21284L, 21298L, 21318L, 21320L, 21321L, 21322L, 21323L, 
+21329L, 21333L, 21334L, 21338L, 21341L, 21343L, 21345L, 21346L, 
+21347L, 21357L, 21359L, 40251L, 40253L, 40500L, 40501L, 40502L, 
+40751L, 40754L, 40755L, 40762L, 40764L, 40772L, 40773L, 40774L, 
+40775L, 40784L, 40785L, 40786L, 40787L, 40789L, 40792L, 40797L, 
+40799L, 40803L, 40804L, 40805L, 41000L, 41001L, 41003L, 41004L, 
+41021L, 41023L, 41029L, 41034L, 41035L, 41036L, 41037L, 41039L, 
+41041L, 41055L, 41063L, 41065L, 41075L, 41078L, 41253L, 41254L, 
+41500L, 41501L, 41503L, 41506L, 41507L, 41510L, 41752L, 41756L
+), chol = c(203L, 165L, 228L, 78L, 249L, 248L, 195L, 227L, 177L, 
+263L, 242L, 215L, 238L, 183L, 191L, 213L, 255L, 230L, 194L, 196L, 
+186L, 234L, 203L, 281L, 228L, 179L, 232L, NA, 254L, 215L, 177L, 
+182L, 265L, 182L, 199L, 183L, 194L, 190L, 173L, 182L, 136L, 218L, 
+225L, 262L, 213L, 243L, 148L, 128L, 169L, 157L, 196L, 237L, 212L, 
+233L, 289L, 193L, 204L, 165L, 237L, 218L, 296L, 178L, 443L, 145L, 
+234L, 146L, 223L, 213L, 173L, 232L, 171L, 164L, 170L, 180L, 204L, 
+209L, 242L, 134L, 217L, 251L, 217L, 300L, 218L, 189L, 185L, 206L, 
+218L, 189L, 229L, 228L, 159L, 249L, 170L, 174L, 204L, 203L, 241L, 
+245L, 143L, 224L, 168L, 184L, 199L, 158L, 209L, 214L, 293L, 227L, 
+292L, 218L, 244L, 283L, 186L, 273L, 193L, 194L, 231L, 217L, 174L, 
+225L, 268L, 195L, 179L, 215L, 185L, 132L, 175L, 179L, 228L, 181L, 
+160L, 188L, 168L, 318L, 192L, 209L, 129L, 160L, 160L, 211L, 262L, 
+201L, 263L, 219L, 191L, 171L, 219L, 347L, 269L, 164L, 181L, 190L, 
+255L, 218L, 223L, 254L, 236L, 176L, 158L, 181L, 151L, 115L, 271L, 
+190L, 118L, 168L, 254L, 193L, 187L, 212L, 170L, 215L, 199L, 140L, 
+216L, 204L, 193L, 267L, 201L, 204L, 246L, 229L, 172L, 197L, 205L, 
+219L, 174L, 192L, 206L, 160L, 216L, 236L, 205L, 206L, 143L, 173L, 
+235L, 169L, 283L, 174L, 271L, 203L, 188L, 293L, 215L, 207L, 179L, 
+202L, 211L, 211L, 151L, 171L, 342L, 179L, 155L, 197L, 200L, 237L, 
+198L, 240L, 192L, 145L, 269L, 240L, 205L, 266L, 188L, 222L, 142L, 
+268L, 174L, 214L, 194L, 196L, 207L, 204L, 189L, 179L, 159L, 260L, 
+228L, 242L, 227L, 208L, 208L, 209L, 163L, 201L, 237L, 176L, 146L, 
+231L, 241L, 305L, 149L, 183L, 235L, 244L, 199L, 224L, 173L, 192L, 
+157L, 172L, 170L, 215L, 214L, 195L, 230L, 206L, 147L, 234L, 135L, 
+226L, 179L, 163L, 191L, 138L, 184L, 181L, 224L, 293L, 147L, 198L, 
+152L, 277L, 219L, 182L, 135L, 277L, 212L, 162L, 207L, 255L, 404L, 
+239L, 220L, 165L, 243L, 149L, 178L, 190L, 226L, 132L, 160L, 204L, 
+164L, 155L, 251L, 198L, 179L, 223L, 207L, 244L, 245L, 191L, 221L, 
+300L, 173L, 138L, 203L, 260L, 166L, 180L, 159L, 207L, 298L, 203L, 
+191L, 231L, 184L, 164L, 134L, 220L, 180L, 216L, 158L, 261L, 172L, 
+249L, 189L, 225L, 193L, 219L, 156L, 224L, 181L, 306L, 122L, 219L, 
+150L, 185L, 226L, 206L, 199L, 239L, 235L, 184L, 242L, 307L, 204L, 
+212L, 203L, 219L, 226L, 217L, 157L, 235L, 252L, 204L, 188L, 194L, 
+215L, 179L, 202L, 194L, 227L, 337L, 255L, 162L, 322L, 289L, 217L, 
+209L, 214L, 302L, 179L, 279L, 144L, 270L, 196L, 221L, 210L, 192L, 
+169L, 179L, 216L, 301L, 296L, 284L, 194L, 199L, 159L), stab.glu = c(82L, 
+97L, 92L, 93L, 90L, 94L, 92L, 75L, 87L, 89L, 82L, 128L, 75L, 
+79L, 76L, 83L, 78L, 112L, 81L, 206L, 97L, 65L, 299L, 92L, 66L, 
+80L, 87L, 74L, 84L, 72L, 101L, 85L, 330L, 85L, 87L, 81L, 86L, 
+107L, 80L, 206L, 81L, 68L, 83L, 84L, 76L, 52L, 193L, 223L, 85L, 
+74L, 82L, 87L, 97L, 92L, 111L, 106L, 128L, 94L, 233L, 88L, 262L, 
+78L, 185L, 85L, 80L, 77L, 75L, 203L, 131L, 184L, 92L, 86L, 69L, 
+84L, 57L, 113L, 108L, 105L, 81L, 94L, 88L, 103L, 87L, 96L, 84L, 
+85L, 182L, 75L, 95L, 76L, 88L, 197L, 106L, 125L, 62L, 84L, 86L, 
+120L, 91L, 341L, 69L, 79L, 130L, 91L, 176L, 111L, 85L, 105L, 
+235L, 80L, 101L, 83L, 74L, 94L, 77L, 80L, 105L, 78L, 173L, 84L, 
+85L, 108L, 70L, 119L, 76L, 99L, 91L, 81L, 115L, 177L, 100L, 77L, 
+101L, 270L, 109L, 87L, 110L, 122L, 196L, 48L, 93L, 81L, 82L, 
+112L, 83L, 97L, 112L, 197L, 73L, 71L, 255L, 84L, 112L, 126L, 
+90L, 342L, 102L, 92L, 91L, 83L, 85L, 239L, 121L, 92L, 95L, 82L, 
+121L, 77L, 84L, 79L, 76L, 110L, 85L, 385L, 79L, 113L, 248L, 133L, 
+106L, 120L, 104L, 91L, 101L, 120L, 79L, 106L, 90L, 89L, 94L, 
+71L, 109L, 111L, 88L, 112L, 371L, 83L, 91L, 95L, 145L, 93L, 103L, 
+94L, 174L, 87L, 80L, 77L, 77L, 81L, 98L, 225L, 74L, 85L, 251L, 
+236L, 58L, 92L, 56L, 96L, 118L, 88L, 56L, 84L, 59L, 96L, 83L, 
+82L, 88L, 82L, 155L, 90L, 105L, 87L, 54L, 115L, 187L, 89L, 84L, 
+77L, 100L, 68L, 79L, 74L, 98L, 122L, 95L, 89L, 83L, 100L, 118L, 
+90L, 79L, 70L, 92L, 91L, 77L, 69L, 109L, 101L, 153L, 85L, 225L, 
+124L, 91L, 117L, 67L, 97L, 67L, 171L, 86L, 90L, 86L, 78L, 88L, 
+68L, 75L, 69L, 74L, 95L, 92L, 101L, 98L, 115L, 78L, 92L, 103L, 
+119L, 105L, 74L, 88L, 88L, 82L, 76L, 102L, 100L, 206L, 97L, 95L, 
+76L, 74L, 138L, 64L, 228L, 97L, 83L, 82L, 173L, 91L, 81L, 118L, 
+86L, 90L, 88L, 71L, 89L, 119L, 81L, 120L, 65L, 85L, 81L, 71L, 
+67L, 77L, 92L, 172L, 75L, 84L, 104L, 155L, 84L, 76L, 94L, 101L, 
+60L, 76L, 155L, 74L, 101L, 70L, 81L, 80L, 74L, 75L, 78L, 86L, 
+71L, 77L, 92L, 82L, 130L, 80L, 67L, 100L, 83L, 81L, 85L, 106L, 
+99L, 297L, 87L, 94L, 88L, 90L, 173L, 279L, 75L, 92L, 102L, 161L, 
+71L, 84L, 95L, 64L, 105L, 84L, 87L, 85L, 85L, 83L, 90L, 87L, 
+267L, 87L, 91L, 77L, 81L, 85L, 270L, 81L, 73L, 120L, 126L, 81L, 
+85L, 104L, 85L, 84L, 90L, 369L, 89L, 269L, 76L, 88L), hdl = c(56L, 
+24L, 37L, 12L, 28L, 69L, 41L, 44L, 49L, 40L, 54L, 34L, 36L, 46L, 
+30L, 47L, 38L, 64L, 36L, 41L, 50L, 76L, 43L, 41L, 45L, 92L, 30L, 
+NA, 52L, 42L, 36L, 43L, 34L, 37L, 63L, 60L, 67L, 32L, 57L, 43L, 
+51L, 46L, 42L, 38L, 40L, 59L, 14L, 24L, 51L, 47L, 58L, 41L, 45L, 
+39L, 50L, 63L, 61L, 69L, 58L, 39L, 60L, 59L, 23L, 29L, 63L, 60L, 
+85L, 75L, 69L, 114L, 54L, 40L, 64L, 69L, 74L, 65L, 53L, 42L, 
+60L, 36L, 40L, 44L, 38L, 47L, 52L, 46L, 54L, 72L, 74L, 53L, 43L, 
+44L, 42L, 44L, 70L, 75L, 63L, 39L, 37L, 33L, 45L, 39L, 48L, 48L, 
+55L, 59L, 94L, 44L, 55L, 71L, 36L, 74L, 76L, 49L, 49L, 34L, 61L, 
+48L, 34L, 82L, 51L, 46L, 52L, 44L, 58L, 34L, 42L, 35L, 61L, 24L, 
+36L, 45L, 59L, 108L, 44L, 34L, 42L, 41L, 33L, 34L, 43L, 87L, 
+92L, 73L, 88L, 69L, 73L, 42L, 34L, 63L, 26L, 44L, 34L, 32L, 48L, 
+37L, 36L, 55L, 31L, 44L, 48L, 36L, 40L, 44L, 39L, 44L, 39L, 45L, 
+64L, 49L, 60L, 36L, 59L, 31L, 46L, 35L, 24L, 34L, 53L, 44L, 62L, 
+43L, 46L, 37L, 32L, 50L, 36L, 30L, 44L, 44L, 86L, 82L, 41L, 33L, 
+46L, 37L, 37L, 29L, 39L, 77L, 90L, 62L, 24L, 120L, 100L, 46L, 
+72L, 55L, 40L, 29L, 47L, 61L, 48L, 63L, 69L, 46L, 51L, 52L, 46L, 
+49L, 42L, 54L, 66L, 57L, 42L, 54L, 51L, 87L, 25L, 48L, 117L, 
+35L, 57L, 62L, 46L, 56L, 46L, 50L, 54L, 60L, 37L, 55L, 66L, 51L, 
+32L, 43L, 57L, 46L, 45L, 34L, 41L, 110L, 40L, 44L, 49L, 51L, 
+59L, 39L, 77L, 30L, 31L, 31L, 34L, 56L, 33L, 46L, 47L, 29L, 37L, 
+38L, 34L, 54L, 34L, 83L, 36L, 48L, 33L, 40L, 36L, 44L, 44L, 54L, 
+42L, 62L, 32L, 62L, 63L, 44L, 47L, 45L, 68L, 40L, 43L, 34L, 33L, 
+55L, 58L, 46L, 42L, 50L, 52L, 57L, 70L, 40L, 41L, 37L, 67L, 70L, 
+38L, 66L, 60L, 42L, 41L, 92L, 26L, 53L, 83L, 59L, 58L, 45L, 78L, 
+46L, 68L, 34L, 28L, 44L, 50L, 36L, 58L, 91L, 42L, 58L, 36L, 66L, 
+46L, 30L, 64L, 83L, 36L, 28L, 40L, 36L, 49L, 67L, 34L, 42L, 46L, 
+56L, 43L, 44L, 38L, 59L, 65L, 68L, 36L, 63L, 37L, 36L, 34L, 58L, 
+54L, 36L, 51L, 31L, 52L, 54L, 47L, 42L, 87L, 55L, 46L, 36L, 84L, 
+60L, 33L, 65L, 26L, 62L, 90L, 46L, 92L, 38L, 40L, 36L, 48L, 57L, 
+52L, 40L, 28L, 40L, 67L, 48L, 81L, 69L, 58L, 50L, 64L, 118L, 
+46L, 54L, 38L, 52L, 79L), ratio = c(3.6, 6.9, 6.2, 6.5, 8.9, 
+3.6, 4.8, 5.2, 3.6, 6.6, 4.5, 6.3, 6.6, 4, 6.4, 4.5, 6.7, 3.6, 
+5.4, 4.8, 3.7, 3.1, 4.7, 6.9, 5.1, 1.9, 7.7, NA, 4.9, 5.1, 4.9, 
+4.2, 7.8, 4.9, 3.2, 3.1, 2.9, 5.9, 3, 4.2, 2.7, 4.7, 5.4, 6.9, 
+5.3, 4.1, 10.6, 5.3, 3.3, 3.3, 3.4, 5.8, 4.7, 6, 5.8, 3.1, 3.3, 
+2.4, 4.1, 5.6, 4.9, 3, 19.3, 5, 3.7, 2.4, 2.6, 2.8, 2.5, 2, 3.2, 
+4.1, 2.7, 2.6, 2.8, 3.2, 4.6, 3.2, 3.6, 7, 5.4, 6.8, 5.7, 4, 
+3.6, 4.5, 4, 2.6, 3.1, 4.3, 3.7, 5.7, 4, 4, 2.9, 2.7, 3.8, 6.3, 
+3.9, 6.8, 3.7, 4.7, 4.1, 3.3, 3.8, 3.6, 3.1, 5.2, 5.3, 3.1, 6.8, 
+3.8, 2.4, 5.6, 3.9, 5.7, 3.8, 4.5, 5.1, 2.7, 5.3, 4.2, 3.4, 3.9, 
+3.2, 3.9, 4.2, 5.1, 3.7, 7.5, 4.4, 4.2, 2.8, 2.9, 4.4, 6.1, 3.1, 
+3.9, 4.8, 6.2, 6.1, 2.3, 2.9, 3, 2.2, 2.5, 3, 8.3, 7.9, 2.6, 
+7, 4.3, 7.5, 6.8, 4.6, 6.9, 6.6, 3.2, 5.1, 4.1, 3.1, 3.2, 6.8, 
+4.3, 3, 3.8, 6.5, 4.3, 2.9, 4.3, 2.8, 6, 3.4, 4.5, 4.7, 5.8, 
+8, 7.9, 3.8, 4.6, 4, 5.3, 3.7, 5.3, 6.4, 4.4, 4.8, 6.4, 4.7, 
+3.6, 2.5, 2.9, 5, 6.2, 3.1, 4.7, 6.4, 5.8, 7.3, 2.3, 3, 3.3, 
+7.8, 2.4, 2.2, 4.5, 2.5, 3.7, 5.3, 7.3, 3.2, 2.8, 7.1, 2.8, 2.2, 
+4.3, 3.9, 4.6, 4.3, 4.9, 4.6, 2.7, 4.1, 4.2, 4.9, 4.9, 3.7, 2.6, 
+5.7, 5.6, 1.5, 6.1, 3.4, 3.2, 4.5, 3.6, 4.1, 3.6, 2.9, 4.3, 6.2, 
+4.4, 3.4, 4.1, 6.5, 4.9, 2.9, 4.4, 5.3, 5.2, 3.6, 2.1, 6, 6.9, 
+3, 3.6, 4, 6.3, 2.6, 7.5, 5.6, 5.6, 4.6, 3.1, 5.2, 4.7, 4.6, 
+6.7, 6.2, 5.4, 4.3, 4.3, 4, 2.7, 5, 3.4, 5.8, 3.5, 5.1, 4.1, 
+5.1, 5.4, 3.5, 3.2, 4.8, 4.5, 3.5, 4.1, 2.9, 6.2, 3.1, 4.1, 4.8, 
+7.5, 12.2, 4.3, 3.8, 3.6, 5.8, 3, 3.4, 3.3, 3.2, 3.3, 3.9, 5.5, 
+2.4, 2.2, 6.6, 3, 3, 5.3, 5, 2.7, 9.4, 3.6, 2.7, 5.1, 3, 3.1, 
+2.6, 5.7, 2.4, 5.3, 5.7, 4.7, 6, 5.6, 3.3, 2.5, 4.4, 2.8, 3.7, 
+3.3, 3.9, 7.2, 2.5, 3.1, 4.8, 8.9, 4.7, 6.3, 3.9, 3.3, 4.6, 5.3, 
+3.9, 5.5, 2.8, 5, 3.9, 3.1, 3.5, 3, 5.5, 3.8, 6.4, 5.1, 7.1, 
+5.3, 3.8, 5.9, 4, 7.1, 4.3, 4, 3.3, 5.6, 2.9, 3.7, 4.1, 5.4, 
+2.6, 3, 6.1, 3, 8.7, 5.4, 2.8, 3.5, 3.5, 7.6, 5.4, 5.8, 4.5, 
+5.3, 3.4, 7, 5.1, 6.8, 2.9, 4.6, 2.6, 2.8, 2.9, 3.6, 3.4, 2.6, 
+6.4, 5.3, 5.1, 3.8, 2), glyhb = c(4.31, 4.44, 4.64, 4.63, 7.72, 
+4.81, 4.84, 3.94, 4.84, 5.78, 4.77, 4.97, 4.47, 4.59, 4.67, 3.41, 
+4.33, 4.53, 5.28, 11.24, 6.49, 4.67, 12.74, 5.56, 4.61, 4.18, 
+5.1, 4.28, 4.52, 4.37, 5.11, 4.47, 15.52, 5.66, 3.67, 4.03, 2.68, 
+3.56, 6.21, 7.91, 4.58, 3.89, 4.38, NA, 5.96, 4.41, 6.14, 10.9, 
+6.14, 5.57, 4.25, 5.35, 6.33, 4.56, 9.39, 6.35, 5.2, 4.98, 13.7, 
+NA, 10.93, 5.23, 14.31, 3.99, NA, 4.27, 4.25, 11.41, 4.44, 8.4, 
+4.59, 5.23, 4.39, 5.2, 6.11, 7.44, 5.47, 4.29, 3.93, 6.96, 4.84, 
+5.18, 5.52, 4.38, 5.28, 4.82, 10.55, 4.86, 4.86, 4.11, 5.02, 
+9.17, 5.11, 5.07, 4.84, 4.1, 4.79, 7.79, 5.15, 10.15, 4.17, 4.05, 
+5.44, 4.31, 9.77, 3.89, 5.17, 5.71, 7.87, NA, 4.66, 4.22, 5.17, 
+3.76, 4.31, 4.61, NA, NA, 5.35, 4.36, 4.41, 8.45, 3.98, 9.76, 
+4.83, 4.01, 3.84, 4.95, 6.39, 7.53, 4.62, 4.79, 5.09, 6.51, 4.86, 
+4.41, 6.13, 6.49, 7.51, 6.97, 4.9, 4.81, 4.58, 9.18, 5.46, 4.04, 
+5.23, 6.34, 5.37, 4.51, 9.58, 5.55, 5.6, 4.87, 5.6, 12.97, 5.63, 
+4.5, 5.56, 4.03, 4.38, 13.6, 4.57, 4.66, 4.71, 4.4, 9.25, 4.74, 
+4.4, 5.49, 3.44, 9.82, 4.96, 11.59, 4.41, 4.44, 7.14, 8.81, 5.35, 
+4.69, 7.4, 4.73, 4.52, 4.95, 4.21, 4.56, 5.35, 4.04, 5.49, 4.64, 
+4.4, 5.24, NA, 4.03, 4.81, 4.31, 5.23, 5.22, 8.25, 4.95, 4.01, 
+4.67, 6.17, 4.76, 4.66, 4.82, 4.97, 5.5, 3.55, 10.09, 4.01, 5.1, 
+12.67, 12.07, 4.17, 4.75, 3.55, NA, 4.44, 4.92, 4.59, 4.73, 5.14, 
+5.74, 4.87, 5.41, 5.13, 4.64, 6.96, 5.36, 5.53, 5.38, 4.26, 4.34, 
+8.57, 5.02, 4.36, 3.33, 4.18, 4.78, 4.74, 3.97, 6.42, 6.48, 5.6, 
+4.85, 4.61, 4.1, 7.51, 4.24, 4.76, 3.75, 5.04, 5.34, 4.5, 4.37, 
+7.48, 4.36, 4.74, 5.26, 10.47, 5.17, 5.7, 3.59, 6.42, 5.03, 4.41, 
+5.68, 4.39, 4.07, 4.62, 3.7, 3.96, NA, 4.75, 4.31, 5.35, 4.8, 
+4.81, 4.88, 5.05, 4.87, 4.67, 4.43, 4.27, 5.03, 4.4, 4.67, 4.21, 
+5.24, 4.61, 4.4, 5.01, 6.06, 10.75, 4.69, 5.63, 3.69, 3.85, 4.09, 
+4.1, 9.28, 3.88, 5.7, 2.85, 13.06, 3.97, 3.03, 5.51, 5.68, 4.2, 
+6.44, 9.62, 4.54, 7.51, 5.63, 5.77, 4.56, 4.4, 4.7, 2.85, 5.34, 
+4.95, 3.59, 8.23, 5.06, NA, NA, 8.06, 4.9, 4.71, 3.8, 4.67, 10.97, 
+4.43, 5.91, 2.73, 5.12, 3.78, 5.12, 3.62, 4.66, 5.01, 3.75, 4.55, 
+4.92, 4.09, 5.58, 3.98, 7.22, 3.97, 4.65, 4.83, 4.88, 4.93, 5.16, 
+6.78, 4.16, 12.16, 4.28, 4.16, 5.22, 14.94, 10.16, 10.07, 3.66, 
+6.48, 4.9, 11.18, 4.33, 3.75, 4.97, 4.04, 4.68, 4.17, 4.14, 4.98, 
+4.66, 4.29, 5.56, 4.45, 11.41, 4.07, 5.01, 4.48, 4.65, 4.05, 
+8.11, 4.13, 3.58, 9.37, 5.53, 4.96, 4.38, 4.82, 4.99, NA, 4.28, 
+16.11, 4.39, 13.63, 4.49, NA), location = structure(c(1L, 1L, 
+1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 
+2L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 2L, 1L, 1L, 1L, 1L, 
+1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 
+1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 
+1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 2L, 
+2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 
+2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 1L, 1L, 1L, 2L, 2L, 2L, 
+2L, 1L, 1L, 1L, 1L, 1L, 2L, 2L, 2L, 2L, 1L, 1L, 2L, 1L, 1L, 1L, 
+2L, 2L, 2L, 2L, 1L, 1L, 1L, 1L, 1L, 2L, 2L, 1L, 1L, 1L, 1L, 1L, 
+1L, 1L, 1L, 1L, 1L, 1L, 2L, 2L, 1L, 1L, 1L, 1L, 2L, 2L, 2L, 2L, 
+2L, 2L, 2L, 1L, 1L, 1L, 1L, 1L, 1L, 2L, 2L, 2L, 2L, 1L, 1L, 2L, 
+2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 
+2L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 2L, 2L, 2L, 1L, 1L, 1L, 1L, 1L, 
+1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 
+1L, 1L, 1L, 1L, 1L, 1L, 2L, 2L, 2L, 2L, 2L, 1L, 1L, 1L, 1L, 1L, 
+1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 
+1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 
+1L, 1L, 2L, 2L, 2L, 2L, 2L, 1L, 1L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 
+2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 
+2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 1L, 1L, 2L, 2L, 
+2L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 2L, 2L, 2L, 2L, 
+2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 
+2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 
+2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 
+2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 
+2L), .Label = c("Buckingham", "Louisa"), class = "factor"), loc = c(1L, 
+1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 
+2L, 2L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 2L, 1L, 1L, 1L, 
+1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 
+1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 
+1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 
+2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 
+2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 1L, 1L, 1L, 2L, 2L, 
+2L, 2L, 1L, 1L, 1L, 1L, 1L, 2L, 2L, 2L, 2L, 1L, 1L, 2L, 1L, 1L, 
+1L, 2L, 2L, 2L, 2L, 1L, 1L, 1L, 1L, 1L, 2L, 2L, 1L, 1L, 1L, 1L, 
+1L, 1L, 1L, 1L, 1L, 1L, 1L, 2L, 2L, 1L, 1L, 1L, 1L, 2L, 2L, 2L, 
+2L, 2L, 2L, 2L, 1L, 1L, 1L, 1L, 1L, 1L, 2L, 2L, 2L, 2L, 1L, 1L, 
+2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 
+2L, 2L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 2L, 2L, 2L, 1L, 1L, 1L, 1L, 
+1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 
+1L, 1L, 1L, 1L, 1L, 1L, 1L, 2L, 2L, 2L, 2L, 2L, 1L, 1L, 1L, 1L, 
+1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 
+1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 
+1L, 1L, 1L, 2L, 2L, 2L, 2L, 2L, 1L, 1L, 2L, 2L, 2L, 2L, 2L, 2L, 
+2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 
+2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 1L, 1L, 2L, 
+2L, 2L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 2L, 2L, 2L, 
+2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 
+2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 
+2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 
+2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 
+2L, 2L), age = c(46L, 29L, 58L, 67L, 64L, 34L, 30L, 37L, 45L, 
+55L, 60L, 38L, 27L, 40L, 36L, 33L, 50L, 20L, 36L, 62L, 70L, 47L, 
+38L, 66L, 24L, 41L, 37L, 48L, 43L, 40L, 42L, 52L, 61L, 61L, 25L, 
+47L, 35L, 46L, 57L, 70L, 22L, 52L, 36L, 43L, 72L, 37L, 54L, 60L, 
+40L, 55L, 76L, 43L, 65L, 45L, 70L, 20L, 62L, 92L, 49L, 44L, 74L, 
+36L, 51L, 38L, 31L, 28L, 22L, 71L, 76L, 91L, 40L, 23L, 20L, 40L, 
+52L, 76L, 46L, 48L, 22L, 58L, 34L, 61L, 40L, 28L, 53L, 67L, 51L, 
+49L, 65L, 54L, 38L, 64L, 41L, 67L, 27L, 21L, 41L, 47L, 61L, 65L, 
+28L, 41L, 37L, 50L, 57L, 28L, 31L, 83L, 79L, 68L, 32L, 26L, 36L, 
+53L, 19L, 63L, 58L, 53L, 50L, 41L, 48L, 59L, 34L, 63L, 23L, 21L, 
+23L, 36L, 71L, 64L, 43L, 31L, 44L, 60L, 43L, 48L, 56L, 55L, 49L, 
+58L, 33L, 48L, 66L, 59L, 45L, 52L, 76L, 36L, 41L, 20L, 50L, 43L, 
+82L, 35L, 47L, 75L, 62L, 31L, 50L, 39L, 33L, 58L, 81L, 27L, 47L, 
+33L, 67L, 42L, 21L, 51L, 27L, 51L, 71L, 50L, 54L, 59L, 59L, 40L, 
+58L, 72L, 66L, 23L, 42L, 43L, 75L, 65L, 34L, 37L, 61L, 36L, 45L, 
+68L, 57L, 41L, 68L, 40L, 79L, 62L, 63L, 55L, 55L, 27L, 66L, 63L, 
+78L, 68L, 31L, 64L, 40L, 61L, 28L, 34L, 63L, 55L, 26L, 36L, 40L, 
+45L, 68L, 82L, 60L, 30L, 41L, 54L, 72L, 47L, 50L, 51L, 45L, 38L, 
+20L, 44L, 63L, 50L, 44L, 48L, 41L, 29L, 76L, 69L, 26L, 70L, 25L, 
+42L, 56L, 31L, 31L, 27L, 73L, 32L, 19L, 71L, 27L, 31L, 20L, 31L, 
+62L, 44L, 36L, 36L, 47L, 30L, 63L, 48L, 65L, 59L, 37L, 78L, 23L, 
+38L, 38L, 41L, 29L, 49L, 23L, 29L, 40L, 38L, 40L, 29L, 78L, 50L, 
+23L, 60L, 40L, 60L, 40L, 30L, 21L, 63L, 63L, 43L, 46L, 64L, 56L, 
+35L, 59L, 22L, 43L, 26L, 41L, 43L, 20L, 28L, 30L, 66L, 20L, 32L, 
+38L, 61L, 26L, 74L, 72L, 21L, 36L, 42L, 66L, 34L, 43L, 57L, 45L, 
+44L, 27L, 63L, 65L, 30L, 28L, 41L, 31L, 33L, 66L, 28L, 25L, 26L, 
+40L, 38L, 30L, 52L, 22L, 51L, 45L, 53L, 21L, 53L, 37L, 34L, 30L, 
+74L, 36L, 45L, 35L, 50L, 27L, 52L, 42L, 39L, 73L, 28L, 53L, 49L, 
+55L, 37L, 60L, 56L, 84L, 20L, 80L, 60L, 80L, 29L, 43L, 63L, 37L, 
+20L, 44L, 54L, 58L, 35L, 52L, 60L, 43L, 59L, 33L, 37L, 40L, 38L, 
+32L, 60L, 30L, 42L, 52L, 59L, 78L, 51L, 25L, 37L, 54L, 89L, 53L, 
+51L, 29L, 41L, 68L), gender2 = structure(c(1L, 1L, 1L, 2L, 2L, 
+2L, 2L, 2L, 2L, 1L, 1L, 1L, 1L, 1L, 2L, 1L, 1L, 2L, 2L, 1L, 2L, 
+2L, 1L, 1L, 1L, 1L, 2L, 2L, 1L, 2L, 1L, 2L, 2L, 1L, 2L, 1L, 2L, 
+2L, 2L, 2L, 1L, 1L, 2L, 2L, 1L, 1L, 1L, 2L, 1L, 1L, 2L, 1L, 1L, 
+1L, 1L, 1L, 2L, 1L, 1L, 1L, 1L, 2L, 1L, 1L, 2L, 1L, 1L, 1L, 1L, 
+1L, 2L, 1L, 1L, 1L, 2L, 1L, 1L, 2L, 1L, 1L, 2L, 1L, 2L, 1L, 1L, 
+2L, 1L, 1L, 1L, 2L, 2L, 1L, 1L, 2L, 1L, 1L, 1L, 1L, 1L, 2L, 1L, 
+2L, 1L, 2L, 1L, 2L, 1L, 1L, 2L, 2L, 2L, 2L, 2L, 1L, 1L, 2L, 1L, 
+1L, 2L, 2L, 2L, 1L, 2L, 1L, 2L, 1L, 1L, 1L, 1L, 2L, 1L, 1L, 1L, 
+1L, 1L, 1L, 2L, 1L, 2L, 2L, 1L, 1L, 1L, 2L, 1L, 2L, 2L, 2L, 1L, 
+2L, 2L, 1L, 2L, 2L, 1L, 2L, 2L, 1L, 2L, 1L, 2L, 2L, 1L, 1L, 1L, 
+1L, 2L, 1L, 1L, 1L, 1L, 1L, 2L, 2L, 1L, 2L, 1L, 1L, 2L, 2L, 1L, 
+2L, 1L, 2L, 2L, 1L, 2L, 2L, 1L, 1L, 1L, 1L, 2L, 1L, 2L, 1L, 1L, 
+2L, 1L, 2L, 1L, 1L, 2L, 1L, 2L, 2L, 2L, 1L, 1L, 1L, 2L, 1L, 1L, 
+2L, 2L, 1L, 1L, 2L, 1L, 1L, 1L, 1L, 2L, 1L, 1L, 2L, 1L, 1L, 2L, 
+1L, 2L, 1L, 2L, 2L, 1L, 2L, 1L, 2L, 2L, 1L, 2L, 1L, 2L, 1L, 2L, 
+1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 2L, 1L, 1L, 1L, 2L, 1L, 2L, 2L, 
+2L, 2L, 1L, 2L, 1L, 1L, 2L, 2L, 1L, 2L, 2L, 1L, 1L, 1L, 1L, 2L, 
+1L, 1L, 2L, 1L, 2L, 1L, 2L, 1L, 1L, 1L, 1L, 2L, 1L, 2L, 2L, 1L, 
+2L, 2L, 2L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 2L, 1L, 1L, 1L, 
+2L, 1L, 1L, 2L, 2L, 2L, 1L, 1L, 1L, 1L, 2L, 2L, 1L, 2L, 2L, 2L, 
+2L, 2L, 2L, 1L, 2L, 2L, 1L, 1L, 2L, 1L, 2L, 1L, 1L, 1L, 1L, 2L, 
+1L, 1L, 1L, 1L, 1L, 1L, 2L, 1L, 2L, 2L, 1L, 2L, 2L, 1L, 2L, 2L, 
+2L, 2L, 2L, 1L, 1L, 1L, 1L, 1L, 1L, 2L, 2L, 1L, 1L, 1L, 1L, 1L, 
+1L, 2L, 2L, 2L, 2L, 2L, 1L, 1L, 2L, 1L, 2L, 2L, 1L, 1L, 1L, 2L, 
+2L, 1L, 1L, 2L, 2L, 1L, 2L, 1L, 1L, 2L, 1L, 1L, 1L, 1L), .Label = c("female", 
+"male"), class = "factor"), Gender = c(1L, 1L, 1L, 2L, 2L, 2L, 
+2L, 2L, 2L, 1L, 1L, 1L, 1L, 1L, 2L, 1L, 1L, 2L, 2L, 1L, 2L, 2L, 
+1L, 1L, 1L, 1L, 2L, 2L, 1L, 2L, 1L, 2L, 2L, 1L, 2L, 1L, 2L, 2L, 
+2L, 2L, 1L, 1L, 2L, 2L, 1L, 1L, 1L, 2L, 1L, 1L, 2L, 1L, 1L, 1L, 
+1L, 1L, 2L, 1L, 1L, 1L, 1L, 2L, 1L, 1L, 2L, 1L, 1L, 1L, 1L, 1L, 
+2L, 1L, 1L, 1L, 2L, 1L, 1L, 2L, 1L, 1L, 2L, 1L, 2L, 1L, 1L, 2L, 
+1L, 1L, 1L, 2L, 2L, 1L, 1L, 2L, 1L, 1L, 1L, 1L, 1L, 2L, 1L, 2L, 
+1L, 2L, 1L, 2L, 1L, 1L, 2L, 2L, 2L, 2L, 2L, 1L, 1L, 2L, 1L, 1L, 
+2L, 2L, 2L, 1L, 2L, 1L, 2L, 1L, 1L, 1L, 1L, 2L, 1L, 1L, 1L, 1L, 
+1L, 1L, 2L, 1L, 2L, 2L, 1L, 1L, 1L, 2L, 1L, 2L, 2L, 2L, 1L, 2L, 
+2L, 1L, 2L, 2L, 1L, 2L, 2L, 1L, 2L, 1L, 2L, 2L, 1L, 1L, 1L, 1L, 
+2L, 1L, 1L, 1L, 1L, 1L, 2L, 2L, 1L, 2L, 1L, 1L, 2L, 2L, 1L, 2L, 
+1L, 2L, 2L, 1L, 2L, 2L, 1L, 1L, 1L, 1L, 2L, 1L, 2L, 1L, 1L, 2L, 
+1L, 2L, 1L, 1L, 2L, 1L, 2L, 2L, 2L, 1L, 1L, 1L, 2L, 1L, 1L, 2L, 
+2L, 1L, 1L, 2L, 1L, 1L, 1L, 1L, 2L, 1L, 1L, 2L, 1L, 1L, 2L, 1L, 
+2L, 1L, 2L, 2L, 1L, 2L, 1L, 2L, 2L, 1L, 2L, 1L, 2L, 1L, 2L, 1L, 
+1L, 1L, 1L, 1L, 1L, 1L, 1L, 2L, 1L, 1L, 1L, 2L, 1L, 2L, 2L, 2L, 
+2L, 1L, 2L, 1L, 1L, 2L, 2L, 1L, 2L, 2L, 1L, 1L, 1L, 1L, 2L, 1L, 
+1L, 2L, 1L, 2L, 1L, 2L, 1L, 1L, 1L, 1L, 2L, 1L, 2L, 2L, 1L, 2L, 
+2L, 2L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 2L, 1L, 1L, 1L, 2L, 
+1L, 1L, 2L, 2L, 2L, 1L, 1L, 1L, 1L, 2L, 2L, 1L, 2L, 2L, 2L, 2L, 
+2L, 2L, 1L, 2L, 2L, 1L, 1L, 2L, 1L, 2L, 1L, 1L, 1L, 1L, 2L, 1L, 
+1L, 1L, 1L, 1L, 1L, 2L, 1L, 2L, 2L, 1L, 2L, 2L, 1L, 2L, 2L, 2L, 
+2L, 2L, 1L, 1L, 1L, 1L, 1L, 1L, 2L, 2L, 1L, 1L, 1L, 1L, 1L, 1L, 
+2L, 2L, 2L, 2L, 2L, 1L, 1L, 2L, 1L, 2L, 2L, 1L, 1L, 1L, 2L, 2L, 
+1L, 1L, 2L, 2L, 1L, 2L, 1L, 1L, 2L, 1L, 1L, 1L, 1L), height = c(62L, 
+64L, 61L, 67L, 68L, 71L, 69L, 59L, 69L, 63L, 65L, 58L, 60L, 59L, 
+69L, 65L, 65L, 67L, 64L, 65L, 67L, 67L, 69L, 62L, 61L, 72L, 68L, 
+68L, 62L, 70L, 65L, 68L, 74L, 69L, 66L, 66L, 66L, 72L, 71L, 69L, 
+66L, 62L, 67L, 75L, 59L, 64L, 67L, 67L, 65L, 66L, 65L, 64L, 61L, 
+64L, 60L, 68L, 68L, 62L, 62L, 66L, 63L, 70L, 70L, NA, 70L, 64L, 
+62L, 63L, 61L, 61L, 71L, 69L, 64L, 68L, 75L, 60L, 62L, 70L, 71L, 
+63L, 73L, 67L, 73L, 64L, 61L, 67L, NA, 62L, 62L, 66L, 68L, 63L, 
+61L, 68L, 67L, 63L, 59L, 63L, 65L, 67L, 63L, 69L, 61L, 71L, 61L, 
+68L, 67L, 59L, 70L, 70L, 70L, 72L, 69L, 64L, 61L, 73L, 63L, 63L, 
+70L, 71L, 70L, 67L, 72L, 63L, 76L, 65L, 65L, 63L, 63L, 71L, 64L, 
+67L, 64L, 65L, 64L, 63L, 74L, 67L, 71L, 67L, 63L, 68L, 66L, 66L, 
+67L, 71L, 64L, 70L, 62L, 72L, 71L, 62L, 66L, 69L, 65L, 68L, 76L, 
+62L, 70L, 66L, 69L, 69L, 64L, 65L, 64L, 66L, 68L, 75L, 63L, 65L, 
+63L, 67L, 69L, 69L, 65L, 73L, 66L, 59L, 66L, 65L, 66L, 72L, 65L, 
+71L, 69L, 63L, 71L, 71L, 63L, 64L, 67L, 61L, 66L, 62L, 67L, NA, 
+65L, 66L, 61L, 70L, 63L, 67L, 68L, 64L, 65L, 55L, 66L, 62L, 68L, 
+63L, 69L, 63L, 65L, 75L, 73L, 64L, 62L, 69L, 63L, 63L, 62L, 65L, 
+67L, 65L, 61L, 68L, 61L, 66L, 69L, 63L, 70L, NA, 70L, 67L, 67L, 
+68L, 63L, 68L, 66L, 59L, 72L, 66L, 71L, 62L, 68L, 67L, 65L, 65L, 
+64L, 63L, 60L, 63L, 63L, 71L, 62L, 66L, 63L, 71L, 66L, 69L, 73L, 
+72L, 69L, 63L, 69L, 63L, 64L, 66L, 71L, 69L, 69L, 67L, 65L, 63L, 
+65L, 62L, 72L, 60L, 63L, 68L, 63L, 71L, 61L, 70L, 52L, 61L, 62L, 
+62L, 69L, 64L, 70L, 67L, 63L, 68L, 69L, 74L, 66L, 63L, 64L, 62L, 
+65L, 65L, 64L, 68L, 63L, 67L, 70L, 65L, 64L, 74L, 60L, 62L, 70L, 
+71L, 66L, 61L, 64L, NA, 69L, 73L, 66L, 62L, 72L, 69L, 70L, 72L, 
+66L, 71L, 62L, 69L, 74L, 67L, 63L, 70L, 64L, 68L, 62L, 64L, 64L, 
+65L, 69L, 63L, 61L, 64L, 67L, 60L, 66L, 69L, 71L, 67L, 73L, 64L, 
+69L, 69L, 67L, 60L, 65L, 67L, 69L, 67L, 66L, 64L, 59L, 65L, 60L, 
+67L, 71L, 69L, 62L, 64L, 66L, 58L, 59L, 58L, 68L, 69L, 70L, 72L, 
+70L, 63L, 56L, 68L, 62L, 70L, 72L, 67L, 62L, 68L, 72L, 66L, 62L, 
+62L, 66L, 65L, 60L, 66L, 66L, 61L, 69L, 63L, 69L, 63L, 64L), 
+    weight = c(121L, 218L, 256L, 119L, 183L, 190L, 191L, 170L, 
+    166L, 202L, 156L, 195L, 170L, 165L, 183L, 157L, 183L, 159L, 
+    126L, 196L, 178L, 230L, 288L, 185L, 113L, 118L, 252L, 100L, 
+    145L, 189L, 174L, 139L, 191L, 174L, 118L, 186L, 159L, 205L, 
+    145L, 214L, 160L, 170L, 192L, 253L, 137L, 233L, 165L, 196L, 
+    180L, 219L, 154L, 181L, 187L, 167L, 220L, 274L, 180L, 217L, 
+    189L, 191L, 183L, 161L, 235L, 125L, 165L, 126L, 137L, 165L, 
+    102L, 127L, 214L, 245L, 161L, 264L, 142L, 143L, 183L, 173L, 
+    223L, 154L, 219L, 169L, 200L, 200L, 145L, 178L, 215L, 205L, 
+    151L, 170L, 169L, 159L, 110L, 198L, 185L, 142L, 139L, 156L, 
+    220L, 197L, 200L, 154L, 203L, 180L, 150L, 204L, 200L, 125L, 
+    165L, 170L, 212L, 227L, 150L, 174L, 119L, 175L, 230L, 158L, 
+    263L, 156L, 120L, 172L, 170L, 158L, 164L, 169L, 235L, 125L, 
+    244L, 225L, 140L, 227L, 160L, 167L, 325L, 121L, 151L, 223L, 
+    266L, 177L, 170L, 146L, 121L, 170L, 151L, 159L, 105L, 277L, 
+    160L, 145L, 320L, 163L, 163L, 169L, 232L, 210L, 160L, 145L, 
+    215L, 255L, 308L, NA, 158L, 210L, 123L, 118L, 167L, 186L, 
+    158L, 145L, 119L, 282L, 171L, 172L, 138L, 187L, 189L, 204L, 
+    215L, 167L, 189L, 180L, 165L, 179L, 204L, 233L, 210L, 195L, 
+    199L, 185L, 147L, 119L, 171L, 184L, 158L, 130L, 134L, 251L, 
+    200L, 140L, 114L, 209L, 210L, 179L, 109L, 130L, 145L, 167L, 
+    179L, 144L, 130L, 164L, 201L, 186L, 174L, 136L, 105L, 130L, 
+    124L, 170L, 134L, 165L, 191L, 175L, 180L, 142L, 147L, 110L, 
+    204L, 181L, 187L, 190L, 181L, 140L, 201L, 196L, 153L, 170L, 
+    188L, 179L, 259L, 200L, 162L, 141L, 183L, 160L, 120L, 145L, 
+    174L, 252L, 135L, 155L, 179L, 211L, 115L, 190L, 290L, 168L, 
+    255L, 205L, 260L, 250L, 166L, 170L, 182L, 176L, 145L, 172L, 
+    277L, 167L, 205L, 183L, 123L, 128L, 183L, 99L, 270L, 138L, 
+    285L, 180L, 160L, 170L, 185L, 163L, 187L, 128L, 153L, 125L, 
+    155L, 223L, 161L, 216L, 179L, 227L, 159L, 170L, 138L, 114L, 
+    239L, 174L, 188L, 198L, 114L, 225L, 143L, 146L, 141L, 151L, 
+    248L, 152L, 130L, 165L, 180L, 163L, 179L, 156L, 130L, 160L, 
+    210L, 164L, 115L, 159L, 141L, 169L, 181L, 180L, 209L, 210L, 
+    237L, 163L, 185L, 180L, 245L, 150L, 146L, 145L, 142L, 198L, 
+    148L, 200L, 190L, 182L, 220L, 179L, 212L, 165L, 257L, 184L, 
+    183L, 218L, 179L, 228L, 289L, 153L, 235L, 144L, 183L, 154L, 
+    216L, 181L, 202L, 160L, 123L, 197L, 192L, 187L, 212L, 186L, 
+    162L, 120L, 152L, 210L, 148L, 170L, 157L, 129L, 211L, 189L, 
+    120L, 121L, 120L, 169L, 186L, 262L, 222L, 222L, 179L, 224L, 
+    165L, 185L, 147L, 177L, 145L, 146L, 154L, 136L, 168L, 115L, 
+    173L, 154L, 167L, 197L, 220L), frame = structure(c(3L, 2L, 
+    2L, 2L, 3L, 2L, 3L, 3L, 2L, 4L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 
+    3L, 3L, 2L, 2L, 2L, 2L, 2L, 3L, 4L, 2L, 4L, 3L, 3L, 3L, 2L, 
+    3L, 3L, 3L, 3L, 3L, 3L, 3L, 2L, 2L, 3L, 2L, 2L, 2L, 3L, 3L, 
+    3L, 3L, 3L, 1L, 3L, 2L, 2L, 3L, 4L, 2L, 2L, 2L, 2L, 2L, 3L, 
+    3L, 1L, 3L, 4L, 3L, 3L, 3L, 1L, 3L, 2L, 3L, 3L, 4L, 2L, 3L, 
+    2L, 3L, 2L, 3L, 4L, 4L, 3L, 3L, 2L, 2L, 3L, 3L, 2L, 2L, 3L, 
+    4L, 2L, 3L, 3L, 3L, 3L, 2L, 3L, 2L, 2L, 2L, 3L, 4L, 3L, 3L, 
+    3L, 1L, 2L, 1L, 2L, 4L, 3L, 4L, 3L, 2L, 3L, 2L, 4L, 4L, 4L, 
+    3L, 3L, 4L, 2L, 3L, 3L, 2L, 2L, 4L, 3L, 4L, 3L, 2L, 4L, 4L, 
+    3L, 2L, 3L, 3L, 4L, 4L, 3L, 4L, 4L, 3L, 2L, 3L, 4L, 2L, 2L, 
+    1L, 3L, 2L, 2L, 2L, 4L, 2L, 3L, 2L, 3L, 3L, 3L, 4L, 4L, 2L, 
+    3L, 4L, 4L, 4L, 3L, 2L, 2L, 4L, 3L, 3L, 4L, 2L, 2L, 3L, 4L, 
+    4L, 3L, 2L, 2L, 3L, 3L, 3L, 3L, 3L, 4L, 3L, 4L, 4L, 4L, 4L, 
+    2L, 3L, 3L, 4L, 3L, 2L, 3L, 4L, 4L, 3L, 3L, 4L, 3L, 4L, 3L, 
+    3L, 3L, 4L, 4L, 4L, 4L, 3L, 3L, 4L, 4L, 2L, 3L, 1L, 3L, 2L, 
+    4L, 2L, 3L, 3L, 2L, 2L, 3L, 2L, 3L, 3L, 4L, 2L, 2L, 2L, 3L, 
+    3L, 2L, 3L, 3L, 4L, 4L, 2L, 3L, 3L, 4L, 3L, 2L, 4L, 3L, 2L, 
+    3L, 2L, 3L, 3L, 3L, 2L, 3L, 2L, 2L, 3L, 2L, 2L, 3L, 4L, 3L, 
+    4L, 4L, 3L, 4L, 2L, 4L, 2L, 3L, 2L, 3L, 1L, 3L, 3L, 4L, 4L, 
+    3L, 4L, 3L, 3L, 2L, 3L, 3L, 3L, 4L, 4L, 4L, 3L, 3L, 4L, 4L, 
+    4L, 3L, 3L, 3L, 4L, 4L, 3L, 4L, 4L, 3L, 3L, 3L, 2L, 3L, 4L, 
+    4L, 3L, 4L, 4L, 4L, 4L, 4L, 2L, 4L, 3L, 1L, 2L, 4L, 3L, 4L, 
+    1L, 4L, 3L, 3L, 3L, 3L, 4L, 3L, 2L, 2L, 4L, 3L, 4L, 3L, 3L, 
+    2L, 1L, 2L, 3L, 3L, 2L, 4L, 2L, 3L, 2L, 4L, 2L, 4L, 4L, 4L, 
+    3L, 4L, 4L, 3L, 3L, 3L, 4L, 4L, 4L, 3L, 3L, 3L, 4L, 4L, 2L, 
+    3L, 3L, 3L, 1L, 2L, 4L, 3L, 3L, 3L, 3L, 2L, 4L, 2L, 3L, 3L, 
+    2L, 2L, 3L, 3L, 3L, 3L, 3L, 3L, 4L, 3L, 3L), .Label = c(" ", 
+    "large", "medium", "small"), class = "factor"), frame2 = c(2L, 
+    3L, 3L, 3L, 2L, 3L, 2L, 2L, 3L, 1L, 2L, 2L, 2L, 2L, 2L, 2L, 
+    2L, 2L, 2L, 3L, 3L, 3L, 3L, 3L, 2L, 1L, 3L, 1L, 2L, 2L, 2L, 
+    3L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 3L, 3L, 2L, 3L, 3L, 3L, 2L, 
+    2L, 2L, 2L, 2L, NA, 2L, 3L, 3L, 2L, 1L, 3L, 3L, 3L, 3L, 3L, 
+    2L, 2L, NA, 2L, 1L, 2L, 2L, 2L, NA, 2L, 3L, 2L, 2L, 1L, 3L, 
+    2L, 3L, 2L, 3L, 2L, 1L, 1L, 2L, 2L, 3L, 3L, 2L, 2L, 3L, 3L, 
+    2L, 1L, 3L, 2L, 2L, 2L, 2L, 3L, 2L, 3L, 3L, 3L, 2L, 1L, 2L, 
+    2L, 2L, NA, 3L, NA, 3L, 1L, 2L, 1L, 2L, 3L, 2L, 3L, 1L, 1L, 
+    1L, 2L, 2L, 1L, 3L, 2L, 2L, 3L, 3L, 1L, 2L, 1L, 2L, 3L, 1L, 
+    1L, 2L, 3L, 2L, 2L, 1L, 1L, 2L, 1L, 1L, 2L, 3L, 2L, 1L, 3L, 
+    3L, NA, 2L, 3L, 3L, 3L, 1L, 3L, 2L, 3L, 2L, 2L, 2L, 1L, 1L, 
+    3L, 2L, 1L, 1L, 1L, 2L, 3L, 3L, 1L, 2L, 2L, 1L, 3L, 3L, 2L, 
+    1L, 1L, 2L, 3L, 3L, 2L, 2L, 2L, 2L, 2L, 1L, 2L, 1L, 1L, 1L, 
+    1L, 3L, 2L, 2L, 1L, 2L, 3L, 2L, 1L, 1L, 2L, 2L, 1L, 2L, 1L, 
+    2L, 2L, 2L, 1L, 1L, 1L, 1L, 2L, 2L, 1L, 1L, 3L, 2L, NA, 2L, 
+    3L, 1L, 3L, 2L, 2L, 3L, 3L, 2L, 3L, 2L, 2L, 1L, 3L, 3L, 3L, 
+    2L, 2L, 3L, 2L, 2L, 1L, 1L, 3L, 2L, 2L, 1L, 2L, 3L, 1L, 2L, 
+    3L, 2L, 3L, 2L, 2L, 2L, 3L, 2L, 3L, 3L, 2L, 3L, 3L, 2L, 1L, 
+    2L, 1L, 1L, 2L, 1L, 3L, 1L, 3L, 2L, 3L, 2L, NA, 2L, 2L, 1L, 
+    1L, 2L, 1L, 2L, 2L, 3L, 2L, 2L, 2L, 1L, 1L, 1L, 2L, 2L, 1L, 
+    1L, 1L, 2L, 2L, 2L, 1L, 1L, 2L, 1L, 1L, 2L, 2L, 2L, 3L, 2L, 
+    1L, 1L, 2L, 1L, 1L, 1L, 1L, 1L, 3L, 1L, 2L, NA, 3L, 1L, 2L, 
+    1L, NA, 1L, 2L, 2L, 2L, 2L, 1L, 2L, 3L, 3L, 1L, 2L, 1L, 2L, 
+    2L, 3L, NA, 3L, 2L, 2L, 3L, 1L, 3L, 2L, 3L, 1L, 3L, 1L, 1L, 
+    1L, 2L, 1L, 1L, 2L, 2L, 2L, 1L, 1L, 1L, 2L, 2L, 2L, 1L, 1L, 
+    3L, 2L, 2L, 2L, NA, 3L, 1L, 2L, 2L, 2L, 2L, 3L, 1L, 3L, 2L, 
+    2L, 3L, 3L, 2L, 2L, 2L, 2L, 2L, 2L, 1L, 2L, 2L), bp.1s = c(118L, 
+    112L, 190L, 110L, 138L, 132L, 161L, NA, 160L, 108L, 130L, 
+    102L, 130L, NA, 100L, 130L, 130L, 100L, 110L, 178L, 148L, 
+    137L, 136L, 158L, 100L, 144L, 140L, 120L, 125L, 180L, 146L, 
+    130L, 170L, 176L, 120L, 140L, 115L, NA, 124L, 158L, 105L, 
+    142L, 149L, 124L, 130L, 110L, 140L, 110L, 106L, 150L, 158L, 
+    104L, 158L, 124L, 126L, 165L, 141L, 160L, 130L, 138L, 159L, 
+    130L, 158L, NA, 121L, 120L, 120L, 150L, 160L, 170L, 138L, 
+    126L, 108L, 142L, 140L, 156L, 130L, 178L, 120L, 174L, 145L, 
+    138L, 120L, 136L, 147L, 119L, 139L, 120L, 125L, 121L, 138L, 
+    151L, 103L, 119L, 110L, 125L, 112L, 142L, 160L, 160L, 111L, 
+    136L, 136L, 136L, 115L, 130L, 110L, 150L, 170L, 130L, 132L, 
+    158L, 138L, 160L, 118L, 131L, 141L, 139L, 159L, 150L, 150L, 
+    150L, 138L, 160L, 124L, 112L, 110L, 110L, 170L, 130L, 180L, 
+    122L, 130L, 132L, 141L, 111L, 140L, 136L, 150L, 162L, 110L, 
+    145L, 104L, 146L, 130L, 125L, 125L, 140L, 126L, 108L, 140L, 
+    135L, 179L, 139L, 120L, 151L, 150L, 110L, 138L, 140L, 110L, 
+    125L, 146L, 150L, 140L, 98L, 161L, 125L, 138L, 230L, 122L, 
+    142L, 136L, 138L, 132L, 148L, 140L, 118L, 186L, 140L, 200L, 
+    110L, 118L, 146L, 136L, 140L, 142L, 136L, 180L, 110L, 140L, 
+    142L, 132L, 104L, 138L, 122L, 142L, 118L, 190L, 118L, 180L, 
+    140L, 160L, 142L, 170L, 199L, 131L, 190L, 110L, 190L, 135L, 
+    120L, 178L, 122L, 110L, NA, 125L, 137L, 130L, 180L, 130L, 
+    102L, 130L, 152L, 170L, 118L, 160L, 150L, 165L, 142L, 132L, 
+    140L, 184L, 176L, 150L, 170L, 130L, 122L, 116L, 158L, 122L, 
+    140L, 123L, 118L, 131L, 108L, 136L, 121L, 162L, 100L, 108L, 
+    150L, 120L, 100L, 105L, 125L, 175L, 140L, 118L, 150L, 150L, 
+    142L, 106L, 130L, 140L, 140L, 108L, 130L, 150L, 138L, 130L, 
+    122L, 118L, 121L, 120L, 125L, 136L, 140L, 142L, 130L, 150L, 
+    131L, 127L, 126L, 148L, 140L, 106L, 132L, 110L, 220L, 180L, 
+    100L, 212L, 134L, 162L, 122L, 138L, 112L, 128L, 148L, 130L, 
+    110L, 122L, 136L, 172L, 138L, 122L, 120L, 110L, 138L, 138L, 
+    250L, 138L, 116L, 150L, 138L, 110L, 120L, 130L, 148L, 135L, 
+    140L, 110L, 145L, 142L, 118L, 131L, 140L, 140L, 140L, 130L, 
+    128L, 142L, 136L, 128L, 110L, 108L, 152L, 90L, 122L, 140L, 
+    126L, 130L, 135L, 122L, 135L, 162L, 140L, 110L, 172L, 138L, 
+    142L, 130L, 140L, 178L, 162L, 134L, 124L, 142L, 120L, 140L, 
+    124L, 130L, 100L, 144L, 110L, 156L, 148L, 160L, 110L, 122L, 
+    140L, 140L, 140L, 125L, 170L, 144L, 124L, 170L, 110L, 120L, 
+    142L, 140L, 130L, 120L, 128L, 140L, 174L, 118L, 146L, 144L, 
+    130L, 110L, 130L, 140L, 190L, 132L, 218L, 138L, 140L, 120L, 
+    120L, 100L), bp.1d = c(59L, 68L, 92L, 50L, 80L, 86L, 112L, 
+    NA, 80L, 72L, 90L, 68L, 80L, NA, 66L, 90L, 100L, 90L, 76L, 
+    90L, 88L, 100L, 83L, 88L, 70L, 112L, 95L, 85L, 70L, 122L, 
+    94L, 90L, 88L, 86L, 78L, 97L, 64L, NA, 64L, 90L, 85L, 79L, 
+    89L, 80L, 60L, 82L, 65L, 68L, 82L, 82L, 78L, 90L, 94L, 86L, 
+    80L, 110L, 81L, 82L, 90L, 79L, 99L, 79L, 98L, NA, 71L, 90L, 
+    70L, 80L, 60L, 82L, 94L, 75L, 70L, 98L, 90L, 78L, 86L, 120L, 
+    75L, 75L, 100L, 78L, 76L, 52L, 72L, 68L, 69L, 80L, 64L, 62L, 
+    79L, 85L, 64L, 72L, 90L, 85L, 72L, 102L, 92L, 80L, 65L, 96L, 
+    84L, 90L, 68L, 90L, 90L, 90L, 90L, 73L, 90L, 104L, 82L, 96L, 
+    70L, 88L, 99L, 79L, 99L, 80L, 105L, 102L, 82L, 68L, 78L, 
+    62L, 80L, 76L, 92L, 66L, 110L, 70L, 88L, 72L, 79L, 62L, 75L, 
+    83L, 98L, 78L, 68L, 95L, 64L, 92L, 90L, 72L, 82L, 86L, 90L, 
+    78L, 86L, 88L, 89L, 90L, 86L, 87L, 80L, 72L, 89L, 98L, 90L, 
+    69L, 76L, 106L, 76L, 66L, 118L, 90L, 88L, 120L, 86L, 78L, 
+    86L, 66L, 80L, 76L, 90L, 69L, 102L, 72L, 94L, 78L, 68L, 98L, 
+    90L, 90L, 92L, 96L, 96L, 80L, 102L, 96L, 82L, 80L, 82L, 76L, 
+    70L, 72L, 110L, 86L, 105L, 80L, 78L, 80L, 88L, 115L, 79L, 
+    118L, 76L, 100L, 75L, 80L, 88L, 74L, 76L, NA, 64L, 74L, 70L, 
+    86L, 70L, 56L, 73L, 100L, 90L, 78L, 66L, 110L, 115L, 100L, 
+    86L, 75L, 76L, 110L, 74L, 96L, 80L, 68L, 53L, 98L, 90L, 65L, 
+    82L, 78L, 75L, 58L, 86L, 75L, 75L, 72L, 58L, 78L, 75L, 60L, 
+    82L, 70L, 80L, 89L, 66L, 99L, 98L, 79L, 82L, 82L, 65L, 70L, 
+    76L, 82L, 99L, 90L, 96L, 96L, 61L, 75L, 80L, 60L, 70L, 90L, 
+    98L, 78L, 81L, 75L, 71L, 78L, 82L, 86L, 82L, 80L, 68L, 100L, 
+    110L, 70L, 114L, 74L, 88L, 62L, 80L, 78L, 90L, 92L, 76L, 
+    64L, 64L, 86L, 124L, 78L, 86L, 68L, 80L, 76L, 84L, 100L, 
+    88L, 76L, 92L, 84L, 64L, 60L, 75L, 81L, 88L, 94L, 58L, 72L, 
+    81L, 62L, 111L, 112L, 87L, 70L, 75L, 94L, 78L, 88L, 82L, 
+    60L, 68L, 92L, 48L, 90L, 75L, 80L, 82L, 100L, 74L, 80L, 108L, 
+    72L, 80L, 110L, 92L, 90L, 100L, 98L, 100L, 90L, 78L, 94L, 
+    96L, 80L, 90L, 82L, 72L, 50L, 88L, 72L, 88L, 98L, 100L, 70L, 
+    80L, 100L, 100L, 100L, 80L, 96L, 82L, 84L, 110L, 64L, 98L, 
+    79L, 90L, 94L, 84L, 82L, 96L, 90L, 78L, 94L, 94L, 78L, 70L, 
+    110L, 95L, 94L, 90L, 90L, 94L, 100L, 70L, 78L, 72L), bp.2s = c(NA, 
+    NA, 185L, NA, NA, NA, 161L, NA, 128L, NA, 130L, NA, NA, NA, 
+    NA, 120L, NA, NA, NA, NA, 148L, 149L, NA, 160L, 110L, NA, 
+    NA, NA, NA, 170L, 139L, NA, 168L, 180L, NA, NA, NA, NA, NA, 
+    160L, NA, NA, 136L, NA, NA, NA, NA, NA, NA, 142L, 140L, NA, 
+    149L, NA, NA, 153L, NA, NA, NA, NA, 160L, NA, 148L, NA, NA, 
+    NA, NA, 145L, 160L, NA, 140L, NA, NA, 130L, NA, 144L, NA, 
+    182L, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, 
+    148L, NA, NA, NA, 117L, NA, 156L, 150L, 158L, NA, 130L, NA, 
+    126L, NA, NA, NA, 156L, 170L, NA, NA, 158L, NA, 162L, NA, 
+    NA, NA, NA, 150L, NA, 150L, 150L, NA, 158L, NA, NA, NA, NA, 
+    NA, NA, 210L, NA, NA, NA, NA, NA, NA, NA, NA, 156L, NA, NA, 
+    NA, 168L, NA, NA, NA, NA, NA, NA, NA, NA, 172L, 136L, NA, 
+    NA, NA, NA, 137L, NA, NA, NA, NA, 160L, NA, NA, 151L, NA, 
+    NA, 235L, NA, 136L, NA, NA, NA, 148L, NA, NA, 190L, NA, 208L, 
+    NA, NA, 136L, NA, 136L, 148L, 130L, 176L, NA, 148L, 140L, 
+    NA, NA, NA, NA, NA, NA, 170L, NA, 165L, NA, 158L, 142L, 180L, 
+    190L, NA, NA, NA, 170L, NA, NA, 160L, NA, NA, NA, NA, NA, 
+    NA, NA, NA, NA, NA, 140L, 150L, NA, 150L, 150L, 160L, 144L, 
+    NA, NA, 180L, 150L, 146L, 178L, NA, NA, NA, 159L, NA, NA, 
+    NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, 152L, 
+    NA, NA, 130L, 142L, NA, NA, NA, NA, NA, NA, NA, 150L, NA, 
+    130L, 126L, NA, NA, NA, NA, NA, NA, 142L, NA, NA, NA, NA, 
+    NA, 158L, 128L, NA, NA, NA, 202L, 190L, NA, 210L, NA, 150L, 
+    NA, NA, NA, 138L, 138L, NA, NA, NA, NA, 176L, NA, NA, NA, 
+    NA, NA, NA, NA, NA, NA, 130L, NA, NA, NA, NA, NA, NA, 130L, 
+    NA, 142L, NA, NA, 130L, 138L, NA, NA, NA, 124L, 141L, NA, 
+    NA, NA, NA, 162L, NA, NA, NA, NA, NA, 170L, NA, NA, 158L, 
+    NA, NA, 168L, 135L, 142L, 170L, 142L, 170L, 152L, NA, 110L, 
+    142L, NA, 140L, NA, NA, NA, 146L, NA, 158L, 130L, 160L, NA, 
+    NA, 136L, 136L, 138L, NA, 160L, 144L, NA, 166L, NA, 122L, 
+    NA, 138L, 130L, NA, NA, 148L, 174L, NA, 149L, 142L, NA, NA, 
+    170L, 130L, 172L, 126L, 238L, 130L, 146L, NA, NA, NA), bp.2d = c(NA, 
+    NA, 92L, NA, NA, NA, 112L, NA, 86L, NA, 90L, NA, NA, NA, 
+    NA, 96L, NA, NA, NA, NA, 84L, 110L, NA, 88L, 70L, NA, NA, 
+    NA, NA, 112L, 89L, NA, 80L, 90L, NA, NA, NA, NA, NA, 96L, 
+    NA, NA, 88L, NA, NA, NA, NA, NA, NA, 78L, 84L, NA, 96L, NA, 
+    NA, 100L, NA, NA, NA, NA, 103L, NA, 88L, NA, NA, NA, NA, 
+    80L, 60L, NA, 80L, NA, NA, 92L, NA, 76L, NA, 110L, NA, NA, 
+    NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, 79L, NA, NA, 
+    NA, 68L, NA, 106L, 98L, 80L, NA, 94L, NA, 84L, NA, NA, NA, 
+    88L, 100L, NA, NA, 108L, NA, 96L, NA, NA, NA, NA, 89L, NA, 
+    100L, 100L, NA, 74L, NA, NA, NA, NA, NA, NA, 110L, NA, NA, 
+    NA, NA, NA, NA, NA, NA, 82L, NA, NA, NA, 98L, NA, NA, NA, 
+    NA, NA, NA, NA, NA, 91L, 86L, NA, NA, NA, NA, 79L, NA, NA, 
+    NA, NA, 116L, NA, NA, 111L, NA, NA, 120L, NA, 84L, NA, NA, 
+    NA, 78L, NA, NA, 110L, NA, 90L, NA, NA, 96L, NA, 86L, 98L, 
+    98L, 94L, NA, 102L, 86L, NA, NA, NA, NA, NA, NA, 90L, NA, 
+    105L, NA, 84L, 90L, 100L, 99L, NA, NA, NA, 86L, NA, NA, 82L, 
+    NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, 100L, 100L, NA, 80L, 
+    90L, 96L, 110L, NA, NA, 84L, 102L, 76L, 96L, NA, NA, NA, 
+    80L, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, 
+    NA, NA, NA, 102L, NA, NA, 80L, 90L, NA, NA, NA, NA, NA, NA, 
+    NA, 85L, NA, 90L, 96L, NA, NA, NA, NA, NA, NA, 96L, NA, NA, 
+    NA, NA, NA, 80L, 74L, NA, NA, NA, 98L, 114L, NA, 112L, NA, 
+    80L, NA, NA, NA, 90L, 84L, NA, NA, NA, NA, 124L, NA, NA, 
+    NA, NA, NA, NA, NA, NA, NA, 86L, NA, NA, NA, NA, NA, NA, 
+    95L, NA, 70L, NA, NA, 80L, 89L, NA, NA, NA, 96L, 80L, NA, 
+    NA, NA, NA, 92L, NA, NA, NA, NA, NA, 98L, NA, NA, 110L, NA, 
+    NA, 108L, 88L, 92L, 114L, 102L, 96L, 90L, NA, 74L, 98L, NA, 
+    90L, NA, NA, NA, 82L, NA, 86L, 100L, 100L, NA, NA, 100L, 
+    92L, 82L, NA, 94L, 80L, NA, 108L, NA, 100L, NA, 84L, 88L, 
+    NA, NA, 100L, 84L, NA, 94L, 92L, NA, NA, 118L, 94L, 100L, 
+    80L, 90L, 94L, 102L, NA, NA, NA), waist = c(29L, 46L, 49L, 
+    33L, 44L, 36L, 46L, 34L, 34L, 45L, 39L, 42L, 35L, 37L, 36L, 
+    37L, 37L, 31L, 30L, 46L, 42L, 45L, 48L, 48L, 33L, 28L, 43L, 
+    27L, 31L, 37L, 37L, 29L, 39L, 49L, 32L, 39L, 31L, 46L, 31L, 
+    45L, 35L, 40L, 40L, 43L, 40L, 49L, 42L, 42L, 40L, 43L, 37L, 
+    36L, 43L, 39L, 51L, 49L, 38L, 51L, 43L, 40L, 42L, 34L, 43L, 
+    31L, 35L, 28L, 28L, 34L, 31L, 35L, 41L, 44L, 37L, 43L, 31L, 
+    35L, 37L, 36L, 46L, 38L, 41L, 40L, 38L, 38L, 37L, 37L, 42L, 
+    40L, 37L, 36L, 34L, 33L, 29L, 36L, 35L, 28L, 29L, 35L, 40L, 
+    42L, 42L, 34L, 42L, 36L, 36L, 40L, 41L, 35L, 39L, 37L, 39L, 
+    41L, 31L, 34L, 32L, 34L, 39L, 33L, 51L, 31L, 32L, 38L, 31L, 
+    34L, 32L, 39L, 44L, 33L, 48L, 44L, 37L, 47L, 40L, 38L, 53L, 
+    32L, 34L, 43L, 49L, 38L, 33L, 32L, 31L, 37L, 33L, 33L, 29L, 
+    51L, 39L, 29L, 56L, 40L, 37L, 39L, 46L, 44L, 35L, 36L, 40L, 
+    46L, 52L, 30L, 36L, 39L, 30L, 29L, 36L, 37L, 39L, 38L, 28L, 
+    52L, 38L, 37L, 33L, 38L, 38L, 40L, 46L, 45L, 45L, 34L, 33L, 
+    37L, 44L, 40L, 37L, 36L, 41L, 39L, 32L, 29L, 37L, 39L, 37L, 
+    37L, 34L, 50L, 44L, 32L, 30L, 34L, 45L, 47L, 33L, 29L, 33L, 
+    44L, 37L, 40L, 29L, 34L, 45L, 38L, 30L, 32L, 26L, 33L, 32L, 
+    41L, 31L, 33L, 38L, 37L, 39L, 35L, 34L, 28L, 40L, 38L, 37L, 
+    38L, 37L, 35L, 46L, 38L, 32L, 38L, 40L, 45L, 48L, 41L, 35L, 
+    33L, 36L, 30L, 29L, 32L, 38L, 45L, 33L, 33L, 40L, 40L, 31L, 
+    41L, 55L, 36L, 47L, 37L, 42L, 43L, 39L, 35L, 42L, 34L, 34L, 
+    40L, 50L, 36L, 39L, 38L, 26L, 31L, 43L, 30L, 45L, 31L, 50L, 
+    38L, 36L, 34L, 43L, 36L, 38L, 33L, 36L, 31L, 31L, 45L, 37L, 
+    41L, 38L, 44L, 38L, 32L, 32L, 28L, 48L, 38L, 35L, 40L, 31L, 
+    41L, 33L, 36L, 32L, 33L, 49L, 33L, 32L, 41L, 39L, 34L, 37L, 
+    36L, 31L, 40L, 44L, 31L, 30L, 36L, 33L, 35L, 43L, 35L, 42L, 
+    37L, 53L, 35L, 40L, 39L, 47L, 33L, 37L, 34L, NA, 42L, 35L, 
+    43L, 39L, 38L, 40L, 39L, 48L, 34L, 47L, 39L, 41L, 41L, 32L, 
+    42L, 48L, 36L, 47L, 33L, 43L, 35L, 43L, 41L, 43L, 37L, 36L, 
+    41L, 41L, 40L, 47L, 40L, 44L, 33L, 37L, 44L, 32L, 34L, 33L, 
+    30L, 38L, 36L, 30L, 32L, 32L, 36L, 42L, 42L, 40L, 41L, 37L, 
+    48L, 31L, 39L, 34L, 39L, 38L, NA, 40L, 33L, 38L, 31L, 35L, 
+    32L, 33L, 41L, 49L), hip = c(38L, 48L, 57L, 38L, 41L, 42L, 
+    49L, 39L, 40L, 50L, 45L, 50L, 41L, 43L, 40L, 41L, 43L, 39L, 
+    34L, 51L, 41L, 46L, 55L, 44L, 38L, 36L, 47L, 33L, 38L, 39L, 
+    40L, 35L, 41L, 43L, 34L, 44L, 35L, 49L, 36L, 48L, 40L, 43L, 
+    42L, 49L, 40L, 57L, 42L, 43L, 44L, 52L, 41L, 46L, 47L, 44L, 
+    54L, 58L, 41L, 51L, 47L, 45L, 48L, 40L, 48L, 35L, 39L, 32L, 
+    35L, 42L, 33L, 38L, 39L, 47L, 40L, 54L, 35L, 40L, 45L, 40L, 
+    50L, 41L, 42L, 44L, 41L, 45L, 40L, 41L, 53L, 49L, 42L, 41L, 
+    40L, 41L, 30L, 43L, 44L, 39L, 39L, 39L, 50L, 43L, 46L, 39L, 
+    51L, 40L, 39L, 41L, 42L, 40L, 41L, 42L, 44L, 44L, 38L, 43L, 
+    38L, 39L, 48L, 40L, 64L, 40L, 35L, 43L, 39L, 42L, 40L, 43L, 
+    50L, 36L, 51L, 47L, 40L, 53L, 43L, 44L, 62L, 38L, 38L, 48L, 
+    45L, 43L, 46L, 41L, 33L, 40L, 38L, 39L, 33L, 49L, 41L, 36L, 
+    49L, 45L, 43L, 41L, 54L, 45L, 39L, 42L, 45L, 54L, 58L, 37L, 
+    43L, 47L, 36L, 35L, 39L, 46L, 43L, 42L, 37L, 59L, 40L, 41L, 
+    39L, 37L, 45L, 47L, 44L, 46L, 46L, 41L, 45L, 44L, 42L, 53L, 
+    43L, 43L, 47L, 45L, 38L, 37L, 40L, 44L, 43L, 38L, 38L, 47L, 
+    48L, 33L, 37L, 43L, 48L, 45L, 34L, 33L, 38L, 47L, 43L, 42L, 
+    35L, 43L, 46L, 38L, 35L, 37L, 33L, 35L, 38L, 46L, 40L, 42L, 
+    41L, 43L, 47L, 39L, 41L, 37L, 43L, 46L, 41L, 44L, 42L, 37L, 
+    49L, 42L, 40L, 39L, 41L, 48L, 49L, 47L, 39L, 40L, 39L, 44L, 
+    40L, 35L, 44L, 58L, 40L, 41L, 42L, 45L, 37L, 47L, 62L, 39L, 
+    52L, 41L, 47L, 51L, 38L, 42L, 39L, 44L, 42L, 40L, 49L, 47L, 
+    41L, 40L, 37L, 36L, 45L, 36L, 49L, 39L, 60L, 42L, 45L, 39L, 
+    47L, 40L, 49L, 39L, 44L, 39L, 39L, 54L, 40L, 44L, 46L, 47L, 
+    39L, 38L, 38L, 35L, 53L, 46L, 46L, 49L, 39L, 52L, 40L, 48L, 
+    39L, 40L, 58L, 38L, 40L, 46L, 40L, 39L, 42L, 42L, 38L, 47L, 
+    47L, 37L, 34L, 43L, 38L, 39L, 49L, 41L, 46L, 42L, 56L, 38L, 
+    41L, 43L, 58L, 39L, 43L, 37L, NA, 49L, 38L, 46L, 44L, 46L, 
+    52L, 47L, 51L, 46L, 55L, 41L, 45L, 45L, 37L, 54L, 51L, 40L, 
+    52L, 42L, 46L, 38L, 45L, 42L, 47L, 45L, 41L, 50L, 48L, 45L, 
+    48L, 42L, 41L, 38L, 41L, 53L, 42L, 46L, 37L, 37L, 43L, 44L, 
+    33L, 34L, 41L, 38L, 46L, 48L, 44L, 51L, 47L, 50L, 38L, 41L, 
+    42L, 45L, 39L, NA, 42L, 39L, 42L, 41L, 39L, 43L, 40L, 48L, 
+    58L), time.ppn = c(720L, 360L, 180L, 480L, 300L, 195L, 720L, 
+    1020L, 300L, 240L, 300L, 90L, 720L, 60L, 225L, 240L, 180L, 
+    1440L, 120L, 540L, 1020L, 480L, 240L, 285L, 210L, 780L, 420L, 
+    510L, 720L, 450L, 540L, 780L, 225L, 330L, 720L, 780L, 720L, 
+    240L, 30L, 840L, 720L, 720L, 30L, 300L, 90L, 90L, 150L, 450L, 
+    780L, 360L, 120L, 240L, 360L, 270L, 780L, 60L, 540L, 180L, 
+    195L, 720L, 300L, 720L, 420L, 120L, 720L, 180L, 960L, 960L, 
+    1020L, 120L, 240L, 420L, 120L, 240L, 300L, 1200L, 180L, 240L, 
+    210L, 180L, 270L, 10L, 210L, 60L, 420L, 780L, 720L, 840L, 
+    660L, 420L, 690L, 1140L, 120L, 60L, 10L, 900L, 1560L, 120L, 
+    20L, 390L, 780L, 600L, 10L, 45L, 780L, 60L, 240L, 300L, 240L, 
+    720L, NA, 330L, 60L, 30L, 300L, 30L, 30L, 720L, 210L, 120L, 
+    120L, 300L, 1170L, 240L, 720L, 180L, 10L, 240L, 660L, 180L, 
+    225L, 140L, 60L, 30L, 60L, 855L, 90L, 960L, 90L, 315L, 210L, 
+    600L, 30L, 120L, 1320L, 750L, 60L, 900L, 390L, 1080L, 30L, 
+    720L, 60L, 720L, 900L, 15L, 270L, 720L, 720L, 210L, 300L, 
+    10L, 10L, 60L, 300L, 150L, 60L, 60L, 180L, 60L, 270L, 420L, 
+    240L, 210L, 990L, 90L, 90L, 780L, 360L, 480L, 195L, 60L, 
+    150L, 30L, 120L, 45L, 90L, 630L, 720L, 300L, 80L, 135L, 210L, 
+    10L, 90L, 360L, 240L, 720L, 720L, 120L, 15L, 780L, 60L, 30L, 
+    435L, 120L, 150L, 120L, 60L, 120L, 720L, 60L, 180L, 180L, 
+    180L, NA, 720L, 720L, 60L, 720L, 90L, 720L, 240L, 60L, 240L, 
+    120L, 720L, 270L, 720L, 210L, 210L, 720L, 60L, 60L, 30L, 
+    90L, 15L, 300L, 180L, 180L, 720L, 180L, 900L, 720L, 20L, 
+    240L, 240L, 60L, 300L, 180L, 240L, 900L, 720L, 540L, 720L, 
+    720L, 300L, 720L, 360L, 360L, 60L, 120L, 420L, 240L, 270L, 
+    60L, 90L, 60L, 840L, 90L, 480L, NA, 240L, 720L, 720L, 720L, 
+    150L, 330L, 690L, 720L, 300L, 120L, 600L, 795L, 135L, 240L, 
+    10L, 480L, 10L, 375L, 30L, 30L, 150L, 270L, 570L, 720L, 30L, 
+    120L, 330L, 10L, 5L, 60L, 90L, 105L, 30L, 1260L, 390L, 420L, 
+    15L, 420L, 270L, 60L, 45L, 180L, 390L, 150L, 15L, 300L, 720L, 
+    240L, 15L, 330L, 120L, 30L, 480L, 180L, 300L, 30L, 240L, 
+    150L, 180L, 270L, 10L, 300L, 240L, 20L, 330L, 20L, 240L, 
+    150L, 300L, 540L, 240L, 150L, 150L, 30L, 60L, 195L, 90L, 
+    180L, 450L, 225L, 75L, 195L, 210L, 180L, 195L, 330L, 285L, 
+    240L, 150L, 15L, 60L, 210L, 210L, 1440L, 390L, 900L, 1440L, 
+    90L, 260L, 240L, 270L, 270L, 180L, 15L, 480L, 240L, 780L, 
+    300L, 60L, 900L, 40L, 450L, 1020L, 210L, 60L, 180L, 180L, 
+    30L, 480L, 60L, 540L, 60L, 60L, 480L, 330L, 210L, 210L, 180L, 
+    20L, 255L, 900L), Diabetes = c(0L, 0L, 0L, 0L, 1L, 0L, 0L, 
+    0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 1L, 0L, 0L, 
+    1L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 1L, 0L, 0L, 0L, 0L, 
+    0L, 0L, 1L, 0L, 0L, 0L, NA, 0L, 0L, 0L, 1L, 0L, 0L, 0L, 0L, 
+    0L, 0L, 1L, 0L, 0L, 0L, 1L, NA, 1L, 0L, 1L, 0L, NA, 0L, 0L, 
+    1L, 0L, 1L, 0L, 0L, 0L, 0L, 0L, 1L, 0L, 0L, 0L, 0L, 0L, 0L, 
+    0L, 0L, 0L, 0L, 1L, 0L, 0L, 0L, 0L, 1L, 0L, 0L, 0L, 0L, 0L, 
+    1L, 0L, 1L, 0L, 0L, 0L, 0L, 1L, 0L, 0L, 0L, 1L, NA, 0L, 0L, 
+    0L, 0L, 0L, 0L, NA, NA, 0L, 0L, 0L, 1L, 0L, 1L, 0L, 0L, 0L, 
+    0L, 0L, 1L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 1L, 0L, 0L, 0L, 
+    0L, 1L, 0L, 0L, 0L, 0L, 0L, 0L, 1L, 0L, 0L, 0L, 0L, 1L, 0L, 
+    0L, 0L, 0L, 0L, 1L, 0L, 0L, 0L, 0L, 1L, 0L, 0L, 0L, 0L, 1L, 
+    0L, 1L, 0L, 0L, 1L, 1L, 0L, 0L, 1L, 0L, 0L, 0L, 0L, 0L, 0L, 
+    0L, 0L, 0L, 0L, 0L, NA, 0L, 0L, 0L, 0L, 0L, 1L, 0L, 0L, 0L, 
+    0L, 0L, 0L, 0L, 0L, 0L, 0L, 1L, 0L, 0L, 1L, 1L, 0L, 0L, 0L, 
+    NA, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 
+    0L, 0L, 1L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 
+    0L, 1L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 1L, 0L, 0L, 0L, 1L, 0L, 
+    0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, NA, 0L, 0L, 0L, 
+    0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 
+    0L, 0L, 1L, 0L, 0L, 0L, 0L, 0L, 0L, 1L, 0L, 0L, 0L, 1L, 0L, 
+    0L, 0L, 0L, 0L, 0L, 1L, 0L, 1L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 
+    0L, 0L, 1L, 0L, NA, NA, 1L, 0L, 0L, 0L, 0L, 1L, 0L, 0L, 0L, 
+    0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 1L, 0L, 0L, 
+    0L, 0L, 0L, 0L, 0L, 0L, 1L, 0L, 0L, 0L, 1L, 1L, 1L, 0L, 0L, 
+    0L, 1L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 1L, 
+    0L, 0L, 0L, 0L, 0L, 1L, 0L, 0L, 1L, 0L, 0L, 0L, 0L, 0L, NA, 
+    0L, 1L, 0L, 1L, 0L, NA), WHbinary = c(1L, 2L, 2L, 2L, 2L, 
+    1L, 2L, 2L, 1L, 2L, 1L, 2L, 2L, 1L, 2L, 1L, 2L, 1L, 2L, 2L, 
+    1L, 1L, 2L, 2L, 2L, 1L, 2L, NA, 2L, 2L, 2L, 1L, 2L, 2L, 1L, 
+    1L, 1L, 2L, 1L, 1L, 1L, 2L, 2L, 2L, 2L, 1L, 2L, 2L, 1L, 1L, 
+    1L, 2L, 2L, 2L, 2L, 1L, 1L, 1L, 1L, 2L, 2L, 1L, 2L, 2L, 1L, 
+    1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 2L, 1L, 1L, 2L, 
+    2L, 2L, 2L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 2L, 1L, 1L, 1L, 
+    1L, 1L, 2L, 1L, 2L, 1L, 2L, 1L, 1L, 1L, 1L, 1L, 2L, 2L, 1L, 
+    2L, 1L, 1L, 2L, 1L, 2L, 1L, 1L, 2L, 1L, 2L, 1L, 1L, 1L, 1L, 
+    1L, 1L, 2L, 1L, 2L, 1L, 1L, 1L, 1L, 1L, 2L, 1L, 1L, 2L, 2L, 
+    2L, 1L, 1L, 1L, 1L, 1L, 1L, 2L, 2L, 1L, 2L, 1L, 2L, 2L, 2L, 
+    2L, 2L, 1L, 2L, 1L, 1L, 1L, 2L, 1L, 1L, 1L, 2L, 1L, 1L, 1L, 
+    1L, 2L, 1L, 1L, 2L, 2L, 2L, 2L, 1L, 2L, 1L, 2L, 1L, 2L, 2L, 
+    1L, 2L, 2L, 2L, 1L, 1L, 1L, 2L, 2L, 1L, 2L, 2L, 2L, 2L, 1L, 
+    1L, 1L, 2L, 1L, 1L, 1L, 1L, 1L, 2L, 2L, 1L, 1L, 2L, 1L, 1L, 
+    1L, 1L, 2L, 1L, 2L, 2L, 1L, 1L, 1L, 2L, 2L, 1L, 1L, 2L, 2L, 
+    1L, 2L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 2L, 1L, 1L, 1L, 2L, 
+    2L, 1L, 1L, 2L, 2L, 1L, 1L, 2L, 2L, 1L, 1L, 1L, 2L, 1L, 2L, 
+    2L, 2L, 2L, 1L, 2L, 2L, 2L, 2L, 2L, 2L, 1L, 1L, 1L, 1L, 2L, 
+    1L, 2L, 1L, 2L, 1L, 2L, 2L, 1L, 1L, 2L, 1L, 1L, 1L, 1L, 2L, 
+    1L, 1L, 2L, 2L, 2L, 1L, 1L, 1L, 2L, 1L, 1L, 1L, 1L, 1L, 1L, 
+    2L, 1L, 1L, 2L, 1L, 1L, 2L, 2L, 1L, 2L, 1L, 1L, 2L, 1L, 1L, 
+    1L, 2L, 1L, 2L, 2L, 2L, 2L, 2L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 
+    2L, 1L, 1L, 2L, 2L, 2L, 2L, 1L, 1L, 2L, 2L, 1L, 2L, 1L, 2L, 
+    1L, 1L, 1L, 1L, 2L, 1L, 2L, 2L, 2L, 2L, 1L, 2L, 1L, 2L, 1L, 
+    1L, 1L, 2L, 1L, 1L, 1L, 2L, 1L, 1L, 2L, 1L, 2L, 2L, 1L, 1L, 
+    1L, 2L, 2L, 2L, 1L, 2L, 1L, 2L, 2L, 2L, 1L, 2L, 1L, 1L, 1L, 
+    1L, 1L, 1L, 2L, 2L, 2L, 1L, 1L)), .Names = c("id", "chol", 
+"stab.glu", "hdl", "ratio", "glyhb", "location", "loc", "age", 
+"gender2", "Gender", "height", "weight", "frame", "frame2", "bp.1s", 
+"bp.1d", "bp.2s", "bp.2d", "waist", "hip", "time.ppn", "Diabetes", 
+"WHbinary"), class = "data.frame", row.names = c(NA, -403L))
+
+diab$Diff <- diab$bp.1d - diab$bp.2d
+n.D.diff <- length( diab$Diff ) - sum( is.na(diab$Diff) )
+se.D.diff <- sd(diab$Diff, na.rm=TRUE) / sqrt(n.D.diff)
+
+```
+
+A US study
+(@data:Willems1997:CHD, @data:Schorling1997:smoking)
+was conducted to determine how CHD risk factors were assessed
+among parts of the population with diabetes.
+One RQ of interest is:
+
+> Do diastolic blood pressure measurements change from first to the second observation? 
+
+We have a pair of measurements for each person:
+their first and second blood pressure measurements.
+The data,
+shown in Table \@ref(tab:DiabetesDataTable),
+is from 141~people.
+
+We could work our the differences in one of two ways:   
+
+* The first minus second observation: the *reduction* in BP; 
+* The second minus first observation: the *increase* in BP.
+
+Either way is fine,
+as long as you keep the order consistent throughout.
+Here,
+we will use the *second minus the first*,
+so that the differences 
+represent the *increase* in BP
+from the first to second measurement.
+	
+
+
+```{r DiabetesDataTable, echo=FALSE}
+DiffExists <- complete.cases(diab[, c("bp.1d", "bp.2d", "Diff")])
+
+kable(head(diab[DiffExists, c("bp.1d", "bp.2d", "Diff")]),
+      col.names=c("First observation", "Second observation", "Increase"),
+      caption="The first six observations from the diabetes study: Diastolic blood pressure for the first and second visits, and the increase, all in mm Hg")
+```
+
+
+Since there is a large amount of data,
+the appropriate graphical summary is a histogram of differences
+(Fig. \@ref(fig:DiabetesHIST)).
+The numerical summary can report on both the first and second observations,
+but must report on the *differences*.
+We use SPSS to compute the numerical summaries
+(Fig. \@ref(fig:BloodPressureDescriptives),
+then report them in a suitable table
+(Table \@ref(tab:DiabSummTable)).
+
+
+```{r BloodPressureDescriptives, echo=FALSE, fig.cap="SPSS output for the blood pressure data", fig.align="center"}
+knitr::include_graphics("SPSS/Diabetes/Diabetes-DescriptivesAll.png")
+```
+
+   
+```{r echo=FALSE}
+diab$Diff <- diab$bp.1d - diab$bp.2d
+n.D.diff <- length( diab$Diff ) - sum( is.na(diab$Diff) )
+se.D.diff <- sd(diab$Diff, na.rm=TRUE) / sqrt(n.D.diff)
+```
+
+
+
+
+```{r DiabetesHIST, echo=FALSE, fig.cap="Histogram of the increase in DBP between the first and second visits", fig.align="center"}
+hist(diab$Diff,
+	col=plot.colour,
+	xlab="DBP increase (in mm Hg)",
+	las=1,
+	ylab="Frequency",
+	main="")
+box()
+```
+
+
+
+
+```{r DiabSummTable, echo=FALSE}
+Diab.Table <- array( dim=c(3, 4))
+
+n.diab <- function(x){
+  length(x) - sum( is.na(x))
+}
+
+se.diab <- function(x) {
+  sd(x, na.rm=TRUE) / sqrt(n.diab(x) )
+}
+
+Diab.Table[1, 1] <- mean(diab$bp.1d[DiffExists], na.rm=TRUE)
+Diab.Table[2, 1] <- mean(diab$bp.2d[DiffExists], na.rm=TRUE)
+Diab.Table[3, 1] <- mean(diab$Diff[DiffExists], na.rm=TRUE)
+
+Diab.Table[1, 2] <- sd(diab$bp.1d[DiffExists], na.rm=TRUE)
+Diab.Table[2, 2] <- sd(diab$bp.2d[DiffExists], na.rm=TRUE)
+Diab.Table[3, 2] <- sd(diab$Diff[DiffExists], na.rm=TRUE)
+
+Diab.Table[1, 3] <- se.diab(diab$bp.1d[DiffExists])
+Diab.Table[2, 3] <- se.diab(diab$bp.2d[DiffExists])
+Diab.Table[3, 3] <- se.diab(diab$Diff[DiffExists])
+
+Diab.Table[1, 4] <- n.diab(diab$bp.1d[DiffExists])
+Diab.Table[2, 4] <- n.diab(diab$bp.2d[DiffExists])
+Diab.Table[3, 4] <- n.diab(diab$Diff[DiffExists])
+
+rownames(Diab.Table) <- c("First observation", "Second observation", "Increase")
+
+kable(Diab.Table,
+      col.names=c("Mean", "Standard deviation", "Standard error", "Sample size"),
+      digits=c(2, 3, 3, 0),
+      caption="The numerical summary for the diabetes data. The differences are the second observation minus the first observation: the increases in diastolic blood pressure from the first to second observation")
+
+```
+
+	
+To find an *approximate* 95\% CI for the mean difference:
+\[
+   \text{s.e.}(\bar{d})=\frac{s_d}{\sqrt{n}} = \frac{8.02614}{\sqrt{141}} = 0.67592
+\]
+Then, using an approximate multiplier of 2, the margin of error is:
+\[
+   2 \times 0.67592 = 1.3518,
+\]
+so an approximate 95\% CI  for the increase is 
+\[
+   -1.9504\pm 1.3518,
+\]
+or from $-0.60$ to $-3.30$mm Hg.
+The are both *negative* increases;
+so we could instead write 
+that the 95\% CI  for the *decrease* in diastolic blood pressure  
+is from $0.60$ to $3.30$mm Hg.
+
+We can write:
+
+> Based on the sample,
+> an *approximate* 95\% CI  for the mean decrease in DBP is from
+> $0.60$ to $3.30$mm Hg.
+
+The exact 95\% CI  from SPSS 
+(Fig. \@ref(fig:BloodPressureResults)),
+using an exact multiplier rather than an approximate multiplier of 2,
+is only slightly different since the sample size is large.
+
+
+```{r BloodPressureResults, echo=FALSE, out.width="75%", fig.cap="SPSS results for the blood pressure data, including the exact 95\\% CI", fig.align="center"}
+knitr::include_graphics("SPSS/Diabetes/Diabetes-Test.png")
+```
+
+
+So we can write,
+after rounding to two decimal places:
+
+> Based on the sample,
+> a 95\% CI  for the decrease in DBP is from
+> $0.61$ to $3.29$ mm Hg.
+
+Note that the wording implies which reading is the higher reading on average:
+the second.
+
+Provided the sample somewhat random,
+the CI  will be valid.
+
+
+```{exercise}	
+Is there evidence of a difference
+*in the population*?
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Exercises
+
+### The taste of brocolli
+
+People often struggle to eat the recommended dose of vegetables.
+In one study
+[@data:Fritts2018:Vegetables]
+exploring ways to increase vegetable intake in teens,
+teens were asked to rate the taste of raw broccoli served raw,
+and broccoli served with a specially-made dip.
+Each teen ($n = 101$) gets a *pair* of measurements,
+where they assessed the taste with and without dip.
+Taste was assessed using a '100 mm visual analog scale',
+where higher score means a better taste.
+
+* For the raw broccoli, the mean taste rating was
+	 $56.0$ (with a standard deviation of $26.6$);
+	 <!-- %  (SDs); so if $n=101$ we'd get SE: 2.647 -->
+* For the broccoli served with dip, the mean taste rating was
+	$61.2$ (with a standard deviation of $28.7$).
+
+Because the data are paired,
+the *difference* are the best way to describe the data.
+The mean difference in rating was $5.2$,
+with standard error of $3.06$. % (working backwards from the $t$-score). Looks like $n=101$.
+
+
+From this information:
+
+* Compute the approximate 95\% CI  
+	for the mean difference in taste ratings.
+* Construct a useful numerical summary table for these data.
+
+
+
+
+
+
+
+
+
+
+
+
+
+### The effects of Captopril {#CaptorilCI}
+
+```{r echo=FALSE}
+#blood <- read.table("~/Documents/Teaching/Datasets/Books/Hand/Hand-R/blood-R.dat", header=TRUE)
+blood <- structure(list(Patient = c(1L, 2L, 3L, 4L, 5L, 6L, 7L, 8L, 9L, 
+10L, 11L, 12L, 13L, 14L, 15L, 1L, 2L, 3L, 4L, 5L, 6L, 7L, 8L, 
+9L, 10L, 11L, 12L, 13L, 14L, 15L), Before = c(210L, 169L, 187L, 
+160L, 167L, 176L, 185L, 206L, 173L, 146L, 174L, 201L, 198L, 148L, 
+154L, 130L, 122L, 124L, 104L, 112L, 101L, 121L, 124L, 115L, 102L, 
+98L, 119L, 106L, 107L, 100L), After = c(201L, 165L, 166L, 157L, 
+147L, 145L, 168L, 180L, 147L, 136L, 151L, 168L, 179L, 129L, 131L, 
+125L, 121L, 121L, 106L, 101L, 85L, 98L, 105L, 103L, 98L, 90L, 
+98L, 110L, 103L, 82L), BP = structure(c(2L, 2L, 2L, 2L, 2L, 2L, 
+2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 
+1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L), .Label = c("D", "S"), class = "factor")), .Names = c("Patient", 
+"Before", "After", "BP"), class = "data.frame", row.names = c(NA, 
+-30L))
+  
+bloodD <- subset(blood, BP=="D")
+
+bloodD$Diff <- bloodD$Before - bloodD$After
+```
+
+
+In a study of hypertension
+(@data:hand:handbook, @data:macgregor:essential),
+patients were given a drug (captopril)
+and their systolic blood pressure measured
+immediately before and two hours after being given the drug
+(Table \@ref(tab:CaptorilDataCI)).
+
+Table: (\#tab:CaptorilDataCI) The blood pressure before and two hours after taking captoril
+
+Before SBP (mm Hg)      |  After SBP (mm Hg)       
+-----------------------:+:-------------------------
+210      | 201    
+169      | 165    
+187      | 166    
+160      | 157    
+167      | 147    
+176      | 145    
+185      | 168    
+206      | 180    
+
+
+* Explain why it is sensible to compute differences as the `Before` minus the `After` measurements. 
+What do the differences *mean* when computed this way?
+* Compute the differences.
+* Compute an approximate 95\% CI for the mean difference.
+* Write down the exact 95\% CI using the SPSS output using Fig. \@ref(fig:CaptorilSPSSCI). 
+* Why are the two CIs different?
+
+
+
+```{r CaptorilSPSSCI, echo=FALSE, fig.cap="SPSS output for the Captoril data", fig.align="center"}
+knitr::include_graphics("SPSS/Captopril/Captopril-PairedTOutput.png")
+```
+
+
+
+
+
+```{r echo=FALSE}
+BT <- structure(list(Type = structure(c(1L, 1L, 1L, 1L, 1L, 1L, 1L, 
+1L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L), .Label = c("Type A", "Type B"
+), class = "factor"), Cholesterol = c(233, 291, 312, 250, 254, 
+276, 234, 181, 344, 185, 263, 246, 226, 175, 242, 252)), .Names = c("Type", 
+"Cholesterol"), row.names = c(NA, -16L), class = "data.frame", variable.labels = structure(c("Behaviour type", 
+"Cholesterol level (in mg per 100ml)"), .Names = c("Type", "Cholesterol"
+)), codepage = 28591L)
+```
+
+
+
+
+
+
+
+
+
+### Others
+
+**AND Perhaps this: @data:Allen2018:Smoking.
+Urge to smoke before and after exercise.**
+
+* Before exercise: $4.95\pm0.28$ (that's a SE)
+* After exercise: $4.24\pm 0.32$.
+* Differences: $0-0.71\pm0.24$, $p=0.0060$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Confidence intervals for two independent means
+
+
+```{r echo=FALSE}
+# RT <- read.spss("~/Documents/Teaching/Datasets/applications/popular/ReactionTimePhoneInd.sav", to.data.frame = TRUE)
+RT <- structure(list(Reaction = c(636, 623, 615, 672, 601, 600, 542, 
+554, 543, 520, 609, 559, 595, 565, 573, 554, 626, 501, 574, 468, 
+578, 560, 525, 647, 456, 688, 679, 960, 558, 482, 527, 536, 557, 
+572, 457, 489, 532, 506, 648, 485, 610, 444, 626, 626, 426, 585, 
+487, 436, 642, 476, 586, 565, 617, 528, 578, 472, 485, 539, 523, 
+479, 535, 603, 512, 449), Group = structure(c(1L, 1L, 1L, 1L, 
+1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 
+1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 2L, 2L, 2L, 2L, 
+2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 
+2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L), .Label = c("Phone", 
+"Control"), class = "factor")), .Names = c("Reaction", "Group"
+), row.names = c(NA, -64L), class = "data.frame", variable.labels = structure(c("Reaction time (in ms)", 
+"Group"), .Names = c("Reaction", "Group")), codepage = 65001L)
+```
+
+
+
+
+
+
+
+
+
+
+
+##  Means of independent samples {#MeansIndSamples}
+
+A study
+(@data:Strayer2001:phones, @agresti2007statistics)
+examined the reaction times of students while driving.
+In one of their studies,
+two different groups of students were used,
+one group of students *used* a mobile phone,
+and a different group of students *did not* use a mobile phone.
+Their reaction times were measured in a driving simulator.
+
+In this study, 
+there are two distinct groups:
+using, or not using, a mobile phone while driving.
+We do not have paired sample;
+instead,
+we have two separate (or independent) samples,
+and we wish to compare the mean of each of the samples.
+
+
+For this study,
+the RQ could be:
+
+> What is the difference between the mean reaction time while driving different for students 
+> a mobile phone and for students not using a mobile phone?
+
+Part of the data are shown in
+Table \@ref(tab:PhoneDataTable).
+
+
+
+```{r PhoneDataTable, echo=FALSE}
+RT.DataTable <- cbind( head(RT$Reaction[RT$Group=="Phone"], 10), head(RT$Reaction[RT$Group=="Control"], 10))
+
+kable(RT.DataTable,
+      col.names = c("Using phone", "Not using phone"),
+      caption="Reaction times (in milliseconds) for students using, and not using, mobile phones. The first ten observations are shown, but 32 students are in each group",
+      align=c("r", "r"))
+
+```
+
+
+The numerical summary 
+should summarise each group,
+and summarise the differences as well as possible since the RQ is based around the difference.
+Alll this information can be found using SPSS
+(Fig. \@ref(fig:ReactionPhoneSummary)).
+This information can be compiled into a table
+(Table \@ref(tab:PhoneNumerical)).
+
+
+```{block2, type="rmdspss"}
+These can be found in SPSS selecting
+`Analyze`, then `Compare means`, and then `Independent-Samples T Test...`.
+
+Place the variable `Reaction` into the `Test Variable(s)` box,
+and the variable `Group` into the `Grouping Variable` box
+(and then click on `Define Groups...` to tell SPSS that you wish to compare the two groups
+that are labelled `1` and `2` in the data,
+by entering a `1` in the `Group 1:` box, and a `2` in `Group 2:` box.)
+```
+
+```{r ReactionPhoneSummary, echo=FALSE, fig.cap="SPSS output for the phone reaction time data", fig.align="center"}
+knitr::include_graphics("SPSS/ReactionPhone/ReactionPhone-Test.png")
+```
+
+
+```{r PhoneNumerical, echo=FALSE}
+Phone.DataSummary <- array(NA, dim=c(3, 4) )
+
+Phone.DataSummary[1:2, 1] <- aggregate( Reaction ~ Group, data=RT, FUN="mean")[, 2]
+Phone.DataSummary[1:2, 2] <- aggregate( Reaction ~ Group, data=RT, FUN="length")[, 2] 
+Phone.DataSummary[1:2, 3] <- aggregate( Reaction ~ Group, data=RT, FUN="sd")[, 2]
+Phone.DataSummary[1:2, 4] <- aggregate( Reaction ~ Group, data=RT, FUN=function(x){ sd(x)/sqrt(length(x))})[, 2] 
+
+Phone.DataSummary[3, 1] <- Phone.DataSummary[1, 1] - Phone.DataSummary[2, 1]
+Phone.DataSummary[3, 4] <- sqrt( Phone.DataSummary[1, 3]^2/Phone.DataSummary[1, 2] +
+                                 Phone.DataSummary[2, 3]^2/Phone.DataSummary[2, 2]  )
+
+rownames(Phone.DataSummary) <- c("Using phone", "Not using phone", "All students")
+
+kable(Phone.DataSummary,
+      digits=c(2, 0, 3, 3),
+      col.names = c("Mean", "Sample size", "Standard deviation", "Standard error"),
+      caption="Numerical summaries of the reaction-time data")  
+
+
+```
+
+Of course,
+each time the study is repeated,
+the means for each group are likely to be different,
+and so the difference between the means is likely to be different.
+That is,
+the difference between the means has a *standard error*,
+as it varies from sample to sample.
+
+The formula for computing the standard error is a bit tricky to use,
+but it is not necessary to do so.
+We will give the standard error, 
+or computer output from which the standard error can be found.
+
+
+```{exercise}
+What is the difference between the 'standard deviation' and the 'standard error'
+in this context?
+```
+     
+    
+    
+The appropriate graphical summary 
+may be a boxplot or (since the samples sizes are small) a dotchart .
+(Fig. \@ref(fig:PhonePlots)).
+ 
+
+```{r PhonePlots, echo=FALSE, fig.cap="Plots of the reaction times (in milliseconds) for students using, and not using, mobile phones.", fig.align="center"}
+par(mfrow=c(1,2) )
+
+boxplot(RT$Reaction ~ RT$Group,
+	col=plot.colour,
+	las=1,
+	ylim=c(400, 1000),
+	ylab="Reaction time (milliseconds)",
+	xlab="Group")
+
+
+stripchart(RT$Reaction ~ factor(RT$Group), 
+	las=1, 
+	ylim=c(400, 1000),
+	pch=1, 
+	vertical = TRUE,
+	ylab="Reaction time (milliseconds)",
+	xlab="Group")
+```
+
+
+While these two plots are fine,
+they plot the data but don't really help us compare the variation in the *means*
+(recall that the boxplot displays the *medians*).
+**A better plot is to use an error bar chart**,
+which we discuss next.
+
+
+
+
+
+
+
+
+
+## Error bar charts
+
+For two independent sample,
+an *error bar chart*
+is often more appropriate than a boxplot or dotchart:
+it displays the *confidence intervals* (or sometimes the *standard errors*)
+for each group being compared,
+and so is more relevant to the RQ:
+Error bars charts display the variation *in the sample means* from sample to sample,
+while boxplots display the variation *in the individual observations* and show the median.
+
+
+```{example}
+A study [@data:Aloy2011:Litter]
+examined the impact of plastic litter on the shoreline at Talim Bay, Batangas, Philippines,
+during various seasons,
+and it's impact on the gastropod [*Nassarius pullus*](https://en.wikipedia.org/wiki/Nassarius_pullus).
+The error bar chart in
+Fig. \@ref(fig:MonsoonRubbish)
+was produced.
+```
+
+```{r MonsoonRubbish, echo=FALSE, fig.cap="Relative abundance of a gastropod from random quadrat surveys conducted over prevalent monsoon types in all study areas in Talim Bay. Error bars represent 95\\% confidence intervals.", fig.align="center"}
+NE <- c(0.25, 1)
+SW <- c(0.2, 0.6)
+Summer <- c(0.25, 2.2)
+width <- 0.1
+
+Mdns <- c(0.63, 0.38, 1.21)
+Ns <- c(60, 69, 39)
+
+plot( c(0.5, 3.5), c(0, 2.5), 
+      type="n",
+      xlab="",
+      ylab="Mean N. pullus relative abundance",
+      axes=FALSE,
+      las=1)
+
+axis(side=1,
+     at=1:3,
+     labels=c("NE monsoon", "SW monsoon", "Summer"))
+axis(side=2,
+     las=1,
+     at=0:2)
+
+# Vertical lines
+segments(1, NE[1], 
+         1, NE[2])
+segments(2, SW[1], 
+         2, SW[2])
+segments(3, Summer[1], 
+         3, Summer[2])
+
+segments( 1-width, NE[1],
+          1+width, NE[1])
+segments( 1-width, NE[2],
+          1+width, NE[2])
+
+segments( 2-width, SW[1],
+          2+width, SW[1])
+segments( 2-width, SW[2],
+          2+width, SW[2])
+
+segments( 3-width, Summer[1],
+          3+width, Summer[1])
+segments( 3-width, Summer[2],
+          3+width, Summer[2])
+
+# Plot medians
+points( c(1, 2, 3),
+        Mdns, pch=20)
+
+# Sample sizes
+text( 1:3, c(NE[1], SW[1], Summer[1]),
+      labels= paste("n =", Ns),
+      pos=1,
+      cex=0.9
+)
+
+# Label medians
+text(1:3, Mdns,
+     labels=paste("  ",Mdns),
+     pos=4)
+
+# Add minor tick marks
+rug( seq(0, 2.5, by=0.2), ticksize=-0.01, side=2)
+
+box()
+```
+
+
+```{r echo=FALSE}
+library(GLMsData)
+data(lime)
+```
+
+```{example}
+A study
+(@data:ForestBiomass2017, @schepaschenko2017bpdb, @mypapers:dunnsmyth:glms)
+examined  the foliage biomass of small-leaved lime trees.
+Trees from three sources were studied:
+coppices; natural; planted.
+The mean foliage biomass was recorded, and compared;
+two graphical summaries are shown in
+\@ref(fig:LimeTreesBoxErrorbar):
+a boxplot and an error bar chart.
+Using a better scale for the error-bar plot is helpful
+(Fig. \@ref(fig:LimeTreesErrorbar)).
+```
+
+```{r LimeTreesBoxErrorbar, echo=FALSE, fig.cap="Boxplot and error bar chart comparing the mean foliage biomass for small-leaved lime trees from three sources", fig.align="center"}
+par( mfrow=c(1,2))
+
+lime.mns <- tapply(lime$Foliage, lime$Origin, "mean")
+
+boxplot(Foliage ~ Origin, data=lime,
+	xlab="Origin",
+	ylab="Foliage biomass (kg)",
+	las=1,
+	ylim=c(0, 14),
+	main="Boxplot: Foliage biomass",
+	col="white")
+points(1:3, lime.mns, 
+	pch=19,
+	col="red")
+
+
+
+mns <- with(lime, tapply(Foliage, Origin, "mean") )
+ses <- with(lime, tapply(Foliage, Origin, function(x){sd(x)/sqrt(length(x))}) )
+ci.lo <- mns - ses*2
+ci.hi <- mns + ses*2
+
+
+plot( range( c( ci.lo, ci.hi) ) ~ c(1,3), data=lime,
+      type="n",
+      ylim=c(0, 14),
+      pch=19,
+      axes=FALSE,
+      main="Error bars chart:\n mean foliage biomass",
+      xlab="Origin", 
+      ylab="Foliage biomass, oven dried (kg)",
+      sub = "(Error bars are 95% confidence intervals)",
+      las=1)
+axis(side=1, 
+     at=1:3, 
+     labels=levels(lime$Origin), 
+     las=1) 
+axis(side=2, las=1)
+box()
+
+points( mns ~ c(1:3), pch=19)
+
+arrows(1:3, mns-2*ses, 1:3, mns+2*ses, length=0.05, angle=90, code=3)
+```
+
+
+      
+```{r LimeTreesErrorbar, echo=FALSE, fig.cap="Error bar chart comparing the mean foliage biomass for small-leaved lime trees from three sources", fig.align="center"}
+plot( range( c( ci.lo, ci.hi) ) ~ c(1,3), data=lime,
+      type="n",
+      ylim=c(1, 3.5),
+     pch=19,
+     axes=FALSE,
+     main="Error bars chart:\n mean foliage biomass",
+     xlab="Origin", 
+     ylab="Foliage biomass, oven dried (kg)",
+     sub = "(Error bars are 95% confidence intervals)",
+     las=1)
+axis(side=1, 
+     at=1:3, 
+     labels=levels(lime$Origin), 
+     las=1) 
+axis(side=2, las=1)
+box()
+
+points( mns ~ c(1:3), pch=19)
+
+arrows(1:3, mns-2*ses, 1:3, mns+2*ses, length=0.05, angle=90, code=3)
+```    
+
+
+
+
+```{block2, type="rmdspss"}
+To make **error bar charts** in SPSS,
+select `Graphs` and `Chart Builder`.
+Then,
+select `Bar` from the list of possible graph types.
+(I have no idea why it is under *bar* charts.)
+
+Select the third format in the second row,
+and drag to the canvas.
+Then drag the quantitative variable to the vertical axis,
+and the qualitative variable to the horizontal axis.
+```
+
+
+
+
+## Two independent means: Notation
+
+In this chapter,
+we are comparing the means of two groups.
+Since there are two groups,
+we need to be able to distinguish between the statistics 
+(such as the sample mean)
+for each of the two group.
+One way is to use subscripts
+(Table \@ref(tab:IndSampleNotation)).
+
+Table: (\#tab:IndSampleNotation)  Notation used to distinguish between the two groups
+
+~                           |  Type A          |  Type B    
+---------------------------:+-----------------:+:------------
+Population mean:            |  $\mu_A$       |  $\mu_B$         
+Sample means:               |  $\bar{x}_A$   |  $\bar{x}_B$     
+Sample standard deviation   |  $s_A$         |  $s_B$           
+Sample size:                |  $n_A$         |  $n_B$           
+
+
+
+
+
+
+
+
+EXPLAIN WHY n AND sd NOT THERE.
+ 
+Using this notation,
+the difference between population means,
+which is what we are really interested in,
+is $\mu_A-\mu_B$.
+Since we do not know he population values (that's why we are doing the study),
+we estimate the difference between population means using the
+difference between sample means: $\bar{x}_A-\bar{x}_B$.
+
+And since the difference  $\bar{x}_A-\bar{x}_B$
+is likely to be different for each sample,
+it has a *standard error*.
+
+
+
+
+
+
+
+
+
+## Two independent sample means: Sampling distribution
+
+Of course,
+each time we take a different sample of students,
+we will have dfferent students,
+and they will give different reaction times while driving.
+The means for each group will differ from sample to sample,
+and the difference between the means will be different for each sample too.
+That is,
+the *difference* between the means varies from sample to sample,
+and so has a sampling distribution and standard error.
+So provided the appropriate conditions are met,
+the difference between the sampling means 
+will have
+
+* an approximate normal distribution;
+* centred around $\mu_A - \mu_B$ (the *differences* between the means in the two population);
+* with a standard deviation of $\displaystyle\text{s.e.}( \bar{x}_A - \bar{x}_B)$.
+
+Of course, 
+we don't know what the value of $\mu_A - \mu_B$ is (that’s why we are estimating it), but we have an
+estimate: the value of $\bar{x}_A - \bar{x}_B$.
+Also,
+notice that we don't give a formula for finding the standard error
+$\displaystyle\text{s.e.}( \bar{x}_A - \bar{x}_B)$.
+There is a formula,
+but it is complicated and we won't use it;
+instead, we will obtain this from SPSS or from the reports in the journal paper.
+
+```{block2, type="rmdnote"}
+It is important to make it clear 
+how the differences are computed.
+
+We could compute the differences as
+the reaction time for phone users, *minus* the reaction time for non-phone users.
+
+Alternatively,
+we could compute the differences as
+the reaction time for non-phone users, *minus* the reaction time for phone users.
+
+Either is fine as long as you are consistent throughout,
+and the meaning of any conclusions will be the same.
+```
+
+NOTATION: P and C for Phone and Contorl???
+
+In this case, 
+it probably makes more sense 
+to compute differences as the reaction time for phone users, *minus* the reaction time for non-phone users;
+then,
+the differences will refer to how much greater (on average)
+the reaction times are when students are using phones.
+
+For the reaction time data,
+the differences between the sample means will have:
+
+* an approximate normal distribution;
+* centred around $\mu_P - \mu_C$ (the *differences* between the means in the two *populations*);
+* with a standard deviation of $\displaystyle\text{s.e.}( \bar{x}_P - \bar{x}_C)$ in the *population*.
+
+Since we do not have the population information,
+we use these best estimates that we have: from the sample data.
+So for the reaction time data,
+then,
+we find 
+(using Table \@ref(tab:PhoneNumerical))
+that the difference in the sample means will have, approximately:
+
+* an approximate normal distribution;
+* centred around $`r round(Phone.DataSummary[3, 1], 2)`$ (the *differences* between the means in the two samples);
+* with a standard deviation of $`r round(Phone.DataSummary[3, 4], 2)`$.
+
+
+
+
+
+
+## Two independent sample means: Confidence intervals
+
+```{r echo=FALSE}
+RT.mn <- Phone.DataSummary[3, 1]
+RT.se <- Phone.DataSummary[3, 4]
+```
+
+
+Now that we know the sampling distribution of the difference between the sample means,
+we can use the idea of a confidence interval again.
+An approximate 95\% CI for the difference between he population means is
+\begin{eqnarray*}
+	(\text{the estimate of the difference}) \pm (2 \times\text{the std. err of the difference}),
+\end{eqnarray*}
+or,
+in this case,
+\begin{eqnarray*}
+	`r round(RT.mn, 2)` \pm (2 \times `r round(RT.se, 2)`),
+\end{eqnarray*}
+or $`r round(RT.mn, 2)`\pm `r round(RT.se, 2)`$.
+So we would have an approximate 95\%  CI  for the difference 
+of $`r round(RT.mn - 2*RT.se, 3)`$ to $`r round(RT.mn + 2*RT.se, 3)`$.
+So we can write:
+
+> Based on the sample,
+> an *approximate* 95\% CI  is for the difference 
+> in reaction time while driving, 
+> for those using a phone and those not using a phone, 
+> is  $`r round(RT.mn - 2*RT.se, 3)`$ to $`r round(RT.mn + 2*RT.se, 3)`$ milliseconds
+> (higher for those using a phone).
+
+Notice that it is not sufficient to state what the CI  is;
+you should also state the *direction* in which the differences were calculated,
+so readers know which group had the higher mean.
+
+
+ABOVE LOOKED OLD. SO CHECK!
+
+
+
+
+
+
+
+
+## Notes on using SPSS for the difference in means for two independent samples
+
+To use SPSS,
+the data must be entered as follows
+(where `1` means `Using phone` and `2` means `Control` (i.e. not using phone)):
+
+SPSS IMAGES/VIDEO
+
+
+```{r ReactionPhoneData, echo=FALSE, fig.cap="Data for the phone reaction data entered into SPSS", fig.align="center"}
+knitr::include_graphics("SPSS/ReactionPhone/ReactionPhone-Data.png")
+```
+
+
+Select `Analyze`, `Compare Means` and select `Independent-Samples T Test...`, and fill in the details:
+
+```{r ReactionPhoneTestInput, echo=FALSE, fig.cap="Analysing the phone reaction data", fig.align="center"}
+knitr::include_graphics("SPSS/ReactionPhone/ReactionPhone-Test-Input.png")
+```
+
+
+
+The SPSS output
+(where the variance is the standard deviation squared)
+is:
+
+
+```{r ReactionPhoneTestOutput, echo=FALSE, fig.cap="Data for the phone reaction data entered into SPSS", fig.align="center"}
+knitr::include_graphics("SPSS/ReactionPhone/ReactionPhone-Test.png")
+```
+
+
+SPSS gives *two* confidence intervals.
+Because it is more general (makes fewer assumptions), 
+**use the 'Equal variance not assumed' results**
+(second row)
+in this course.
+
+From the output,
+the difference in sample means is $\bar{x}_P - \bar{x}_C = `r round(RT.mn, 3)`$.
+Every time we take a sample,
+the two sample means will differ,
+and hence the difference between the sample means will be different.
+that is,
+the difference between the means varies and has a *standard error*.
+From the output,
+the standard error is
+$\text{s.e.}(\bar{x}_P - \bar{x}_C) = `r round(RT.mn, 3)`$.
+The 95\% CI  is from $12.317$ to $90.871$.
+
+> Based on the sample,
+> a 95\% confidence interval for the difference in the         
+> reaction time while driving between those using a phone and thos enot using a phone is
+> between $12.317$ to $90.871$ milliseconds
+> greater for those using a phone
+> (two independent samples).
+
+The *approximate* and SPSS CIs are slightly different
+as SPSS uses an *exact* multiplier (whereas we used an approximate multiplier of 2),
+and the sample sizes are small.
+
+
+
+
+## Conditions for validity
+
+The conditions under which the CI  is statistically valid
+are similar to those for one sample mean and for paired samples.
+
+* **Both** sets of data
+   must be random samples
+* If this is true,
+   this CI  is statistically valid in one of two situations:
+    - If both sample sizes are sufficiently large; *or*
+    - If either sample size is small,
+      and
+      the both *populations* have an approximate normal distribution
+  
+We can explore the histograms of the *samples*
+to determine if normality of the *populations* seems reasonable.
+
+```{example}
+For our reaction time data,
+both samples are a bit larger than $25$,
+so the CI will be valid if the samples are somewhat representative.
+```
+
+
+
+
+
+
+
+
+
+
+
+
+## Example: Health Promotion services {#BHADP}
+
+
+A study
+[@data:Becker1991:BHADP]
+compared the access to health promotion (HP) services
+for people with and without a disability.
+Access was measured using the
+*Barriers to Health Promoting Activities for Disabled Persons* 
+[BHADP scale](http://www.utexas.edu/nursing/chpr/resources/bhadp.html).
+Higher scores mean greater barriers.
+The RQ is:
+
+> What is the mean difference between the mean 
+> [BHADP scores](http://www.utexas.edu/nursing/chpr/resources/bhadp.html).
+> for people with and without a disability?
+
+In this case,
+only summary data is available
+(Table \@ref(tab:BHADPSummary)):
+we don't have access to the original data.
+From this,
+we can create a useful graphical summary:
+error bar chart
+(Fig. \@ref(fig:BHADPErrorBar)).
+
+
+
+
+Table: (\#tab:BHADPSummary) The BHADP data summary
+
+Group                 |   $\bar{x}$      |  $s$       |  $n$           |  Standard error
+---------------------:+------------------:+-----------:+--------------:+---------------:
+Disability            |  $31.83$          |   $7.73$  |  $132$         |  0.6728
+No disability         |  $25.07$          |   $4.80$  |  $137$         |  0.4101
+*Difference in means* |  $6.76$           |           |                |  $0.80285$
+
+
+Our best estimate of the difference in population means is
+the  difference in sample means{: $(\bar{x}_D - \bar{x}_{ND}) = 6.76$}.
+The standard error for estimating this *difference* is
+$\text{s.e.}(\bar{x}_D - \bar{x}_{ND}) = 0.80285$.
+      
+```{block2, type="rmdnote"}
+The *standard error is given to us here*; you **cannot** easily calculate this from the given information.
+```
+
+
+```{r BHADPErrorBar, echo=FALSE, fig.cap="Error bar chart shwoing the men BHADP score for people with and without a disability", fig.align="center"}
+### Disability example
+bit <- 0.05
+
+mns <- c(31.83, 25.07)
+sd <- c(7.73, 4.80)
+nn <- c(132, 137)
+
+se <- sd/sqrt(nn)
+
+ci.lo <- mns - 2*se
+ci.hi <- mns + 2*se
+
+plot( 1:2, mns,
+      pch=19,
+      ylim=c(24, 34 ),
+      xlim=c(1-bit, 2+bit),
+      las=1,
+      axes=FALSE,
+      xlab="",
+      ylab="BHADP score",
+      main="Access to health promotion\nservices for two groups ",
+      sub="(Error bars are the 95% CI)",
+      type="p")
+axis(side=1, 
+     at=1:2,
+     las=1,
+     labels=c("Disability", "No disability"))
+axis(side=2, las=1)
+box()
+
+lines( c(1, 1),
+       c(ci.lo[1], ci.hi[1]))
+lines( c(2, 2),
+       c(ci.lo[2], ci.hi[2]))
+
+
+lines( c(1-bit, 1+bit), c( ci.hi[1], ci.hi[1]) )
+lines( c(1-bit, 1+bit), c( ci.lo[1], ci.lo[1]) )
+
+lines( c(2-bit, 2+bit), c( ci.hi[2], ci.hi[2]) )
+lines( c(2-bit, 2+bit), c( ci.lo[2], ci.lo[2]) )
+```
+
+
+
+
+
+```{exercise}
+Find an approximate 95\% CI  for the *difference* between the mean BHADP scores.
+```
+
+
+Based on the sample,
+an approximate 95\% CI  for the  difference in population mean BHADP scores
+between people with a disability 
+and people without a disability 
+is from
+$5.15$ to $8.37$
+(two independent samples) higher for those with a disability.
+   
+This means that,
+if we found many samples in the same way,
+and computed the 95\% CI  from each,
+about 95\% of the CIs\ would contain the population difference
+($\mu_D - \mu_{ND}$).
+
+Loosely speaking:
+There is a 95\% chance that our CI  straddles the difference in the population means ($\mu_D - \mu_{ND}$).
+Note: The CI  is statistically valid if the samples are somewhat random.
+
+
+
+
+```{exercise}
+Use the *68--95--99.7 rule* to construct an approximate *99.7\% CI* for the difference in population means.
+```
+
+
+
+
+
+## Example: Face-plant study {#FacePlantCI}
+
+
+```{r echo=FALSE}
+# library(foreign)
+# FF <- read.spss("~/Documents/Teaching/Datasets/applications/health/ForwardFall.sav", to.data.frame=TRUE)
+
+FF <- structure(list(LeanAngle = c(29, 34, 33, 27, 28, 32, 31, 34, 
+32, 27, 18, 15, 23, 13, 12), Group = structure(c(1L, 1L, 1L, 
+1L, 1L, 1L, 1L, 1L, 1L, 1L, 2L, 2L, 2L, 2L, 2L), .Label = c("Younger females", 
+"Older females"), class = "factor")), .Names = c("LeanAngle", 
+"Group"), row.names = c(NA, -15L), class = "data.frame", variable.labels = structure(c("Maximum lean angle (in degrees)", 
+""), .Names = c("LeanAngle", "Group")), codepage = 28591L)
+```
+
+A study
+[@data:Wojcik:ForwardFall]
+compared the lean-forward angle in younger and older women.
+An elaborate set-up was constructed to measure this angle,
+using harnesses.
+The research question could be:
+
+> Among healthy women,
+> what is difference between the mean lean-forward angle
+> for younger women compared to older women?
+
+The data are shown in 
+Table \@ref(tab:FacePlant).
+
+Table: (\#tab:FacePlant) Lean-forward angles for older and younger women
+
+Younger women | Older women
+------------:+:------------
+29 | 18
+32 | 15
+34 | 23
+31 | 13
+33 | 12
+34 |
+27 |
+32 |
+28 |
+27 |
+
+
+An appropriate graph for two independent means
+is a *boxplot*, *dotplot* (since the sample sizes are small),
+or an error bar chart
+(Fig. \@ref(fig:FacePlantPlots)).
+The error bar chart is the best plot,
+as it is directly related to the RQ:
+It compares the *means*.
+The appropriate numerical summary for two independent means
+summarises both groups, and the *difference*.
+(Table \@ref(tab:FacePlantSummary)).
+Summarising the *difference* is important,
+as the RQ is about those differences.
+
+
+
+```{r FacePlantPlots, echo=FALSE, fig.cap="Plots of the face-plant data", fig.align="center"}
+mns <- with(FF, tapply(LeanAngle, Group, "mean") )
+ses <- with(FF, tapply(LeanAngle, Group, function(x){sd(x)/sqrt(length(x))}) )
+ci.lo <- mns - ses*2
+ci.hi <- mns + ses*2
+
+
+par(mfrow=c(1,3) )
+
+boxplot(FF$LeanAngle ~ FF$Group,
+	las=1,
+	ylim=c(10, 40),
+	col=plot.colour,
+	names=c("Younger", "Older"),
+	main="Boxplot of\nlean forward angle",
+	xlab="Age group",
+	ylab="Lean-forward angle (degrees)")
+
+stripchart(FF$LeanAngle ~ FF$Group,
+	las=1,
+	ylim=c(10, 40),
+	vertical=TRUE,
+	group.names=c("Younger", "Older"),
+	main="Dot plot of\nlean forward angle",
+	xlab="Age group",
+	ylab="Lean-forward angle (degrees)")
+
+# Error bar
+plot( range( c( ci.lo, ci.hi) ) ~ c(1,3), data=FF,
+      type="n",
+      ylim=c(10, 40),
+      xlim=c(0.5, 2.5),
+      pch=19,
+      axes=FALSE,
+      main="Error bars chart:\n mean lean forward angle",
+      xlab="Age group", 
+      ylab="Lean forward angle (degrees)",
+      sub = "(Error bars are 95% confidence intervals)",
+      las=1)
+axis(side=1, 
+     at=1:2, 
+     labels=c("Younger", "Older"), 
+     las=1) 
+axis(side=2, las=1)
+box()
+
+points( mns ~ c(1:2), pch=19)
+
+arrows(1:2, mns-2*ses, 1:2, mns+2*ses, length=0.05, angle=90, code=3)
+```
+
+```{r FacePlantSummary, echo=FALSE}
+FF.Summary <- array( NA, dim=c(3, 4))
+
+FF.Summary[1:2, 1] <- aggregate(FF$LeanAngle ~ FF$Group, FUN="mean")[, 2]
+FF.Summary[1:2, 2] <- aggregate(FF$LeanAngle ~ FF$Group, FUN="sd")[, 2]
+FF.Summary[1:2, 3] <- aggregate(FF$LeanAngle ~ FF$Group, FUN=function(x){sd(x) / sqrt(length(x))})[, 2]
+FF.Summary[1:2, 4] <- aggregate(FF$LeanAngle ~ FF$Group, FUN="length")[, 2]
+
+FF.Summary[3, 1] <- FF.Summary[1, 1] - FF.Summary[2, 1] 
+FF.Summary[3, 3] <- sqrt( FF.Summary[1, 2]^2/FF.Summary[1, 4] + 
+                          FF.Summary[2, 2]^2/FF.Summary[2, 4] )
+row.names(FF.Summary) <- c("Younger women", "Older women", "Difference")
+
+kable(FF.Summary,
+      digits=c(1, 2, 2, 0),
+      col.names=c("Mean", "Standard deviation", "Standard error", "$n$"),
+      caption="Data summary for the face-plant data"
+      )
+```
+
+The SPSS output is shown in Fig. \@ref(fig:FallFowardTTest).
+
+```{r FallFowardTTest, echo=FALSE, fig.cap="SPSS output for the face-plant data", fig.align="center"}
+knitr::include_graphics("SPSS/FallForward/FallForwardTTestOutput.png")
+```
+
+From the output,
+we see that the 95\% CI  is from
+$9.102$ to $19.898$.
+So we can write,
+after rounding the numbers produced by SPSS:
+
+> Based on the sample, 
+> a 95\% CI  for the difference between population mean one-step fall-recovery angle for 
+> heathy women  is between 
+> $9.1$ and $19.9$ degrees
+> greater for younger women than for older women
+> (two independent samples).
+
+Notice that the statement makes it clear which group has the higher mean.
+
+This CI  tells us that is if we found many samples in the same way,
+and computed the CI  from each,
+about 95\% of the CIs\ woud contain the difference between the means in
+the population: $\mu_Y - \mu_{O}$.
+Loosely speaking:
+There is a 95\% chance that our CI  straddles $\mu_Y - \mu_{O}$
+
+The CI  is may not be valid
+(as the sample sizes are not large),
+so the CIs may not be quite accurate.
+
+
+
+## Example: University students eating habits
+
+A study
+[@data:Mann12017:UniStudents]
+examined the eating habits of university students.
+One issue they studied was the 
+number of portions of hot potato chips (French fries)
+consumed by students eating fewer than 50\% of their meals on campus,
+and by students eating 50\% or more of their meals on campus.
+
+In this study, 
+there are two distinct groups:
+those who eat fewer than 50\% of their meals on campus,
+and those who do not.
+It is unreasonable for students to be placed into *both* groups,
+and two measurements taken from each student.
+Instead,
+one group of students is in the 
+'fewer than 50\% of meals on campus' groups,
+and a different group of students is in the 
+'50\% or more of meals on campus' groups.
+That is,
+we do not have paired sample;
+instead,
+we have two separate (or independent) samples,
+and we wish to compare the mean of each of the samples.
+
+
+DETAILS!!
+
+
+## Exercises
+
+### NHANES
+
+Let's return briefly to the NHANES study,
+where we had this RQ:
+
+> Among Americans,
+> is the mean direct HDL  cholesterol levels
+> different for those who smoke now, and those who do not smoke now?
+
+Using the SPSS output in
+Fig. \@ref(fig:NHANESTwoSample):
+
+* Construct a table showing the appropriate numerical summary.
+* Determine, and suitably communicate, the 95\% CI  for the difference between the direct HDL cholesterol
+	values between current smokers and non-smokers.
+
+
+```{r NHANESTwoSample, echo=FALSE, fig.cap="SPSS output for the NHANES data", fig.align="center"}
+knitr::include_graphics("SPSS/NHANES/NHANES-TOutput.png")
+```
+
+
+### Others
+
+
+
+# Confidence intervals for odds ratios
+
+## Introduction: Odds ratios
+
+A study
+[@data:Mann12017:UniStudents]
+examined the eating habits of university students.
+One issues they studied was the relationship between 
+eating on campus and where the student lived.
+In this study,
+the researchers can cross-classify the $n=183$ students
+into groups according to two qualitative variables:
+
+* Where they live: With or not with their parents;
+* Whether they eat fewer than 50\% of meals on campus,
+	or 50\% or more meals on campus.
+
+Since both variables that are allocated to each student (unit of analysis) are qualitative,
+means are not appropriate.
+However,
+the data can be compiled into a two-way table of counts
+(Table \@ref(tab:MealsDataTable)).
+Since both of the qualitative variables have two levels,
+the table is a $2\times 2$ table.
+
+
+```{r MealsDataTable, echo=FALSE}
+Counts <- c(52, 105, 2, 24)
+Live <- rep( c("Lives with parents", "Doesn't live with parents"), 2)
+Meals <- c( rep("<50% meals on campus", 2),
+            rep("50%+ meals on campus", 2))
+
+Eating <- data.frame(
+  Counts=Counts,
+  Live=Live,
+  Meals=Meals
+)
+
+
+kable(xtabs(Counts ~ Live + Meals, data=Eating),
+      caption="Where university students live and eat"
+)
+      
+```
+
+
+```{r echo=FALSE}
+UniS <- matrix( ncol=2,
+				 data=c(52, 2, 105, 24), 
+				 byrow=TRUE)
+rownames(UniS) <- c("Lives\nwith parents", "Doesn't live\nwith parents")
+colnames(UniS) <- c("<50% meals on campus", "50%+ meals on campus")
+```
+
+
+
+
+
+
+
+## Comparing odds: Summaries
+
+An appropriate graph 
+is a *side-by-side* 
+(Fig. \@ref(fig:EatingGraphs))
+or a *stacked* bar chart.
+For comparing the *odds*,
+the side-by-side bar chart is best.
+A *stacked* bar chart is 
+best for comparing *proportions*.
+An appropriate numerical summary includes
+the odds and percentages from each group
+(Table \@ref(tab:EatingNumericalSummary)).
+
+TABLE LOOKS WFONG or at last non consisent with elsewhee for simular tables.
+
+
+
+Table: (\#tab:EatingNumericalSummary) The odds and percentage of university students eating fewer than 50\% of their meals on campus
+
+~								 |  Odds of 50\%+	meals on campus	 |  Percentage of 50\%+ meals on campus		 | 	Sample size
+----------------:+--------------------------------:+----------------------------------------:+--------------:
+Living with parents			 |  `r round(UniS[1,1]/UniS[1,2], 4)`	 |  `r round(UniS[1,1]/sum(UniS[1,]) * 100, 1)` |  `r sum(UniS[1,])`
+Not living with parents		 |  `r round(UniS[2,1]/UniS[2,2], 4)` |  `r round(UniS[2,1]/sum(UniS[2,]) * 100, 1)`	 |  `r sum(UniS[2,])`
+~               | Odds ratio:			 |  `r round( (UniS[1, 1] / UniS[1, 2] ) / (UniS[2, 1] / UniS[2, 2]), 4)` | 
+
+
+
+
+
+
+
+
+```{r EatingGraphs, echo=FALSE, fig.cap="Two plots of the uni-student eating data", fig.align="center"}
+par( 	xpd=TRUE,
+		mfrow=c(1,2),
+		mar=c(6, 4, 4, 2) +0.1) # DEFAULT: c(5, 4, 4, 2) + 0.1
+
+
+barplot( t(prop.table(UniS, margin=1)) * 100,
+	col=c(plot.colour, "steelblue"),
+	beside=FALSE,
+	ylab="Percentage",
+	main="Stacked bar chart of where\nstudents live and eat", 
+	las=1)
+legend(0, -13, 
+	fill=c(plot.colour, "steelblue"),
+	bty="n",
+	#horiz=TRUE,
+	legend=colnames(UniS)
+	)
+
+
+barplot( t(prop.table(UniS, margin=1)) * 100,
+	col=c(plot.colour, "steelblue"),
+	ylab="Percentage",
+	beside=TRUE,
+	main="Side-by-side bar chart of where\nstudents live and eat", 
+	ylim=c(0, 100),
+	las=1)
+legend(0.5, -13, 
+	fill=c(plot.colour, "steelblue"),
+	bty="n",
+	#horiz=TRUE,
+	legend=colnames(UniS)
+	)
+```
+
+
+
+
+## Comparing odds: Sampling distribution
+
+
+From these data,
+we see that:
+
+* The odds of eating fewer than 50\% of meals on campus for students living with their parents is:
+   $52\div 2 = 26$.
+* The odds of eating fewer than 50\% of meals on campus for students *not* living with their parents is:
+   $105\div24 = 4.375$.
+* The *odds ratio* (OR) comparing the odds of eating fewer than 50\% of meals on campus for 
+   students living with parents to students *not* living with parents is:
+   $26 \div 4.375 = 5.943$ (with parents to without parents).
+
+So the odds are different in each group,
+and hence the OR is not one.    
+
+Of course, every time we take a sample of students,
+we will find the the odds
+of students who eat the majority of their meals on campus is likely to be different
+for each sample.
+That is,
+the odds ratio *varies* from sample to sample,
+and so has a sampling distribution.
+
+Similarly,
+the 
+*percentage* 
+of students who eat the majority of their meals on campus is likely to be different
+for each sample.
+That is,
+the percentage *varies* from sample to sample,
+and so has a sampling distribution.
+
+In this case,
+the sampling distribution for the difference in percentages 
+has an approximate normal distribution,
+with a standard error.
+Likewise,
+the sample OR has a sampling distribution,
+but the sampling distribution for the OR is a little 
+different^[For those who want to know: The OR is only defined for non-negative values,
+so the *logarithm* of the OR has an approximate normal distribution.
+The other quantities we have studied are defined for all real values, just like the logarithm of the OR.].
+For this reason,
+we won't bother ourselves with the details,
+but they are very similar to what we have seen before.
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Comparing odds: Using SPSS
+
+There are two ways to enter data into SPSS for
+these types of analyses.
+Below,
+we have defined the variable
+`Meals` to be 1 for eating 50\% of fewer meals on campus, and 2 for 50\%+;
+`Live` to be 1 for living with parents, and 2 for not living with parents.
+
+
+
+To enter data into SPSS,
+usually each row would usually represent a university student
+(a unit of analysis),
+and we observe two things from each student
+(if they live with their parents; if they eat 50\% or more of their meals on campus.
+In this case then,
+we would have `r sum(UniS)` rows of data,
+one for each person
+(Fig. \@ref(fig:UniMeals)).
+
+```{r UniMeals, echo=FALSE, fig.cap="SPSS data for the university students meals, the long format", fig.align="center"}
+knitr::include_graphics("SPSS/UniStudents/UniStudentsLong.png")
+```
+
+For tables of counts,
+an alternative (and often simpler)
+method of data entry is to enter the table of counts
+(Fig. \@ref(fig:UniMeals2)).
+In this case then,
+we would have $2\times2 = 4$  rows of data.
+	
+```{r UniMeals2, echo=FALSE, fig.cap="SPSS data for the university students meals, the short format", fig.align="center"}
+knitr::include_graphics("SPSS/UniStudents/UniStudentsShort.png")
+```
+
+In this second case only, 
+we need to tell SPSS that each row represents many students,
+by selecting 
+`Data> Weight Cases`
+(Fig. \@ref(fig:UniMealsWeight))
+and telling SPSS that each row represents many students,
+as shown in the 
+`Counts` column of 
+Fig. \@ref(fig:UniMeals2).
+
+
+```{r UniMealsWeight, echo=FALSE, fig.cap="Using SPSS to Weight the data when data are entered in the short format", fig.align="center"}
+knitr::include_graphics("SPSS/UniStudents/UniStudentsWeighting.png")
+```
+
+
+
+
+
+
+
+
+
+
+## Comparing odds: Confidence intervals
+
+Because the sampling distribution is a little tricky to find for ORs,
+we just rely on the SPSS output to find the CI  for the odds ratio.
+(SPSS does not find CIs for the difference between two proportions.)
+
+
+
+```{r UniMealsCI, echo=FALSE, fig.cap="Using SPSS to compute the chi-square test information", fig.align="center"}
+knitr::include_graphics("SPSS/UniStudents/UniStudentsChiSquareDialog.png")
+```
+
+
+
+Count data collected into two-way tables of counts
+can be analysed in SPSS using
+`Analyze > Descriptive Statistics > Crosstabs...`
+The variables are placed in the rows and columns
+as appropriate.
+	
+(For these steps,
+the data can be arranged in either of the ways described above.)
+
+
+To produce the CI,
+we select the `Statistics...` button
+and then (unintuitively) the `Risk` option
+(Fig. \@ref(fig:UniMealsCI)).
+
+
+```{r UniMealsCIOutput, echo=FALSE, fig.cap="Using SPSS to compute a CI", fig.align="center"}
+knitr::include_graphics("SPSS/UniStudents/UniStudentsRiskOption.png")
+```
+
+
+The output 
+(Fig. \@ref(fig:UniMealsTestOutput)),
+shows that the sample OR is 5.943,
+and the (exact) 95\% CI is
+from 1.352 to 26.114.
+There is lot of other information there too that we do not need.
+The only information of importance is in that first row.
+
+
+```{r UniMealsTestOutput, echo=FALSE, fig.cap="The SPSS for computing  a CI", fig.align="center"}
+knitr::include_graphics("SPSS/UniStudents/UniStudentsRiskOutput.png")
+```
+
+
+So we could write:
+
+> Based on the sample, 
+> a 95\% CI  for the OR comparing the odds of eating fewer than 50\% of meals at home
+> is from 1.352 to 26.114
+> (living with parents to *not* living with parents).
+
+Notice that the direction of the OR is explained:
+it is the odds of eating fewer than 50\% of meals on campus for students
+living with parents to *not* living with parents.
+
+
+
+
+
+
+## Example: Pet birds
+
+```{r echo=FALSE}
+#library(foreign)
+#PB <- read.spss("~/Documents/Teaching/Datasets/Books/Hand/Hand-SPSS/PetBirds.sav", to.data.frame=TRUE)
+
+PB <- structure(list(LC = structure(c(1L, 1L, 2L, 2L), .Label = c("Adults with lung cancer", 
+"Adults without lung cancer"), class = "factor"), Pets = structure(c(1L, 
+2L, 1L, 2L), .Label = c("Kept pet birds", "Did not keep pet birds"
+), class = "factor"), Counts = c(98, 141, 101, 328)), .Names = c("LC", 
+"Pets", "Counts"), row.names = c(NA, -4L), class = "data.frame", variable.labels = structure(character(0), .Names = character(0)), codepage = 28591L)
+
+PB2 <- xtabs( Counts ~ Pets + LC, data=PB)
+```
+
+
+A study examined people with lung cancer,
+and a matched set of controls without lung cancer,
+and compared the number that had pet birds
+[@data:Kohlmeier1992:BirdsCancer].
+One RQ of the study was:
+
+> What is the difference between the *odds* of having a pet bird
+> the for people *with* lung cancer (cases)
+> and for people *without* lung cancer (controls)?
+
+Equivalently, the RQ could be written as:
+
+> What is the difference between the *proportion* of people who own pet birds the same for
+> people *with* lung cancer (cases)
+> compared to people *without* lung cancer (controls)?
+
+The data are given in
+Table \@ref(tab:BirdsData).
+The numerical summary 
+(Table \@ref(tab:BirdsNumericalSummary))
+and the graphical summary
+(Fig. \@ref(fig:BirdsGraphs))
+show a clear difference between the two groups.
+
+
+```{r BirdsData,  echo=FALSE}
+kable(PB2,
+      caption="The pet bird data")
+```
+
+Table: (\#tab:BirdsNumericalSummary) The odds and percentage of subjects having pet birds
+
+~								 |  Odds of owning pet bird		 |  Percentage having pet bird 	 | 	Sample size
+----------------:+----------------------------:+------------------------------:+---------------
+With lung cancer			   |  0.6950	           |  41.0\%	                     |  238
+Without lung cancer			 |  0.3079	           |  25.5\%	                     |  429
+Odds ratio:			 |  2.26\phantom{00}             |
+
+
+
+   
+```{r BirdsGraphs, echo=FALSE, fig.cap="A plot of the pet-birds data", fig.align="center"}
+par( 	xpd=TRUE,
+		mar=c(5, 4, 4, 8) +0.1) # DEFAULT: c(5, 4, 4, 2) + 0.1
+
+barplot(PB2, 
+	las=1,
+	ylab="Count",
+	xlab="Lung cancer?",
+	beside=TRUE,
+	names.arg=c("Adults with lung\ncancer", "Adults without lung\ncancer"),
+	ylim=c(0, 400),
+	col=c("blue", "green")
+)
+box()
+
+legend(6.2, 400, 
+	fill = c("blue", "green"),
+	title = "Kept pets?",
+	legend = c("Kept pet birds", "Did not keep\npet birds"), bty="n")
+```
+
+
+
+
+We can use SPSS to analyse the evidence;
+for example,
+we can find a CI  for the odds ratio
+(Fig. \@ref(fig:PetBirdsCI)).
+
+
+```{r PetBirdsCI, echo=FALSE, fig.cap="Using SPSS to compute a CI for the pet-birds data", fig.align="center"}
+knitr::include_graphics("SPSS/PetBirds/PetsOR.png")
+```
+
+
+
+The *sample* OR is 2.257,
+and the 95\% CI  is from 1.605 to 3.174.
+AND INTERPRET PROPERLY.
+
+
+
+## Exercises
+
+### Scars
+
+Make one more example, thne exercises?
+
+SCARS?
+[@data:Wallace2017:Sunburn]
+
+
+
+### Exercise: Rainfall in Emerald
+
+```{r echo=FALSE}
+library(GLMsData)
+data(emeraldaug)
+
+SOI.tab <- xtabs( ~ (SOI>0) + (Rain>0), data=emeraldaug)
+
+colnames(SOI.tab) <- c("No rainfall recorded", "Rainfall recorded")
+rownames(SOI.tab) <- c("Positive SOI", "Non-positive SOI")
+
+#prop.table(SOI.tab, margin=1 )
+
+#chisq.test(SOI.tab)
+#chisq.test(SOI.tab, correct=FALSE)
+#chisq.test(SOI.tab, correct=FALSE)$expected
+```
+
+The *Southern Oscillation Index * (SOI) 
+is a standardised measure of the pressure difference between Tahiti and Darwin,
+and has been shown to be related to rainfall in some parts of the world
+[@climate:stone:1996],
+and especially Queensland
+[@climate:stone:1992].
+As an example
+[@mypapers:dunnsmyth:glms],
+the rainfall at 
+[Emerald (Queensland)](https://www.google.com/maps/place/Emerald+QLD+4720/@-23.5351912,145.9388784,7z/data=!4m8!1m2!2m1!1semerald!3m4!1s0x6bcf546842f6f587:0x400eef17f2099e0!8m2!3d-23.527291!4d148.164573)
+was recorded for Augusts where the monthly average SOI was positive, and when the SOI was non-positive
+[@computing:GLMsData:Rpackage],
+as shown in 
+Table \@ref(tab:SOItable).
+
+```{r SOItable, echo=FALSE}
+kable( SOI.tab,
+      caption="The SOI, and whether rainfall was recorded in August")
+```
+
+See if the evidence suggests 
+a relationship between the SOI being positive,
+and rainfall being recorded in August at Emerald.
+
+
+
+# Final notes about forming CIs
+
+In summary,
+here are a few things to remember when forming CIs:
+
+* CIs are always formed for the unknown *population* quantity,
+   based on sample information.
+* CIs give an interval in which the sample quantity is likely to lie within over repeated sampling.
+* Loosely: CIs give an interval in which we are likely to find 
+   the value of the unknown *population* quantity.
+* Most CIs are of the form
+   \[
+      \text{Estimate} \pm (\overbrace{\text{Multiplier} \times \text{standard error}}^{\text{Margin of error}}).
+   \] 
+
+
+
+
+
+

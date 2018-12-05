@@ -1,0 +1,2726 @@
+# (PART) Describing and summarising data  {-}
+
+# Describing variables
+
+
+
+```{r echo=FALSE}
+SixSteps(4, "Descriptions")
+```
+
+
+
+## Quantitative and qualitative variables
+
+
+### Introduction
+
+Before starting on any analysis of the data,
+it is important to describe and understand the data,
+beacuse the type of data determines how we proceed with summaries and analysis.
+
+Broadly, 
+variables may be described as:
+
+* *Quantitative*, 
+   which are mathematically numerical;  or 
+* *Qualitative*, 
+   which are labels or categories. 
+
+Be careful: 
+Numerical data does not necessarily mean that the variable is quantitative.
+*Mathematically numerical data are quantitative*;
+that is, 
+numbers that have numerical meanings.
+      
+```{example}
+Postcodes are numbers,
+but are *not* quantitative.
+The numbers are just labels.
+A postcode of 4556 isn't one 'better' or one 'more' than a postcode of 4555.
+The values do not have numerical meanings.
+Indeed,
+rather than numerical postcodes,
+alphabetic postcodes could have been chosen.
+```
+
+
+
+
+
+
+
+
+### Quantitative data: Discrete and continuous variables
+
+Quantitative variables may be defined as *discrete* or *continuous*.
+Make sure to give the measurement units (such as *kg* or *cm*)
+for quantitative data when appropriate.
+
+
+```{definition, name="Discrete"}
+A *discrete* variable is a variable for which the possible values can be counted, at least in theory.
+```
+
+Sometimes,
+the possible values may not have a theoretical upper limit,
+yet can be still considered 'countable'.
+
+
+```{example}
+These (quantitative) variables are discrete:
+
+* The number of heart attacked experience by women in over 40 in the previous year.
+The possible values are 0, 1, 2,..
+* The number of cracked eggs in a carton of 12. The possible values can be counted: 0, 1, 2, \dots 12.
+* Whether or not a person wears an orthic device. The possible values are 'Yes' and '`'No'. 
+
+```
+
+
+```{definition, name="Continuous variable"}
+A *continuous* variable is a variable where all the possible values cannot be counted; 
+the number of possible values is infinite,
+```
+
+In other words,
+there are always values between any two given values of the variable,
+if we measure to a greater number of decimal places.
+We need to round off to a reasonable value though in practice.
+
+
+```{example}
+These variables are continuous:
+
+* The height of 6-year-old Australian children. 
+Between any two given values of heights,
+we can find another value by measuring to more and more decimal places of a centimetre,
+but we would normally just quote height to the nearest centimetre.
+*  The energy consumption of houses in a given city.
+Between any two given energy consumption values,
+we can find another value by measuring to more and more decimal places of a kiloWatt-hour (kWh),
+but we would normally just quote to the nearest kWh.
+* The time spent in front of a computer each day for employees in a given industry.
+Between any two given times,
+we could find another value by measuring to more and more decimal places of a second,
+but we would normally just quote the times to the nearest minute, or the nearest 15 minutes.
+
+```
+
+   
+   
+   
+```{example}
+Be clear in your definitions!
+Consider the variable 'Age'.
+	Age is a *continuous* quantitative variable,
+	since we age continuously.
+	We round our age to the last birthday we  had,
+	but that is for convenience.
+	(For example, young children's ages may be given as 
+	'3 days' or '10 months').
+
+Sometimes we need *Age group* instead
+(such as
+Under 20; 20 to under 30; 30 to under 50; 50 or over).
+Ensure your RQ is clear about which is needed!
+```
+	
+
+```{exercise}
+Here are two survey questions that produce qualitative data.
+*How* are the responses different?
+*How* are the responses similar?
+
+
+1. What is your blood type?
+    - Type A.
+    - Type B
+    - Type AB
+    - Type O
+2. What is your age group?
+    - Under 20.
+    - 20 to under 30.
+    - 30 to under 50.
+    - 50 or over.
+
+```      
+
+
+
+### Qualitative variables: Nominal and ordinal variables
+
+The possible values of qualitative variables are called 
+the *levels* of the variable.
+*Nominal variables are qualitative variables where 
+the levels have *no natural order*.
+*Ordinal* variables are qualitative variables where 
+the levels do have a *natural order*.
+
+
+
+
+```{example}  
+This survey question will produce *nominal* data:
+
+How do you usually get to university?
+
+- Car (as driver or passenger).
+- Bus.
+- Ride bicycle or walk.
+- Other.
+
+The data will be nominal with four levels.
+We could place the levels in any order we want:
+for example,
+from largest group to smallest,
+or in alphabetical order.
+We can select the best order for our intended purpose.
+```
+
+
+```{example}
+This survey question will produce a *ordinal* data:
+
+Please indicate the extent to which you agree or disagree with this statement:
+'Permeable pavements technology has the potential to
+revolutionise green building practices'.
+
+- Disagree.
+- Neither agree or disagree.
+- Agree.
+
+The data will be ordinal with three levels.
+It makes sense to treat the levels
+in the given order (or the reverse order).
+```
+
+
+
+
+```{exercise}
+Are these variables
+quantitative (discrete or continuous), or
+qualitative (nominal or ordinal, with what levels)?
+   
+* Systolic blood pressure.
+* Program of enrolment.
+* Academic grade (HD; DN; CR; PS; FL).
+* Number of times people visited the doctor last year.
+
+```
+
+
+
+
+
+
+
+
+
+## Describing variables in SPSS
+   
+In SPSS, 
+quantitative variables are called *scale*
+(regardless of whether they are discrete or continuous).
+Nominal variables are called *nominal* in SPSS,
+ordinal variables are called *ordinal* in SPSS.
+This information is placed in the `Variable View` worksheet of SPSS.
+
+
+
+IMAGE
+
+
+
+
+
+
+
+
+# Graphical summaries of data
+
+```{r echo=FALSE}
+SixSteps(4, "Graphical summaries")
+```
+
+
+## Introduction
+
+In any study,
+data are collected,
+because
+**data are the means by which the research question is answered**.
+But before analysis,
+we need to understand and summarise the data.
+In this chapter,
+we look at using graphs to summarise data.
+Importantly:
+
+>	The purpose of a graph is to display the information
+>	in the clearest, simplest possible way,
+>	to help us understand the data.
+
+For this reason,
+we should always consider what the graph tells us.
+
+
+
+## One quantitative variable
+
+
+Three different types of graphs can be used 
+to show how the values of one
+quantitative variable are *distributed*.
+These are  best used for *continuous* quantitative data,
+but may also be used for *discrete* quantitative data
+with many possible responses
+(such as the number of cars parked in a large shopping centre carpark at hour for year).
+The three options are:
+
+* *Stemplot*
+(or *stem-and-leaf plot*): 
+Best for small amounts of data.
+* *Histogram*:
+Best for large amounts of data.
+* *Dot chart*:
+Best for small amounts of data;
+good for moderate amounts of data.
+
+
+
+### Stem-and-leaf plots
+
+*Stem-and-leaf plots* (or just *stemplots*)
+are best described using an example.
+
+
+```{r echo=FALSE}
+BB <- structure(list(Time = c(5L, 104L, 118L, 155L, 257L, 405L, 407L, 
+422L, 431L, 708L, 735L, 812L, 814L, 909L, 1035L, 1049L, 1053L, 
+1133L, 1209L, 1256L, 1305L, 1406L, 1407L, 1433L, 1446L, 1514L, 
+1631L, 1657L, 1742L, 1807L, 1825L, 1854L, 1909L, 1947L, 1949L, 
+1951L, 2010L, 2037L, 2051L, 2104L, 2123L, 2217L, 2327L, 2355L
+), Gender = c(1L, 1L, 2L, 2L, 2L, 1L, 1L, 2L, 2L, 2L, 2L, 2L, 
+1L, 1L, 2L, 1L, 1L, 2L, 2L, 2L, 2L, 1L, 1L, 1L, 1L, 2L, 2L, 2L, 
+1L, 2L, 1L, 2L, 2L, 2L, 2L, 2L, 1L, 2L, 2L, 2L, 2L, 1L, 1L, 1L
+), Weight = c(3837L, 3334L, 3554L, 3838L, 3625L, 2208L, 1745L, 
+2846L, 3166L, 3520L, 3380L, 3294L, 2576L, 3208L, 3521L, 3746L, 
+3523L, 2902L, 2635L, 3920L, 3690L, 3430L, 3480L, 3116L, 3428L, 
+3783L, 3345L, 3034L, 2184L, 3300L, 2383L, 3428L, 4162L, 3630L, 
+3406L, 3402L, 3500L, 3736L, 3370L, 2121L, 3150L, 3866L, 3542L, 
+3278L), Minutes = c(5L, 64L, 78L, 115L, 177L, 245L, 247L, 262L, 
+271L, 428L, 455L, 492L, 494L, 549L, 635L, 649L, 653L, 693L, 729L, 
+776L, 785L, 846L, 847L, 873L, 886L, 914L, 991L, 1017L, 1062L, 
+1087L, 1105L, 1134L, 1149L, 1187L, 1189L, 1191L, 1210L, 1237L, 
+1251L, 1264L, 1283L, 1337L, 1407L, 1435L)), .Names = c("Time", 
+"Gender", "Weight", "Minutes"), class = "data.frame", row.names = c(NA, 
+-44L))
+```
+
+```{example}
+Consider these data,
+which are weights (in kg) of babies born 
+in a Brisbane hospital in one day
+(@mypapers:Dunn:dataset:1999, @data:Steele:BabyBoom).
+
+
+For these data, 
+the weights are given number of kilograms, 
+followed by one decimal place of a kilogram.
+The whole number of kilograms is placed to the left (as a *stem*),
+and the first decimal place is placed on the left (as a *leaf*).
+Stem-and-leaf plots work best with the first *two* digits of the data only.
+```
+
+
+
+
+```{r echo=FALSE}
+htmltools::tags$iframe(title = "Stemplots: Baby weights", src = "./Animations/StemPlotBBMovie.html", height=640, width=520) 
+```
+
+\animategraphics[loop,controls, width=\linewidth]{12}{./_book/Animations/images/StemPlotBB}{1}{15}
+
+
+From this plot,
+we see that most births are 3-point-something kilograms.
+
+For stem-and-leaf plots:
+
+* The larger unit (e.g. kilograms) are placed on the left (stems).
+* The next smallest unit (e.g. first decimal place of a kilogram) are placed on the right (leaves).
+* The numbers in each row should be evenly spaced, so we can see patterns.
+* Some data do not work well with stem-and-leaf plots.
+  Some times,
+  data might need to be suitably rounded before creating the stem-and-leaf plot.
+* Within each row, the observations are *ordered* on each stem so patterns can be seen.
+
+   
+
+```{example}
+A study of krill [@data:Greenacre2016:reporting] produced the stem-and-leaf plot
+shown in the animation below.
+This shows that the number of eggs is usually small,
+but there are occasional times when a large number of eggs are seen.
+```
+
+<!-- ```{r EggsStem, echo=FALSE, fig.cap="Stemplot of the number of eggs in an experiment on *Calanus glacialis*"} -->
+<!-- Eggs <- c(1, 0, 1, 2, 2, 8, 16, 31, 0, 0, 20, 0, 26, 1, 3) -->
+
+<!-- # stem(Eggs) -->
+
+<!-- plot.new() -->
+<!-- tmp <- capture.output( stem(Eggs)) -->
+<!-- text( 0, 1, paste(tmp, collapse='\n'), adj=c(0,1), family='mono') -->
+<!-- ``` -->
+
+
+```{r echo=FALSE}
+htmltools::tags$iframe(title = "Stemplots", src = "./Animations/StemPlotMovie.html", height=640, width=520) 
+```
+
+
+
+
+### Dot charts
+
+
+Dot charts show the original data on an axis,
+which each observation represented by a point.
+   
+```{example}
+A study examined the serving size of fries at McDonald [@data:Wetzel2005:McDonalds],
+and produced the dot chart in Fig \@ref(fig:Fries)
+(based on @data:Wetzel2005:McDonalds, Fig. 2).
+We can see that the mass of fries is almost always under the target,
+and often substantially so.
+```
+
+```{r Fries, echo=FALSE, fig.height=3, fig.cap="Mass measurements for large orders of french fries"}
+#Fries <- c(58, 60.5, 60.5, 61, 62, 62, 62.5, 64, 67, 67, 69, 69, 71, 71, 71, 71.5, 
+#           76, 76.5, 76.5, 77, 77, 77.5, 79.5, 82, 82, 82.5, 84, 84, 87, 93, 104)
+#stripchart(Fries, 
+#           method="stack",
+#           main="Dotplot for Mass of Small Order of Fries",
+#           axes=FALSE,
+#           ylim = c(-5, 10),
+#           xlim=c(65, 110) )
+#axis(side=1)
+#arrows(74, 8, 74, 2, angle=15)
+#text(74, 8, "McDonald's target of 74 grams per serving", cex=0.8,pos=3)
+
+
+Fries <- c(117, 126, 128, 132, 133, 133, 134, 137, 138, 139, 139, 140, 141, 142, 142.5, 143, 143.5,  
+           145, 146, 146, 151, 152, 152, 154, 154, 154.5, 154.5, 155, 156, 156.5, 157, 176)
+stripchart(Fries, 
+           method="stack",
+           main="Dotplot for Mass of Large Order of Fries",
+           axes=FALSE,
+           pch=20,
+           ylim = c(-1, 10),
+           xlim=c(112, 180) )
+axis(side=1, 
+     at= seq(115, 175, by=10) )
+arrows(165, 8, 171, 2, angle=15)
+text(165, 8, 
+     "McDonald's target of 171 grams per serving", 
+     cex=0.8,
+     pos=3)
+```
+
+
+### Histograms
+
+Histograms are a series of boxes,
+where the width of the box represents a range of values of the variable being graphed,
+and the height of the box represents the number (or percentage) of observations within that range of values.
+The boxes on a histogram show how many observations
+lie within given ranges of the quantitative variable:
+
+```{example}
+Consider again the
+weights (in kg) of babies born 
+in a Brisbane hospital in one day
+(@mypapers:Dunn:dataset:1999, @data:Steele:BabyBoom).
+A histogram can be constructed, 
+as shown in the animation below.
+```
+
+
+```{r echo=FALSE}
+htmltools::tags$iframe(title = "Histogram: Baby weights", src = "./Animations/BabyboomHistMovie.html", height=640, width=520) 
+```
+
+
+```{example}
+A study of 'headache attributed to ingestion or inhalation of a cold stimulus' (HICS),
+commonly known as a brain freeze from eating cold food (e.g. ice cream) or drinking cold drink,
+measured the duration of the brain freeze [@data:Mages2017:BrainFreeze].
+
+A histogram of the data (Fig \@ref(fig:BrainFreeze),
+based on @data:Mages2017:BrainFreeze, Figure 2b).
+shows that
+11 people experience HICS symptoms between 0 and 5 second in length.
+In addition, 9 people experienced symptoms between 5 and 10 seconds,
+and 1 person experienced symptoms for more than 35 seconds.
+```
+
+```{r BrainFreeze, echo=FALSE, fig.cap="Duration of HICS after drinking ice water"}
+# Read from Mages 2017, Figure 2b
+
+Hts <- c(11, 9, 4, 4, 2, 5, 0, 1)
+Borders <- seq(0, 40, by=5)
+
+old.par <- par()
+
+
+barplot(Hts, 
+        space=0,
+        ylim=c(0, 12),
+        col=plot.colour,
+        main="Duration of HICS after drinking ice water",
+        ylab="Number of volunteers",
+        xlab="Duration (s)",
+        axes=FALSE)
+axis(side=2, 
+     las=1)
+axis(side=1, 
+     at=0:8, 
+     labels=Borders)
+box()
+```
+
+
+   
+
+
+
+
+### Summarising the data {#SummariseData}
+
+Recall:
+Graphs are constructed to help us understand the data.
+After producing a graph for one quantitative variable, then,
+we need to summarise what we learn.
+For one *quantitative variable*,
+describe:
+
+1. Location:
+   What is an "average", central or typical value?
+2. Variation: 
+    How much variation is present in the bulk of the data?
+3.  Shape:
+    How are the values distributed?
+4.  Outliers and unusual features:
+    Are there any unusual observations, or anything else of interest?
+
+Describing the shape can be tricky,
+but some terminology helps
+(Fig. \@ref(fig:DescribeShape)):
+
+*	Skewed *right*;
+*	Skewed *left*;
+* Symmetric data (and perhaps bell-shaped)
+* Bimodal data.
+
+Sometime, there are no suitable short descriptions.
+
+```{r DescribeShape, echo=FALSE, fig.height=8, fig.cap="Some common shapes of the distribution of qualitative data"}
+par(mfrow=c(2,2))
+
+library(scales)
+
+set.seed(110110)
+
+xx <- c( rchisq(300, df=2), 7,7,8,7,7,7,8,7,7,6)
+
+hist( scales::rescale(xx, to=c(0, 5)), 
+   xlab="Values", ylab="Number of obs.",
+   main="Skewed right",
+   col="slateblue", las=1)
+
+xx <- c( rchisq(300, df=1), 2, 2, 1, 1, 2, 0, 0)
+
+xx <- max(xx) - xx
+hist( scales::rescale(xx, to=c(0, 5)), 
+   xlab="Values", ylab="Number of obs.",
+   main="Skewed left",
+   col="slateblue", las=1)
+
+xx <- rnorm(500, mean=10)
+hist( scales::rescale(xx, to=c(0, 10)), 
+   xlab="Values", ylab="Number of obs.",
+   main="Approx. symmetric",
+   col="slateblue", las=1)
+
+
+xx1 <- rnorm(500,mean=0, sd=1)
+xx2 <- rnorm(250,mean=4, sd=1)
+xx <- c( xx1[xx1>0], xx2)
+
+
+hist( scales::rescale(xx, to=c(0, 10)),  
+	right=TRUE,
+   col="slateblue", las=1,
+   xlab="Values",ylab="Number of obs.", main="Bimodal distribution")
+
+par(mfrow=c(1,1))
+```
+
+
+
+```{exercise}
+Describe the histogram in
+Example \@ref(fig:DescribeShape).
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+## One qualitative variable
+
+
+Three different graphs can be used to show how common 
+each level of a qualitative variable is in the data.
+These are best used for qualitative data,
+are quantitative datas with a small number of possible options 
+may also be graphed using these graphs
+(e.g. number of cars for sale on an online selling site with 4, 6 and 8 cylinders).
+The three options are:
+
+* *Dot chart*:
+   Usually a good choice.
+* *Bar chart*:
+   Usually a good choice.
+* *Pie chart*:
+   Only useful in special circumstances;
+   can be harder to interpret.
+
+For *nominal* data, 
+order is unimportant;
+so we could order the categories 
+alphabetically, by size;
+by my preference;
+or any way I like.
+
+For ordinal data,
+the natural order of the levels should be used.
+
+
+
+### Dot charts
+
+Dot charts indicate the counts (or the corresponding percentages)
+in each level
+using dots.
+The levels can be on the horizontal or vertical axis;
+placing the level names on the vertical axis often makes for easier reading,
+and more room for long labels. 
+
+
+
+```{example}
+A study of spider monkeys [@data:Chapman1990:SpiderMonkeys]
+examined the types of social groups.
+A dot chart (Fig. \@ref(fig:SpiderMonkeys)) can be used to display the data.
+```
+
+
+```{r SpiderMonkeys, echo=FALSE, fig.cap="2D dotchart of spider monkey family groups"}
+counts <- c(8, 3, 2, 15, 1, 23, 48)
+names <- c("Solitary", "All males", "Female + no young", "Mixed young", 
+           "Mixed + no young", "One female + offspring", "Many females + offspring")
+
+sort.order <- sort( counts, index.return=TRUE)
+
+old.mar=par()$mar
+new.mar <- old.mar
+new.mar[2] <- old.mar[2]*2.5
+par(mar = new.mar  )
+
+dotchart( counts[sort.order$ix], 
+          pch=19,
+          las=1, 
+          xlim=c(0,50),
+          xlab="Percentage of observations",
+          ylab="",
+          main="Spider monkey sub-groups")
+axis(side=2, seq_along(counts[sort.order$ix]), names[sort.order$ix], las=1)
+
+```
+
+
+
+
+### Bar charts
+
+Similar to dot charts,
+bar charts indicate the counts in each category
+using a bar from the zero-line.
+As with dot charts,
+the levels can be on the horizontal or vertical axis,
+and placing the level names on the vertical axis often makes for easier reading,
+and more room for long labels. 
+
+
+```{example IndependenceBarText}
+In a study of functional independence [@data:Ocepek2013:SmartHome],
+the type of diagnoses were graphed using a bar chart:
+(Fig. \@ref(fig:IndependenceBar))
+``` 
+
+```{r IndependenceBar, echo=FALSE, fig.cap="Diagnoses of participants"}
+Number <- rev( c(11, 10, 9, 8, 5, 4, 3, 3, 2, 4) )
+Diag <- rev( c("Amputation-one leg",
+          "Neuromuscular disease",
+          "SCI-paraplegia",
+          "Rheum. dis. or multiple skeletal injury",
+          "SCI-tetraplegia",
+          "Cerebral vascular insult",
+          "Amputation-both legs",
+          "Amputation-arm",
+          "Cerebral palsy",
+          "Other") )
+Diag.Cols <- rev( c( 
+                grey(0.6), 
+                grey(0.2), 
+                grey(0.6),
+                grey(0.6),
+                grey(0.2),
+                grey(0.6),
+                grey(0.2),
+                rep( grey(0.6), 3) ) )
+
+par( mar=c(4, 16, 4, 2) + 0.1)
+barplot( Number, 
+         names.arg=Diag,
+         horiz=TRUE,
+         las=1,
+         xlim=c(0, 12),
+         xlab="Number of participants",
+         col=Diag.Cols)
+```
+
+
+For bar charts and for dot charts:
+
+* Place the qualitative variable on the horizontal or vertical axis 
+   (and label with the levels of the variable).
+* Use a count or percentage on the other axis.
+*  For nominal data,
+   dots and bars can be ordered any way we like:
+   *Think about the most helpful order*.
+* Bars have gaps between bars, as the bars represent distinct categories.
+In contrast, the bars of histograms are butted together
+(exept when an interval has a coun of zero),
+as the bars represent a numerical scale.
+
+
+
+
+
+
+
+
+
+### Pie charts
+
+In pie charts,
+a circle is divided into segments 
+proportional to the number of counts.
+
+```{example}
+In a study of functional independence [@data:Ocepek2013:SmartHome],
+the severity of the  diagnoses were graphed using a pie chart
+(\@ref(fig:IndependencePie)).
+
+This picture actually conveys one thing only:
+"69\% of patients had a less severe injury".
+Notice that the colour coding helps explain the colours
+used in Example \@ref(exm:IndependenceBarText).
+```
+   
+   
+```{r IndependencePie, echo=FALSE, fig.cap="Severity of diagnoses of participants"}
+pie( c(31, 69),
+     labels=c("More severe (31%)", "Less severe (69%"),
+     col=c( grey(0.2), grey(0.6)),
+     init.angle = 90)
+```
+
+
+Pie charts need *all* categories available,
+and display *parts of a whole* (so they must add to 100\%),
+so not all qualitative data can be graphed with a pie chart.
+In addition,
+categories with zero observations cannot be shown in a pie chart.
+Pie charts are also difficult to produce and understand for variables
+with many categories.
+
+
+
+```{exercise}
+In which of these situations is a pie chart *appropriate*?
+  
+* The percentage of users of these web browsers: Firefox, Chrome, and Safari.
+* The percentage of people in each state who own an iPhone.
+* The percentage of students awarded different grades last semester.
+
+```
+
+
+
+```{example}
+A study of patients with thrombolysis [@data:Castle206:Thrombolysis]
+produced the following pie chart:
+	
+
+This chart conveys one number:
+"14.29\% of the patients were suitable for the study".
+```
+
+
+
+
+
+
+
+
+
+### Comparing pie charts and bar charts
+
+Consider the pie chart
+(made from data in @data:houchens:1988)
+in the left panel of
+Fig. \@ref(fig:LOSgraphs).
+A pie chart *is* appropriate,
+as the counts are parts of a whole.
+But notice that comparing the sizes of the segments is hard.
+Compare this to the equivalent bar chart in the right panel.
+In general,
+human brains are better at comparing *lengths*
+than they are at comparing *angles* [@data:Friel:Graphs].
+
+
+
+
+
+
+```{r LOSgraphs, echo=FALSE, fig.cap="Graphs from a study of hispotal admission of children with asthma"}
+los <- 
+structure(list(LOS = c(1L, 2L, 3L, 4L, 2L, 2L, 1L, 1L, 2L, 2L, 
+3L, 1L, 1L, 1L, 2L, 1L, 1L, 3L, 2L, 3L, 1L, 2L, 1L, 2L, 4L, 2L, 
+3L, 5L, 2L, 6L, 3L, 1L, 1L, 3L, 1L, 2L, 4L, 1L, 3L, 7L, 2L, 4L, 
+4L, 1L, 3L, 3L, 3L, 2L, 1L, 2L, 3L, 2L, 6L, 3L, 2L, 3L, 1L, 2L, 
+1L, 3L, 3L, 3L, 1L, 1L, 2L, 2L, 2L, 3L, 2L, 2L, 3L, 3L, 2L, 3L, 
+1L, 2L, 2L, 3L, 1L, 4L, 1L, 5L, 2L, 1L, 3L, 1L, 1L, 2L, 2L, 2L, 
+1L, 2L, 2L, 2L, 1L, 3L, 1L, 1L, 2L, 2L, 2L, 1L, 3L, 1L, 1L, 1L, 
+3L, 2L, 1L, 2L, 3L, 2L, 2L, 2L, 2L, 2L, 1L, 2L, 3L, 3L, 1L, 4L, 
+1L, 4L, 3L, 4L, 3L, 2L, 2L, 1L, 2L, 8L, 2L, 2L, 2L, 4L, 4L, 2L, 
+2L, 1L, 2L, 3L, 3L, 2L, 2L, 2L, 1L, 1L, 2L, 3L, 4L, 3L, 4L, 4L, 
+2L, 2L, 3L, 2L, 1L, 2L, 1L, 2L, 2L, 2L, 1L, 1L, 2L, 2L, 3L, 2L, 
+2L, 2L, 3L, 3L, 3L, 2L, 2L, 2L, 3L, 2L, 2L, 2L, 2L, 3L, 1L, 4L, 
+3L, 1L, 2L, 2L, 2L, 2L, 2L, 1L, 4L, 2L, 3L, 2L, 2L, 1L, 3L, 2L, 
+3L, 3L, 1L, 2L, 2L, 3L, 1L, 1L, 2L, 1L, 1L, 1L, 2L, 1L, 5L, 2L, 
+2L, 3L, 2L, 2L, 3L, 4L, 1L, 2L, 2L, 2L, 1L, 6L, 3L, 3L, 3L, 2L, 
+1L, 5L, 1L, 2L, 1L, 2L, 2L, 3L, 1L, 7L, 4L, 2L, 2L, 2L, 3L, 2L, 
+2L, 2L, 3L, 1L, 2L, 1L, 3L, 4L, 4L, 3L, 2L, 1L, 3L, 3L, 3L, 3L, 
+3L, 4L, 2L, 2L, 3L, 2L, 2L, 1L, 3L, 1L, 1L, 2L, 2L, 3L, 3L, 2L, 
+2L, 3L, 6L, 3L, 2L, 5L, 3L, 4L, 4L, 3L, 4L, 2L, 4L, 2L, 2L, 2L, 
+2L, 4L, 2L, 5L, 1L, 2L, 3L, 3L, 1L, 2L, 4L, 2L, 1L, 1L, 3L, 3L, 
+2L, 3L, 10L, 2L, 3L, 2L, 2L, 4L, 2L, 4L, 1L, 3L, 4L, 3L, 3L, 
+4L, 3L, 1L, 3L, 3L, 5L, 2L, 2L, 3L, 1L, 2L, 3L, 1L, 1L, 1L, 1L, 
+2L, 2L, 3L, 1L, 1L, 2L, 2L, 2L, 1L, 2L, 1L, 2L, 1L, 1L, 1L, 3L, 
+1L, 2L, 1L, 2L, 6L, 2L, 2L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 
+2L, 3L, 3L, 2L, 2L, 5L, 4L, 5L, 2L, 1L, 2L, 1L, 2L, 3L, 3L, 2L, 
+2L, 3L, 2L, 3L, 2L, 1L, 4L, 1L, 4L, 1L, 1L, 1L, 6L, 2L, 2L, 1L, 
+5L, 2L, 4L, 3L, 1L, 3L, 1L, 3L, 3L, 7L, 1L, 1L, 1L, 3L, 1L, 5L, 
+2L, 5L, 2L, 3L, 4L, 2L, 2L, 1L, 2L, 5L, 2L, 3L, 2L, 3L, 2L, 1L, 
+1L, 1L, 3L, 1L, 3L, 1L, 2L, 2L, 3L, 2L, 5L, 4L, 2L, 5L, 2L, 2L, 
+4L, 3L, 2L, 1L, 1L, 6L, 1L, 9L, 2L, 1L, 6L, 3L, 3L, 2L, 3L, 2L, 
+3L, 3L, 3L, 3L, 3L, 3L, 3L, 2L, 3L, 2L, 1L, 4L, 2L, 2L, 2L, 1L, 
+2L, 3L, 3L, 2L, 1L, 2L, 2L, 4L, 1L, 2L, 4L, 3L, 1L, 2L, 2L, 1L, 
+2L, 4L, 3L, 2L, 2L, 3L, 1L, 2L, 5L, 3L, 2L, 2L, 1L, 4L, 6L, 1L, 
+4L, 3L, 2L, 3L, 3L, 3L, 3L, 2L, 5L, 5L, 3L, 2L, 2L, 4L, 2L, 1L, 
+2L, 2L, 2L, 3L, 3L, 1L, 3L, 5L, 2L, 2L, 3L, 3L, 2L, 3L, 1L, 1L, 
+3L, 2L, 2L, 4L, 2L, 2L, 6L, 4L, 2L, 1L, 3L, 1L, 2L, 3L, 2L, 1L, 
+3L, 1L, 2L, 2L, 2L, 2L, 5L, 6L, 4L, 2L, 2L, 5L, 1L, 1L, 2L, 1L, 
+3L, 1L, 1L, 1L, 8L, 3L, 3L, 2L, 2L, 2L, 3L, 3L, 7L, 1L, 5L, 6L, 
+3L, 4L, 2L, 4L, 4L, 5L, 5L, 4L, 5L, 7L, 3L, 3L, 3L, 3L, 4L, 3L, 
+1L, 1L, 3L, 5L, 4L, 4L, 6L, 6L, 6L, 3L, 4L, 1L, 2L, 1L, 1L, 1L, 
+2L, 6L, 5L, 4L, 4L, 2L, 4L, 3L, 2L, 2L, 3L, 1L, 3L, 4L, 2L, 4L, 
+7L, 2L, 3L, 4L, 2L, 2L, 3L, 2L, 6L, 5L, 7L, 4L, 1L, 2L, 3L, 3L, 
+2L, 1L, 5L, 3L, 2L, 2L, 4L, 1L, 5L, 3L, 3L, 5L, 5L, 8L, 2L, 5L, 
+2L, 3L, 3L, 2L, 4L, 2L, 2L, 3L, 3L, 6L, 2L, 3L, 3L, 4L, 4L, 4L, 
+4L, 2L, 4L, 1L, 2L, 1L, 5L, 4L, 6L, 2L, 5L, 4L, 1L, 8L, 3L, 2L, 
+2L, 3L, 2L, 3L, 1L, 2L, 2L, 2L, 1L, 2L, 4L, 2L, 2L, 2L, 2L, 1L, 
+2L, 3L, 1L, 6L, 2L, 6L, 2L, 11L, 3L, 4L, 2L, 3L, 3L, 4L, 2L, 
+4L, 2L, 4L, 4L, 4L, 3L, 5L, 3L, 2L, 1L, 3L, 1L, 4L, 2L, 2L, 4L, 
+3L, 3L, 3L, 3L, 2L, 3L, 4L, 2L, 5L, 4L, 6L, 5L, 3L, 7L, 2L, 3L, 
+3L, 4L, 2L, 2L, 4L, 3L, 3L, 6L, 1L, 3L, 2L, 2L, 2L), Hospital = c(17L, 
+17L, 17L, 17L, 17L, 17L, 17L, 17L, 17L, 17L, 17L, 17L, 17L, 17L, 
+17L, 17L, 17L, 27L, 27L, 27L, 57L, 57L, 57L, 57L, 3L, 3L, 3L, 
+3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 
+3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 
+2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 18L, 18L, 18L, 18L, 18L, 18L, 
+23L, 23L, 23L, 23L, 23L, 23L, 23L, 23L, 23L, 23L, 23L, 23L, 23L, 
+23L, 23L, 23L, 23L, 23L, 23L, 23L, 23L, 23L, 23L, 23L, 23L, 23L, 
+23L, 23L, 23L, 7L, 7L, 7L, 30L, 30L, 30L, 30L, 30L, 30L, 30L, 
+30L, 30L, 30L, 30L, 24L, 24L, 24L, 24L, 24L, 24L, 24L, 24L, 24L, 
+24L, 24L, 24L, 24L, 24L, 24L, 24L, 24L, 24L, 24L, 24L, 24L, 24L, 
+24L, 24L, 24L, 24L, 24L, 24L, 24L, 24L, 24L, 24L, 22L, 22L, 22L, 
+22L, 22L, 22L, 22L, 22L, 22L, 22L, 22L, 22L, 22L, 22L, 22L, 22L, 
+22L, 22L, 22L, 22L, 22L, 22L, 22L, 22L, 22L, 22L, 22L, 22L, 22L, 
+22L, 22L, 10L, 10L, 10L, 10L, 10L, 10L, 10L, 10L, 10L, 10L, 10L, 
+6L, 6L, 6L, 6L, 6L, 6L, 6L, 6L, 6L, 6L, 6L, 6L, 20L, 20L, 20L, 
+20L, 20L, 20L, 20L, 20L, 20L, 20L, 20L, 20L, 20L, 20L, 20L, 20L, 
+20L, 20L, 20L, 20L, 20L, 20L, 20L, 20L, 20L, 20L, 20L, 20L, 20L, 
+20L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 5L, 5L, 5L, 5L, 5L, 5L, 5L, 
+49L, 49L, 49L, 49L, 49L, 49L, 49L, 49L, 49L, 49L, 44L, 48L, 48L, 
+48L, 48L, 48L, 48L, 48L, 48L, 48L, 48L, 48L, 48L, 48L, 56L, 56L, 
+56L, 56L, 56L, 56L, 56L, 56L, 56L, 56L, 56L, 56L, 56L, 1L, 1L, 
+1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 9L, 9L, 9L, 9L, 9L, 9L, 9L, 9L, 
+9L, 9L, 9L, 2L, 2L, 50L, 50L, 50L, 50L, 50L, 50L, 58L, 58L, 58L, 
+58L, 58L, 58L, 58L, 58L, 58L, 58L, 58L, 58L, 58L, 58L, 58L, 58L, 
+58L, 58L, 58L, 58L, 58L, 58L, 58L, 58L, 58L, 58L, 45L, 45L, 45L, 
+45L, 45L, 45L, 5L, 5L, 5L, 5L, 19L, 19L, 19L, 19L, 19L, 19L, 
+19L, 19L, 19L, 19L, 19L, 19L, 19L, 19L, 19L, 19L, 19L, 19L, 19L, 
+19L, 19L, 19L, 19L, 19L, 19L, 19L, 19L, 19L, 19L, 19L, 18L, 18L, 
+18L, 18L, 18L, 50L, 50L, 50L, 19L, 19L, 19L, 8L, 8L, 8L, 8L, 
+17L, 17L, 17L, 17L, 17L, 17L, 17L, 17L, 17L, 17L, 17L, 17L, 17L, 
+17L, 27L, 27L, 27L, 27L, 27L, 27L, 27L, 27L, 27L, 27L, 27L, 27L, 
+27L, 27L, 27L, 27L, 27L, 27L, 27L, 27L, 27L, 27L, 27L, 27L, 27L, 
+27L, 27L, 27L, 27L, 57L, 57L, 57L, 57L, 57L, 57L, 57L, 57L, 57L, 
+57L, 57L, 57L, 57L, 57L, 57L, 57L, 57L, 57L, 57L, 2L, 2L, 2L, 
+2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 18L, 18L, 18L, 18L, 
+18L, 18L, 18L, 18L, 18L, 18L, 18L, 18L, 18L, 18L, 23L, 7L, 7L, 
+7L, 7L, 7L, 7L, 7L, 7L, 7L, 7L, 7L, 7L, 7L, 7L, 7L, 7L, 7L, 7L, 
+7L, 7L, 7L, 7L, 7L, 7L, 7L, 7L, 7L, 7L, 7L, 7L, 7L, 7L, 7L, 7L, 
+30L, 30L, 30L, 30L, 30L, 30L, 30L, 30L, 30L, 30L, 30L, 30L, 30L, 
+30L, 30L, 30L, 30L, 24L, 24L, 24L, 10L, 10L, 10L, 4L, 4L, 4L, 
+4L, 6L, 6L, 6L, 6L, 6L, 6L, 6L, 6L, 6L, 6L, 20L, 20L, 20L, 20L, 
+4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 
+4L, 4L, 4L, 4L, 4L, 4L, 4L, 5L, 5L, 5L, 5L, 5L, 5L, 5L, 49L, 
+49L, 49L, 49L, 49L, 49L, 49L, 49L, 49L, 44L, 44L, 44L, 44L, 44L, 
+44L, 44L, 44L, 44L, 44L, 44L, 44L, 44L, 44L, 44L, 48L, 48L, 48L, 
+48L, 48L, 48L, 48L, 48L, 48L, 48L, 48L, 48L, 48L, 48L, 48L, 56L, 
+56L, 56L, 56L, 56L, 56L, 56L, 56L, 56L, 56L, 56L, 56L, 56L, 56L, 
+56L, 56L, 56L, 56L, 56L, 56L, 56L, 56L, 56L, 56L, 42L, 42L, 42L, 
+42L, 42L, 42L, 42L, 42L, 42L, 42L, 42L, 42L, 42L, 42L, 42L, 42L, 
+42L, 42L, 42L, 42L, 42L, 42L, 42L, 42L, 1L, 1L, 1L, 1L, 1L, 1L, 
+1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 
+9L, 9L, 9L, 9L, 9L, 9L, 9L, 9L, 9L, 9L, 9L, 54L, 54L, 54L, 54L, 
+54L, 54L, 54L, 54L, 54L, 54L, 54L, 54L, 54L, 54L, 54L, 54L, 54L, 
+54L, 54L, 54L, 54L, 50L, 50L, 50L, 50L, 50L, 50L, 50L, 50L, 50L, 
+50L, 50L, 50L, 50L, 50L, 50L, 50L, 50L, 50L, 50L, 50L, 50L, 50L, 
+50L, 58L, 58L, 45L, 45L, 45L, 45L, 45L, 58L, 58L, 58L, 18L, 18L, 
+18L, 18L, 18L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 6L, 6L, 6L, 
+6L, 6L, 6L, 6L, 6L, 6L, 6L, 6L, 6L), Insurer = c(0L, 0L, 0L, 
+0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 
+0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 
+0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 
+0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 
+0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 
+0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 
+0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 
+0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 
+0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 
+0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 
+0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 
+0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 
+0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 
+0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 
+0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 
+0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 
+0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 
+0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 
+0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 
+0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 
+0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 
+0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 
+0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 
+0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 
+0L, 0L, 0L, 0L, 0L, 0L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 
+1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 
+1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 
+1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 
+1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 
+1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 
+1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 
+1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 
+1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 
+1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 
+1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 
+1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 
+1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 
+1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 
+1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 
+1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 
+1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 
+1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 
+1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 
+1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 
+1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 
+1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 0L, 1L, 1L, 
+1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 
+1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 
+1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 
+1L, 1L), Age = c(10L, 6L, 3L, 11L, 3L, 13L, 2L, 16L, 12L, 13L, 
+4L, 3L, 3L, 7L, 2L, 3L, 4L, 2L, 7L, 15L, 3L, 4L, 2L, 9L, 2L, 
+3L, 11L, 2L, 3L, 7L, 6L, 5L, 5L, 8L, 2L, 2L, 2L, 5L, 13L, 9L, 
+2L, 15L, 4L, 14L, 17L, 4L, 6L, 7L, 13L, 2L, 3L, 13L, 4L, 16L, 
+11L, 13L, 2L, 13L, 6L, 7L, 3L, 5L, 4L, 8L, 4L, 10L, 2L, 5L, 3L, 
+6L, 4L, 4L, 4L, 4L, 8L, 4L, 4L, 5L, 10L, 4L, 4L, 8L, 5L, 3L, 
+7L, 4L, 8L, 9L, 4L, 2L, 16L, 2L, 2L, 4L, 2L, 3L, 2L, 2L, 9L, 
+13L, 13L, 3L, 12L, 9L, 9L, 2L, 5L, 3L, 5L, 6L, 7L, 2L, 4L, 5L, 
+3L, 3L, 14L, 13L, 17L, 13L, 10L, 10L, 9L, 15L, 4L, 11L, 8L, 5L, 
+4L, 8L, 4L, 2L, 3L, 2L, 14L, 9L, 10L, 3L, 2L, 3L, 11L, 13L, 2L, 
+7L, 10L, 11L, 17L, 5L, 4L, 10L, 17L, 15L, 14L, 13L, 12L, 13L, 
+13L, 12L, 12L, 11L, 12L, 9L, 11L, 9L, 15L, 11L, 7L, 16L, 8L, 
+3L, 9L, 4L, 3L, 3L, 2L, 4L, 3L, 3L, 2L, 4L, 6L, 3L, 2L, 4L, 9L, 
+6L, 2L, 13L, 15L, 6L, 3L, 11L, 2L, 2L, 8L, 2L, 2L, 6L, 3L, 3L, 
+5L, 3L, 4L, 17L, 5L, 2L, 3L, 5L, 2L, 14L, 15L, 16L, 4L, 3L, 2L, 
+13L, 3L, 9L, 2L, 3L, 7L, 11L, 15L, 10L, 8L, 7L, 6L, 13L, 2L, 
+15L, 14L, 15L, 10L, 11L, 7L, 9L, 3L, 10L, 2L, 3L, 3L, 15L, 4L, 
+16L, 5L, 5L, 6L, 8L, 2L, 7L, 6L, 3L, 5L, 5L, 3L, 2L, 4L, 11L, 
+8L, 8L, 16L, 2L, 3L, 9L, 5L, 11L, 5L, 2L, 2L, 5L, 8L, 3L, 4L, 
+14L, 8L, 2L, 2L, 17L, 2L, 12L, 8L, 6L, 2L, 17L, 3L, 2L, 5L, 11L, 
+3L, 3L, 13L, 3L, 8L, 13L, 13L, 13L, 13L, 3L, 3L, 2L, 4L, 7L, 
+5L, 2L, 3L, 6L, 5L, 3L, 2L, 9L, 13L, 3L, 5L, 2L, 11L, 11L, 9L, 
+4L, 5L, 5L, 4L, 15L, 3L, 5L, 9L, 13L, 3L, 5L, 6L, 11L, 3L, 2L, 
+7L, 2L, 8L, 2L, 4L, 14L, 4L, 12L, 2L, 2L, 2L, 10L, 7L, 3L, 3L, 
+9L, 17L, 17L, 16L, 16L, 12L, 11L, 11L, 9L, 14L, 6L, 5L, 5L, 5L, 
+5L, 4L, 3L, 4L, 2L, 5L, 2L, 3L, 4L, 11L, 6L, 4L, 3L, 3L, 4L, 
+3L, 4L, 11L, 14L, 4L, 8L, 8L, 7L, 7L, 14L, 6L, 3L, 11L, 4L, 8L, 
+5L, 2L, 4L, 17L, 4L, 2L, 6L, 3L, 5L, 6L, 11L, 5L, 2L, 10L, 2L, 
+3L, 4L, 3L, 13L, 13L, 4L, 5L, 6L, 14L, 6L, 13L, 3L, 4L, 11L, 
+13L, 2L, 15L, 3L, 2L, 2L, 2L, 7L, 2L, 4L, 2L, 2L, 5L, 14L, 7L, 
+3L, 5L, 12L, 4L, 3L, 2L, 4L, 2L, 15L, 7L, 11L, 15L, 15L, 10L, 
+5L, 16L, 6L, 2L, 3L, 4L, 3L, 14L, 5L, 6L, 6L, 5L, 6L, 3L, 14L, 
+3L, 3L, 10L, 6L, 11L, 3L, 4L, 2L, 3L, 17L, 17L, 4L, 4L, 4L, 13L, 
+2L, 5L, 3L, 3L, 3L, 14L, 7L, 5L, 5L, 13L, 3L, 6L, 11L, 3L, 7L, 
+6L, 8L, 4L, 3L, 2L, 12L, 2L, 5L, 6L, 7L, 6L, 6L, 13L, 5L, 6L, 
+2L, 6L, 5L, 7L, 14L, 8L, 5L, 8L, 9L, 5L, 2L, 10L, 4L, 4L, 7L, 
+2L, 3L, 2L, 2L, 6L, 10L, 10L, 14L, 14L, 2L, 7L, 10L, 3L, 3L, 
+2L, 14L, 14L, 10L, 5L, 4L, 2L, 7L, 4L, 4L, 5L, 11L, 5L, 12L, 
+3L, 9L, 3L, 3L, 2L, 3L, 8L, 13L, 10L, 5L, 5L, 14L, 5L, 12L, 12L, 
+8L, 6L, 6L, 6L, 4L, 5L, 5L, 6L, 3L, 5L, 2L, 4L, 11L, 11L, 2L, 
+9L, 3L, 2L, 10L, 3L, 6L, 12L, 17L, 10L, 4L, 4L, 17L, 11L, 2L, 
+6L, 15L, 4L, 10L, 5L, 2L, 16L, 6L, 5L, 6L, 4L, 12L, 5L, 4L, 2L, 
+5L, 5L, 7L, 2L, 14L, 4L, 14L, 5L, 16L, 4L, 3L, 3L, 17L, 13L, 
+6L, 2L, 3L, 3L, 5L, 2L, 7L, 2L, 2L, 13L, 2L, 3L, 3L, 3L, 12L, 
+6L, 7L, 8L, 4L, 4L, 13L, 11L, 2L, 2L, 6L, 15L, 14L, 2L, 2L, 3L, 
+2L, 9L, 17L, 12L, 11L, 11L, 4L, 3L, 4L, 2L, 2L, 2L, 6L, 2L, 4L, 
+2L, 7L, 4L, 5L, 5L, 3L, 4L, 7L, 7L, 7L, 8L, 5L, 8L, 3L, 3L, 2L, 
+3L, 2L, 10L, 2L, 16L, 14L, 10L, 6L, 3L, 3L, 8L, 2L, 7L, 12L, 
+5L, 3L, 2L, 14L, 15L, 5L, 11L, 13L, 13L, 17L, 12L, 9L, 5L, 5L, 
+11L, 4L, 3L, 2L, 11L, 2L, 15L, 2L, 10L, 9L, 3L, 3L, 5L, 6L, 17L, 
+4L, 14L, 9L, 14L, 8L, 6L, 5L, 4L, 4L, 4L, 2L, 2L, 2L, 5L, 8L, 
+5L, 3L, 3L, 6L, 6L, 3L, 6L, 2L, 5L, 10L, 4L, 5L, 9L, 3L, 9L, 
+6L, 4L, 8L, 9L, 4L, 3L, 9L, 3L, 4L, 7L, 4L, 4L, 7L, 7L, 11L, 
+4L, 4L, 17L, 10L, 6L, 8L, 10L, 12L, 2L, 6L, 3L, 14L, 2L, 12L, 
+12L), Gender = c(1L, 0L, 0L, 0L, 0L, 0L, 1L, 0L, 1L, 0L, 0L, 
+1L, 0L, 1L, 0L, 1L, 0L, 1L, 1L, 1L, 0L, 1L, 0L, 1L, 0L, 0L, 0L, 
+1L, 0L, 0L, 0L, 1L, 0L, 1L, 0L, 1L, 1L, 1L, 0L, 0L, 0L, 0L, 0L, 
+1L, 0L, 0L, 1L, 0L, 1L, 1L, 0L, 1L, 0L, 0L, 0L, 0L, 1L, 0L, 0L, 
+0L, 0L, 1L, 0L, 1L, 1L, 1L, 1L, 1L, 0L, 0L, 0L, 0L, 0L, 1L, 1L, 
+0L, 0L, 0L, 1L, 1L, 0L, 1L, 1L, 0L, 1L, 0L, 1L, 0L, 0L, 0L, 1L, 
+0L, 1L, 1L, 0L, 0L, 0L, 1L, 1L, 0L, 0L, 1L, 0L, 0L, 0L, 1L, 0L, 
+1L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 1L, 0L, 0L, 0L, 0L, 1L, 0L, 
+0L, 0L, 1L, 0L, 0L, 0L, 1L, 0L, 0L, 0L, 0L, 1L, 0L, 1L, 1L, 1L, 
+0L, 0L, 0L, 0L, 1L, 0L, 1L, 0L, 1L, 1L, 0L, 0L, 0L, 0L, 1L, 1L, 
+1L, 0L, 0L, 0L, 0L, 1L, 1L, 0L, 1L, 0L, 1L, 1L, 0L, 1L, 0L, 0L, 
+0L, 0L, 1L, 0L, 1L, 1L, 0L, 1L, 0L, 0L, 1L, 0L, 0L, 0L, 0L, 1L, 
+0L, 0L, 0L, 0L, 1L, 0L, 1L, 0L, 0L, 0L, 1L, 0L, 0L, 1L, 0L, 1L, 
+0L, 0L, 0L, 0L, 0L, 0L, 0L, 1L, 0L, 1L, 1L, 1L, 1L, 1L, 0L, 1L, 
+0L, 0L, 1L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 1L, 0L, 1L, 0L, 1L, 0L, 
+1L, 1L, 0L, 0L, 0L, 0L, 1L, 1L, 1L, 0L, 0L, 0L, 0L, 0L, 0L, 1L, 
+1L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 1L, 0L, 1L, 0L, 0L, 0L, 0L, 0L, 
+0L, 0L, 0L, 0L, 0L, 0L, 0L, 1L, 1L, 0L, 0L, 0L, 0L, 1L, 1L, 1L, 
+1L, 0L, 1L, 1L, 0L, 1L, 0L, 1L, 1L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 
+1L, 1L, 0L, 1L, 1L, 1L, 1L, 0L, 1L, 0L, 1L, 0L, 1L, 0L, 0L, 1L, 
+1L, 0L, 0L, 0L, 0L, 0L, 1L, 1L, 0L, 0L, 0L, 0L, 1L, 1L, 0L, 1L, 
+0L, 1L, 1L, 1L, 0L, 1L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 1L, 1L, 0L, 
+0L, 1L, 0L, 1L, 1L, 1L, 1L, 0L, 0L, 0L, 0L, 1L, 0L, 0L, 0L, 0L, 
+1L, 0L, 0L, 0L, 0L, 0L, 1L, 0L, 0L, 1L, 0L, 1L, 0L, 0L, 0L, 1L, 
+0L, 0L, 1L, 0L, 0L, 1L, 0L, 0L, 1L, 1L, 0L, 1L, 1L, 0L, 0L, 1L, 
+0L, 0L, 1L, 1L, 0L, 0L, 0L, 1L, 0L, 1L, 0L, 0L, 0L, 0L, 0L, 0L, 
+0L, 0L, 1L, 0L, 0L, 0L, 0L, 0L, 1L, 1L, 0L, 1L, 1L, 0L, 0L, 0L, 
+1L, 0L, 1L, 0L, 0L, 0L, 0L, 0L, 1L, 0L, 1L, 0L, 0L, 0L, 0L, 0L, 
+0L, 0L, 1L, 0L, 0L, 1L, 0L, 0L, 0L, 1L, 0L, 0L, 0L, 0L, 0L, 0L, 
+0L, 0L, 1L, 1L, 0L, 0L, 0L, 0L, 0L, 1L, 0L, 0L, 1L, 0L, 1L, 0L, 
+0L, 0L, 0L, 1L, 0L, 0L, 0L, 0L, 1L, 0L, 1L, 0L, 0L, 0L, 0L, 0L, 
+1L, 0L, 0L, 0L, 0L, 0L, 0L, 1L, 1L, 1L, 0L, 1L, 0L, 0L, 0L, 0L, 
+1L, 1L, 1L, 1L, 0L, 0L, 1L, 0L, 0L, 0L, 0L, 0L, 1L, 0L, 0L, 0L, 
+0L, 0L, 0L, 1L, 0L, 0L, 1L, 0L, 0L, 0L, 0L, 0L, 1L, 0L, 0L, 0L, 
+0L, 0L, 0L, 1L, 1L, 1L, 1L, 0L, 1L, 0L, 0L, 0L, 0L, 0L, 0L, 1L, 
+0L, 0L, 1L, 0L, 1L, 1L, 1L, 1L, 1L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 
+1L, 1L, 1L, 1L, 0L, 0L, 1L, 0L, 0L, 0L, 1L, 1L, 0L, 0L, 0L, 0L, 
+1L, 1L, 1L, 1L, 1L, 1L, 1L, 0L, 1L, 1L, 0L, 1L, 1L, 0L, 0L, 1L, 
+1L, 0L, 1L, 0L, 1L, 1L, 0L, 1L, 1L, 1L, 1L, 0L, 0L, 0L, 0L, 0L, 
+0L, 0L, 1L, 1L, 1L, 1L, 0L, 0L, 0L, 0L, 0L, 1L, 0L, 1L, 0L, 0L, 
+1L, 1L, 1L, 0L, 0L, 0L, 0L, 0L, 1L, 0L, 1L, 0L, 0L, 0L, 1L, 1L, 
+1L, 1L, 0L, 0L, 1L, 0L, 1L, 0L, 0L, 0L, 0L, 0L, 1L, 1L, 0L, 1L, 
+0L, 0L, 1L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 1L, 1L, 
+0L, 0L, 1L, 0L, 1L, 0L, 0L, 1L, 1L, 1L, 1L, 0L, 1L, 0L, 0L, 0L, 
+1L, 1L, 0L, 0L, 0L, 1L, 1L, 0L, 0L, 0L, 1L, 0L, 0L, 0L, 0L, 0L, 
+1L, 0L, 1L, 0L, 0L, 0L, 1L, 0L, 1L, 1L, 1L, 0L, 0L, 1L, 1L, 1L, 
+0L, 0L, 0L, 0L, 0L, 0L, 0L, 1L, 0L, 0L, 0L, 0L, 1L, 0L, 0L, 0L, 
+0L, 1L, 0L, 0L, 0L, 0L, 1L, 0L, 0L, 1L, 0L, 1L, 0L, 1L, 1L, 0L, 
+0L, 0L, 1L, 1L, 0L, 0L, 0L, 1L, 0L, 1L, 1L, 0L, 0L, 0L, 0L, 1L, 
+0L, 0L, 0L, 0L, 1L, 0L, 0L, 0L, 0L, 0L), Race = c(2L, 1L, 1L, 
+3L, 2L, 2L, 3L, 2L, 2L, 1L, 3L, 1L, 1L, 2L, 4L, 3L, 2L, 3L, 3L, 
+3L, 1L, 5L, 2L, 2L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 4L, 3L, 2L, 1L, 
+1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 3L, 1L, 1L, 4L, 1L, 1L, 3L, 1L, 
+1L, 1L, 3L, 3L, 3L, 1L, 3L, 5L, 2L, 3L, 1L, 1L, 3L, 1L, 2L, 1L, 
+2L, 1L, 2L, 2L, 2L, 2L, 4L, 3L, 3L, 2L, 3L, 1L, 2L, 3L, 4L, 2L, 
+1L, 2L, 2L, 2L, 3L, 3L, 4L, 4L, 3L, 4L, 5L, 2L, 2L, 1L, 3L, 3L, 
+3L, 4L, 1L, 2L, 3L, 1L, 3L, 2L, 1L, 1L, 1L, 3L, 3L, 1L, 3L, 3L, 
+3L, 1L, 3L, 1L, 1L, 1L, 1L, 2L, 3L, 2L, 3L, 3L, 1L, 2L, 3L, 5L, 
+4L, 1L, 3L, 2L, 3L, 5L, 2L, 3L, 1L, 3L, 1L, 4L, 2L, 5L, 3L, 2L, 
+1L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 1L, 3L, 2L, 2L, 3L, 3L, 1L, 
+3L, 3L, 3L, 1L, 3L, 3L, 3L, 3L, 3L, 1L, 1L, 4L, 1L, 3L, 2L, 2L, 
+1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 5L, 1L, 1L, 3L, 4L, 5L, 5L, 
+1L, 1L, 3L, 4L, 1L, 4L, 1L, 3L, 1L, 3L, 1L, 1L, 4L, 3L, 2L, 1L, 
+4L, 5L, 3L, 3L, 1L, 1L, 4L, 2L, 1L, 3L, 3L, 1L, 1L, 1L, 2L, 2L, 
+3L, 1L, 1L, 1L, 2L, 1L, 3L, 3L, 1L, 3L, 3L, 1L, 1L, 3L, 1L, 3L, 
+1L, 1L, 1L, 1L, 1L, 2L, 3L, 1L, 1L, 1L, 1L, 1L, 1L, 2L, 3L, 3L, 
+1L, 1L, 2L, 1L, 2L, 1L, 5L, 2L, 2L, 2L, 1L, 1L, 2L, 1L, 1L, 2L, 
+2L, 1L, 1L, 5L, 1L, 1L, 5L, 2L, 3L, 1L, 4L, 4L, 4L, 2L, 2L, 2L, 
+3L, 1L, 5L, 5L, 1L, 5L, 5L, 5L, 5L, 2L, 5L, 1L, 5L, 1L, 3L, 3L, 
+1L, 2L, 2L, 1L, 1L, 2L, 1L, 2L, 3L, 4L, 2L, 1L, 1L, 1L, 2L, 2L, 
+3L, 2L, 3L, 2L, 4L, 2L, 1L, 3L, 1L, 3L, 1L, 1L, 1L, 2L, 1L, 1L, 
+1L, 1L, 1L, 4L, 1L, 1L, 1L, 1L, 5L, 3L, 3L, 3L, 3L, 3L, 3L, 5L, 
+4L, 3L, 3L, 3L, 1L, 3L, 3L, 3L, 1L, 4L, 4L, 3L, 5L, 3L, 2L, 3L, 
+5L, 2L, 4L, 4L, 3L, 4L, 4L, 2L, 3L, 2L, 1L, 2L, 4L, 3L, 1L, 3L, 
+3L, 3L, 5L, 2L, 5L, 5L, 3L, 2L, 3L, 3L, 1L, 3L, 4L, 2L, 2L, 3L, 
+2L, 3L, 1L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 
+3L, 2L, 2L, 3L, 3L, 3L, 3L, 3L, 3L, 2L, 2L, 3L, 3L, 2L, 3L, 3L, 
+3L, 1L, 1L, 2L, 3L, 1L, 5L, 3L, 3L, 2L, 2L, 3L, 3L, 2L, 2L, 3L, 
+3L, 1L, 1L, 3L, 3L, 3L, 1L, 3L, 1L, 1L, 1L, 1L, 2L, 1L, 1L, 1L, 
+1L, 1L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 3L, 3L, 2L, 2L, 
+2L, 3L, 2L, 3L, 3L, 3L, 3L, 2L, 2L, 4L, 2L, 3L, 2L, 3L, 3L, 2L, 
+1L, 2L, 1L, 1L, 2L, 2L, 3L, 2L, 2L, 2L, 3L, 2L, 2L, 2L, 2L, 2L, 
+3L, 3L, 2L, 3L, 3L, 3L, 1L, 1L, 2L, 2L, 1L, 1L, 4L, 1L, 3L, 3L, 
+3L, 2L, 1L, 2L, 3L, 3L, 3L, 2L, 2L, 2L, 3L, 3L, 3L, 3L, 2L, 2L, 
+2L, 3L, 2L, 2L, 4L, 5L, 1L, 5L, 1L, 1L, 5L, 5L, 3L, 3L, 3L, 3L, 
+1L, 2L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 1L, 3L, 3L, 
+3L, 3L, 3L, 1L, 2L, 3L, 3L, 1L, 1L, 3L, 1L, 5L, 1L, 2L, 1L, 3L, 
+4L, 1L, 2L, 5L, 2L, 2L, 2L, 2L, 3L, 1L, 3L, 3L, 3L, 1L, 1L, 2L, 
+1L, 1L, 2L, 2L, 2L, 2L, 3L, 2L, 3L, 2L, 2L, 2L, 2L, 1L, 2L, 2L, 
+2L, 2L, 3L, 1L, 2L, 3L, 2L, 3L, 1L, 3L, 2L, 3L, 3L, 4L, 1L, 1L, 
+3L, 3L, 2L, 3L, 1L, 3L, 4L, 3L, 3L, 1L, 3L, 2L, 3L, 4L, 3L, 2L, 
+2L, 2L, 1L, 3L, 3L, 2L, 1L, 3L, 3L, 3L, 2L, 3L, 2L, 3L, 3L, 3L, 
+1L, 3L, 3L, 1L, 3L, 1L, 4L, 4L, 1L, 3L, 4L, 3L, 4L, 2L, 2L, 1L, 
+2L, 4L, 3L, 2L, 3L, 3L, 2L, 4L, 5L, 1L, 4L, 4L, 3L, 4L, 1L, 3L, 
+3L, 3L, 2L, 3L, 3L, 2L, 3L, 3L, 2L, 3L, 3L, 3L, 2L, 1L, 1L, 3L, 
+3L, 2L, 2L, 2L, 3L, 3L, 2L, 3L, 1L, 2L, 2L, 3L, 1L, 4L, 3L, 3L, 
+3L, 3L, 2L, 2L, 1L, 3L, 3L, 2L, 3L, 1L, 3L, 3L, 2L, 2L, 1L, 1L, 
+2L, 1L, 2L, 2L, 3L, 1L, 2L, 2L, 1L, 2L, 2L, 2L, 1L, 2L, 2L, 3L, 
+3L, 2L, 3L, 5L, 4L, 3L, 2L, 2L, 5L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 
+1L, 2L), BedSize = c(4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 
+4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 2L, 2L, 2L, 2L, 2L, 2L, 
+2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 
+2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 
+3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 2L, 2L, 2L, 2L, 2L, 2L, 4L, 
+4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 
+4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 3L, 3L, 3L, 2L, 
+2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 3L, 3L, 3L, 3L, 3L, 3L, 
+3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 
+3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 2L, 2L, 2L, 2L, 2L, 2L, 
+2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 
+2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 
+1L, 1L, 1L, 1L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 
+3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 
+3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 2L, 2L, 
+2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 3L, 3L, 3L, 3L, 
+3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 
+3L, 3L, 3L, 3L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 
+2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 
+2L, 2L, 2L, 2L, 2L, 2L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 
+3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 
+3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 2L, 2L, 
+2L, 2L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 
+3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 
+2L, 2L, 2L, 2L, 2L, 3L, 3L, 3L, 3L, 3L, 3L, 2L, 2L, 2L, 2L, 4L, 
+4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 
+4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 
+4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 2L, 2L, 2L, 2L, 2L, 2L, 
+2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 3L, 3L, 3L, 
+3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 2L, 2L, 2L, 2L, 2L, 
+2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 4L, 3L, 3L, 3L, 3L, 3L, 3L, 
+3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 
+3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 2L, 2L, 2L, 2L, 
+2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 3L, 3L, 3L, 
+1L, 1L, 1L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 
+2L, 3L, 3L, 3L, 3L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 
+2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 
+2L, 2L, 2L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 
+3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 
+3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 2L, 2L, 2L, 2L, 2L, 2L, 
+2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 
+2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 
+2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 
+2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 
+2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 4L, 4L, 4L, 4L, 4L, 
+4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 
+3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 
+3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 
+3L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 
+2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L), Owner = c(2L, 2L, 
+2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 1L, 
+1L, 1L, 1L, 1L, 1L, 1L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 
+2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 
+2L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 
+1L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 
+2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 
+2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 
+2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 
+2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 
+2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 
+2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 
+2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 
+2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 
+2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 
+2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 
+2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 
+2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 
+2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 
+2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 1L, 1L, 
+2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 
+2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 
+2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 
+2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 
+2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 
+2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 
+2L, 2L, 2L, 2L, 2L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 
+1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 
+1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 
+1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 
+1L, 1L, 1L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 
+2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 
+2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 
+2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 
+2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 
+2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 
+2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 
+2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 
+2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 
+2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 
+2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 
+2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 1L, 1L, 1L, 1L, 1L, 1L, 
+1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 
+1L, 1L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 
+2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 
+2L, 2L, 2L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 
+1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 
+2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 
+2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 
+2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 
+2L, 2L, 2L), Compl = c(0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 
+0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 
+0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 1L, 0L, 0L, 0L, 
+0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 
+0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 
+0L, 0L, 0L, 0L, 0L, 0L, 0L, 1L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 
+0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 
+0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 1L, 0L, 0L, 
+0L, 0L, 0L, 1L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 
+0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 
+0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 
+0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 
+0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 
+0L, 1L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 1L, 0L, 
+0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 
+0L, 0L, 0L, 0L, 0L, 1L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 
+0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 
+0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 
+0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 
+0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 
+0L, 0L, 1L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 
+0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 
+0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 
+0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 
+0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 
+0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 
+0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 1L, 0L, 0L, 0L, 0L, 0L, 0L, 
+0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 
+0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 1L, 0L, 0L, 0L, 0L, 
+0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 
+0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 
+0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 1L, 0L, 0L, 0L, 0L, 
+0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 
+0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 
+0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 
+0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 
+0L, 0L, 0L, 0L, 0L, 0L, 1L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 1L, 
+0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 
+0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 
+0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 
+0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 
+0L, 1L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 
+0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 
+0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 
+0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 
+0L, 0L, 0L, 0L, 1L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 
+0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 
+0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 1L, 0L, 
+0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 
+0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L), Staff = c(4.6419, 
+4.6419, 4.6419, 4.6419, 4.6419, 4.6419, 4.6419, 4.6419, 4.6419, 
+4.6419, 4.6419, 4.6419, 4.6419, 4.6419, 4.6419, 4.6419, 4.6419, 
+8.6794, 8.6794, 8.6794, 4.3699, 4.3699, 4.3699, 4.3699, 4.3363, 
+4.3363, 4.3363, 4.3363, 4.3363, 4.3363, 4.3363, 4.3363, 4.3363, 
+4.3363, 4.3363, 4.3363, 4.3363, 4.3363, 4.3363, 4.3363, 4.3363, 
+4.3363, 4.3363, 4.3363, 4.3363, 4.3363, 4.3363, 4.3363, 4.3363, 
+4.3363, 4.3363, 4.7452, 4.7452, 4.7452, 4.7452, 4.7452, 4.7452, 
+4.7452, 4.7452, 4.7452, 4.7452, 4.7452, 4.7452, 4.7452, 4.7452, 
+4.7452, 4.7452, 3.8462, 3.8462, 3.8462, 3.8462, 3.8462, 3.8462, 
+6.4841, 6.4841, 6.4841, 6.4841, 6.4841, 6.4841, 6.4841, 6.4841, 
+6.4841, 6.4841, 6.4841, 6.4841, 6.4841, 6.4841, 6.4841, 6.4841, 
+6.4841, 6.4841, 6.4841, 6.4841, 6.4841, 6.4841, 6.4841, 6.4841, 
+6.4841, 6.4841, 6.4841, 6.4841, 6.4841, 9.3671, 9.3671, 9.3671, 
+2.8125, 2.8125, 2.8125, 2.8125, 2.8125, 2.8125, 2.8125, 2.8125, 
+2.8125, 2.8125, 2.8125, 3.6825, 3.6825, 3.6825, 3.6825, 3.6825, 
+3.6825, 3.6825, 3.6825, 3.6825, 3.6825, 3.6825, 3.6825, 3.6825, 
+3.6825, 3.6825, 3.6825, 3.6825, 3.6825, 3.6825, 3.6825, 3.6825, 
+3.6825, 3.6825, 3.6825, 3.6825, 3.6825, 3.6825, 3.6825, 3.6825, 
+3.6825, 3.6825, 3.6825, 3.4614, 3.4614, 3.4614, 3.4614, 3.4614, 
+3.4614, 3.4614, 3.4614, 3.4614, 3.4614, 3.4614, 3.4614, 3.4614, 
+3.4614, 3.4614, 3.4614, 3.4614, 3.4614, 3.4614, 3.4614, 3.4614, 
+3.4614, 3.4614, 3.4614, 3.4614, 3.4614, 3.4614, 3.4614, 3.4614, 
+3.4614, 3.4614, 3.9658, 3.9658, 3.9658, 3.9658, 3.9658, 3.9658, 
+3.9658, 3.9658, 3.9658, 3.9658, 3.9658, 6.9006, 6.9006, 6.9006, 
+6.9006, 6.9006, 6.9006, 6.9006, 6.9006, 6.9006, 6.9006, 6.9006, 
+6.9006, 3.5233, 3.5233, 3.5233, 3.5233, 3.5233, 3.5233, 3.5233, 
+3.5233, 3.5233, 3.5233, 3.5233, 3.5233, 3.5233, 3.5233, 3.5233, 
+3.5233, 3.5233, 3.5233, 3.5233, 3.5233, 3.5233, 3.5233, 3.5233, 
+3.5233, 3.5233, 3.5233, 3.5233, 3.5233, 3.5233, 3.5233, 7.4683, 
+7.4683, 7.4683, 7.4683, 7.4683, 7.4683, 7.4683, 9.5487, 9.5487, 
+9.5487, 9.5487, 9.5487, 9.5487, 9.5487, 4.5611, 4.5611, 4.5611, 
+4.5611, 4.5611, 4.5611, 4.5611, 4.5611, 4.5611, 4.5611, 3.1863, 
+4.7026, 4.7026, 4.7026, 4.7026, 4.7026, 4.7026, 4.7026, 4.7026, 
+4.7026, 4.7026, 4.7026, 4.7026, 4.7026, 8.7974, 8.7974, 8.7974, 
+8.7974, 8.7974, 8.7974, 8.7974, 8.7974, 8.7974, 8.7974, 8.7974, 
+8.7974, 8.7974, 4.1099, 4.1099, 4.1099, 4.1099, 4.1099, 4.1099, 
+4.1099, 4.1099, 4.1099, 4.1099, 5.5977, 5.5977, 5.5977, 5.5977, 
+5.5977, 5.5977, 5.5977, 5.5977, 5.5977, 5.5977, 5.5977, 4.7452, 
+4.7452, 4.1043, 4.1043, 4.1043, 4.1043, 4.1043, 4.1043, 3.2559, 
+3.2559, 3.2559, 3.2559, 3.2559, 3.2559, 3.2559, 3.2559, 3.2559, 
+3.2559, 3.2559, 3.2559, 3.2559, 3.2559, 3.2559, 3.2559, 3.2559, 
+3.2559, 3.2559, 3.2559, 3.2559, 3.2559, 3.2559, 3.2559, 3.2559, 
+3.2559, 2.5606, 2.5606, 2.5606, 2.5606, 2.5606, 2.5606, 9.5487, 
+9.5487, 9.5487, 9.5487, 3.5175, 3.5175, 3.5175, 3.5175, 3.5175, 
+3.5175, 3.5175, 3.5175, 3.5175, 3.5175, 3.5175, 3.5175, 3.5175, 
+3.5175, 3.5175, 3.5175, 3.5175, 3.5175, 3.5175, 3.5175, 3.5175, 
+3.5175, 3.5175, 3.5175, 3.5175, 3.5175, 3.5175, 3.5175, 3.5175, 
+3.5175, 3.8462, 3.8462, 3.8462, 3.8462, 3.8462, 4.1043, 4.1043, 
+4.1043, 3.5175, 3.5175, 3.5175, 2.9617, 2.9617, 2.9617, 2.9617, 
+4.6419, 4.6419, 4.6419, 4.6419, 4.6419, 4.6419, 4.6419, 4.6419, 
+4.6419, 4.6419, 4.6419, 4.6419, 4.6419, 4.6419, 8.6794, 8.6794, 
+8.6794, 8.6794, 8.6794, 8.6794, 8.6794, 8.6794, 8.6794, 8.6794, 
+8.6794, 8.6794, 8.6794, 8.6794, 8.6794, 8.6794, 8.6794, 8.6794, 
+8.6794, 8.6794, 8.6794, 8.6794, 8.6794, 8.6794, 8.6794, 8.6794, 
+8.6794, 8.6794, 8.6794, 4.3699, 4.3699, 4.3699, 4.3699, 4.3699, 
+4.3699, 4.3699, 4.3699, 4.3699, 4.3699, 4.3699, 4.3699, 4.3699, 
+4.3699, 4.3699, 4.3699, 4.3699, 4.3699, 4.3699, 4.7452, 4.7452, 
+4.7452, 4.7452, 4.7452, 4.7452, 4.7452, 4.7452, 4.7452, 4.7452, 
+4.7452, 4.7452, 4.7452, 4.7452, 3.8462, 3.8462, 3.8462, 3.8462, 
+3.8462, 3.8462, 3.8462, 3.8462, 3.8462, 3.8462, 3.8462, 3.8462, 
+3.8462, 3.8462, 6.4841, 9.3671, 9.3671, 9.3671, 9.3671, 9.3671, 
+9.3671, 9.3671, 9.3671, 9.3671, 9.3671, 9.3671, 9.3671, 9.3671, 
+9.3671, 9.3671, 9.3671, 9.3671, 9.3671, 9.3671, 9.3671, 9.3671, 
+9.3671, 9.3671, 9.3671, 9.3671, 9.3671, 9.3671, 9.3671, 9.3671, 
+9.3671, 9.3671, 9.3671, 9.3671, 9.3671, 2.8125, 2.8125, 2.8125, 
+2.8125, 2.8125, 2.8125, 2.8125, 2.8125, 2.8125, 2.8125, 2.8125, 
+2.8125, 2.8125, 2.8125, 2.8125, 2.8125, 2.8125, 3.6825, 3.6825, 
+3.6825, 3.9658, 3.9658, 3.9658, 7.4683, 7.4683, 7.4683, 7.4683, 
+6.9006, 6.9006, 6.9006, 6.9006, 6.9006, 6.9006, 6.9006, 6.9006, 
+6.9006, 6.9006, 3.5233, 3.5233, 3.5233, 3.5233, 7.4683, 7.4683, 
+7.4683, 7.4683, 7.4683, 7.4683, 7.4683, 7.4683, 7.4683, 7.4683, 
+7.4683, 7.4683, 7.4683, 7.4683, 7.4683, 7.4683, 7.4683, 7.4683, 
+7.4683, 7.4683, 7.4683, 7.4683, 7.4683, 9.5487, 9.5487, 9.5487, 
+9.5487, 9.5487, 9.5487, 9.5487, 4.5611, 4.5611, 4.5611, 4.5611, 
+4.5611, 4.5611, 4.5611, 4.5611, 4.5611, 3.1863, 3.1863, 3.1863, 
+3.1863, 3.1863, 3.1863, 3.1863, 3.1863, 3.1863, 3.1863, 3.1863, 
+3.1863, 3.1863, 3.1863, 3.1863, 4.7026, 4.7026, 4.7026, 4.7026, 
+4.7026, 4.7026, 4.7026, 4.7026, 4.7026, 4.7026, 4.7026, 4.7026, 
+4.7026, 4.7026, 4.7026, 8.7974, 8.7974, 8.7974, 8.7974, 8.7974, 
+8.7974, 8.7974, 8.7974, 8.7974, 8.7974, 8.7974, 8.7974, 8.7974, 
+8.7974, 8.7974, 8.7974, 8.7974, 8.7974, 8.7974, 8.7974, 8.7974, 
+8.7974, 8.7974, 8.7974, 6.2894, 6.2894, 6.2894, 6.2894, 6.2894, 
+6.2894, 6.2894, 6.2894, 6.2894, 6.2894, 6.2894, 6.2894, 6.2894, 
+6.2894, 6.2894, 6.2894, 6.2894, 6.2894, 6.2894, 6.2894, 6.2894, 
+6.2894, 6.2894, 6.2894, 4.1099, 4.1099, 4.1099, 4.1099, 4.1099, 
+4.1099, 4.1099, 4.1099, 4.1099, 4.1099, 4.1099, 4.1099, 4.1099, 
+4.1099, 4.1099, 4.1099, 4.1099, 4.1099, 4.1099, 4.1099, 4.1099, 
+4.1099, 5.5977, 5.5977, 5.5977, 5.5977, 5.5977, 5.5977, 5.5977, 
+5.5977, 5.5977, 5.5977, 5.5977, 10.766, 10.766, 10.766, 10.766, 
+10.766, 10.766, 10.766, 10.766, 10.766, 10.766, 10.766, 10.766, 
+10.766, 10.766, 10.766, 10.766, 10.766, 10.766, 10.766, 10.766, 
+10.766, 4.1043, 4.1043, 4.1043, 4.1043, 4.1043, 4.1043, 4.1043, 
+4.1043, 4.1043, 4.1043, 4.1043, 4.1043, 4.1043, 4.1043, 4.1043, 
+4.1043, 4.1043, 4.1043, 4.1043, 4.1043, 4.1043, 4.1043, 4.1043, 
+3.2559, 3.2559, 2.5606, 2.5606, 2.5606, 2.5606, 2.5606, 3.2559, 
+3.2559, 3.2559, 3.8462, 3.8462, 3.8462, 3.8462, 3.8462, 4.1099, 
+4.1099, 4.1099, 4.1099, 4.1099, 4.1099, 4.1099, 4.1099, 4.1099, 
+6.9006, 6.9006, 6.9006, 6.9006, 6.9006, 6.9006, 6.9006, 6.9006, 
+6.9006, 6.9006, 6.9006, 6.9006)), .Names = c("LOS", "Hospital", 
+"Insurer", "Age", "Gender", "Race", "BedSize", "Owner", "Compl", 
+"Staff"), class = "data.frame", row.names = c(NA, -789L))
+
+par( mfrow=c(1,2))
+
+pie( table(factor(los$Race)), 
+	labels=c("White","Hispanic","Black","Asian","Other"), 
+   col=c("white","olivedrab","black","yellow","brown"),
+   main="Piechart of number of children\nhospitalized with asthma by race")
+   
+plot( factor(los$Race), 
+	las=2, 
+	col="slateblue", 
+	names=c("White","Hispanic","Black","Asian","Other"), 
+	ylim=c(0, 300),
+   sub="Race", 
+   ylab="Number of children", 
+   main="Barchart of number of children\nhospitalized with asthma by race")
+
+par( mfrow=c(1,1))
+```
+
+   
+
+```{exercise}
+Rank the categories from largest to smallest
+using each graph in
+Fig. \@ref(fig:3Dcharts).
+Which graph makes it easiest?
+```
+
+```{r 3Dcharts, echo=FALSE, fig.cap="Three different graphs for the same data"}
+# New data
+library(plotrix)
+
+par(mfrow=c(2,2), mar=c(1, 1, 1, 1))
+
+set.seed(222)
+nos <- round(40 + rnorm(5,0,10))
+nos <- c(32, 36, 37, 30, 34)
+labs <- c("A", "B", "C", "D", "E")
+
+par( mar=c(2,2,2,2))
+pie3D( nos, theta=pi/4, 
+   labels=labs)
+
+pie( nos, 
+   labels=labs)
+   
+#barplot(nos, las=1, names.arg=labs, ylab="Number")
+#abline(h=seq(0,35,by=5), col="white")
+
+barplot(nos, 
+   las=1, 
+   ylab="Number", 
+   axes=FALSE)
+axis(side=1, labels=labs, at=1:5 )
+
+abline(h=seq(0,35,by=5), col="white")
+
+par(mfrow=c(1,1))
+```
+
+Recall that the purpose of a graph is to 
+is to display the information 
+in the clearest, simplest possible way,
+to help us understand the data.
+Usually,
+adding an artificial third dimension does not make the message clearer.
+
+
+
+```{exercise}
+Consider an extreme example of the distortion
+created when using three-dimensions
+(Fig. \@ref(fig:Extreme3D)).
+Estimate the percentage of each pie slice.
+```
+
+
+```{r Extreme3D, echo=FALSE, fig.cap="Extreme 3D pie charts"}
+par( mar=c(0.25, 0.25, 0.25, 0.25))
+
+pie3D( c(30, 20, 20, 30), 
+       labels=c("A", "B","C", "D"),
+       theta=pi/20,  
+       start=2*pi/3)
+```
+
+
+
+### Do we even need a graph?
+
+ 
+Although graphs are excellent,
+sometimes a graphic is not the best way to display information.
+Sometimes just writing the information down is better
+('14.29\% of the patients were suitable for the study'),
+as above).
+Sometimes a table may be better
+for example,
+when there are a small number of levels,
+or if more details might be useful.
+Compare these two ways of presenting some data:
+Fig. \@ref(fig:SimpleBar)
+and
+Table \@ref(tab:SimpleTable)
+
+
+
+
+
+
+
+```{r SimpleBar, echo=FALSE, fig.cap="Simple data, displayed as a barchart"}
+
+# New data
+library(plotrix)
+
+par(mar=c(2, 2, 0, 0))
+set.seed(222)
+nos <- round(40 + rnorm(5,0,10))
+nos <- c(32, 36, 37, 30, 34)
+labs <- c("A", "B", "C", "D", "E")
+
+
+barplot(nos, 
+   las=1, 
+   ylab="Number", 
+   axes=FALSE)
+axis(side=1, labels=labs, at=1:5 )
+
+abline(h=seq(0,35,by=5), col="white")
+
+par(mfrow=c(1,1))
+```
+
+
+
+```{r SimpleTable, echo=FALSE}
+simpletab <- data.frame(Response=labs,
+                        Numbers=nos, 
+                        Percentage=round(nos/sum(nos)*100, 0) )
+
+
+kable(simpletab,
+      align=c("r", "r", "r"),
+      booktabs = TRUE,
+      caption="Simple data, displayed as a table")
+```
+
+
+	
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+## One qualitative variable and one quantitative variable
+
+
+Relational and interventional RQs are about the relationships between variables.
+These relationships,
+and other relationships between two variables,
+can also be examined by using suitable graphs.
+
+
+With one qualitative variable and one quantitative variable,
+suitable graphs include: 
+
+* *Back-to-back stem-and-leaf plot*:
+         Good choice for small amounts of data
+         when the qualitative variable only has *two levels*; 
+* *2-D Dot chart*: 
+         Good choice for small amounts of data;
+* *Boxplot*:
+         Good choice, except for small amounts of data.        
+         
+
+
+
+
+
+
+
+
+
+
+### Back-to-back stem-and-leaf
+
+Back-to-back stem-and-leaf plots
+are essentially two stem-and-leaf plots that share the stems;
+one group has the leaves going left-to-right from the stem,
+and 
+a second group has the leaves going right-to-left from the stem.
+
+
+```{example}
+A study of krill [@data:Greenacre2016:reporting]
+produced this back-to-back stem-and-leaf plot:
+
+We can see that the treatment group tends to produce more eggs.
+```
+			
+		
+		
+### 2-D Dot charts
+
+
+A 2-D dot charts places dots for each observation,
+but separated for each level of the qualitative variable.
+
+```{example}
+In a study of Vitamin D [@data:Hall2010:vitaminD],
+the following dot chart was produced:
+
+MAKE IMAGE
+```
+
+
+
+
+
+
+
+
+### Boxplots
+
+
+Understanding boxplots takes some explanation,
+and we will return to boxplots again later (XREF!).
+
+
+Let's try to explain how a boxplot works.
+To do so,
+we'll focus on just one single boxplot from one variable
+(though it is best to use histograms for one quantitative variable).
+The boxplot for Age in the NHANES data is shown in
+Fig.~\ref{FG:GRAPHICS:NHANESAgeBoxplot} (left panel). 
+
+NHANES DATA HASNT BEEN INTRODUCED!
+
+
+```{r echo=FALSE}
+library(NHANES)
+
+Age.quantiles <- quantile(NHANES$Age)
+#  0%  25%  50%  75% 100% 
+#   0   18   36   54   80 
+HDL.quantiles <- quantile(NHANES$DirectChol, na.rm=TRUE)
+#  0%  25%  50%  75% 100% 
+#0.52 1.06 1.29 1.58 3.44 
+```
+
+The boxplot essentially has five horizontal lines:
+
+* The oldest subject is about `r Age.quantiles[5]`:
+This is the line at the top of the boxplot.
+*  75\% of subjects are younger than about `r Age.quantiles[4]`,
+   and this is represented by the line at the top of the 
+   central box.
+* 50\% of subjects are younger than about `r Age.quantiles[3]`,
+   and this is represented by the line in the centre of the 
+   central box.
+* 25\% of subjects are younger than about `r Age.quantiles[2]`,
+and this is represented by the line at the bottom of the 
+central box.
+* The youngest subject is about `r Age.quantiles[1]`.
+   This is the line at the bottom of the boxplot.
+
+
+```{r echo=FALSE}
+par(mfrow=c(1,2))
+
+par(mar=c(0,5,0,0) + 0.5)
+boxplot(NHANES$Age, 
+	col="wheat", 
+	las=1,
+	ylim=c(0, 80),
+	ylab="Age (in years)"
+)
+
+boxplot(NHANES$DirectChol, 
+	col="wheat", 
+	las=1,
+	ylim=c(0, 4),
+	ylab="Direct HDL cholesterol (mmol/L)"
+)
+
+par(mfrow=c(1,1))
+```
+
+
+
+A variation of the boxplot is shown in
+Fig.~\ref{FG:GRAPHICS:NHANESAgeBoxplot} (right panel). 
+The boxplot is produced using the same principles as the boxplot in the left panel,
+except that
+the horizontal line extending from the central box
+extends to the 'maximum' (except for outliers),
+and 
+the horizontal line extending from the central box
+extends to the 'minimum' (except for outliers).
+That is,
+the lines extend from the box as far as possible,
+*except* for outliers (unusual observations).
+We will revisit boxplots in the next chapter,
+and explain how SPSS decides which observations are outliers
+(XREF!).
+
+
+```{example}
+A study [@data:Ondei2017:monsoon] compared various rainforests on various
+criteria, 
+including the moisture index.
+The following boxplot compares rainforests in Western Australia and the Northern Territory:
+```
+
+
+```{example}
+A study of different engineering project delivery methods [@data:Hale2009:ProjectDelivery]
+produced the boxplot below:
+```
+	
+
+
+
+```{example}
+Boxplots can be horizontal too,
+which leaves more room for long labels;
+for example [@data:Silva2011:StoneCladding]:
+```
+
+
+		
+		
+
+
+## Two quantitative variables {#Scatterplots}
+
+Scatterplots display the relationship between *two quantitative variables*.
+Conventionally,
+the "response" variable is on the vertical axis, and the
+the "explanatory" variable is on the horizontal axis.
+As with any graph,
+we need to explain what the graph tells us.
+The purpose of a graph is to display the information 
+in the clearest, simplest possible way,
+to help us understand the data.
+For a *scatterplot*,
+we can describe briefly how the variables are related to each other.
+
+
+```{example}
+A study of atheltes at the Australian Institute of Sport (AIS)
+measured numerous physical and blood measurements from high performance athletes
+[@data:Telford1991:sexsportsize].
+Many relationships were of interest
+Fig. \@ref(fig:ScatterAIS)
+shows the relationship between the sum of skin folds and percentage body fat.
+Each point represents one athlete.
+Clearly,
+the greater the percentage body fat,
+the greater the sum of skin folds, in general.  
+```
+	
+```{r ScatterAIS, echo=FALSE, results ='hide', fig.cap="Scatter plot of SSF against percentage body fat for male AIS athletes"}
+### TAKEN FROM GLMsData:  dput( subset(AIS, Sex=="M")[, c("SSF", "PBF")])
+library(GLMsData)
+data(AIS)
+
+AIS.sub <- dput( subset(AIS, Sex=="M")[, c("SSF", "PBF")])
+structure(list(SSF = c(44.5, 41.8, 33.7, 50.9, 40.5, 51.2, 54.4, 
+52.3, 57, 65.3, 52, 42.7, 35.2, 49.2, 61.8, 46.5, 34.8, 60.2, 
+48.1, 44.5, 54, 44.7, 64.9, 43.8, 58.3, 52.8, 43.1, 78, 40.8, 
+41.5, 50.9, 49.6, 88.9, 48.3, 61.8, 43, 61.1, 43.8, 54.2, 41.8, 
+34.1, 30.5, 34, 46.7, 71.1, 65.9, 34.3, 34.6, 31.8, 34.5, 31, 
+32.6, 31.5, 32.6, 31, 28, 33.7, 30.3, 38, 55.7, 37.5, 112.5, 
+82.7, 29.7, 38.9, 44.8, 30.9, 44, 37.5, 37.6, 31.7, 36.6, 48, 
+41.9, 30.9, 52.8, 43.2, 113.5, 96.9, 49.3, 42.3, 96.3, 56.5, 
+105.7, 100.7, 56.8, 75.9, 52.8, 47.8, 76, 61.2, 75.6, 43.3, 49.5, 
+70, 75.7, 57.7, 67.2, 56.5, 47.6, 60.4, 34.9), PBF = c(8.47, 
+7.68, 6.16, 8.56, 6.86, 9.4, 9.17, 8.54, 9.2, 11.72, 8.44, 7.19, 
+6.46, 9, 12.61, 9.03, 6.96, 10.05, 9.56, 9.36, 10.81, 8.61, 9.53, 
+7.42, 9.79, 8.97, 7.49, 11.95, 7.35, 7.16, 8.77, 9.56, 14.53, 
+8.51, 10.64, 7.06, 8.87, 7.88, 9.2, 7.19, 6.06, 5.63, 6.59, 9.5, 
+13.97, 11.66, 6.43, 6.99, 6, 6.56, 6.03, 6.33, 6.82, 6.2, 5.93, 
+5.8, 6.56, 6.76, 7.22, 8.51, 7.72, 19.94, 13.91, 6.1, 7.52, 9.56, 
+6.06, 7.35, 6, 6.92, 6.33, 5.9, 8.84, 8.94, 6.53, 9.4, 8.18, 
+17.41, 18.08, 9.86, 7.29, 18.72, 10.12, 19.17, 17.24, 9.89, 13.06, 
+8.84, 8.87, 14.69, 8.64, 14.98, 7.82, 8.97, 11.63, 13.49, 10.25, 
+11.79, 10.05, 8.51, 11.5, 6.26)), .Names = c("SSF", "PBF"), class = "data.frame", row.names = 101:202)
+
+plot( SSF ~ PBF,
+      data=AIS.sub,
+      las=1,
+      xlim=c(5, 20),
+      ylim=c(20, 120),
+      main="SSF vs PBF: Male AIS athletes",
+      xlab="Percentage body fat",
+      ylab="Sum of skin fold",
+      sub="(Note: Units of measurement for skin folds not given)",
+      pch=19)
+```
+
+
+
+
+
+
+## Two qualitative variables
+
+The relationship between two qualitative variables
+can be explored using:
+
+* *Side-by-side bar charts*;
+* *Stacked bar charts*; or
+* *Dot charts*.
+
+Sometimes the best summary is just a two-way
+table of counts (or percentages).
+      
+
+
+```{example}
+```{r echo=FALSE}
+## Russell2009
+
+Counts <- matrix( c(75, 25, 21,   74, 27, 22,   71, 10, 18,   58, 10, 12), nrow=4, ncol=3, byrow=TRUE) 
+rownames(Counts) <- c("Autumn", "Winter", "Spring", "Summer")
+colnames(Counts) <- c("Unknown", "M", "F")
+```
+
+A study of roadkill [@data:Russell2009:Possums] produced this stacked bar chart:
+
+
+Many other variations of this chart were possible:
+
+* The bars could have been horizontal rather than vertical;
+* Percentages, rather than counts, could have been used;
+* Each bar could represent the sex of the possum,
+		and the seasons stacked;
+* The section within each bart could have been placed side-by-side,
+		rather than stacked.
+
+That is,
+there are many variations of the this graph;
+some are shown in 
+Fig. \@ref(fig:PossumBarCharts).
+	
+
+```{r PossumBarCharts, echo=FALSE, fig.height=14, fig.width=5, fig.cap="Four graphs: The number of possums found as road kill, by sex and season"}
+par( mfrow=c(4, 1))
+colnames(Counts) <- c("?", "M", "F")
+
+barplot( t(Counts), 
+   beside=TRUE,
+   ylab="Number of possums",
+   xlab="Season",
+   space=c(0.15, 1),
+   ylim=c(0, 80),
+   las=1)
+grid(ny=NA, nx=8)
+
+out <- barplot( t(Counts), 
+   beside=TRUE,
+   ylab="Number of possums",
+   xlab="Season",
+   main="Bar chart of possum road deaths\nby season and sex of possum",
+   space=c(0.15, 1),
+   ylim=c(0, 80),
+   las=1,
+   add=TRUE)
+
+mtext( "?", at=out[1,], side=1, line=0)
+mtext( "M", at=out[2,], side=1, line=0)
+mtext( "F", at=out[3,], side=1, line=0)
+
+
+
+barplot( Counts, 
+   beside=TRUE,
+   xlab="Number of possums",
+   #ylab="Season",
+   space=c(0.15,1),
+   ylim=c(0,16),
+   xlim=c(0, 80),
+   horiz=TRUE,
+   axes=FALSE,
+   names.arg=c("","",""),
+   las=1)
+grid(nx=NA, ny=8)
+
+out <- barplot( Counts, 
+   beside=TRUE,
+   xlab="Number of possums",
+   #ylab="Season",
+   main="Bar chart of possum road deaths\nby season and sex of possum",
+   space=c(0.15,1),
+   ylim=c(0,16),
+   xlim=c(0, 80),
+   las=1,
+   horiz=TRUE,
+   names.arg=c("","",""),
+   add=TRUE)
+
+mtext( "Au", at=out[1,], side=2, line=0, las=1)
+mtext( "Wn", at=out[2,], side=2, line=0, las=1)
+mtext( "Sp", at=out[3,], side=2, line=0, las=1)
+mtext( "Su", at=out[4,], side=2, line=0, las=1)
+
+mtext( "Females", at=14, side=2, line=2, las=3)
+mtext( "Males",   at=8, side=2, line=2, las=3)
+mtext( "Unknown", at=3, side=2, line=2, las=3)
+
+
+
+
+Percentages <- t(apply(Counts,1,function(x){ round(x/sum(x)*100,1)}))
+
+barplot( Percentages, 
+   beside=TRUE,
+   ylab="Percentages of possums",
+   #xlab="Season",
+   space=c(0.15,1),
+   ylim=c(0,80),
+   las=1)
+grid(nx=NA, ny=8)
+
+out <- barplot( Percentages, 
+   beside=TRUE,
+   ylab="Percentages of possums",
+   #xlab="Season",
+   main="Bar chart of possum road deaths\nby season and sex of possum",
+   space=c(0.15,1),
+   ylim=c(0,80),
+   las=1,
+   add=TRUE)
+
+mtext( "Au", at=out[1,], side=1, line=0)
+mtext( "Wn", at=out[2,], side=1, line=0)
+mtext( "Sp", at=out[3,], side=1, line=0)
+mtext( "Su", at=out[4,], side=1, line=0)
+
+
+
+
+
+
+
+
+
+barplot( Percentages, 
+   beside=TRUE,
+   ylab="Percentages of possums",
+   #xlab="Season",
+   space=c(0.15,1),
+   ylim=c(0,80),
+   las=1)
+grid(nx=NA, ny=8)
+
+out <- barplot( Percentages, 
+   beside=TRUE,
+   ylab="Percentages of possums",
+   #xlab="Season",
+   main="Bar chart of possum road deaths\nby season and sex of possum",
+   space=c(0.15,1),
+   #horiz=TRUE,
+   ylim=c(0,80),
+   las=1,
+   add=TRUE)
+
+mtext( "Au", at=out[1,], side=1, line=0)
+mtext( "Wn", at=out[2,], side=1, line=0)
+mtext( "Sp", at=out[3,], side=1, line=0)
+mtext( "Su", at=out[4,], side=1, line=0)
+```
+
+Instead of a bar chart,
+a dot chart (Fig. \@ref(fig:PossumDotCharts))
+could also have been used.
+
+```{r PossumDotCharts, echo=FALSE, fig.height=5, fig.width=5, fig.cap="A dot chart of the number of possums found as road kill, by sex and season"}
+colnames(Counts) <- c("Unknown", "M", "F")
+
+dotchart(Counts,
+   main="Dot chart of possum road deaths\nby season and sex of possum",
+	xlim=c(0, 80),
+	xlab="Number of possums",
+	pch=c(1, 2, 3, 4))
+```
+
+Another display is to construct a two-way table,
+of counts (Table \@ref(tab:PossumRoadkillNumber))
+or percentages (Table \@ref(tab:PossumRoadkillPercentages)).
+Some of these are shown below.
+Which one do you think best communicates the message in the data?
+
+
+```{r PossumRoadkillNumber, echo=FALSE}
+
+knitr::kable(Counts,
+             align=c("r", "r", "r"),
+             caption="The number of possums found as road kill, by sex and season")
+```
+
+
+```{r PossumRoadkillPercentages, echo=FALSE}
+colnames(Percentages) <- c("Unknown", "M", "F")
+
+knitr::kable(Percentages,
+             align=c("r", "r", "r"),
+             caption="The percentages of possums found as road kill by sex, for each season")
+```
+
+
+
+
+
+
+
+
+
+
+
+
+## Comparing 2-D and 3-D graphs
+
+Using a third dimension when it is not needed is a bad idea:
+the resulting graphs can be hard to read and misleading.
+Remember: The purpose of a graph is to display the information in the
+*simplest* and *clearest* possible way.
+ 
+```{exercise}
+Consider the relationship
+(based on http://ravenanalytics.com/Articles/Misuse of statistics.pdf)
+between:
+
+* A treatment given  (A, B, C, D), and
+* The gender of the patient (male or female).
+
+Using Fig. \@ref(fig:Bar3D),
+are more males or females cured for each treatment?
+```
+
+
+```{r Bar3D, echo=FALSE, fig.cap="A three-dimensional bar chart of treatment data"}
+# Define a function
+barplot3d <- function(heights, rows, transp="f0", theta=25, phi=25, bar.size=3, bar.space=0.5,
+    col.lab=NULL, row.lab=NULL, z.lab=NULL, col.bar=c("#44ff58","#5844ff","#ff5844"), grid="white", ...) {
+    # Set parameters
+    cols    = length(heights)/rows
+    calkdl  = (bar.size + bar.space)
+    slupki  = matrix(heights, nrow=cols, ncol=rows)
+    zakres  = pretty(0:ceiling(max(heights, na.rm=T)*1.1))
+    odstep  = bar.space/2 + bar.size/2
+    colors  = paste(col.bar, transp, sep="")
+    shcols  = colors
+    for (i1 in 1:length(colors)) 
+    	shcols[i1] = paste("#",
+			as.hexmode(round(unclass(as.hexmode(substr(colors[i1],2,3)))*0.8,0)),
+			as.hexmode(round(unclass(as.hexmode(substr(colors[i1],4,5)))*0.8,0)),
+			as.hexmode(round(unclass(as.hexmode(substr(colors[i1],6,7)))*0.8,0)),
+            substr(colors[i1],8,9), sep="")
+
+    # Prepare the grid for bars
+    y = x = 0
+    for (i1 in (1:rows)-1) y = c(y, bar.space/2+i1*calkdl, bar.space/1.99+i1*calkdl,
+        bar.space/2+bar.size+i1*calkdl, bar.space/1.99+bar.size+i1*calkdl,
+        bar.space+bar.size+i1*calkdl)
+    for (i1 in (1:cols)-1) x = c(x, bar.space/2+i1*calkdl, bar.space/1.99+i1*calkdl,
+        bar.space/2+bar.size+i1*calkdl, bar.space/1.99+bar.size+i1*calkdl,
+        bar.space+bar.size+i1*calkdl)
+
+    # Prepare the z matrix of bar heights
+    z = matrix(nrow=length(x), ncol=length(y))
+    for (i1 in (1:cols)-1)  for (i2 in (1:rows)-1) z[c(2:5)+5*i1,c(2:5)+5*i2] = 0
+    for (i1 in (1:cols)-1)  for (i2 in (1:rows)-1) z[c(3:4)+5*i1,c(3:4)+5*i2] = slupki[i1+1,i2+1]
+
+    # Prepare colors matrix
+    fill   = matrix(nrow=length(x)-1, ncol=length(y)-1)
+    for (i1 in (1:rows)-1) {
+        fill[,c(2:5)+5*i1] = colors[i1+1]
+        for (i2 in (1:cols)-1)  fill[c(4:5)+5*i2,c(3:5)+5*i1] = shcols[i1+1]
+        }
+
+    # Prepare area for plotting
+    rys = persp(x, y, matrix(nrow=length(x), ncol=length(y)), col=fill, scale=F, theta=theta,
+        phi=phi, zlim = range(zakres), lphi=44, ltheta=-10, axes=F, ...)
+
+    # Add walls
+    polygon(rbind(trans3d(0,0,0,rys), trans3d(0,0,max(zakres),rys), trans3d(0,max(y),max(zakres),rys),
+        trans3d(0,max(y),0,rys)), col="#aaaaaa66")
+    polygon(rbind(trans3d(0,max(y),0,rys), trans3d(0,max(y),max(zakres),rys), trans3d(max(x),
+        max(y),max(zakres),rys), trans3d(max(x),max(y),0,rys)), col="#aaaaaa50")
+    polygon(rbind(trans3d(0,0,0,rys), trans3d(0,max(y),0,rys), trans3d(max(x),max(y),0,rys),
+        trans3d(max(x),0,0,rys)), col="#aaaaba66")
+
+    # Add grid lines & numbers
+    for (i1 in zakres) {
+        lines(rbind(trans3d(0,0,i1,rys), trans3d(0, max(y),i1,rys)), lwd=2, col=grid)
+        lines(rbind(trans3d(0,max(y),i1,rys), trans3d(max(x), max(y),i1,rys)), lwd=2, col=grid)
+        text(trans3d(-(calkdl*cols)*0.04,0,i1,rys), labels=i1, adj=1, cex=0.9)
+        }
+    text(trans3d(-(calkdl*cols)*0.04,0,max(zakres)*1.05,rys), labels=z.lab, adj=0.8, cex=0.9)
+
+    # Add ticks & text
+    for (i1 in (1:cols)-1) {
+        lines(rbind(trans3d((odstep+calkdl*i1),0,0,rys), trans3d((odstep+calkdl*i1),
+            -(calkdl*rows)*0.05,0,rys)))
+        if (!is.null(col.lab)) text(trans3d((odstep+calkdl*i1),-(calkdl*rows)*0.1,0,rys),
+            col.lab[i1+1], adj=1, cex=0.9)
+        }
+    for (i1 in (1:rows)-1) {
+        lines(rbind(trans3d(max(x),(odstep+calkdl*i1),0,rys), trans3d(max(x)+(calkdl*cols)*0.03,
+            (odstep+calkdl*i1),0,rys)))
+        if (!is.null(col.lab)) text(trans3d(max(x)+(calkdl*cols)*0.05,(odstep+calkdl*i1),0,rys),
+            row.lab[i1+1], adj=0, cex=0.9)
+        }
+
+    # Plot the bars!
+    par(new=T)
+    persp(x, y, z, col=fill, scale=F, theta=theta, phi=phi, zlim = range(zakres),
+        lphi=44, ltheta=-10, shade=0.4, axes=F, ...)
+
+    invisible(rys)
+}
+
+
+# Now the data 
+SeriesA <- c(23, 29, 20, 23)
+SeriesB <- c(22, 30, 18, 22)
+
+Data <- cbind(SeriesA, SeriesB)
+rownames(Data) <- c("A", "B", "C", "D")
+colnames(Data) <- c("Males","Females")
+
+
+
+# Now plots
+par(mar=c(8, 2, 0, 0) + 0.1)
+barplot3d( Data, rows=2, bar.space=10, col.bar=c("#5844ff","#FFFAF0"),
+           z.lab="No. subjects\ncured          ", 
+           row.lab=colnames(Data), col.lab=rownames(Data) )
+
+
+```
+
+The artificial third dimension makes it hard to determine
+the heights of the bars.
+
+In contrast,
+using a 2-D graph,
+as in Fig. \@ref(fig:Bar2D),
+makes it very clear whether or not more males or females cured for each treatment.
+Remember:
+
+> The purpose of a graph is to display the information
+> in the clearest, simplest possible way,
+> to help us understand the data.
+
+The 3D graph clearly fails.
+
+```{r Bar2D, echo=FALSE, fig.cap="A two-dimensional bar chart of treatment data"}
+par(mar=c(4,4,4,2) + 0.1) # The default
+barplot( t(Data), beside=TRUE, legend=FALSE, las=1, args.legend=list(x="bottom",bg="white", cex=0.75), 
+        ylab="No. subjects cured",
+        xlab="Treatment",
+         col=c("#5844ff","#FFFAF0"))
+         
+par(xpd=TRUE) # Allow legend to be outside plot region
+legend(4, 35, # Negative to go below axes 
+	#col=c("#5844ff","#FFFAF0"),
+	legend=c("Males","Females"), 
+	#cex=1, 
+	bg="white", 
+	#pch=15, 
+	fill=c("#5844ff","#FFFAF0"), 
+	horiz=TRUE, bty="n")
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Other types of graphs
+
+
+We have explored many types of graphs,
+for different types of data.
+But sometimes, 
+other plots are useful.
+Usually the best plot is one of those just described,
+but sometimes the best plot is something different, even unique.
+Always remember the driving principle:
+
+> The purpose of a graph is to display the information
+> in the clearest, simplest possible way,
+> to help us understand the data.
+
+Importantly, 
+we need a graph that helps us answer the research question.
+We look at three other types of graphs briefly.
+
+
+
+### Geographic plots
+
+When data are summarised over a geographic area,
+plotting accordingly can be useful.
+
+```{example}
+A study examining lower-limb amputation incidence in Australia
+(based on @data:Dillon2017:Geographic)
+produced the graphs in
+\@ref(fig:AmputationAustraliaF) and \@ref(fig:AmputationAustraliaM).
+Clearly,
+the incidence of amputation is higher in the NT than other parts of Australia for both females and males;
+furthermore, 
+males have higher incidence of amputation than females in every state/territory.
+```
+
+```{r AmputationAustraliaF, echo=FALSE, fig.cap="Age-adjusted incidence of lower limb amputations in Australia, from August 2007 to December 2011: females"}
+library(ggplot2)
+load("Data/ozdata.rda")
+
+ozdata$Females <- ifelse(ozdata$state=="NT", "55 to 75", "15 to 35")
+ggplot() + geom_polygon(data=ozdata, aes(x=long, y=lat, group=group, fill=Females) ) + 
+  coord_equal() +
+  scale_fill_manual(values=c("wheat", "orange"))
+```
+
+```{r AmputationAustraliaM, echo=FALSE, fig.cap="Age-adjusted incidence of lower limb amputations in Australia, from August 2007 to December 2011: males"}
+
+ozdata$Males <- ifelse(ozdata$state=="NT", "95 to 115", "35 to 55")
+
+ggplot() + geom_polygon(data=ozdata, aes(x=long, y=lat, group=group, fill=Males) ) + 
+  coord_equal() +
+  scale_fill_manual(values=c("gold", "red"))
+
+
+```
+
+
+
+
+### Time plots
+   
+Sometimes,
+one of the variables is measured over *time*.
+Then we can use a *time plot*,
+which show how a  variable changes over time.
+
+```{example}
+In a study of green building practices~\cite{data:Paul2008:Comfort},
+researchers studied the temperature in office buildings,
+and produced this line graph:
+	
+
+We can see the day-to-day fluctuations,
+but also 
+```
+
+
+```{exercise}
+A study of motorcyclists fatalities~\cite{data:Haque209:MotorcycleCrashes}
+included this line plot:
+	
+
+What do we learn?
+
+```
+
+
+
+
+
+
+
+
+
+### Case-profile plots
+
+Sometimes the same variable is measured on each
+units of analysis more than once
+(i.e.\ many observations per unit of analysis).
+Then we can use *case profile plots*:
+plots that show how the response variable
+changes for each unit of analysis
+(but these can be tricky in SPSS).
+Alternatively, 
+and easier in SPSS,
+is to plot a histogram of the *differences*
+or the *changes*.
+Examples of this type of data include:
+
+* Before and after measurements.
+* Measurements taken from a person's left eye and their right eye.
+
+In both cases,
+the data are called *paired*
+as each unit of analysis gets a pair of similar measurements.
+
+
+
+
+
+```{example}
+A study of children with atopic asthma
+[@data:Lothian2006:Whey]
+included 
+the graph in
+Fig. \@ref(fig:PairedGraphCaseProfile).
+Each line on the graph represents one person.
+This type of graph is called a *case-profile plot*.
+
+
+```{r PairedGraphCaseProfile, echo=FALSE, fig.cap="A case-profile plot"}
+Pre <-  c( 83, 292, 293, 623, 792, 1543, 1668, 1960, 2877, 2961, 5504)
+Post <- c( 83, 292, 292, 542, 709, 1000, 1000, 1626, 2502, 2711, 4504)
+
+
+WhichTime <- c(
+  rep(1, length(Pre)),
+  rep(2, length(Post))
+)
+
+plot( c(Pre, Post) ~ WhichTime,
+      pch=19,
+      las=1,
+      xlab="Time",
+      ylab="IgE (in micrograms/L)")
+
+for (i in 1:length(Pre)){
+  lines( c(1, 2),
+         c(Pre[i], Post[i]),
+         col=grey(0.6)
+  )
+}
+```
+
+An alternative way to present the 
+data---that is often better---is to 
+produce a histogram of the *changes* for each person.
+(This type of graph is usually easier to produce than a case-profile plot in SPSS too.)
+
+Consider the person in the case-profile plot
+whose line is at the top of the plot.
+Their 'pre' IgE level is about 5500 micrograms/L,
+and their 'post' IgE level is about 4500 micrograms/L,
+which is a *change* (or more usefully, a *reduction*) of about 1000 micrograms/L.
+We could compute these reductions for each person,
+and draw a histogram of these reduction
+(with one reduction for each person),
+as shown in 
+Fig. \@ref(fig:PairedGraphHistDiffs).
+
+
+```{r PairedGraphHistDiffs, echo=FALSE, fig.cap="An alternative to a case-profile plot: A histogram of the differences"}
+Diff <- Post - Pre
+Reduction <- Pre - Post
+
+hist(Reduction,
+     col="wheat",
+     las=1,
+     breaks = seq(0, 1000, by=100),
+     ylab="Number of subjects",
+     xlab="Reduction in IgE (in micrograms/L)",
+     main="Reduction in IgE\n pre and post supplementation")
+box()
+```
+
+
+
+
+
+```{example}
+A study [@data:Dawson2017:BirthdayCakes]
+examined the number of bacteria on birthday cakes
+*before* and *after* blowing out the candles.
+Each cake has two measurements; before and after blowing of candles.
+We could compute the *change* in the number of bacteria for each cake,
+and plot a histogram of the difference.
+
+CHECK! don't think this is paired
+```
+
+
+
+
+```{example}
+A study of paced breathing~\cite{data:Pinna2005:PacedBreathing} 
+included this case-profile plot:
+	
+
+The main message here is about the variation:
+   Breathing frequency is more consistent (less variation)
+   with paced breathing compared to spontaneous breathing.
+```
+
+
+
+
+
+## Summary, and final notes on constructing graphs
+   
+Always remember:
+
+> The purpose: to display the information
+> in the clearest, simplest possible way,
+> to help us understand the data.
+
+You should be able to construct the graphics by hand,
+but we will generally use SPSS.
+Importantly,
+given the purpose of a graph,
+we should understand what it communicates.
+Graphs need to be clear and well-labelled with captions.
+
+Ensure you *do not*:
+
+*	Add artificial third dimensions.
+*	Add optical optical illusions.
+*	Make any errors.
+
+Ensure that you *do*:
+
+* Add units of measurement.
+* Add titles and axis labels.
+* Ensure the axis scales are appropriate.
+* Add any necessary explanations.
+
+	
+	
+	
+
+To summarise one variable, 
+we generally can usually use these graphs:   
+
+* For *one quantitative variable*:
+    - Histogram
+    - Stem-and-leaf
+    - Dot
+
+* For *one qualitative variable*:
+    - Bar chart
+    - Pie chart
+    - Dot
+
+For two variables,
+we can usually use these graphs
+(Table \@ref(tab:GraphsToUse)).
+
+Table: (\#tab:GraphsToUse)  The graph to use for most situations
+
+~                         | Explanatory: Qualitative | Explanatory: Quantitative
+--------------------------+--------------------------+-----------------------
+Response: Qualitative     | Stacked bar chart; side-by-side bar chart             | Boxplot (horizontal); 2-D dot chart
+Response: Qualitative     | Dot chart; boxplot (vertical); 2-D dot chart             	 |              
+
+In general, the 'response' variable is on the vertical axis
+
+
+
+
+
+```{exercise}
+Critique this graph
+
+```
+
+
+
+```{exercise}
+Critique this graph
+```
+
+
+
+```{exercise}
+Critique this graph
+```
+
+
+
+
+
+
+
+```{exercise}
+A study~\cite{data:Danielsson2014:Depression} examined the change in MADRS 
+(a *quantitative* scale measuring level of depression)
+and treatment group
+(whether each person was treated using:
+exercise; body awareness; or advice).
+What graphs would be useful in exploring these data?
+
+* Response variable:
+* Explanatory variable:
+* Relationship between these:
+
+```
+
+
+
+
+
+
+
+
+
+
+
+## The NHANES data: Graphical summaries
+
+To see how these graphs can help,
+we will work with the following RQ:
+
+> Among Americans,
+> is there a relationship between smoking status, 
+> and direct HDL cholesterol levels?
+
+From the RQ,
+we see that:
+
+* Population:  Americans.
+* Outcome: Direct HDL cholesterol levels.
+* Comparison/connection: Between current smoking statuses: Current smoker or not
+* Intervention: (No intervention).
+
+This is a *relational RQ*,
+and can be answered using an *observational study*.
+
+
+```{exercise}
+As with any study,
+we should think about managing confounding by
+thinking about possible extraneous variables that we could measure or observe;
+can you think of any?   
+```
+
+In this study,
+clearly we cannot collect primary data.
+However,
+data to answer this (and many other) RQs
+is obtained from the 
+American *National Health and Nutrition Examination Survey* (NHANES)~\cite{data:NHANES3:Data,data:NHANES3,data:NHANES:Rpackage}.
+From the 
+[NHANES webpage](http://www.cdc.gov/nchs/nhanes/about_nhanes.htm), 
+this survey:
+
+> ... examines a nationally *representative* sample of about 5,000 persons each year\dots 
+> located in counties across the country, 15 of which are visited each year.
+>
+> --- [NHANES webpage](http://www.cdc.gov/nchs/nhanes/about_nhanes.htm)
+
+The data we have available is equivalent to a 
+"a simple random sample from the American population"~\cite{data:NHANES:Rpackage}.
+We have 10\,000 observations on scores of variables
+(from the 2009/2010 and the 2011/2012 surveys).
+      
+```{exercise}
+From the description,
+what sampling scheme seems likely in the NHANES study?
+```   
+
+
+
+
+
+```{exercise}
+Describe the variables from the NHANES study in
+Table \@ref(tab:ClassifyNHANES).
+
+Table: (\#tab:ClassifyNHANES)  Classifying the NHANES variables
+
+Variable              | Quantitative: (discrete/continuous?) or qualitative (nominal/ordinal)?  | In SPSS? 
+----------------------+-------------------------------------------------------------------------+----------
+HDL cholesterol       | | 
+Current smoker?       | |
+Age                   | |
+Sex                   | |  
+Body weight           | |
+
+```   
+   
+
+Any time we have a RQ,
+it is sensible to explore and understand the data,
+and using graphs is a great way to do so.
+
+```{exercise}
+We need to understand the response variable.
+Here are some of the observations:
+How would you summarise these...
+   
+PLOT
+
+It is hard...  but graphs can help.
+```
+
+
+We usually begin by graphing both the response and explanatory variables
+involved in the RQ.
+
+
+For the NHANES data,
+the response variable is direct HDL cholesterol,
+which is quantitative continuous;
+the histogram is shown in
+Fig.~\ref{FG:GRAPHS:NHANEShistogram}.
+Just over 500 people had a HDL cholesterol level 200 or greater but under 225;
+ just over 100 had a level 150 or greater but under 175.
+
+
+```{r echo=FALSE}
+hist(NHANES$DirectChol,
+	xlab="Direct HDL cholesterol (mmol/L)",
+	ylab="Frequency",
+	las=1,
+	ylim=c(0, 4500),
+	xlim=c(0, 4.5),
+	main="",
+	breaks=seq(0, 4.5, by=0.5),
+	col="wheat")
+box()
+```
+
+   
+The explanatory variable is 'current smoking status',
+which we could graph using a bar chart:
+               
+```{r NHANES-Boxplot-Smoke, echo=FALSE}
+barplot( table(NHANES$SmokeNow),
+	xlab="Does respondent currently smoke?",
+	ylab="Count",
+	ylim=c(0, 2000),
+	las=1,
+	col="wheat")
+box()
+```
+
+But this only conveys *one* piece of information,
+so a graph probably isn't really  necessary:
+That `r round( table(NHANES$SmokeNow)["Yes"] / sum( table(NHANES$SmokeNow) ) * 100, 1)`\% 
+(just under half)
+of the respondents were current smokers.
+Recall that there were 10\,000 respondents,
+yet the bar chart clearly does not have 10\,000 responses.
+Many respondents did not answer this question.
+
+
+The main RQ here involves the relationship between 
+direct HDL cholesterol and current smoking statu,s
+so we need a graph that displays this relationship of interest:
+a boxplot.
+      
+```{r NHANES-boxplot, echo=FALSE}
+boxplot(NHANES$DirectChol ~ NHANES$SmokeNow, 
+	col="wheat", 
+	las=1,
+	ylim=c(0, 4),
+	ylab="Direct HDL cholesterol (mmol/L)",
+	xlab="Does respondent smoke now?"
+)
+```
+
+From the plot,
+does there appear to be much difference in the average HDL cholesterol
+concentrations between the two smoking groups?
+
+
+It is always useful to explore relationships between the
+response variable and extraneous variables,
+and between the
+explanatory variable and extraneous variables.
+This is especially the case with observational studies like the NHANES study,
+because confounding can be a problem.
+We will plot the response and explanatory variables 
+against weight and gender
+(Fig.~\ref{FG:GRAPHS:NHANESConfounders})
+to explore potential confounding.
+
+
+
+```{r NHANES-plots, echo=FALSE}
+par( mfrow=c(2, 2))
+
+plot( DirectChol ~ Weight, data=NHANES, 
+	xlab="Weight (in kg)", 
+	ylab="Direct HDL cholesterol (mmol/L)",
+	ylim=c(0, 4),
+	las=1)
+
+plot( Weight ~ SmokeNow, data=NHANES, 
+	xlab="Current smoker?", 
+	ylab="Current smoking status",
+	horiz=TRUE,
+	ylim=c(0, 250),
+	las=1)
+
+plot( DirectChol ~ Gender, data=NHANES, 
+	xlab="Gender", 
+	ylab="Direct HDL cholesterol (mmol/L)",
+	names=c("Female", "Male"),
+	ylim=c(0, 4),
+	las=1)
+
+par(mar=c(5, 4, 4, 6) + 0.1)  # DEFAULT: c(5, 4, 4, 2) + 0.1.
+barplot( xtabs(~ SmokeNow + Gender, data=NHANES), 
+	ylim=c(0, 2000),
+	xlab="Gender", 
+	ylab="Number of people",
+	names=c("Female", "Male"),
+	col=c("red", "lightblue"),
+	las=1)
+text(2,  500, "Smokers"  	 )
+text(2, 1500, "Non-smokers")
+```
+
+
+
+
+```{exercise}
+What do we learn from these graphs?
+```
+
+
+
+

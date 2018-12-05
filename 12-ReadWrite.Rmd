@@ -1,0 +1,494 @@
+# (PART) Reporting, writing and reading research {-}
+
+
+
+
+
+
+
+
+# Reading research
+
+
+```{r echo=FALSE}
+library(knitr)
+# set global chunk options
+options(formatR.arrow=TRUE,width=90)
+```
+
+
+```{r echo=FALSE}
+SixSteps(6, "Reading")
+```
+
+## Introduction
+
+AGAIN: LOOKS OLD!
+
+Science requires us to read the research of others.
+         Throughout your study at university,
+         you will need to read and understand the research of others.
+         Research is communicated in *journal articles*
+         and *presentations*
+         (conferences; seminars).
+         Thousands of journal articles are in the library
+         (many online).
+         We need to understand the language of research 
+         to understand these articles.
+
+What do we look for when we read a paper?
+
+* What is the *research question*? (Or: aims, objectives, purpose, hypotheses, \dots)
+* Is the study *well-designed*? Are definitions clear?  (Consider: Hawthorne effect, blinding, \dots)
+* Is the *data collection* protocol appropriate and well documented?
+* Is the data *summary* appropriate,   
+         complete and clear?
+* Is the *analysis* appropriate and clear?
+* Are the results accurate, appropriate and well *reported*?
+
+This is the process of research we have been studying.
+   
+
+
+All this information is important
+for understanding the research,
+but the information is not always easy to find!
+Reading papers can be hard work\dots
+      
+The Abstract 
+(or Summary, or Overview, or \dots)
+*should* be a useful overview of the whole paper (without details).
+
+Articles should be critically evaluated:
+they may not all be good just because they are published.
+Ask questions about the quality of the research,
+how can results be generalised,
+what limitations exist, etc.      
+
+
+
+
+## Example 1
+
+IMAGE
+
+* RQ: Can you identify P, O, C and I?
+* What is the design for collecting the data?
+* What do we learn about the data collection?
+* How does the sample data answer the question?
+* Is this a one- or two-tailed RQ?
+* What are the limitations of this study?
+* To what population do the results generalise?
+
+
+
+
+
+
+
+
+
+
+## Example 2
+
+
+IMAGE      
+
+
+
+
+* What are the variables?
+* What *type* of variables are these?
+
+
+
+## Example 3
+
+Watch this space
+
+
+# Writing research
+
+## Introduction
+```{r echo=FALSE}
+SixSteps(6)
+```
+
+
+All of you will need to read the research of others.
+Some of you will need to write about your own studies
+and experiments.
+You need to understand the language of research 
+to be able to write scientifically.
+         
+
+
+Some information here is based on 
+[Dr. Michael Lufaso's notes](http://www.unf.edu/~michael.lufaso/chem4931/lecture3.pdf)
+and
+[Prof. Tony Roberts](http://www.maths.adelaide.edu.au/anthony.roberts/LaTeX/ltxwrite.php).
+
+A scientific paper **should**:
+
+* Present the facts in an unbiased manner
+* Be clear, concise and complete
+* Use facts to make statements
+* Be complete enough that other professionals can repeat your work
+
+A scientific paper **should not**:
+
+* Be haphazard, jumbled and illogical 
+* Be used as your own personal soapbox 
+* Reach conclusions not based on the reported evidence  
+* Be for insiders only
+
+
+
+
+
+[USQ Plagiarism website](http://www.usc.edu.au/University/Library/Tutorials/OnlineUndergrad/PlagiarismReferencing/Plagiarism.htm)
+
+Research involves using other people's ideas and research to develop your own conclusions.
+Acknowledge all sources you have used when writing your research, otherwise you are committing plagiarism.
+   Plagiarism:
+```{definition, name="Plagiarism"}
+'Something appropriated and passed off as one's own'. Delbridge, A. et al, 1997, 
+*The Macquarie Dictionary*, 3rd edn
+```
+
+Plagiarism is a serious offence: theft of intellectual property.
+**Do not plagiarise**:
+
+* Do not take parts of sentences or complete sentences directly from papers
+* Use quotes if necessary and cite work (sparingly)
+* Have someone else critically read the paper
+
+ Plagiarism can destroy people's careers and affect the reputation and status of the University
+ If you are caught plagiarising, you will be penalised.
+   Penalties can range from having to resubmit assignments and being marked down,
+   to failing that assignment or being failed from the course.
+   In very serious cases you could be expelled from USC.
+
+
+
+
+
+## Structure
+
+Many scientific papers have these (or similar) sections
+(though it varies a lot by discipline):
+
+* Title and authors
+* **A**bstract
+* **I**ntroduction: Why did you do this?
+* **M**aterials and method: What did you do?
+* **R**esults: What did you find?
+* **D**iscussion (or: Summary, or Conclusions): What does it mean?
+* References (or: Bibliography)
+
+Often the acronym AIMRaD or IMRaD is used to help recall these sections.
+
+These components 
+often capture certain part sof the six-step research process we have been discussing:
+
+
+IMAGE!
+
+
+
+
+## Writing Scientifically: Title
+
+A title should be a clear description of what you are talking about,
+and use the *fewest* words possible that cover the purpose of the paper.
+(Almost) never use abbreviations in a title.
+It is useful if the title can explains why your study is different from the many others that exist.
+Titles sometimes
+include the technique or method used.
+   
+   
+Here is a good exmaple:
+
+> Beauty sleep: 
+> experimental study on the perceived health and attractiveness of sleep deprived people
+>
+> --- @data:axelsson:beautysleep
+
+
+
+Here is a *poor* example:
+
+> The nucleotide sequence of a 3.2 kb segment of mitochondrial maxicircle DNA from Crithidia fasciculata containing the gene for 
+> cytochrome oxidase subunit III, the N-terminal part of the apocytochrome b gene and a possible frameshift gene; further evidence 
+> for the use of unusual initiator triplets in trypanosome mitochondria
+> 
+> --- @sloof1987nucleotide
+
+ 
+This example is *even worse*:
+
+> Reaction of a bidentate ligands (4,4'-dimethyl 2,2'-bipyridine) with planar-chiral chloro-bridged ruthenium: 
+> Synthesis of cis-dicarbonyl[4,4'-dimethyl-2,2'-bipyridine- $\kappa$ O1, $\kappa$ O2]
+> $\lbrace$ 2-[tricarbonyl($\eta$ 6-phenylene- $\kappa$ C1)chromium]pyridine- $\kappa$N $\rbrace$ ruthenium hexafluorophosphate
+>
+> --- @hijazi2013
+
+This example is even worse,
+since the article needed to be retracted due to unethical conduct of one author
+[@hijazi2013retracted].
+
+
+## Writing Scientifically: Abstract
+
+A short paragraph which summarises the *whole* paper;
+it is not an introduction!
+A good abstract:
+
+* Summarises the whole paper;
+* Gives a concise statement that describes the purpose of the paper
+   (so give the RQ and/or hypotheses);
+* Includes results and conclusion (specific but not detailed);
+*  Does not include anything that is not in the paper.
+
+Writing  the abstract after the paper is fully written is usually sensible.
+
+
+## Writing Scientifically: Introduction
+
+The introduction has two purposes:
+
+1. To set up the context for the paper;
+2. Allow the reader to become familiar with the theoretical groundwork of the subject.
+
+Provides a clear statement of the study's RQ
+(sometimes called the purpose, aim, objective, hypotheses, etc.).
+It introduces the topic,
+states the relevance of the topic,
+defines and explains the terms, acronyms, concepts, and theories necessary to understand the paper.
+It is as short and complete as possible.
+
+
+The introduction usually includes a literature review too,
+but we do not require a literature review in this course.
+
+
+
+
+## Writing Scientifically: Materials and methods
+
+
+The Materials and Methods section:
+
+* Describes how the *sample* was obtained;
+*  Describes {how} the data were *collected*: 
+   the data collection *protocol*;
+* Describes how the data were *analysed*
+   (including the software used, and the statistical methods used);
+* Describe any specialized equipment used
+   (don't list pencils, rulers, paper, etc.!).
+
+
+
+
+
+
+## Writing Scientifically: Results
+
+The Results section:
+
+* Shows all the relevant findings from the research;
+* Presents a summary of the dataset: 
+      the number of cases, the number of missing values, 
+      and a verbal description of all variables;
+* Presents tabular, numerical or graphical summary of each variable;
+* Gives a brief verbal interpretation of these summaries;
+* Gives the *results* from any hypothesis tests and confidence intervals;
+* Identifies trends, consistencies, anomalies etc.;
+* Does *not* contain an interpretation or explanation of the results of the tests; 
+      that is the purpose of the Discussion;
+* Defines any notation you use.
+
+
+
+
+
+
+
+## Writing Scientifically: Discussion
+
+The Discussion section:
+
+* Summarises the results;
+* Gives a short evaluation of the results:
+   Be concise;
+* Refers back to the stated RQ;
+* Discusses limitations,  problems, challenges;
+* Tries to anticipate and respond to potential questions about the research.
+
+
+Don't try to sell your conclusions (the reader should reach their conclusions based on the facts you presented).
+
+
+
+
+## Figures and tables
+
+All tables and figures need a caption:
+
+* Tables typically have captions *above*
+* Figures typically have captions *below*
+
+Captions should be, as far as possible,
+self-contained
+   
+Tables have very few lines:
+Vertical lines are almost never needed
+ 
+
+```{example}
+An article
+[@data:Baur2012:Firefighters]
+includes this in the Abstract:
+
+> Cardiovascular disease (CVD) accounts for 45\% of on-duty fatalities among firefighters, 
+> occurring primarily in firefighters with excess CVD risk factors in patterns resembling the metabolic syndrome (MetSyn).    
+> Additionally, firefighters have a high prevalence of obesity and sedentary behavior suggesting that MetSyn is also common.
+> Therefore we assessed the prevalence of MetSyn in firefighters 
+> and its association with cardiorespiratory fitness (CRF) 
+> in a cross-sectional study of 957 male career firefighters.
+>
+> --- @data:Baur2012:Firefighters, p. 2331
+
+The paper includes this table; critique this table.
+
+IMAGE
+
+The paper includes this figure; critique this figure.
+
+IMAGE
+
+```
+
+```{example}
+Another study
+[@data:Baughman2007:SixMinuteWalk]
+gave this information:
+
+> The aim of our study was to determine the range of 6MWD [6-minute walk distance]
+> in an unselected group of sarcoidosis patients.
+> We performed a prospective study of sarcoidosis patients followed up in one tertiary sarcoidosis clinic.
+>
+> --- @data:Baughman2007:SixMinuteWalk, p. 208
+
+Critique this graph that appears in the paper:
+	
+IMAGE
+
+```
+
+
+
+## General writing tips
+
+TONY ROBERST WEB SITE
+
+
+
+
+## Other things
+
+
+
+* References:
+    - Give the full citations of work you have referenced, in the correct format;
+    - Organise and format your references correctly:
+      Many disciplines or journals have very strict guidelines
+      for how references must be listed;
+    
+* Acknowledgements:
+   Thank people who legitimately contributed to your report,
+   and research funding bodies.
+* Appendices
+    - In the appendices,
+      place important material that
+      would break the flow of the narrative.
+    - Appendices may include large tables, images, detailed discussions of technical details, \dots
+
+
+
+
+## Style
+
+TONY'S STUFF IN HERE??
+
+
+Different disciplines have their own styles.
+Use short sentences;
+be unambiguous:
+
+> Don't write so that you can be understood, 
+> write so that you can't be misunderstood.
+> 
+> --- Attributed to William Howard Taft
+
+Many disciplines prefer you to write using passive voice,
+and many disciplines prefer you to wrote in the past tense.
+In addition,
+many disciplines prefer authors to avoid first person singular/plural  (''I did this\dots'') wherever possible. 
+In all cases,
+use inclusive language.
+
+And finally:
+
+* Use, but do not rely upon, the spell checker;
+* Don't talk down to the reader;
+* Omit any words, phrases, sentences that add nothing to the paper;
+*   Ensure correct content, grammar, spelling, format;
+* Check for commonly misused words: there/their; your/you're;
+* Ensure capitalisation is correct;
+* Sentences should say what they mean,
+   and mean what they say;
+* Use apostrophes correctly.
+
+
+
+
+
+
+
+
+
+
+
+
+## Example
+
+Consider the NHANES data again.
+In preparing a paper about this study,
+suppose the following graph and tables were produced.
+Critique these.
+
+
+
+
+
+```{r echo=FALSE}
+library(NHANES)
+data(NHANES)
+
+plot(BPSys1 ~ SmokeNow, data=NHANES, 
+	xlab="",
+	col="purple") 
+```
+
+
+Group                |  Mean     | Std dev
+---------------------+-----------+---------------
+Current smoker       |  206.6    | 46    
+Current non-smoker   |  214.64   | 48.79  
+*Difference*         |    8.03   |
+95\% CI              | 1.25      | 14.8 
+
+
+
+

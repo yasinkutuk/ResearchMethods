@@ -1,0 +1,264 @@
+# (PART) Collecting data {-}
+
+
+# Procedures for collecting data {#CollectingDataProcedures}
+
+
+
+```{r echo=FALSE}
+SixSteps(3)
+```
+
+If the RQ is well-constructed,
+all terms are clearly defined,
+and the study design is clear and well explained,
+then collecting the data should be reasonably easy
+(but perhaps time-consuming and tedious).  
+
+
+
+## Protocols
+
+    
+Make sure you record the steps and important details:
+Someone else should be able to read your report and approximately repeat the study.
+Studies all should have a well-established *protocol*
+for how the study was done.
+      
+
+
+```{definition, name="Protocol"}
+A *protocol*:
+   is a predefined procedure detailing the design and implementation of studies,
+   and for data collection. 
+```
+
+Protocols ensure repeatability of the study 
+(to ensure successful replication of results by others)
+to confirm or compare results.
+Protocols should clearly indicate how design aspects 
+(such as blinding the individuals, random allocation of treatments, etc.)
+will happen.
+
+
+
+```{example}
+A study [@data:Wojcik:ForwardFall] examined the forward-leaning angle from which people could recover,
+to determine if this was different for younger and older people.
+The paper goes into great detail to explain the protocol 
+(almost 1.5 pages,
+plus a diagram).
+```
+   
+
+
+
+```{example}
+A study [@data:Stensballe2005:Catheter] examined three different types of male catheters,
+   to compare 'withdrawal friction force'.
+   The paper goes into great  detail to explain the protocols
+   (almost a whole page, 
+   plus a (painful-looking) diagram).
+
+
+The exclusion criterion is given as:
+
+>  Subjects with experience of recurrent urinary tract infections, 
+>	known congenital urogenital abnormalities or known urethral strictures 
+>	were excluded from participation.
+>
+> ---  @data:Stensballe2005:Catheter, p. 979
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Collecting data using surveys
+
+### Introduction
+
+Data may be collected in many ways
+(laboratory experiments, taking measurements, etc.).
+For both observational and experimental studies,
+though,
+data are often collected using surveys.
+Surveys are very difficult to do well,
+and question wording is crucial, 
+and surprisingly difficult to get right.
+
+Questions in a survey may be open-ended 
+(respondents can write their own answers)
+or closed 
+(students select from a small number of possible answers).
+Both questions types have advantages and disadvantages.
+Answers to open questions usually lend themselves to qualitative analysis,
+so will only (very briefly) look as closed questions.
+
+
+### Asking survey questions
+
+There are a number of things to keep in mind when framing survey questions;
+here are some of them.
+
+
+**Avoid leading questions** which may indicate how respondents are expected to answers.
+This is often due to the question wording,
+and is it often subtle.
+   
+```{example}
+This survey question is a *leading question*,
+because it is obvious how you are expected to respond:
+  
+> Because bottles from bottled water create enormous amounts of non-biodegradable landfill
+> and hence is a threat to sensitive native wildlife,
+> do you support a ban on bottled water at USC?
+
+```
+
+
+
+```{example}
+These two questions would produce different percentages of respondents agreeing:
+
+* Which is easier to *buy*: cigarettes, beer or marijuana?
+*	Which is easier to *obtain*: cigarettes, beer or marijuana?
+
+```
+
+
+
+
+
+````{example}
+Consider this survey question:
+
+> Do you like this new orthotic?
+
+Even this may incite respondents to please,
+since *liking* is the only option presented;
+better would be to ask:
+
+>	Do you like or dislike this new orthotic?
+
+  ```
+
+
+
+
+**Avoid ambiguity**:
+Avoid terms that may be unfamiliar,
+and questions that are unclear.
+
+```{example}
+Consider this survey question:
+
+> Do children run faster now?
+
+This question is ambiguous: Faster than *what* or *when*?
+```   
+
+
+
+
+**Avoid asking the uninformed**,
+and avoid asking respondents about issues they don't know about.
+Many people will tend to give a response even if they do not understand.
+ 
+```{example}
+Consider this survey question:
+
+> Is the use of fibre composites for waterside recreational purposes
+>	likely to cause the material to swell?
+
+Only people involved in the industry are likely to be able to properly answer this question.
+```
+   
+**Avoid complex and double-barrelled questions**;
+these are often hard to understand.
+
+   
+
+
+```{example}
+Consider this survey question:
+
+> I don't go out of my way to purchase low-fat food unless they are also
+> low in calories but not necessarily salt.  Do you agree?
+
+It is not clear what a 'yes' answer means.
+```
+
+
+```{example}
+Consider this survey question:
+
+>	Do you jog and swim for exercise?
+
+This question would be better asked as two separate questions:
+one asking about jogging, and one about swimming.
+```
+
+
+
+
+
+**Avoid problems with confidentiality**, 
+which would be considered unethical.
+Ethics committee usually look very carefully for question that are unethical.
+In special cases and with justification,
+ethics committees may allow such questions. 
+
+
+```{example}
+Consider this survey question:
+
+>	Do you have a water tank that has been installed without council permission?
+
+Respondents are unlikely to admit to disobeying rules.
+```
+
+
+
+
+
+
+
+## Online and paper surveys
+
+Surveys may be conducted using paper-based surveys,
+or online surveys;
+both have pros and cons [@porter2004pros].
+
+Paper-based surveys require the survey information to be entered into the computer for later analysis;
+this may produce data-entry errors.
+Paper-based surveys can also be costly if physical mailing is necessary.
+However,
+it is often easier to get people to complete paper-based surveys if they are presented with such a survey face-to-face.
+
+Online surveys make data collection easier:
+the data are entered directly onto a computer,
+and so there is less handling and less chance of data entry errors.
+Online surveys also mean it is easier to share the survey with a
+geographically-diverse group of people.
+However,
+sometimes it is difficult to get these surveys to people:
+email addresses may be needed, 
+and respondents may be reluctant to click on links in emails 
+(especially from unknown sources).
+
+
+
+
+

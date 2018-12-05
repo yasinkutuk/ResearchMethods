@@ -1,0 +1,279 @@
+
+\mainmatter
+
+<!-- # Tests -->
+
+
+
+<!-- ## TEST H5P QUIZ -->
+
+
+<!-- <iframe src="https://h5p.org/h5p/embed/186264" width="1090" height="322" frameborder="0" allowfullscreen="allowfullscreen"></iframe><script src="https://h5p.org/sites/all/modules/h5p/library/js/h5p-resizer.js" charset="UTF-8"></script> -->
+
+
+<!-- ## TEST GOOGLE FORMS QUIZ -->
+
+
+<!-- <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScUGUtuPBTArcmQo36tb3iYH49xGiJSl0Z_9XJdnQdV6Ej4ZQ/viewform?embedded=true" width="440" height="100%" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe> -->
+
+
+
+
+<!-- ## TEST MICROSOFT FORMS -->
+
+<!-- <iframe width="640px" height= "480px" src= "https://forms.office.com/Pages/ResponsePage.aspx?id=UOywkz_87UeTRZ_8YBJUHFRck-6LPd1Jr-3u-vTEJgZUOTRXM0JLTEVRQ1dTQTg1TlhXSldJM1hKNC4u&embed=true" frameborder= "0" marginwidth= "0" marginheight= "0" style= "border: none; max-width:100%; max-height:100vh" allowfullscreen webkitallowfullscreen mozallowfullscreen msallowfullscreen> </iframe> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Research: An introduction 
+
+
+## How do we know what we know? {#smoking-study}
+
+Scientists once believed all life commonly and regularly
+[arose spontaneously](http://en.wikipedia.org/wiki/Spontaneous_generation)
+from non-living matter;
+that is,
+any life form could be created on-demand from non-living things by following *recipes*.
+For example, J.  B. van Helmont [@data:VanHelmont:Transformations] [@data:Latour:PasteurPouchet] gave 
+[this recipe](http://en.wikipedia.org/wiki/Spontaneous_generation):
+
+>	If a soiled shirt is placed in the opening of a vessel containing grains of wheat, 
+>	the reaction of the leaven in the shirt with fumes from the wheat will, 
+>	after approximately twenty-one days, 
+>	transform the wheat into mice.
+>
+> --- [Translation](https://www.mnn.com/green-tech/research-innovations/stories/how-to-make-a-mouse-the-bizarre-recipes-borne-of-spontaneous) of @data:VanHelmont:Transformations
+
+
+We now know that this isn't quite how it works.
+But how did he reach this conclusion?
+And why was this idea rejected?
+Because of the *scientific process*.
+
+This idea was put forward because it seemed reasonable from what had been *observed*.
+But the idea was then rejected when it was put to the test,
+and evidence was found that contradicted the idea.
+Then a new theory was put forward, and tested, and replaced based on *evidence*.
+Briefly, this is the scientific process.
+
+A more modern version of this is how we know that cigarette smoking is harmful.
+Even as recently as 1978, the verdict was under debate:
+@data:burch:smokingandlungcancer, in the prestigious journal *JRSS A*,
+states   
+
+>	...many eminent persons, committees and commissions 
+>	have unanimously concluded that
+>	lung cancer ``is almost entirely due to cigarette smoking''.
+>	I once shared this view, but having now studied the evidence in more detail and from new angles 
+>	I feel unable to reach a definitive conclusion...
+>
+> --- @data:burch:smokingandlungcancer, p. 456
+
+All scientific knowledge starts like this:
+Theories or explanations are proposed 
+(based on ideas or observations),
+and these ideas are tested,
+then either rejected or temporarily accepted 
+(until otherwise disproven,
+a better explanation is developed,
+or more evidence emerges to support the theory)
+based on the available evidence.
+This is true for all science-based disciplines:
+
+* How do we know the gestation length for [Gilbert's Potoroo](http://en.wikipedia.org/wiki/Gilbert\%27s\_Potoroo) [@stead2010monitoring]?
+* How do we know that paracetamol eases pain [@weil2007paracetamol]?
+* How do we know that exercise is good for us [@curfman1993exercise]?
+* How do we know if [permeable pavement technology](https://en.wikipedia.org/wiki/Permeable_paving)
+is effective in reducing runoff [@mullaney2014practical]?
+
+
+
+
+
+
+
+## The purpose of research
+
+Everyone in science-based disciplines must understand research
+and how to communicate in the language and ideas of research:
+It's the foundation of science.
+      
+Research formally answers questions that naturally arise 
+by observing the world.
+These questions are answered based on the *data* that are collected;
+that is,
+we provide *evidence-based answers*.
+
+While many people think that the hardest part of process is the
+*analysis* of the data (evidence),
+sometimes the hardest part of the process can be 
+knowing *what* data to collect,
+and *how* to collect it.
+We study both the study design *and* the data analysis in this book.
+
+
+```{definition, name="Data"}
+Data refers to the information obtained from a study.
+```
+
+
+```{definition, name="Dataset"}
+A *dataset* is 
+the complete set of data in a study.
+```
+
+
+
+
+
+
+
+
+
+## Example: Research in action
+
+To understand the way that the process of research *usually* works,
+consider an example.
+
+This example comes from a study in South Australia
+[@data:oconnor:pottingmix],
+where an unusual number of cases of the
+*Legionella longbeachae* infection were observed.
+
+Upon noticing this trend,
+the researchers wanted to know the source of the infection,
+so they could address the issue.
+They then noticed that a large number of those infected 
+were regular gardeners with ferneries
+and handled potting mix.
+So the researchers refined their question to ask
+
+> ... if *L. longbeachae* infection was associated with handling of commercial potting mix.
+>
+> --- @data:oconnor:pottingmix, p. 35
+
+To answer this question,
+they designed a study
+(a 'matched case-control study'),
+then gathered data from 100 people
+(25 cases, and 75 similar people who did not have the infection)
+using a survey.
+They summarise theior data,
+then analysed the data,
+and reached an evidence-based conclusion:
+that the potting mix was partially responsible for the increase
+in infections, 
+but other fators were also at play.
+
+The researchers were then able to make recommendations
+to improve the public health risks
+of contracting the infection,
+including:
+
+> Raising people's awareness of a possible health risk when using potting mix 
+> should continue in order to protect against *L. longbeachae* infection.
+>
+> --- @data:oconnor:pottingmix, p. 39
+
+
+```{example}
+Place the components of the research process in the typical order.
+```
+
+
+<iframe src="https://h5p.org/h5p/embed/357092" width="1090" height="403" frameborder="0" allowfullscreen="allowfullscreen"></iframe><script src="https://h5p.org/sites/all/modules/h5p/library/js/h5p-resizer.js" charset="UTF-8"></script>
+
+
+
+
+
+
+## The components of research
+
+The process of research typically follows this process:
+
+```{r echo=FALSE}
+set.seed(791)
+SixSteps()
+```
+
+Of course, 
+this is not always possible, and often for good reason.
+Nonetheless,
+the above is a good practice to follow when possible.
+
+All of the above steps
+are discussed in this book.
+
+
+
+
+
+## Types of research
+   
+Broadly speaking,
+the two main types of research are
+*Qualitative* research and *Quantitative* research.
+These two types of research are 
+different and complementary 
+(Table \@ref(tab:TypesOfResearch)),
+and work well together.
+
+
+
+```{block2, type="rmdimportant"}
+This course focuses on quantitative methods.
+```
+
+Understand that
+this table
+is a **gross generalization**!
+Both methods have pros and cons,
+and both can be,
+and often are,
+used together ('mixed methods').
+
+Table: (\#tab:TypesOfResearch) Comparing qualitative and quantitative research.
+
+**Aspect** | **Qualitative** | **Quantitative**
+-----------+:----------------+:-------------------
+What:             | Feelings, opinions       				| Objective data
+Why:              | Suggest hypotheses       				| Tests hypotheses
+Conclusions:      | Detailed                        | General
+Data:             | Words, pictures, ...    				| Numbers, stats
+Size:             | Small number             				| Can be large numbers
+Time:             | Time-consuming           				| More efficient
+Applicability:    | Not generalizable        				| Generalizable
+Examples:         | Interviews, focus groups, diaries	| Experiments, surveys measurements
+
+
+
+
+
+## Learning Outcomes
+
+	
+In this course,
+you will learn to:
+
+* Develop scientific research questions and testable hypotheses;
+* Design scientific studies to answer simple scientific research questions;
+* Select and produce appropriate graphical, numerical and statistical analyses;
+*	Select, apply and interpret the results of the correct statistical technique to analyse scientific data;
+*	Comprehend, apply and communicate in the language of research and statistics; 
+*	Demonstrate professional integrity in planning, interpreting and reporting the results of scientific studies.
+
+
